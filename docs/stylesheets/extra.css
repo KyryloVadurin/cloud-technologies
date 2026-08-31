@@ -1,0 +1,125 @@
+/* ==========================================================================
+   1. ВИПРАВЛЕННЯ ТЕМНОЇ ТЕМИ (SLATE) - Читабельність та контраст
+   ========================================================================== */
+[data-md-color-scheme="slate"] {
+  /* Головний текст (робимо яскравим світло-сірим, щоб не зливався) */
+  --md-typeset-color: #f1f5f9;
+  --md-default-fg-color: #f8fafc;
+  --md-default-fg-color--light: #cbd5e1;
+  --md-default-fg-color--lighter: #94a3b8;
+
+  /* Яскраві контрастні посилання (ціанові) */
+  --md-typeset-a-color: #38bdf8;
+
+  /* Глибокий технологічний фон (Slate 900) замість брудного сірого */
+  --md-default-bg-color: #0f172a;
+  --md-default-bg-color--page: #0f172a;
+  --md-default-bg-color--card: #1e293b;
+
+  /* Колір шапки та панелей */
+  --md-primary-fg-color: #1e293b;
+  --md-primary-fg-color--light: #334155;
+}
+
+/* ==========================================================================
+   2. ТИПОГРАФІКА — Автоматичне плавне масштабування (Fluid Typography)
+   ========================================================================== */
+
+/* ==========================================================================
+   3. ШАПКА ТА НАВІГАЦІЯ (Glassmorphism)
+   ========================================================================== */
+.md-header {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+[data-md-color-scheme="slate"] .md-header {
+    background-color: rgba(15, 23, 42, 0.85) !important;
+}
+
+/* ==========================================================================
+   4. ТАБЛИЦІ (З вашого CSS + адаптація під темну тему)
+   ========================================================================== */
+
+/* Закруглені кути для таблиць та тінь */
+.md-typeset table:not([class]) {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Красиві заголовки таблиць */
+.md-typeset table:not([class]) th {
+    background-color: var(--md-primary-fg-color--light);
+    color: var(--md-default-fg-color);
+    font-weight: bold;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) td {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   5. БЛОКИ КОДУ ТА ПРИМІТКИ (Admonitions)
+   ========================================================================== */
+
+/* Закруглені кути та чітка рамка для блоків коду */
+.md-typeset pre {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+[data-md-color-scheme="slate"] .md-typeset pre {
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Рамка в темній темі для чіткості */
+}
+
+.md-typeset code {
+    border-radius: 4px;
+}
+
+/* Закруглення для блоков приміток (Admonition) */
+.md-typeset .admonition,
+.md-typeset details {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================================================
+   6. КНОПКИ (З вашого CSS)
+   ========================================================================== */
+
+/* Плавні переходи для кнопок */
+.md-button {
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.md-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   7. ОФОРМЛЕННЯ MERMAID (З вашого CSS)
+   ========================================================================== */
+
+/* Центрування діаграм */
+.md-typeset .mermaid {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    margin: 1.5em 0;
+}
+
+/* Адаптивне масштабування */
+.md-typeset .mermaid svg {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* Гарантуємо єдиний шрифт для блоків і тексту */
+.mermaid text,
+.mermaid .node label,
+.mermaid .node foreignObject {
+    font-family: var(--md-text-font-family, Roboto, sans-serif) !important;
+}
