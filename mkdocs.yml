@@ -3,9 +3,6 @@
 theme:
   name: material
   language: uk
-  icon:
-    logo: material/chip
-    favicon: material/chip
   palette:
     - scheme: default
       primary: indigo
@@ -36,6 +33,7 @@ font:
   code: JetBrains Mono
 
 markdown_extensions:
+  - md_in_html
   - admonition
   - pymdownx.details
   - pymdownx.superfences:
