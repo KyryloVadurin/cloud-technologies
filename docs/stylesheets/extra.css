@@ -123,3 +123,88 @@
 .mermaid .node foreignObject {
     font-family: var(--md-text-font-family, Roboto, sans-serif) !important;
 }
+
+
+/* ==========================================================================
+   8. АДАПТИВНИЙ ДИЗАЙН: ПОВНОЕКРАННИЙ ДЕСКТОП + ІДЕАЛЬНИЙ МОБІЛЬНИЙ
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   А. ТІЛЬКИ ДЛЯ ДЕСКТОПІВ (Монітори та ноутбуки, ширина від 1220px)
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 76.25em) {
+    /* Розтягуємо сторінку на 100% ширини монітора */
+    .md-grid {
+        max-width: 100% !important;
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
+    }
+
+    /* Центральний контент займає весь вільний простір */
+    .md-content {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        margin-left: 1.5rem !important;
+        margin-right: 1.5rem !important;
+    }
+
+    /* Фіксовані широкі панелі навігації та змісту */
+    .md-sidebar--primary {
+        width: 16rem !important;
+        flex-shrink: 0 !important;
+    }
+
+    .md-sidebar--secondary {
+        width: 18rem !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Б. ТІЛЬКИ ДЛЯ СМАРТФОНІВ ТА ПЛАНШЕТІВ (Ширина менше 1220px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 76.24em) {
+    /* Прибираємо штучні великі відступи, повертаємо природну ширину */
+    .md-grid {
+        max-width: 100% !important;
+        padding-left: 0.6rem !important;
+        padding-right: 0.6rem !important;
+    }
+
+    .md-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Зменшуємо розмір великих заголовків, щоб довгі слова не ламалися */
+    .md-typeset h1 {
+        font-size: 1.35rem !important;
+        line-height: 1.25 !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .md-typeset h2 {
+        font-size: 1.2rem !important;
+        line-height: 1.25 !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   В. ЗАГАЛЬНІ ПРАВИЛА ТИПОГРАФІКИ ТА ЕЛЕМЕНТІВ ДЛЯ ВСІХ ПРИСТРОЇВ
+   -------------------------------------------------------------------------- */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Таблиці розтягуються, а на мобільних мають плавний скрол */
+.md-typeset table:not([class]) {
+    width: 100%;
+}
+
+.md-typeset .mermaid {
+    width: 100%;
+    max-width: 100%;
+}
