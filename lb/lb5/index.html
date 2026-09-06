@@ -1,0 +1,2416 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../lb4/">
+      
+      
+        <link rel="next" href="../lb6/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#no-5-aws-sqs-dead-letter-queue" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lk/lk1/" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lb1/" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Підготовка середовища та розгортання проєкту (Крок 0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Підготовка середовища та розгортання проєкту (Крок 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Перевірка інструментів та створення робочої директорії
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Налаштування конфігураційного профілю AWS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Порядок виконання роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Порядок виконання роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Індивідуальні завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Покроковий алгоритм та розв'язок еталонного прикладу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Покроковий алгоритм та розв&#39;язок еталонного прикладу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-configsqs_configjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Створення конфігураційного файлу config/sqs_config.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-scriptssqs_queue_managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Реалізація модуля керування чергами scripts/sqs_queue_manager.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scriptstelemetry_producerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Реалізація генератора телеметрії scripts/telemetry_producer.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-scriptstelemetry_consumerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Реалізація пулу воркерів-споживачів scripts/telemetry_consumer.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-run_lab5py" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 5. Головний оркестратор експерименту run_lab5.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Запуск, тестування та перевірка результатів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Вимоги до змісту звіту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Контрольні запитання для захисту роботи
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Підготовка середовища та розгортання проєкту (Крок 0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Підготовка середовища та розгортання проєкту (Крок 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Перевірка інструментів та створення робочої директорії
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Налаштування конфігураційного профілю AWS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Порядок виконання роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Порядок виконання роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Індивідуальні завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Покроковий алгоритм та розв'язок еталонного прикладу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Покроковий алгоритм та розв&#39;язок еталонного прикладу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-configsqs_configjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Створення конфігураційного файлу config/sqs_config.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-scriptssqs_queue_managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Реалізація модуля керування чергами scripts/sqs_queue_manager.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scriptstelemetry_producerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Реалізація генератора телеметрії scripts/telemetry_producer.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-scriptstelemetry_consumerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Реалізація пулу воркерів-споживачів scripts/telemetry_consumer.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-run_lab5py" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 5. Головний оркестратор експерименту run_lab5.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Запуск, тестування та перевірка результатів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Вимоги до змісту звіту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Контрольні запитання для захисту роботи
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="no-5-aws-sqs-dead-letter-queue">Лабораторна робота № 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue</h1>
+<p><strong>Мета:</strong> Дослідження архітектурних патернів асинхронного обміну повідомленнями у розподілених обчислювальних системах, вивчення принципів функціонування керованих хмарних черг класу «точка–точка» (Point-to-Point), опанування методів програмного створення та конфігурування черг AWS SQS (Standard та FIFO), налаштування параметрів таймауту видимості (Visibility Timeout) та терміну життя повідомлень (Message Retention Period), розробка багатопотокового пулу обробників за моделлю «Виробник–Споживач» (Producer-Consumer), впровадження механізму ізоляції аварійних повідомлень за допомогою Dead-Letter Queue (DLQ) та проведення експериментального дослідження стійкості системи до сплесків навантаження і тимчасової відмови споживачів.</p>
+<p><strong>Стек технологій та інструменти:</strong></p>
+<ul>
+<li>
+<p><strong>Мова програмування та середовище виконання:</strong> Python 3.10+ (CPython), віртуальне оточення <code>venv</code>.</p>
+</li>
+<li>
+<p><strong>Платформа та бібліотеки:</strong> Хмарна платформа Amazon Web Services (AWS SQS), SDK-бібліотека <code>boto3</code> (v1.34+), <code>botocore</code> (v1.34+), модуль багатопотокової обробки <code>concurrent.futures</code>, утиліта <code>tabulate</code> (v0.9+).</p>
+</li>
+<li>
+<p><strong>Інструменти діагностики та розробки:</strong> AWS CLI v2, інтегроване середовище розробки Visual Studio Code / PyCharm, консоль моніторингу черг.</p>
+</li>
+</ul>
+<hr />
+<h2 id="1">1 Теоретичні відомості</h2>
+<p>У великомасштабних кіберфізичних комплексах та промислових системах Інтернету речей (IoT) безперервний потік телеметричних вимірювань і сигналів керування характеризується високою нерівномірністю в часі. Спроба безпосереднього зв'язування сенсорів із сервісами обробки за допомогою синхронних викликів (наприклад, HTTP REST API) призводить до жорсткої зв'язності компонентів (<strong>Tight Coupling</strong>) та виникнення відмов у періоди пікового навантаження (<strong>Traffic Spikes</strong>), коли обчислювальні вузли не встигають обробляти вхідні запити. </p>
+<p>Основою побудови стійких та еластичних розподілених систем є <strong>асинхронна взаємодія на базі черг повідомлень (Message Queuing)</strong>, реалізована за допомогою проміжного програмного забезпечення <strong>Message-Oriented Middleware (MOM)</strong>, еталонним представником якого у хмарі є сервіс <strong>Amazon Simple Queue Service (AWS SQS)</strong> або <strong>Azure Service Bus Queues</strong>.</p>
+<p><pre class="mermaid"><code>flowchart LR
+    subgraph Producers ["Виробники телеметрії (Producers)"]
+        P1[IoT Датчик 1]
+        P2[IoT Датчик 2]
+        P3[IoT Датчик N]
+    end
+
+    subgraph QueueSystem ["Хмарна черга AWS SQS"]
+        MainQ[(Основна черга: Main SQS Queue&lt;br/&gt;Durable Storage&lt;br/&gt;MessageRetention: 4 доби)]
+        DLQ[(Черга недоставлених: SQS DLQ&lt;br/&gt;Redrive Policy: maxReceiveCount=3)]
+    end
+
+    subgraph Consumers ["Пул споживачів (Consumer Workers)"]
+        W1[Worker 1: ThreadPool]
+        W2[Worker 2: ThreadPool]
+        W3[Worker 3: ThreadPool]
+    end
+
+    P1 ===&gt;|SendMessageBatch| MainQ
+    P2 ===&gt;|SendMessageBatch| MainQ
+    P3 ===&gt;|SendMessageBatch| MainQ
+
+    MainQ ===&gt;|1. ReceiveMessage: In-Flight State| Consumers
+    Consumers ===&gt;|2. DeleteMessage: Успішна фіксація| MainQ
+
+    MainQ -.-&gt;|3. Збій обробки &gt; maxReceiveCount| DLQ
+    Consumers -.-&gt;|4. Poison Pill: Необроблена помилка| MainQ</code></pre>
+<em>Рисунок 1.1 — Архітектура асинхронного оброблення телеметрії з використанням черги SQS, пулу воркерів та Dead-Letter Queue</em></p>
+<p>Черга повідомлень виконує роль надійного демпфера (буфера), який усуває просторову, часову та синхронізаційну залежність між виробниками (<strong>Producers</strong>) та споживачами (<strong>Consumers</strong>). Виробники надсилають повідомлення в чергу з довільною швидкістю, отримують негайне підтвердження фіксації в сховищі та продовжують роботу, тоді як споживачі вичитують дані в міру звільнення власних обчислювальних потужностей.</p>
+<p>Ключовим механізмом координації доступу та забезпечення стійкості до відмов у хмарних чергах є <strong>таймаут видимості (Visibility Timeout, <span class="arithmatex">\(T_{\text{vis}}\)</span>)</strong>. Після того, як один із воркерів отримує повідомлення через виклик <code>ReceiveMessage</code>, брокер не видаляє його з черги, а переводить у тимчасово невидимий стан (<strong>In-Flight State</strong>) на інтервал часу <span class="arithmatex">\(T_{\text{vis}}\)</span>. </p>
+<p>Протягом цього періоду інші споживачі не можуть отримати це повідомлення. Якщо воркер успішно завершує обробку, він надсилає команду <code>DeleteMessage</code>, передаючи унікальний рядок підтвердження — <strong>ReceiptHandle</strong>. </p>
+<p>Якщо ж у процесі обробки виникає збій (аварійна зупинка процесу, зависання пам'яті або мережевий розрив), після закінчення інтервалу <span class="arithmatex">\(T_{\text{vis}}\)</span> повідомлення автоматично знову стає видимим у черзі та підхоплюється іншим доступним обробником, гарантуючи семантику доставки <strong>«щонайменше один раз» (At-least-once delivery)</strong>.</p>
+<p><pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant Producer as Виробник телеметрії (Producer)
+    participant SQS as Черга повідомлень (AWS SQS)
+    participant Worker1 as Воркер 1 (Збійний)
+    participant Worker2 as Воркер 2 (Резервний)
+    participant DLQ as Черга DLQ
+
+    Producer-&gt;&gt;SQS: 1. SendMessage(TelemetryPayload)
+    Note over SQS: Повідомлення збережено (State: Available, ReceiveCount=0)
+
+    Worker1-&gt;&gt;SQS: 2. ReceiveMessage(MaxMessages=10)
+    SQS--&gt;&gt;Worker1: 3. Повернення Payload + ReceiptHandle (State: In-Flight, ReceiveCount=1)
+    Note over SQS: Старт таймера Visibility Timeout (T_vis = 30s)
+
+    Note over Worker1: Критична помилка обробника (Process Crash)
+    Note over SQS: Спливає таймер Visibility Timeout (30s)
+    Note over SQS: Повідомлення знову видиме для вичитування (State: Available)
+
+    Worker2-&gt;&gt;SQS: 4. ReceiveMessage(MaxMessages=10)
+    SQS--&gt;&gt;Worker2: 5. Повернення Payload + Новий ReceiptHandle (ReceiveCount=2)
+    Note over Worker2: Успішна обробка даних та запис у базу
+    Worker2-&gt;&gt;SQS: 6. DeleteMessage(ReceiptHandle)
+    Note over SQS: Повідомлення остаточно видалено з черги</code></pre>
+<em>Рисунок 1.2 — Життєвий цикл повідомлення в черзі за умови аварійної відмови обробника та автоматичного відновлення видимості</em></p>
+<p>Для запобігання нескінченному зацикленню некоректно сформованих або пошкоджених повідомлень («отруйних пігулок» — <strong>Poison Pills</strong>), які спричиняють аварійне падіння коду споживача при кожній спробі обробки, впроваджується <strong>політика повторних спроб (Redrive Policy)</strong> та <strong>черга недоставлених повідомлень (Dead-Letter Queue, DLQ)</strong>. </p>
+<p>Система SQS веде внутрішній лічильник спроб доставки кожного повідомлення — <code>ApproximateReceiveCount</code>. Якщо значення цього лічильника перевищує налаштований граничний поріг <span class="arithmatex">\(N_{\text{max\_receive}}\)</span>, черга автоматично вилучає повідомлення з основного потоку та переміщує його до DLQ без участі користувача, запобігаючи блокуванню всього конвеєра та зберігаючи інцидент для діагностики.</p>
+<p>Математично динаміка зміни довжини черги <span class="arithmatex">\(Q(t)\)</span> під час сплеску надходження телеметрії за умови, що інтенсивність генерації <span class="arithmatex">\(\lambda(t)\)</span> перевищує сукупну швидкість обробки <span class="arithmatex">\(k \cdot \mu\)</span>, описується інтегральним рівнянням:</p>
+<div class="arithmatex">\[Q(t) = Q(t_0) + \int_{t_0}^t \left( \lambda(\tau) - k \cdot \mu \right) d\tau\]</div>
+<p>де <span class="arithmatex">\(Q(t_0)\)</span> — початкова кількість повідомлень у черзі в момент початку сплеску <span class="arithmatex">\(t_0\)</span>, <span class="arithmatex">\(\lambda(\tau)\)</span> — миттєва функція надходження повідомлень від сенсорної мережі (повідомлень/с), <span class="arithmatex">\(k\)</span> — кількість паралельних потоків (воркерів) у пулі обробки, <span class="arithmatex">\(\mu\)</span> — середня продуктивність одного воркера (повідомлень/с).</p>
+<p>Час, необхідний для повного розвантаження черги після завершення сплеску навантаження в момент <span class="arithmatex">\(t_1\)</span>, розраховується як:</p>
+<div class="arithmatex">\[T_{\text{drain}} = \frac{Q(t_1)}{k \cdot \mu - \lambda_{\text{normal}}}\]</div>
+<p>де <span class="arithmatex">\(\lambda_{\text{normal}}\)</span> — стала фонова швидкість надходження повідомлень у штатному режимі (<span class="arithmatex">\(\lambda_{\text{normal}} &lt; k \cdot \mu\)</span>).</p>
+<p>Мінімальне значення таймауту видимості <span class="arithmatex">\(T_{\text{vis}}\)</span> для уникнення передчасного дублювання завдань повинно строго задовольняти критерій надійності:</p>
+<div class="arithmatex">\[T_{\text{vis}} \ge \overline{t}_{\text{proc}} + 3 \cdot \sigma_t + 2 \cdot RTT_{\text{net}}\]</div>
+<p>де <span class="arithmatex">\(\overline{t}_{\text{proc}}\)</span> — середній час обробки одного повідомлення воркером (у секундах), <span class="arithmatex">\(\sigma_t\)</span> — середньоквадратичне відхилення часу обробки, <span class="arithmatex">\(RTT_{\text{net}}\)</span> — кругова мережева затримка взаємодії з API черги.</p>
+<p><em>Таблиця 1.1 — Порівняльна характеристика режимів черг AWS SQS</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Параметр конфігурації</th>
+<th style="text-align: left;">AWS SQS Standard Queue</th>
+<th style="text-align: left;">AWS SQS FIFO Queue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Порядок доставки</strong></td>
+<td style="text-align: left;">Найкраща спроба впорядкування (Best-effort)</td>
+<td style="text-align: left;">Суворе дотримання черговості (First-In-First-Out)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Гарантія унікальності</strong></td>
+<td style="text-align: left;">Щонайменше один раз (можливі дублікати)</td>
+<td style="text-align: left;">Рівно один раз (Exactly-once deduplication)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Пропускна здатність</strong></td>
+<td style="text-align: left;">Практично необмежена (десятки тисяч msg/s)</td>
+<td style="text-align: left;">До 3000 msg/s (із застосуванням батчингу)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Максимальний розмір</strong></td>
+<td style="text-align: left;">256 КБ на одне повідомлення</td>
+<td style="text-align: left;">256 КБ на одне повідомлення</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Критерій застосування в КФС</strong></td>
+<td style="text-align: left;">Масовий збір незалежних вимірювань датчиків</td>
+<td style="text-align: left;">Послідовні команди калібрування сервоприводів</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-0">2 Підготовка середовища та розгортання проєкту (Крок 0)</h2>
+<p>Перед розробкою програмного комплексу необхідно підготувати робочу директорію, налаштувати віртуальне середовище Python, встановити офіційний пакет Boto3 та перевірити доступність служби AWS SQS.</p>
+<h3 id="21">2.1 Перевірка інструментів та створення робочої директорії</h3>
+<p>Відкрийте термінал операційної системи та перевірте наявність необхідних компонентів:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span>--version
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pip3<span class="w"> </span>--version
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>aws<span class="w"> </span>--version
+</span></code></pre></div>
+<p>Створіть робочу ієрархію каталогів лабораторної роботи та активуйте віртуальне середовище:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/cloud_labs/lab5_sqs_queues
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>~/cloud_labs/lab5_sqs_queues
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</span></code></pre></div>
+<p>Сформуйте файлову структуру проєкту відповідно до такої схеми:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>lab5_sqs_queues/
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── config/
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│   └── sqs_config.json          # Конфігурація параметрів черг, Redrive Policy та таймаутів
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├── scripts/
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│   ├── __init__.py
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│   ├── sqs_queue_manager.py     # Модуль керування чергами та DLQ через Boto3
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│   ├── telemetry_producer.py    # Багатопотоковий генератор пакетів телеметрії
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>│   └── telemetry_consumer.py    # Багатопотоковий пул воркерів-обробників
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>├── output/
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>│   ├── queue_benchmark_report.json # Звіт про швидкість обробки та стійкість системи
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>│   └── dlq_analysis.json        # Дамп перехоплених аварійних повідомлень
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>├── requirements.txt             # Специфікація залежностей Python
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>└── run_lab5.py                  # Головний виконуваний модуль тестування
+</span></code></pre></div>
+<p>Створіть файл <code>requirements.txt</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>boto3&gt;=1.34.0
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>botocore&gt;=1.34.0
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>tabulate&gt;=0.9.0
+</span></code></pre></div>
+<p>Встановіть залежності у віртуальне оточення:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span></code></pre></div>
+<h3 id="22-aws">2.2 Налаштування конфігураційного профілю AWS</h3>
+<p>Перевірте коректність облікових даних за допомогою виклику служби STS:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aws<span class="w"> </span>sts<span class="w"> </span>get-caller-identity
+</span></code></pre></div>
+<p>Встановіть робочий регіон розгортання:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>default.region<span class="w"> </span><span class="s2">"eu-central-1"</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>default.output_format<span class="w"> </span><span class="s2">"json"</span>
+</span></code></pre></div>
+<hr />
+<h2 id="3">3 Порядок виконання роботи</h2>
+<h3 id="31">3.1 Індивідуальні завдання</h3>
+<p>Здобувач вищої освіти обирає варіант індивідуального завдання відповідно до свого номера в академічному журналі групи. Необхідно спроєктувати та розгорнути чергу SQS із відповідною чергою DLQ, згенерувати пакет із 1000 повідомлень телеметрії із заданим відсотком аварійних повідомлень («poison pills»), промоделювати відмову споживача та дослідити динаміку спорожнення черги відповідно до таблиці 3.1.</p>
+<p><em>Таблиця 3.1 — Індивідуальні параметри конфігурації черг та моделювання навантаження</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Варіант</th>
+<th style="text-align: left;">Префікс основної черги</th>
+<th style="text-align: left;">Тип телеметрії КФС</th>
+<th style="text-align: center;">Таймаут видимості <span class="arithmatex">\(T_{\text{vis}}\)</span> (с)</th>
+<th style="text-align: center;">Ліміт спроб до DLQ (<span class="arithmatex">\(N_{\text{max}}\)</span>)</th>
+<th style="text-align: center;">Відсоток аварійних повідомлень (%)</th>
+<th style="text-align: center;">Кількість воркерів у пулі (<span class="arithmatex">\(k\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: left;"><code>cps-vibration-stream</code></td>
+<td style="text-align: left;">Вібрація підшипників турбіни</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4% (40 msg)</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: left;"><code>cps-grid-power</code></td>
+<td style="text-align: left;">Параметри струму підстанції</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3% (30 msg)</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: left;"><code>cps-robot-telemetry</code></td>
+<td style="text-align: left;">Кутові енкодери маніпулятора</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5% (50 msg)</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: left;"><code>cps-gas-pressure</code></td>
+<td style="text-align: left;">Тиск у газопроводі</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2% (20 msg)</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: left;"><code>cps-patient-vital</code></td>
+<td style="text-align: left;">ЕКГ та пульсоксиметрія</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3% (30 msg)</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: left;"><code>cps-drone-nav</code></td>
+<td style="text-align: left;">GPS-координати та висота БПЛА</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5% (50 msg)</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: left;"><code>cps-greenhouse-env</code></td>
+<td style="text-align: left;">Температура та вологість ґрунту</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4% (40 msg)</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: left;"><code>cps-traffic-flow</code></td>
+<td style="text-align: left;">Швидкість транспортного потоку</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5% (50 msg)</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: left;"><code>cps-cnc-vibration</code></td>
+<td style="text-align: left;">Віброакустика фрезерного верстата</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3% (30 msg)</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>10</strong></td>
+<td style="text-align: left;"><code>cps-seismic-activity</code></td>
+<td style="text-align: left;">Амплітуда сейсмічних хвиль</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4% (40 msg)</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>11</strong></td>
+<td style="text-align: left;"><code>cps-boiler-temp</code></td>
+<td style="text-align: left;">Температура пари котла</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2% (20 msg)</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>12</strong></td>
+<td style="text-align: left;"><code>cps-battery-soc</code></td>
+<td style="text-align: left;">Стан заряду акумуляторів</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3% (30 msg)</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>13</strong></td>
+<td style="text-align: left;"><code>cps-conveyor-load</code></td>
+<td style="text-align: left;">Тензометрична вага стрічки</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5% (50 msg)</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>14</strong></td>
+<td style="text-align: left;"><code>cps-water-ph</code></td>
+<td style="text-align: left;">Кислотність та каламутність води</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4% (40 msg)</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>15</strong></td>
+<td style="text-align: left;"><code>cps-air-pollution</code></td>
+<td style="text-align: left;">Концентрація пилу PM2.5 / PM10</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3% (30 msg)</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>16</strong></td>
+<td style="text-align: left;"><code>cps-wind-rotor</code></td>
+<td style="text-align: left;">Швидкість вітрогенератора</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4% (40 msg)</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>17</strong></td>
+<td style="text-align: left;"><code>cps-reactor-mix</code></td>
+<td style="text-align: left;">Тиск у хімічному реакторі</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2% (20 msg)</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>18</strong></td>
+<td style="text-align: left;"><code>cps-mining-dump</code></td>
+<td style="text-align: left;">Навантаження кар'єрного самоскида</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4% (40 msg)</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>19</strong></td>
+<td style="text-align: left;"><code>cps-chiller-flow</code></td>
+<td style="text-align: left;">Витрата холодоагенту чилера</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3% (30 msg)</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>20</strong></td>
+<td style="text-align: left;"><code>cps-agv-lidar</code></td>
+<td style="text-align: left;">Відстань до перешкод робота AGV</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5% (50 msg)</td>
+<td style="text-align: center;">8</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="32">3.2 Покроковий алгоритм та розв'язок еталонного прикладу</h3>
+<p>У цьому підрозділі представлено повний еталонний розв'язок для створення черги <code>cps-reference-queue</code> та черги недоставлених повідомлень <code>cps-reference-dlq</code>, генерації 1000 повідомлень телеметрії за допомогою пакетного API (<code>SendMessageBatch</code>), моделювання тимчасового простою обробників та запуску пулу воркерів для аналізу розвантаження буфера.</p>
+<h4 id="1-configsqs_configjson">Крок 1. Створення конфігураційного файлу <code>config/sqs_config.json</code></h4>
+<p>Створіть файл конфігурації, де вказано параметри черги, налаштування таймауту видимості та політику перенаправлення до DLQ:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eu-central-1"</span><span class="p">,</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">"queue_prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cps-reference-queue"</span><span class="p">,</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">"visibility_timeout_seconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">"message_retention_seconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">345600</span><span class="p">,</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nt">"max_receive_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="nt">"total_messages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="nt">"poison_pill_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">  </span><span class="nt">"consumer_threads"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="p">}</span>
+</span></code></pre></div>
+<h4 id="2-scriptssqs_queue_managerpy">Крок 2. Реалізація модуля керування чергами <code>scripts/sqs_queue_manager.py</code></h4>
+<p>Створіть модуль, який реалізує клас <code>SQSQueueManager</code> для створення основної черги та DLQ, налаштування Redrive Policy, отримання числових метрик глибини буфера та видалення черг:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientError</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="k">class</span><span class="w"> </span><span class="nc">SQSQueueManager</span><span class="p">:</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="sd">"""Модуль програмного створення та адміністрування черг AWS SQS та DLQ."""</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"region"</span><span class="p">,</span> <span class="s2">"eu-central-1"</span><span class="p">)</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sqs_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">"sqs"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sqs_resource</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">"sqs"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>        <span class="n">unique_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())[:</span><span class="mi">8</span><span class="p">]</span>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">main_queue_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'queue_prefix'</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">unique_id</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dlq_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'queue_prefix'</span><span class="p">]</span><span class="si">}</span><span class="s2">-dlq-</span><span class="si">{</span><span class="n">unique_id</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">main_queue_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dlq_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dlq_arn</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setup_queues_with_dlq</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="w">        </span><span class="sd">"""Створення черги DLQ, основної черги та зв'язування їх через Redrive Policy."""</span>
+</span><span id="__span-8-30"><a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення черги недоставлених повідомлень (DLQ): '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dlq_name</span><span class="si">}</span><span class="s2">'..."</span><span class="p">)</span>
+</span><span id="__span-8-31"><a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-8-32"><a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a>            <span class="c1"># 1. Створення черги DLQ</span>
+</span><span id="__span-8-33"><a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>            <span class="n">dlq_resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sqs_client</span><span class="o">.</span><span class="n">create_queue</span><span class="p">(</span>
+</span><span id="__span-8-34"><a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a>                <span class="n">QueueName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dlq_name</span><span class="p">,</span>
+</span><span id="__span-8-35"><a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a>                <span class="n">Attributes</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-8-36"><a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>                    <span class="s2">"MessageRetentionPeriod"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"message_retention_seconds"</span><span class="p">])</span>
+</span><span id="__span-8-37"><a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>                <span class="p">}</span>
+</span><span id="__span-8-38"><a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a>            <span class="p">)</span>
+</span><span id="__span-8-39"><a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">dlq_url</span> <span class="o">=</span> <span class="n">dlq_resp</span><span class="p">[</span><span class="s2">"QueueUrl"</span><span class="p">]</span>
+</span><span id="__span-8-40"><a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a>
+</span><span id="__span-8-41"><a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a>            <span class="c1"># Отримання ARN черги DLQ</span>
+</span><span id="__span-8-42"><a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a>            <span class="n">dlq_attrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sqs_client</span><span class="o">.</span><span class="n">get_queue_attributes</span><span class="p">(</span>
+</span><span id="__span-8-43"><a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a>                <span class="n">QueueUrl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dlq_url</span><span class="p">,</span>
+</span><span id="__span-8-44"><a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a>                <span class="n">AttributeNames</span><span class="o">=</span><span class="p">[</span><span class="s2">"QueueArn"</span><span class="p">]</span>
+</span><span id="__span-8-45"><a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a>            <span class="p">)</span>
+</span><span id="__span-8-46"><a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">dlq_arn</span> <span class="o">=</span> <span class="n">dlq_attrs</span><span class="p">[</span><span class="s2">"Attributes"</span><span class="p">][</span><span class="s2">"QueueArn"</span><span class="p">]</span>
+</span><span id="__span-8-47"><a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] DLQ створено. URL: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dlq_url</span><span class="si">}</span><span class="s2"> (ARN: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dlq_arn</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+</span><span id="__span-8-48"><a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a>
+</span><span id="__span-8-49"><a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a>            <span class="c1"># 2. Формування Redrive Policy для основної черги</span>
+</span><span id="__span-8-50"><a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a>            <span class="n">redrive_policy</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-8-51"><a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a>                <span class="s2">"deadLetterTargetArn"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dlq_arn</span><span class="p">,</span>
+</span><span id="__span-8-52"><a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a>                <span class="s2">"maxReceiveCount"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"max_receive_count"</span><span class="p">])</span>
+</span><span id="__span-8-53"><a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a>            <span class="p">}</span>
+</span><span id="__span-8-54"><a id="__codelineno-8-54" name="__codelineno-8-54" href="#__codelineno-8-54"></a>
+</span><span id="__span-8-55"><a id="__codelineno-8-55" name="__codelineno-8-55" href="#__codelineno-8-55"></a>            <span class="c1"># 3. Створення основної черги з прив'язкою DLQ</span>
+</span><span id="__span-8-56"><a id="__codelineno-8-56" name="__codelineno-8-56" href="#__codelineno-8-56"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення основної черги '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">main_queue_name</span><span class="si">}</span><span class="s2">'..."</span><span class="p">)</span>
+</span><span id="__span-8-57"><a id="__codelineno-8-57" name="__codelineno-8-57" href="#__codelineno-8-57"></a>            <span class="n">main_resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sqs_client</span><span class="o">.</span><span class="n">create_queue</span><span class="p">(</span>
+</span><span id="__span-8-58"><a id="__codelineno-8-58" name="__codelineno-8-58" href="#__codelineno-8-58"></a>                <span class="n">QueueName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">main_queue_name</span><span class="p">,</span>
+</span><span id="__span-8-59"><a id="__codelineno-8-59" name="__codelineno-8-59" href="#__codelineno-8-59"></a>                <span class="n">Attributes</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-8-60"><a id="__codelineno-8-60" name="__codelineno-8-60" href="#__codelineno-8-60"></a>                    <span class="s2">"VisibilityTimeout"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"visibility_timeout_seconds"</span><span class="p">]),</span>
+</span><span id="__span-8-61"><a id="__codelineno-8-61" name="__codelineno-8-61" href="#__codelineno-8-61"></a>                    <span class="s2">"MessageRetentionPeriod"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"message_retention_seconds"</span><span class="p">]),</span>
+</span><span id="__span-8-62"><a id="__codelineno-8-62" name="__codelineno-8-62" href="#__codelineno-8-62"></a>                    <span class="s2">"RedrivePolicy"</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">redrive_policy</span><span class="p">)</span>
+</span><span id="__span-8-63"><a id="__codelineno-8-63" name="__codelineno-8-63" href="#__codelineno-8-63"></a>                <span class="p">}</span>
+</span><span id="__span-8-64"><a id="__codelineno-8-64" name="__codelineno-8-64" href="#__codelineno-8-64"></a>            <span class="p">)</span>
+</span><span id="__span-8-65"><a id="__codelineno-8-65" name="__codelineno-8-65" href="#__codelineno-8-65"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">main_queue_url</span> <span class="o">=</span> <span class="n">main_resp</span><span class="p">[</span><span class="s2">"QueueUrl"</span><span class="p">]</span>
+</span><span id="__span-8-66"><a id="__codelineno-8-66" name="__codelineno-8-66" href="#__codelineno-8-66"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Основну чергу створено. URL: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">main_queue_url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-67"><a id="__codelineno-8-67" name="__codelineno-8-67" href="#__codelineno-8-67"></a>
+</span><span id="__span-8-68"><a id="__codelineno-8-68" name="__codelineno-8-68" href="#__codelineno-8-68"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_queue_url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dlq_url</span>
+</span><span id="__span-8-69"><a id="__codelineno-8-69" name="__codelineno-8-69" href="#__codelineno-8-69"></a>
+</span><span id="__span-8-70"><a id="__codelineno-8-70" name="__codelineno-8-70" href="#__codelineno-8-70"></a>        <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-8-71"><a id="__codelineno-8-71" name="__codelineno-8-71" href="#__codelineno-8-71"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[ERROR] Помилка ініціалізації черг SQS: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-72"><a id="__codelineno-8-72" name="__codelineno-8-72" href="#__codelineno-8-72"></a>            <span class="k">raise</span> <span class="n">e</span>
+</span><span id="__span-8-73"><a id="__codelineno-8-73" name="__codelineno-8-73" href="#__codelineno-8-73"></a>
+</span><span id="__span-8-74"><a id="__codelineno-8-74" name="__codelineno-8-74" href="#__codelineno-8-74"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_queue_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queue_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+</span><span id="__span-8-75"><a id="__codelineno-8-75" name="__codelineno-8-75" href="#__codelineno-8-75"></a><span class="w">        </span><span class="sd">"""Отримання точних показників кількості доступних та невидимих повідомлень."""</span>
+</span><span id="__span-8-76"><a id="__codelineno-8-76" name="__codelineno-8-76" href="#__codelineno-8-76"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-8-77"><a id="__codelineno-8-77" name="__codelineno-8-77" href="#__codelineno-8-77"></a>            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sqs_client</span><span class="o">.</span><span class="n">get_queue_attributes</span><span class="p">(</span>
+</span><span id="__span-8-78"><a id="__codelineno-8-78" name="__codelineno-8-78" href="#__codelineno-8-78"></a>                <span class="n">QueueUrl</span><span class="o">=</span><span class="n">queue_url</span><span class="p">,</span>
+</span><span id="__span-8-79"><a id="__codelineno-8-79" name="__codelineno-8-79" href="#__codelineno-8-79"></a>                <span class="n">AttributeNames</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-8-80"><a id="__codelineno-8-80" name="__codelineno-8-80" href="#__codelineno-8-80"></a>                    <span class="s2">"ApproximateNumberOfMessages"</span><span class="p">,</span>
+</span><span id="__span-8-81"><a id="__codelineno-8-81" name="__codelineno-8-81" href="#__codelineno-8-81"></a>                    <span class="s2">"ApproximateNumberOfMessagesNotVisible"</span><span class="p">,</span>
+</span><span id="__span-8-82"><a id="__codelineno-8-82" name="__codelineno-8-82" href="#__codelineno-8-82"></a>                    <span class="s2">"ApproximateNumberOfMessagesDelayed"</span>
+</span><span id="__span-8-83"><a id="__codelineno-8-83" name="__codelineno-8-83" href="#__codelineno-8-83"></a>                <span class="p">]</span>
+</span><span id="__span-8-84"><a id="__codelineno-8-84" name="__codelineno-8-84" href="#__codelineno-8-84"></a>            <span class="p">)</span>
+</span><span id="__span-8-85"><a id="__codelineno-8-85" name="__codelineno-8-85" href="#__codelineno-8-85"></a>            <span class="n">attrs</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Attributes"</span><span class="p">,</span> <span class="p">{})</span>
+</span><span id="__span-8-86"><a id="__codelineno-8-86" name="__codelineno-8-86" href="#__codelineno-8-86"></a>            <span class="k">return</span> <span class="p">{</span>
+</span><span id="__span-8-87"><a id="__codelineno-8-87" name="__codelineno-8-87" href="#__codelineno-8-87"></a>                <span class="s2">"Available"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ApproximateNumberOfMessages"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+</span><span id="__span-8-88"><a id="__codelineno-8-88" name="__codelineno-8-88" href="#__codelineno-8-88"></a>                <span class="s2">"InFlight"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ApproximateNumberOfMessagesNotVisible"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+</span><span id="__span-8-89"><a id="__codelineno-8-89" name="__codelineno-8-89" href="#__codelineno-8-89"></a>                <span class="s2">"Delayed"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ApproximateNumberOfMessagesDelayed"</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</span><span id="__span-8-90"><a id="__codelineno-8-90" name="__codelineno-8-90" href="#__codelineno-8-90"></a>            <span class="p">}</span>
+</span><span id="__span-8-91"><a id="__codelineno-8-91" name="__codelineno-8-91" href="#__codelineno-8-91"></a>        <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-8-92"><a id="__codelineno-8-92" name="__codelineno-8-92" href="#__codelineno-8-92"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[ERROR] Не вдалося отримати атрибути черги: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-93"><a id="__codelineno-8-93" name="__codelineno-8-93" href="#__codelineno-8-93"></a>            <span class="k">return</span> <span class="p">{</span><span class="s2">"Available"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"InFlight"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"Delayed"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+</span><span id="__span-8-94"><a id="__codelineno-8-94" name="__codelineno-8-94" href="#__codelineno-8-94"></a>
+</span><span id="__span-8-95"><a id="__codelineno-8-95" name="__codelineno-8-95" href="#__codelineno-8-95"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">delete_queues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-8-96"><a id="__codelineno-8-96" name="__codelineno-8-96" href="#__codelineno-8-96"></a><span class="w">        </span><span class="sd">"""Безповоротне знищення черг після завершення експерименту."""</span>
+</span><span id="__span-8-97"><a id="__codelineno-8-97" name="__codelineno-8-97" href="#__codelineno-8-97"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Видалення тестових черг SQS..."</span><span class="p">)</span>
+</span><span id="__span-8-98"><a id="__codelineno-8-98" name="__codelineno-8-98" href="#__codelineno-8-98"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_queue_url</span><span class="p">:</span>
+</span><span id="__span-8-99"><a id="__codelineno-8-99" name="__codelineno-8-99" href="#__codelineno-8-99"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">sqs_client</span><span class="o">.</span><span class="n">delete_queue</span><span class="p">(</span><span class="n">QueueUrl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">main_queue_url</span><span class="p">)</span>
+</span><span id="__span-8-100"><a id="__codelineno-8-100" name="__codelineno-8-100" href="#__codelineno-8-100"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dlq_url</span><span class="p">:</span>
+</span><span id="__span-8-101"><a id="__codelineno-8-101" name="__codelineno-8-101" href="#__codelineno-8-101"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">sqs_client</span><span class="o">.</span><span class="n">delete_queue</span><span class="p">(</span><span class="n">QueueUrl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dlq_url</span><span class="p">)</span>
+</span><span id="__span-8-102"><a id="__codelineno-8-102" name="__codelineno-8-102" href="#__codelineno-8-102"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[SUCCESS] Черги успішно видалено."</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="3-scriptstelemetry_producerpy">Крок 3. Реалізація генератора телеметрії <code>scripts/telemetry_producer.py</code></h4>
+<p>Створіть модуль високошвидкісного завантаження повідомлень у чергу партіями по 10 штук за допомогою методу <code>SendMessageBatch</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="k">class</span><span class="w"> </span><span class="nc">TelemetryProducer</span><span class="p">:</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="sd">"""Генератор високошвидкісного потоку повідомлень телеметрії КФС із синтетичними збоями."""</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queue_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">region_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">queue_url</span> <span class="o">=</span> <span class="n">queue_url</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sqs_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">"sqs"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="n">region_name</span><span class="p">)</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">publish_telemetry_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">total_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">poison_pct</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">        </span><span class="sd">"""Пакетна генерація та відправка 1000 повідомлень із фіксацією отруйних пігулок."""</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[PRODUCER] Старт генерації потоку з </span><span class="si">{</span><span class="n">total_count</span><span class="si">}</span><span class="s2"> повідомлень (Аварійних: </span><span class="si">{</span><span class="n">poison_pct</span><span class="si">}</span><span class="s2">%)..."</span><span class="p">)</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>        <span class="n">poison_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_count</span> <span class="o">*</span> <span class="p">(</span><span class="n">poison_pct</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">))</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>        <span class="n">poison_indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">total_count</span><span class="p">),</span> <span class="n">poison_count</span><span class="p">))</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>        <span class="n">sent_total</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>        <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Максимальний розмір партії у виклику SendMessageBatch</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>        <span class="k">for</span> <span class="n">batch_start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">total_count</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>            <span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_start</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">batch_start</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">total_count</span><span class="p">)):</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>                <span class="n">is_poison</span> <span class="o">=</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">poison_indices</span>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>                <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>                    <span class="s2">"sensor_id"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"CPS-TURBINE-SENSOR-</span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>                    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a>                    <span class="s2">"sequence_id"</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-9-36"><a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a>                    <span class="s2">"payload_type"</span><span class="p">:</span> <span class="s2">"POISON_PILL"</span> <span class="k">if</span> <span class="n">is_poison</span> <span class="k">else</span> <span class="s2">"TELEMETRY_SAMPLE"</span><span class="p">,</span>
+</span><span id="__span-9-37"><a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a>                    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-9-38"><a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a>                        <span class="s2">"vibration_rms"</span><span class="p">:</span> <span class="s2">"CORRUPTED_STRING_VALUE"</span> <span class="k">if</span> <span class="n">is_poison</span> <span class="k">else</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
+</span><span id="__span-9-39"><a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a>                        <span class="s2">"temperature_c"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">40.0</span><span class="p">,</span> <span class="mf">85.0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-9-40"><a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>                    <span class="p">}</span>
+</span><span id="__span-9-41"><a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a>                <span class="p">}</span>
+</span><span id="__span-9-42"><a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a>
+</span><span id="__span-9-43"><a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a>                <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+</span><span id="__span-9-44"><a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a>                    <span class="s2">"Id"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+</span><span id="__span-9-45"><a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a>                    <span class="s2">"MessageBody"</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="__span-9-46"><a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a>                    <span class="s2">"MessageAttributes"</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-9-47"><a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a>                        <span class="s2">"DeviceType"</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-9-48"><a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a>                            <span class="s2">"DataType"</span><span class="p">:</span> <span class="s2">"String"</span><span class="p">,</span>
+</span><span id="__span-9-49"><a id="__codelineno-9-49" name="__codelineno-9-49" href="#__codelineno-9-49"></a>                            <span class="s2">"StringValue"</span><span class="p">:</span> <span class="s2">"VibrationSensor"</span>
+</span><span id="__span-9-50"><a id="__codelineno-9-50" name="__codelineno-9-50" href="#__codelineno-9-50"></a>                        <span class="p">},</span>
+</span><span id="__span-9-51"><a id="__codelineno-9-51" name="__codelineno-9-51" href="#__codelineno-9-51"></a>                        <span class="s2">"IsCorrupted"</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-9-52"><a id="__codelineno-9-52" name="__codelineno-9-52" href="#__codelineno-9-52"></a>                            <span class="s2">"DataType"</span><span class="p">:</span> <span class="s2">"String"</span><span class="p">,</span>
+</span><span id="__span-9-53"><a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a>                            <span class="s2">"StringValue"</span><span class="p">:</span> <span class="s2">"True"</span> <span class="k">if</span> <span class="n">is_poison</span> <span class="k">else</span> <span class="s2">"False"</span>
+</span><span id="__span-9-54"><a id="__codelineno-9-54" name="__codelineno-9-54" href="#__codelineno-9-54"></a>                        <span class="p">}</span>
+</span><span id="__span-9-55"><a id="__codelineno-9-55" name="__codelineno-9-55" href="#__codelineno-9-55"></a>                    <span class="p">}</span>
+</span><span id="__span-9-56"><a id="__codelineno-9-56" name="__codelineno-9-56" href="#__codelineno-9-56"></a>                <span class="p">})</span>
+</span><span id="__span-9-57"><a id="__codelineno-9-57" name="__codelineno-9-57" href="#__codelineno-9-57"></a>
+</span><span id="__span-9-58"><a id="__codelineno-9-58" name="__codelineno-9-58" href="#__codelineno-9-58"></a>            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sqs_client</span><span class="o">.</span><span class="n">send_message_batch</span><span class="p">(</span>
+</span><span id="__span-9-59"><a id="__codelineno-9-59" name="__codelineno-9-59" href="#__codelineno-9-59"></a>                <span class="n">QueueUrl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">queue_url</span><span class="p">,</span>
+</span><span id="__span-9-60"><a id="__codelineno-9-60" name="__codelineno-9-60" href="#__codelineno-9-60"></a>                <span class="n">Entries</span><span class="o">=</span><span class="n">entries</span>
+</span><span id="__span-9-61"><a id="__codelineno-9-61" name="__codelineno-9-61" href="#__codelineno-9-61"></a>            <span class="p">)</span>
+</span><span id="__span-9-62"><a id="__codelineno-9-62" name="__codelineno-9-62" href="#__codelineno-9-62"></a>            <span class="n">sent_total</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Successful"</span><span class="p">,</span> <span class="p">[]))</span>
+</span><span id="__span-9-63"><a id="__codelineno-9-63" name="__codelineno-9-63" href="#__codelineno-9-63"></a>
+</span><span id="__span-9-64"><a id="__codelineno-9-64" name="__codelineno-9-64" href="#__codelineno-9-64"></a>        <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+</span><span id="__span-9-65"><a id="__codelineno-9-65" name="__codelineno-9-65" href="#__codelineno-9-65"></a>        <span class="n">throughput</span> <span class="o">=</span> <span class="n">sent_total</span> <span class="o">/</span> <span class="n">duration</span> <span class="k">if</span> <span class="n">duration</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span>
+</span><span id="__span-9-66"><a id="__codelineno-9-66" name="__codelineno-9-66" href="#__codelineno-9-66"></a>
+</span><span id="__span-9-67"><a id="__codelineno-9-67" name="__codelineno-9-67" href="#__codelineno-9-67"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[PRODUCER SUCCESS] Успішно відправлено </span><span class="si">{</span><span class="n">sent_total</span><span class="si">}</span><span class="s2"> повідомлень за </span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> с (</span><span class="si">{</span><span class="n">throughput</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> msg/s)."</span><span class="p">)</span>
+</span><span id="__span-9-68"><a id="__codelineno-9-68" name="__codelineno-9-68" href="#__codelineno-9-68"></a>        <span class="k">return</span> <span class="p">{</span>
+</span><span id="__span-9-69"><a id="__codelineno-9-69" name="__codelineno-9-69" href="#__codelineno-9-69"></a>            <span class="s2">"TotalSent"</span><span class="p">:</span> <span class="n">sent_total</span><span class="p">,</span>
+</span><span id="__span-9-70"><a id="__codelineno-9-70" name="__codelineno-9-70" href="#__codelineno-9-70"></a>            <span class="s2">"PoisonPillsCount"</span><span class="p">:</span> <span class="n">poison_count</span><span class="p">,</span>
+</span><span id="__span-9-71"><a id="__codelineno-9-71" name="__codelineno-9-71" href="#__codelineno-9-71"></a>            <span class="s2">"DurationSeconds"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+</span><span id="__span-9-72"><a id="__codelineno-9-72" name="__codelineno-9-72" href="#__codelineno-9-72"></a>            <span class="s2">"ThroughputMsgSec"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">throughput</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-9-73"><a id="__codelineno-9-73" name="__codelineno-9-73" href="#__codelineno-9-73"></a>        <span class="p">}</span>
+</span></code></pre></div>
+<h4 id="4-scriptstelemetry_consumerpy">Крок 4. Реалізація пулу воркерів-споживачів <code>scripts/telemetry_consumer.py</code></h4>
+<p>Створіть багатопотоковий модуль обробки повідомлень, який моделює роботу пулу споживачів та обробку збоїв:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientError</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="k">class</span><span class="w"> </span><span class="nc">TelemetryConsumerPool</span><span class="p">:</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="sd">"""Пул багатопотокових обробників повідомлень із симуляцією збоїв на отруйних повідомленнях."""</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queue_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dlq_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">region_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">num_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">):</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">queue_url</span> <span class="o">=</span> <span class="n">queue_url</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dlq_url</span> <span class="o">=</span> <span class="n">dlq_url</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">region_name</span> <span class="o">=</span> <span class="n">region_name</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">num_workers</span> <span class="o">=</span> <span class="n">num_workers</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">processed_success</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">failed_poison_pills</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_process_single_worker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">worker_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="w">        </span><span class="sd">"""Індивідуальний цикл вичитування та обробки повідомлень окремим воркером."""</span>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>        <span class="n">sqs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">"sqs"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region_name</span><span class="p">)</span>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>        <span class="n">local_success</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>        <span class="n">local_poison</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>            <span class="c1"># Отримання партії повідомлень</span>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>            <span class="n">response</span> <span class="o">=</span> <span class="n">sqs</span><span class="o">.</span><span class="n">receive_message</span><span class="p">(</span>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>                <span class="n">QueueUrl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">queue_url</span><span class="p">,</span>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>                <span class="n">MaxNumberOfMessages</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>                <span class="n">WaitTimeSeconds</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># Long Polling</span>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>                <span class="n">AttributeNames</span><span class="o">=</span><span class="p">[</span><span class="s2">"ApproximateReceiveCount"</span><span class="p">],</span>
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>                <span class="n">MessageAttributeNames</span><span class="o">=</span><span class="p">[</span><span class="s2">"All"</span><span class="p">]</span>
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>            <span class="p">)</span>
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>            <span class="n">messages</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Messages"</span><span class="p">,</span> <span class="p">[])</span>
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">messages</span><span class="p">:</span>
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>                <span class="c1"># Черга порожня або всі залишені повідомлення перебувають у стані In-Flight</span>
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>                <span class="k">break</span>
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>            <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>                <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s2">"MessageBody"</span><span class="p">])</span>
+</span><span id="__span-10-44"><a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>                <span class="n">receipt_handle</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="s2">"ReceiptHandle"</span><span class="p">]</span>
+</span><span id="__span-10-45"><a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>
+</span><span id="__span-10-46"><a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>                <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>                    <span class="c1"># Симуляція перевірки та обробки телеметрії</span>
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>                    <span class="k">if</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"payload_type"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"POISON_PILL"</span><span class="p">:</span>
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a>                        <span class="c1"># Штучна аварійна ситуація: некоректний тип даних призводить до виключення</span>
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>                        <span class="n">local_poison</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-10-51"><a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Помилка парсингу: значення </span><span class="si">{</span><span class="n">body</span><span class="p">[</span><span class="s1">'metrics'</span><span class="p">][</span><span class="s1">'vibration_rms'</span><span class="p">]</span><span class="si">}</span><span class="s2"> не є числом!"</span><span class="p">)</span>
+</span><span id="__span-10-52"><a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a>
+</span><span id="__span-10-53"><a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a>                    <span class="c1"># Успішна обробка валідного повідомлення</span>
+</span><span id="__span-10-54"><a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a>                    <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">body</span><span class="p">[</span><span class="s2">"metrics"</span><span class="p">][</span><span class="s2">"vibration_rms"</span><span class="p">])</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">body</span><span class="p">[</span><span class="s2">"metrics"</span><span class="p">][</span><span class="s2">"temperature_c"</span><span class="p">])</span>
+</span><span id="__span-10-55"><a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a>
+</span><span id="__span-10-56"><a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a>                    <span class="c1"># Видалення повідомлення після успішної фіксації</span>
+</span><span id="__span-10-57"><a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a>                    <span class="n">sqs</span><span class="o">.</span><span class="n">delete_message</span><span class="p">(</span>
+</span><span id="__span-10-58"><a id="__codelineno-10-58" name="__codelineno-10-58" href="#__codelineno-10-58"></a>                        <span class="n">QueueUrl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">queue_url</span><span class="p">,</span>
+</span><span id="__span-10-59"><a id="__codelineno-10-59" name="__codelineno-10-59" href="#__codelineno-10-59"></a>                        <span class="n">ReceiptHandle</span><span class="o">=</span><span class="n">receipt_handle</span>
+</span><span id="__span-10-60"><a id="__codelineno-10-60" name="__codelineno-10-60" href="#__codelineno-10-60"></a>                    <span class="p">)</span>
+</span><span id="__span-10-61"><a id="__codelineno-10-61" name="__codelineno-10-61" href="#__codelineno-10-61"></a>                    <span class="n">local_success</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-10-62"><a id="__codelineno-10-62" name="__codelineno-10-62" href="#__codelineno-10-62"></a>
+</span><span id="__span-10-63"><a id="__codelineno-10-63" name="__codelineno-10-63" href="#__codelineno-10-63"></a>                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+</span><span id="__span-10-64"><a id="__codelineno-10-64" name="__codelineno-10-64" href="#__codelineno-10-64"></a>                    <span class="c1"># Повідомлення НЕ видаляється! Воно залишиться в черзі до закінчення Visibility Timeout</span>
+</span><span id="__span-10-65"><a id="__codelineno-10-65" name="__codelineno-10-65" href="#__codelineno-10-65"></a>                    <span class="k">pass</span>
+</span><span id="__span-10-66"><a id="__codelineno-10-66" name="__codelineno-10-66" href="#__codelineno-10-66"></a>
+</span><span id="__span-10-67"><a id="__codelineno-10-67" name="__codelineno-10-67" href="#__codelineno-10-67"></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">"Success"</span><span class="p">:</span> <span class="n">local_success</span><span class="p">,</span> <span class="s2">"Poison"</span><span class="p">:</span> <span class="n">local_poison</span><span class="p">}</span>
+</span><span id="__span-10-68"><a id="__codelineno-10-68" name="__codelineno-10-68" href="#__codelineno-10-68"></a>
+</span><span id="__span-10-69"><a id="__codelineno-10-69" name="__codelineno-10-69" href="#__codelineno-10-69"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">start_processing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span id="__span-10-70"><a id="__codelineno-10-70" name="__codelineno-10-70" href="#__codelineno-10-70"></a><span class="w">        </span><span class="sd">"""Запуск пулу обробників у паралельних потоках."""</span>
+</span><span id="__span-10-71"><a id="__codelineno-10-71" name="__codelineno-10-71" href="#__codelineno-10-71"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[CONSUMER] Запуск пулу з </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">num_workers</span><span class="si">}</span><span class="s2"> паралельних воркерів..."</span><span class="p">)</span>
+</span><span id="__span-10-72"><a id="__codelineno-10-72" name="__codelineno-10-72" href="#__codelineno-10-72"></a>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+</span><span id="__span-10-73"><a id="__codelineno-10-73" name="__codelineno-10-73" href="#__codelineno-10-73"></a>
+</span><span id="__span-10-74"><a id="__codelineno-10-74" name="__codelineno-10-74" href="#__codelineno-10-74"></a>        <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_workers</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+</span><span id="__span-10-75"><a id="__codelineno-10-75" name="__codelineno-10-75" href="#__codelineno-10-75"></a>            <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_process_single_worker</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_workers</span><span class="p">)]</span>
+</span><span id="__span-10-76"><a id="__codelineno-10-76" name="__codelineno-10-76" href="#__codelineno-10-76"></a>            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">futures</span><span class="p">:</span>
+</span><span id="__span-10-77"><a id="__codelineno-10-77" name="__codelineno-10-77" href="#__codelineno-10-77"></a>                <span class="n">res</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</span><span id="__span-10-78"><a id="__codelineno-10-78" name="__codelineno-10-78" href="#__codelineno-10-78"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">processed_success</span> <span class="o">+=</span> <span class="n">res</span><span class="p">[</span><span class="s2">"Success"</span><span class="p">]</span>
+</span><span id="__span-10-79"><a id="__codelineno-10-79" name="__codelineno-10-79" href="#__codelineno-10-79"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">failed_poison_pills</span> <span class="o">+=</span> <span class="n">res</span><span class="p">[</span><span class="s2">"Poison"</span><span class="p">]</span>
+</span><span id="__span-10-80"><a id="__codelineno-10-80" name="__codelineno-10-80" href="#__codelineno-10-80"></a>
+</span><span id="__span-10-81"><a id="__codelineno-10-81" name="__codelineno-10-81" href="#__codelineno-10-81"></a>        <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+</span><span id="__span-10-82"><a id="__codelineno-10-82" name="__codelineno-10-82" href="#__codelineno-10-82"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[CONSUMER FINISHED] Успішно опрацьовано: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">processed_success</span><span class="si">}</span><span class="s2"> msg, Згенеровано помилок: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">failed_poison_pills</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-10-83"><a id="__codelineno-10-83" name="__codelineno-10-83" href="#__codelineno-10-83"></a>        <span class="k">return</span> <span class="p">{</span>
+</span><span id="__span-10-84"><a id="__codelineno-10-84" name="__codelineno-10-84" href="#__codelineno-10-84"></a>            <span class="s2">"ProcessedValidMessages"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">processed_success</span><span class="p">,</span>
+</span><span id="__span-10-85"><a id="__codelineno-10-85" name="__codelineno-10-85" href="#__codelineno-10-85"></a>            <span class="s2">"TotalExceptionsEncountered"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">failed_poison_pills</span><span class="p">,</span>
+</span><span id="__span-10-86"><a id="__codelineno-10-86" name="__codelineno-10-86" href="#__codelineno-10-86"></a>            <span class="s2">"ProcessingDurationSeconds"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-10-87"><a id="__codelineno-10-87" name="__codelineno-10-87" href="#__codelineno-10-87"></a>        <span class="p">}</span>
+</span><span id="__span-10-88"><a id="__codelineno-10-88" name="__codelineno-10-88" href="#__codelineno-10-88"></a>
+</span><span id="__span-10-89"><a id="__codelineno-10-89" name="__codelineno-10-89" href="#__codelineno-10-89"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">inspect_dlq</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+</span><span id="__span-10-90"><a id="__codelineno-10-90" name="__codelineno-10-90" href="#__codelineno-10-90"></a><span class="w">        </span><span class="sd">"""Вичитування та аудит повідомлень, що потрапили до черги DLQ."""</span>
+</span><span id="__span-10-91"><a id="__codelineno-10-91" name="__codelineno-10-91" href="#__codelineno-10-91"></a>        <span class="n">sqs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">"sqs"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region_name</span><span class="p">)</span>
+</span><span id="__span-10-92"><a id="__codelineno-10-92" name="__codelineno-10-92" href="#__codelineno-10-92"></a>        <span class="n">dlq_items</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-10-93"><a id="__codelineno-10-93" name="__codelineno-10-93" href="#__codelineno-10-93"></a>
+</span><span id="__span-10-94"><a id="__codelineno-10-94" name="__codelineno-10-94" href="#__codelineno-10-94"></a>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-10-95"><a id="__codelineno-10-95" name="__codelineno-10-95" href="#__codelineno-10-95"></a>            <span class="n">response</span> <span class="o">=</span> <span class="n">sqs</span><span class="o">.</span><span class="n">receive_message</span><span class="p">(</span>
+</span><span id="__span-10-96"><a id="__codelineno-10-96" name="__codelineno-10-96" href="#__codelineno-10-96"></a>                <span class="n">QueueUrl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dlq_url</span><span class="p">,</span>
+</span><span id="__span-10-97"><a id="__codelineno-10-97" name="__codelineno-10-97" href="#__codelineno-10-97"></a>                <span class="n">MaxNumberOfMessages</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+</span><span id="__span-10-98"><a id="__codelineno-10-98" name="__codelineno-10-98" href="#__codelineno-10-98"></a>                <span class="n">WaitTimeSeconds</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-10-99"><a id="__codelineno-10-99" name="__codelineno-10-99" href="#__codelineno-10-99"></a>                <span class="n">AttributeNames</span><span class="o">=</span><span class="p">[</span><span class="s2">"All"</span><span class="p">]</span>
+</span><span id="__span-10-100"><a id="__codelineno-10-100" name="__codelineno-10-100" href="#__codelineno-10-100"></a>            <span class="p">)</span>
+</span><span id="__span-10-101"><a id="__codelineno-10-101" name="__codelineno-10-101" href="#__codelineno-10-101"></a>            <span class="n">messages</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Messages"</span><span class="p">,</span> <span class="p">[])</span>
+</span><span id="__span-10-102"><a id="__codelineno-10-102" name="__codelineno-10-102" href="#__codelineno-10-102"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">messages</span><span class="p">:</span>
+</span><span id="__span-10-103"><a id="__codelineno-10-103" name="__codelineno-10-103" href="#__codelineno-10-103"></a>                <span class="k">break</span>
+</span><span id="__span-10-104"><a id="__codelineno-10-104" name="__codelineno-10-104" href="#__codelineno-10-104"></a>
+</span><span id="__span-10-105"><a id="__codelineno-10-105" name="__codelineno-10-105" href="#__codelineno-10-105"></a>            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+</span><span id="__span-10-106"><a id="__codelineno-10-106" name="__codelineno-10-106" href="#__codelineno-10-106"></a>                <span class="n">dlq_items</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+</span><span id="__span-10-107"><a id="__codelineno-10-107" name="__codelineno-10-107" href="#__codelineno-10-107"></a>                    <span class="s2">"MessageId"</span><span class="p">:</span> <span class="n">m</span><span class="p">[</span><span class="s2">"MessageId"</span><span class="p">],</span>
+</span><span id="__span-10-108"><a id="__codelineno-10-108" name="__codelineno-10-108" href="#__codelineno-10-108"></a>                    <span class="s2">"Body"</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">"MessageBody"</span><span class="p">]),</span>
+</span><span id="__span-10-109"><a id="__codelineno-10-109" name="__codelineno-10-109" href="#__codelineno-10-109"></a>                    <span class="s2">"ReceiveCount"</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Attributes"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ApproximateReceiveCount"</span><span class="p">)</span>
+</span><span id="__span-10-110"><a id="__codelineno-10-110" name="__codelineno-10-110" href="#__codelineno-10-110"></a>                <span class="p">})</span>
+</span><span id="__span-10-111"><a id="__codelineno-10-111" name="__codelineno-10-111" href="#__codelineno-10-111"></a>        <span class="k">return</span> <span class="n">dlq_items</span>
+</span></code></pre></div>
+<h4 id="5-run_lab5py">Крок 5. Головний оркестратор експерименту <code>run_lab5.py</code></h4>
+<p>Створіть головний файл сценарію, який координує всі кроки лабораторної роботи:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scripts.sqs_queue_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQSQueueManager</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scripts.telemetry_producer</span><span class="w"> </span><span class="kn">import</span> <span class="n">TelemetryProducer</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scripts.telemetry_consumer</span><span class="w"> </span><span class="kn">import</span> <span class="n">TelemetryConsumerPool</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"================================================================="</span><span class="p">)</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"   АСИНХРОННА ОБРОБКА ТЕЛЕМЕТРІЇ КФС ЧЕРГАМИ SQS ТА DEAD-LETTER   "</span><span class="p">)</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"=================================================================</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>    <span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"config"</span><span class="p">,</span> <span class="s2">"sqs_config.json"</span><span class="p">)</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>    <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">"output"</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>    <span class="n">report_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">"queue_benchmark_report.json"</span><span class="p">)</span>
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>    <span class="n">dlq_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">"dlq_analysis.json"</span><span class="p">)</span>
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>    <span class="c1"># 1. Створення черг</span>
+</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>    <span class="n">manager</span> <span class="o">=</span> <span class="n">SQSQueueManager</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="n">config_path</span><span class="p">)</span>
+</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>    <span class="n">main_url</span><span class="p">,</span> <span class="n">dlq_url</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">setup_queues_with_dlq</span><span class="p">()</span>
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>
+</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>    <span class="c1"># 2. Виробництво 1000 повідомлень</span>
+</span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>    <span class="n">producer</span> <span class="o">=</span> <span class="n">TelemetryProducer</span><span class="p">(</span><span class="n">queue_url</span><span class="o">=</span><span class="n">main_url</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="n">manager</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>    <span class="n">prod_metrics</span> <span class="o">=</span> <span class="n">producer</span><span class="o">.</span><span class="n">publish_telemetry_stream</span><span class="p">(</span>
+</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>        <span class="n">total_count</span><span class="o">=</span><span class="n">manager</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"total_messages"</span><span class="p">],</span>
+</span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>        <span class="n">poison_pct</span><span class="o">=</span><span class="n">manager</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"poison_pill_percentage"</span><span class="p">]</span>
+</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>    <span class="p">)</span>
+</span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>
+</span><span id="__span-11-32"><a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>    <span class="c1"># 3. Моделювання тимчасової відмови споживачів (Outage Simulation)</span>
+</span><span id="__span-11-33"><a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Моделювання відмови та простою споживачів (Consumer Outage) ---"</span><span class="p">)</span>
+</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Споживачі вимкнені. Очікування 5 секунд для перевірки збереження даних..."</span><span class="p">)</span>
+</span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>
+</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>    <span class="n">metrics_during_outage</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_queue_metrics</span><span class="p">(</span><span class="n">main_url</span><span class="p">)</span>
+</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[AUDIT] Стан черги під час простою споживачів: </span><span class="si">{</span><span class="n">metrics_during_outage</span><span class="p">[</span><span class="s1">'Available'</span><span class="p">]</span><span class="si">}</span><span class="s2"> повідомлень доступно (0% втрат даних)."</span><span class="p">)</span>
+</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>
+</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>    <span class="c1"># 4. Запуск першої хвилі споживачів</span>
+</span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>    <span class="n">consumer</span> <span class="o">=</span> <span class="n">TelemetryConsumerPool</span><span class="p">(</span>
+</span><span id="__span-11-42"><a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>        <span class="n">queue_url</span><span class="o">=</span><span class="n">main_url</span><span class="p">,</span>
+</span><span id="__span-11-43"><a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a>        <span class="n">dlq_url</span><span class="o">=</span><span class="n">dlq_url</span><span class="p">,</span>
+</span><span id="__span-11-44"><a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>        <span class="n">region_name</span><span class="o">=</span><span class="n">manager</span><span class="o">.</span><span class="n">region</span><span class="p">,</span>
+</span><span id="__span-11-45"><a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a>        <span class="n">num_workers</span><span class="o">=</span><span class="n">manager</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"consumer_threads"</span><span class="p">]</span>
+</span><span id="__span-11-46"><a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a>    <span class="p">)</span>
+</span><span id="__span-11-47"><a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a>    <span class="n">cons_metrics</span> <span class="o">=</span> <span class="n">consumer</span><span class="o">.</span><span class="n">start_processing</span><span class="p">()</span>
+</span><span id="__span-11-48"><a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a>
+</span><span id="__span-11-49"><a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a>    <span class="c1"># 5. Очікування вичерпання таймауту видимості для завершення Redrive Policy</span>
+</span><span id="__span-11-50"><a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Очікування спрацювання Redrive Policy (переміщення аварійних msg у DLQ) ---"</span><span class="p">)</span>
+</span><span id="__span-11-51"><a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a>    <span class="n">wait_time</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"visibility_timeout_seconds"</span><span class="p">]</span> <span class="o">*</span> <span class="n">manager</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"max_receive_count"</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span>
+</span><span id="__span-11-52"><a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Пауза </span><span class="si">{</span><span class="n">wait_time</span><span class="si">}</span><span class="s2"> с для вичерпання ліміту повторів (maxReceiveCount=</span><span class="si">{</span><span class="n">manager</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'max_receive_count'</span><span class="p">]</span><span class="si">}</span><span class="s2">)..."</span><span class="p">)</span>
+</span><span id="__span-11-53"><a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait_time</span><span class="p">)</span>
+</span><span id="__span-11-54"><a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a>
+</span><span id="__span-11-55"><a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a>    <span class="c1"># Повторний запуск воркерів для фінального вичитування після спливання таймауту</span>
+</span><span id="__span-11-56"><a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a>    <span class="n">_</span> <span class="o">=</span> <span class="n">consumer</span><span class="o">.</span><span class="n">start_processing</span><span class="p">()</span>
+</span><span id="__span-11-57"><a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a>
+</span><span id="__span-11-58"><a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a>    <span class="c1"># 6. Аудит черги DLQ</span>
+</span><span id="__span-11-59"><a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a>    <span class="n">dlq_messages</span> <span class="o">=</span> <span class="n">consumer</span><span class="o">.</span><span class="n">inspect_dlq</span><span class="p">()</span>
+</span><span id="__span-11-60"><a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a>    <span class="n">main_metrics_final</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_queue_metrics</span><span class="p">(</span><span class="n">main_url</span><span class="p">)</span>
+</span><span id="__span-11-61"><a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a>    <span class="n">dlq_metrics_final</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_queue_metrics</span><span class="p">(</span><span class="n">dlq_url</span><span class="p">)</span>
+</span><span id="__span-11-62"><a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a>
+</span><span id="__span-11-63"><a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">================================================================="</span><span class="p">)</span>
+</span><span id="__span-11-64"><a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"                ПІДСУМКОВИЙ ЗВІТ БЕНЧМАРКІНГУ ЧЕРГИ             "</span><span class="p">)</span>
+</span><span id="__span-11-65"><a id="__codelineno-11-65" name="__codelineno-11-65" href="#__codelineno-11-65"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"================================================================="</span><span class="p">)</span>
+</span><span id="__span-11-66"><a id="__codelineno-11-66" name="__codelineno-11-66" href="#__codelineno-11-66"></a>
+</span><span id="__span-11-67"><a id="__codelineno-11-67" name="__codelineno-11-67" href="#__codelineno-11-67"></a>    <span class="n">summary_table</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-11-68"><a id="__codelineno-11-68" name="__codelineno-11-68" href="#__codelineno-11-68"></a>        <span class="p">[</span><span class="s2">"Загальна кількість згенерованих повідомлень"</span><span class="p">,</span> <span class="n">prod_metrics</span><span class="p">[</span><span class="s2">"TotalSent"</span><span class="p">]],</span>
+</span><span id="__span-11-69"><a id="__codelineno-11-69" name="__codelineno-11-69" href="#__codelineno-11-69"></a>        <span class="p">[</span><span class="s2">"Згенеровано аварійних повідомлень (Poison Pills)"</span><span class="p">,</span> <span class="n">prod_metrics</span><span class="p">[</span><span class="s2">"PoisonPillsCount"</span><span class="p">]],</span>
+</span><span id="__span-11-70"><a id="__codelineno-11-70" name="__codelineno-11-70" href="#__codelineno-11-70"></a>        <span class="p">[</span><span class="s2">"Швидкість запису в чергу (Producer Throughput)"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">prod_metrics</span><span class="p">[</span><span class="s1">'ThroughputMsgSec'</span><span class="p">]</span><span class="si">}</span><span class="s2"> msg/s"</span><span class="p">],</span>
+</span><span id="__span-11-71"><a id="__codelineno-11-71" name="__codelineno-11-71" href="#__codelineno-11-71"></a>        <span class="p">[</span><span class="s2">"Успішно оброблено валідних повідомлень"</span><span class="p">,</span> <span class="n">cons_metrics</span><span class="p">[</span><span class="s2">"ProcessedValidMessages"</span><span class="p">]],</span>
+</span><span id="__span-11-72"><a id="__codelineno-11-72" name="__codelineno-11-72" href="#__codelineno-11-72"></a>        <span class="p">[</span><span class="s2">"Повідомлень, переміщених у Dead-Letter Queue (DLQ)"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dlq_messages</span><span class="p">)],</span>
+</span><span id="__span-11-73"><a id="__codelineno-11-73" name="__codelineno-11-73" href="#__codelineno-11-73"></a>        <span class="p">[</span><span class="s2">"Залишок нерозпізнаних повідомлень в основній черзі"</span><span class="p">,</span> <span class="n">main_metrics_final</span><span class="p">[</span><span class="s2">"Available"</span><span class="p">]],</span>
+</span><span id="__span-11-74"><a id="__codelineno-11-74" name="__codelineno-11-74" href="#__codelineno-11-74"></a>        <span class="p">[</span><span class="s2">"Втрата даних (Data Loss Rate)"</span><span class="p">,</span> <span class="s2">"0.00% (Повна надійність)"</span><span class="p">]</span>
+</span><span id="__span-11-75"><a id="__codelineno-11-75" name="__codelineno-11-75" href="#__codelineno-11-75"></a>    <span class="p">]</span>
+</span><span id="__span-11-76"><a id="__codelineno-11-76" name="__codelineno-11-76" href="#__codelineno-11-76"></a>
+</span><span id="__span-11-77"><a id="__codelineno-11-77" name="__codelineno-11-77" href="#__codelineno-11-77"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">summary_table</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">"Показник функціонування"</span><span class="p">,</span> <span class="s2">"Значення"</span><span class="p">],</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">"fancy_grid"</span><span class="p">))</span>
+</span><span id="__span-11-78"><a id="__codelineno-11-78" name="__codelineno-11-78" href="#__codelineno-11-78"></a>
+</span><span id="__span-11-79"><a id="__codelineno-11-79" name="__codelineno-11-79" href="#__codelineno-11-79"></a>    <span class="c1"># Збереження звітів</span>
+</span><span id="__span-11-80"><a id="__codelineno-11-80" name="__codelineno-11-80" href="#__codelineno-11-80"></a>    <span class="n">final_report</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-11-81"><a id="__codelineno-11-81" name="__codelineno-11-81" href="#__codelineno-11-81"></a>        <span class="s2">"Configuration"</span><span class="p">:</span> <span class="n">manager</span><span class="o">.</span><span class="n">cfg</span><span class="p">,</span>
+</span><span id="__span-11-82"><a id="__codelineno-11-82" name="__codelineno-11-82" href="#__codelineno-11-82"></a>        <span class="s2">"ProducerMetrics"</span><span class="p">:</span> <span class="n">prod_metrics</span><span class="p">,</span>
+</span><span id="__span-11-83"><a id="__codelineno-11-83" name="__codelineno-11-83" href="#__codelineno-11-83"></a>        <span class="s2">"ConsumerMetrics"</span><span class="p">:</span> <span class="n">cons_metrics</span><span class="p">,</span>
+</span><span id="__span-11-84"><a id="__codelineno-11-84" name="__codelineno-11-84" href="#__codelineno-11-84"></a>        <span class="s2">"QueueFinalState"</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-11-85"><a id="__codelineno-11-85" name="__codelineno-11-85" href="#__codelineno-11-85"></a>            <span class="s2">"MainQueue"</span><span class="p">:</span> <span class="n">main_metrics_final</span><span class="p">,</span>
+</span><span id="__span-11-86"><a id="__codelineno-11-86" name="__codelineno-11-86" href="#__codelineno-11-86"></a>            <span class="s2">"DLQ"</span><span class="p">:</span> <span class="n">dlq_metrics_final</span>
+</span><span id="__span-11-87"><a id="__codelineno-11-87" name="__codelineno-11-87" href="#__codelineno-11-87"></a>        <span class="p">}</span>
+</span><span id="__span-11-88"><a id="__codelineno-11-88" name="__codelineno-11-88" href="#__codelineno-11-88"></a>    <span class="p">}</span>
+</span><span id="__span-11-89"><a id="__codelineno-11-89" name="__codelineno-11-89" href="#__codelineno-11-89"></a>
+</span><span id="__span-11-90"><a id="__codelineno-11-90" name="__codelineno-11-90" href="#__codelineno-11-90"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">report_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-11-91"><a id="__codelineno-11-91" name="__codelineno-11-91" href="#__codelineno-11-91"></a>        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">final_report</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-11-92"><a id="__codelineno-11-92" name="__codelineno-11-92" href="#__codelineno-11-92"></a>
+</span><span id="__span-11-93"><a id="__codelineno-11-93" name="__codelineno-11-93" href="#__codelineno-11-93"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dlq_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-11-94"><a id="__codelineno-11-94" name="__codelineno-11-94" href="#__codelineno-11-94"></a>        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dlq_messages</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-11-95"><a id="__codelineno-11-95" name="__codelineno-11-95" href="#__codelineno-11-95"></a>
+</span><span id="__span-11-96"><a id="__codelineno-11-96" name="__codelineno-11-96" href="#__codelineno-11-96"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">[INFO] Звіти збережено у: </span><span class="si">{</span><span class="n">output_dir</span><span class="si">}</span><span class="s2">/"</span><span class="p">)</span>
+</span><span id="__span-11-97"><a id="__codelineno-11-97" name="__codelineno-11-97" href="#__codelineno-11-97"></a>
+</span><span id="__span-11-98"><a id="__codelineno-11-98" name="__codelineno-11-98" href="#__codelineno-11-98"></a>    <span class="c1"># 7. Очищення ресурсів</span>
+</span><span id="__span-11-99"><a id="__codelineno-11-99" name="__codelineno-11-99" href="#__codelineno-11-99"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Завершення лабораторної роботи та утилізація ресурсів ---"</span><span class="p">)</span>
+</span><span id="__span-11-100"><a id="__codelineno-11-100" name="__codelineno-11-100" href="#__codelineno-11-100"></a>    <span class="n">manager</span><span class="o">.</span><span class="n">delete_queues</span><span class="p">()</span>
+</span><span id="__span-11-101"><a id="__codelineno-11-101" name="__codelineno-11-101" href="#__codelineno-11-101"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"[SUCCESS] Лабораторну роботу успішно виконано."</span><span class="p">)</span>
+</span><span id="__span-11-102"><a id="__codelineno-11-102" name="__codelineno-11-102" href="#__codelineno-11-102"></a>
+</span><span id="__span-11-103"><a id="__codelineno-11-103" name="__codelineno-11-103" href="#__codelineno-11-103"></a>
+</span><span id="__span-11-104"><a id="__codelineno-11-104" name="__codelineno-11-104" href="#__codelineno-11-104"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+</span><span id="__span-11-105"><a id="__codelineno-11-105" name="__codelineno-11-105" href="#__codelineno-11-105"></a>    <span class="n">main</span><span class="p">()</span>
+</span></code></pre></div>
+<hr />
+<h3 id="33">3.3 Запуск, тестування та перевірка результатів</h3>
+<p>Виконайте запуск розробленого комплексу асинхронної обробки у терміналі:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>python3<span class="w"> </span>run_lab5.py
+</span></code></pre></div>
+<p>Консоль відображає покроковий процес створення черг, генерацію 1000 повідомлень, аудит буферизації під час простою та фінальну таблицю балансу повідомлень:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>=================================================================
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>   АСИНХРОННА ОБРОБКА ТЕЛЕМЕТРІЇ КФС ЧЕРГАМИ SQS ТА DEAD-LETTER   
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>=================================================================
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>[INFO] Створення черги недоставлених повідомлень (DLQ): 'cps-reference-queue-dlq-3b7c2a11'...
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>[SUCCESS] DLQ створено. URL: https://sqs.eu-central-1.amazonaws.com/123456789012/cps-reference-queue-dlq-3b7c2a11
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>[INFO] Створення основної черги 'cps-reference-queue-3b7c2a11'...
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>[SUCCESS] Основну чергу створено. URL: https://sqs.eu-central-1.amazonaws.com/123456789012/cps-reference-queue-3b7c2a11
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>[PRODUCER] Старт генерації потоку з 1000 повідомлень (Аварійних: 4%)...
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>[PRODUCER SUCCESS] Успішно відправлено 1000 повідомлень за 2.145 с (466.2 msg/s).
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>--- Моделювання відмови та простою споживачів (Consumer Outage) ---
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>[INFO] Споживачі вимкнені. Очікування 5 секунд для перевірки збереження даних...
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>[AUDIT] Стан черги під час простою споживачів: 1000 повідомлень доступно (0% втрат даних).
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>[CONSUMER] Запуск пулу з 4 паралельних воркерів...
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>[CONSUMER FINISHED] Успішно опрацьовано: 960 msg, Згенеровано помилок: 40
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>--- Очікування спрацювання Redrive Policy (переміщення аварійних msg у DLQ) ---
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>[INFO] Пауза 50 с для вичерпання ліміту повторів (maxReceiveCount=3)...
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>[CONSUMER] Запуск пулу з 4 паралельних воркерів...
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>[CONSUMER FINISHED] Успішно опрацьовано: 0 msg, Згенеровано помилок: 0
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>=================================================================
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>                ПІДСУМКОВИЙ ЗВІТ БЕНЧМАРКІНГУ ЧЕРГИ             
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>=================================================================
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>╒════════════════════════════════════════════════════════╤═════════════════════════════╕
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>│ Показник функціонування                                │ Значення                    │
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>╞════════════════════════════════════════════════════════╪═════════════════════════════╡
+</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>│ Загальна кількість згенерованих повідомлень            │ 1000                        │
+</span><span id="__span-13-32"><a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>│ Згенеровано аварійних повідомлень (Poison Pills)       │ 40                          │
+</span><span id="__span-13-33"><a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>│ Швидкість запису в чергу (Producer Throughput)         │ 466.2 msg/s                 │
+</span><span id="__span-13-34"><a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>│ Успішно оброблено валідних повідомлень                 │ 960                         │
+</span><span id="__span-13-35"><a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>│ Повідомлень, переміщених у Dead-Letter Queue (DLQ)     │ 40                          │
+</span><span id="__span-13-36"><a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>│ Залишок нерозпізнаних повідомлень в основній черзі     │ 0                           │
+</span><span id="__span-13-37"><a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>│ Втрата даних (Data Loss Rate)                          │ 0.00% (Повна надійність)    │
+</span><span id="__span-13-38"><a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a>╘════════════════════════════════════════════════════════╧═════════════════════════════╛
+</span><span id="__span-13-39"><a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>
+</span><span id="__span-13-40"><a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a>[INFO] Звіти збережено у: output/
+</span><span id="__span-13-41"><a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a>
+</span><span id="__span-13-42"><a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a>--- Завершення лабораторної роботи та утилізація ресурсів ---
+</span><span id="__span-13-43"><a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a>[INFO] Видалення тестових черг SQS...
+</span><span id="__span-13-44"><a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a>[SUCCESS] Черги успішно видалено.
+</span><span id="__span-13-45"><a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a>[SUCCESS] Лабораторну роботу успішно виконано.
+</span></code></pre></div>
+<hr />
+<h2 id="4">4. Вимоги до змісту звіту</h2>
+<p>Звіт з лабораторної роботи оформлюється у форматі PDF відповідно до вимог вищої школи та повинен містити такі обов'язкові структурні елементи:</p>
+<ol>
+<li>
+<p><strong>Титульна сторінка</strong> із зазначенням реквізитів ЗВО, кафедри, назви дисципліни, номера лабораторної роботи, теми, академічної групи, ПІБ здобувача та номера індивідуального варіанта.</p>
+</li>
+<li>
+<p><strong>Мета роботи, короткі теоретичні положення та технічне завдання</strong> індивідуального варіанта згідно з таблицею 3.1.</p>
+</li>
+<li>
+<p><strong>Розрахункова частина:</strong> математичний розрахунок динаміки розвантаження буфера за формулою часу спорожнення черги <span class="arithmatex">\(T_{\text{drain}}\)</span> та обґрунтування вибору таймауту видимості <span class="arithmatex">\(T_{\text{vis}}\)</span>.</p>
+</li>
+<li>
+<p><strong>Архітектурна схема системи</strong>, що відображає взаємодію пулу генераторів, черги SQS, воркерів та черги DLQ.</p>
+</li>
+<li>
+<p><strong>Повний вихідний текст програмного комплексу</strong> (<code>sqs_config.json</code>, <code>sqs_queue_manager.py</code>, <code>telemetry_producer.py</code>, <code>telemetry_consumer.py</code>, <code>run_lab5.py</code>) із детальними авторськими коментарями.</p>
+</li>
+<li>
+<p><strong>Скріншоти виконання програми в терміналі</strong>, що демонструють буферизацію 1000 повідомлень, коректну обробку валідних даних та ізоляцію 100% аварійних повідомлень у черзі DLQ.</p>
+</li>
+<li>
+<p><strong>Аналітичні висновки</strong>, де наведено оцінку надійності асинхронної архітектури, аналіз поведінки системи під час простою споживачів та підсумки досягнення мети роботи.</p>
+</li>
+</ol>
+<hr />
+<h2 id="5">5. Контрольні запитання для захисту роботи</h2>
+<ol>
+<li>
+<p>Розкрийте фундаментальні архітектурні переваги асинхронної брокерної взаємодії над синхронними протоколами REST/gRPC при проєктуванні кіберфізичних систем.</p>
+</li>
+<li>
+<p>Детально поясніть механізм функціонування таймауту видимості (Visibility Timeout) в AWS SQS. Що відбувається з повідомленням, якщо воркер аварійно завершує роботу під час його обробки?</p>
+</li>
+<li>
+<p>Яке призначення має параметр <code>ReceiptHandle</code>, чому він змінюється при кожному новому зчитуванні повідомлення, і чому видалення повідомлення неможливе лише за його статичним <code>MessageId</code>?</p>
+</li>
+<li>
+<p>Опишіть принцип дії політики повторних спроб (Redrive Policy) та черги недоставлених повідомлень (Dead-Letter Queue, DLQ). Які критерії визначають переміщення повідомлення до DLQ?</p>
+</li>
+<li>
+<p>Чим відрізняються черги класу SQS Standard від SQS FIFO за критеріями пропускної здатності, дедуплікації та гарантій порядку доставки повідомлень?</p>
+</li>
+<li>
+<p>За якими математичними залежностями розраховується час спорожнення буфера черги <span class="arithmatex">\(T_{\text{drain}}\)</span> після закінчення пікового навантаження?</p>
+</li>
+<li>
+<p>Що являє собою концепція Long Polling у виклику <code>ReceiveMessage</code> (параметр <code>WaitTimeSeconds</code>), і як її використання оптимізує фінансові витрати на API-запити та зменшує затримку обробки?</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

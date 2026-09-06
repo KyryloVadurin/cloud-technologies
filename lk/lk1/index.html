@@ -1,0 +1,3332 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../lk2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lb/lb1/" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Еволюція розподілених архітектур та канонічні стандарти хмарних обчислень
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерні моделі, системні обмеження та економіка хмарних інфраструктур
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Архітектурне проектування корпоративної платформи
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Еволюція розподілених архітектур та канонічні стандарти хмарних обчислень
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Еволюція розподілених архітектур та канонічні стандарти хмарних обчислень">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-grid-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Генезис обчислювальних систем: від мейнфреймів і кластерів до Grid-систем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-nist-sp-800-145" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Формальний канон NIST SP 800-145: декомпозиція п'яти сутнісних характеристик
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-spi-xaas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Сервісна ієрархія SPI та еволюція концепції XaaS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. Сервісна ієрархія SPI та еволюція концепції XaaS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-iaas-infrastructure-as-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Інфраструктура як послуга (IaaS — Infrastructure as a Service)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-paas-platform-as-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Платформа як послуга (PaaS — Platform as a Service)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-saas-software-as-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Програмне забезпечення як послуга (SaaS — Software as a Service)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-xaas-everything-as-a-service-faas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Еволюція до XaaS (Everything as a Service) та безсерверна модель (FaaS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Моделі просторового та організаційного розгортання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4. Моделі просторового та організаційного розгортання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-public-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Публічна хмара (Public Cloud)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-private-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Приватна хмара (Private Cloud)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-community-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Громадська хмара (Community Cloud)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-hybrid-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Гібридна хмара (Hybrid Cloud)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-multi-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Мультихмарна стратегія (Multi-cloud)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерні моделі, системні обмеження та економіка хмарних інфраструктур
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Інженерні моделі, системні обмеження та економіка хмарних інфраструктур">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-shared-responsibility-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Модель спільної відповідальності (Shared Responsibility Model)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Математичне моделювання доступності та відмовостійкості
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. Математичне моделювання доступності та відмовостійкості">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покрокове математичне виведення сумарної доступності системи
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-sla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фінансово-штрафна модель SLA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-faasserverless" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Подієво-орієнтовані безсерверні обчислення (FaaS/Serverless)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. Подієво-орієнтовані безсерверні обчислення (FaaS/Serverless)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Архітектурна динаміка обробки запиту: «Холодний» проти «Теплого» старту
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-tco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Економіко-технологічний розрахунок TCO та енергетична ефективність
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. Економіко-технологічний розрахунок TCO та енергетична ефективність">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Модель енергетичної ефективності ЦОД (PUE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Порівняльний розрахунок сукупної вартості володіння (TCO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Стратегія оптимізації цінових моделей у публічній хмарі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Архітектурні ліміти, критичні бар'єри та вузькі місця
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Архітектурне проектування корпоративної платформи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Архітектурне проектування корпоративної платформи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-cloudbursting-tco-smart-city-iot-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Проєктування відмовостійкої гібридної інфраструктури з автоматичним Cloudbursting та оптимізацією TCO для Smart City IoT Platform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Проєктування відмовостійкої гібридної інфраструктури з автоматичним Cloudbursting та оптимізацією TCO для Smart City IoT Platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі/ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cloudbursting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок дефіциту обчислювальної потужності та конфігурації Cloudbursting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Розрахунок надійності та перевірка обмеження SLA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-3-tco-egress-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Розрахунок 3-річного TCO та вартості Egress-трафіку
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Еволюція розподілених архітектур та канонічні стандарти хмарних обчислень
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерні моделі, системні обмеження та економіка хмарних інфраструктур
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Архітектурне проектування корпоративної платформи
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Еволюція розподілених архітектур та канонічні стандарти хмарних обчислень
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Еволюція розподілених архітектур та канонічні стандарти хмарних обчислень">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-grid-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Генезис обчислювальних систем: від мейнфреймів і кластерів до Grid-систем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-nist-sp-800-145" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Формальний канон NIST SP 800-145: декомпозиція п'яти сутнісних характеристик
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-spi-xaas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Сервісна ієрархія SPI та еволюція концепції XaaS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. Сервісна ієрархія SPI та еволюція концепції XaaS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-iaas-infrastructure-as-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Інфраструктура як послуга (IaaS — Infrastructure as a Service)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-paas-platform-as-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Платформа як послуга (PaaS — Platform as a Service)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-saas-software-as-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Програмне забезпечення як послуга (SaaS — Software as a Service)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-xaas-everything-as-a-service-faas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Еволюція до XaaS (Everything as a Service) та безсерверна модель (FaaS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Моделі просторового та організаційного розгортання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4. Моделі просторового та організаційного розгортання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-public-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Публічна хмара (Public Cloud)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-private-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Приватна хмара (Private Cloud)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-community-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Громадська хмара (Community Cloud)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-hybrid-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Гібридна хмара (Hybrid Cloud)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-multi-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Мультихмарна стратегія (Multi-cloud)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерні моделі, системні обмеження та економіка хмарних інфраструктур
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Інженерні моделі, системні обмеження та економіка хмарних інфраструктур">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-shared-responsibility-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Модель спільної відповідальності (Shared Responsibility Model)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Математичне моделювання доступності та відмовостійкості
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. Математичне моделювання доступності та відмовостійкості">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покрокове математичне виведення сумарної доступності системи
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-sla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Фінансово-штрафна модель SLA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-faasserverless" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Подієво-орієнтовані безсерверні обчислення (FaaS/Serverless)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. Подієво-орієнтовані безсерверні обчислення (FaaS/Serverless)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Архітектурна динаміка обробки запиту: «Холодний» проти «Теплого» старту
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-tco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Економіко-технологічний розрахунок TCO та енергетична ефективність
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. Економіко-технологічний розрахунок TCO та енергетична ефективність">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Модель енергетичної ефективності ЦОД (PUE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Порівняльний розрахунок сукупної вартості володіння (TCO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Стратегія оптимізації цінових моделей у публічній хмарі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Архітектурні ліміти, критичні бар'єри та вузькі місця
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Архітектурне проектування корпоративної платформи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Архітектурне проектування корпоративної платформи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-cloudbursting-tco-smart-city-iot-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Проєктування відмовостійкої гібридної інфраструктури з автоматичним Cloudbursting та оптимізацією TCO для Smart City IoT Platform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Проєктування відмовостійкої гібридної інфраструктури з автоматичним Cloudbursting та оптимізацією TCO для Smart City IoT Platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі/ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cloudbursting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок дефіциту обчислювальної потужності та конфігурації Cloudbursting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Розрахунок надійності та перевірка обмеження SLA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-3-tco-egress-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Розрахунок 3-річного TCO та вартості Egress-трафіку
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1">Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання</h1>
+<h2 id="_1">Мета лекції</h2>
+<p>Формування у майбутніх інженерів комп'ютерних систем і мереж системного розуміння еволюції розподіленого комп'ютингу, архітектурних принципів та інженерно-економічних критеріїв проектування хмарних середовищ. Лекція орієнтована на опанування формального апарату стандарту NIST SP 800-145, демаркації меж відповідальності в сервісних моделях (IaaS, PaaS, SaaS, FaaS), вибору оптимальних моделей розгортання (Public, Private, Hybrid, Multi-cloud) та застосування кількісних методів оцінювання сукупної вартості володіння (TCO), енергоефективності дата-центрів (PUE) і ймовірнісної доступності (SLA) для створення масштабованих і відмовостійких комп'ютерних систем.</p>
+<h2 id="_2">Очікувані результати навчання</h2>
+<ol>
+<li>
+<p><strong>Знання та розуміння.</strong> Студент повинен демонструвати глибоке розуміння історичної спадкоємності парадигм обчислень (мейнфрейми, кластери, Grid, Cloud), знати п'ять сутнісних характеристик, три класичні сервісні моделі та чотири моделі розгортання згідно зі стандартом NIST SP 800-145, а також розуміти специфіку архітектурної моделі спільної відповідальності (Shared Responsibility Model).</p>
+</li>
+<li>
+<p><strong>Застосування.</strong> Студент повинен уміти аналітично розраховувати показники надійності складних мультихмарних систем на основі заданих параметрів SLA, обчислювати бюджет функціонування безсерверних середовищ (FaaS) з урахуванням тривалості виконання коду й алокації пам'яті, а також формалізувати оцінку сукупної вартості володіння (TCO) під час міграції інфраструктури з On-Premises у хмару.</p>
+</li>
+<li>
+<p><strong>Аналіз.</strong> Студент повинен уміти критично аналізувати вузькі місця хмарних інфраструктур (проблему «холодного старту» в FaaS, накладні витрати на передачу трафіку при Cloudbursting, ризики вендорної залежності — Vendor Lock-in) та декомпозувати вимоги прикладного програмного забезпечення для вибору між віртуалізованими інстансами IaaS, контейнерними платформами PaaS і безсерверними функціями.</p>
+</li>
+<li>
+<p><strong>Оцінювання та синтез.</strong> Студент повинен уміти обґрунтовувати інженерні рішення щодо вибору між капітальними (CapEx) та операційними (OpEx) витратами з урахуванням коефіцієнта PUE дата-центрів, синтезувати комбіновані моделі розгортання (Hybrid/Multi-cloud) під задані обмеження нормативно-правового регулювання, мережевої латентності та бюджету проекту.</p>
+</li>
+</ol>
+<hr />
+<h2 id="_3">Детальний покроковий план лекції</h2>
+<h3 id="1-">1. Теоретико-концептуальний базис. Еволюція розподілених архітектур та канонічні стандарти хмарних обчислень</h3>
+<ul>
+<li>
+<p>1.1. Генезис обчислювальних систем: концепція розподілу часу (time-sharing) у мейнфреймах (IBM System/360, «Дніпро-2»), кластерні системи високої доступності (Beowulf, MPI) та архітектурна модель віртуальних організацій у Grid-системах (Globus Toolkit, gLite, OGSA).</p>
+</li>
+<li>
+<p>1.2. Концептуальний базис NIST SP 800-145: декомпозиція та системний взаємозв'язок п'яти сутнісних характеристик хмари (On-demand self-service, Broad network access, Resource pooling, Rapid elasticity, Measured service).</p>
+</li>
+<li>
+<p>1.3. Сервісна ієрархія та рівні абстракції: детальний аналіз моделей IaaS (інфраструктурні примітиви), PaaS (керовані середовища виконання), SaaS (кінцеве прикладне ПЗ) та еволюція до моделі XaaS.</p>
+</li>
+<li>
+<p>1.4. Моделі розгортання інфраструктури: порівняльний системний аналіз публічних (Public), приватних (On-Premises та Hosted Private), громадських (Community) і комбінованих топологій.</p>
+</li>
+</ul>
+<h3 id="2">2. Методологія та аналіз граничних умов. Інженерні моделі, системні обмеження та економіка хмарних інфраструктур</h3>
+<ul>
+<li>
+<p>2.1. Модель спільної відповідальності (Shared Responsibility Model): демаркаційні лінії контролю за безпеку ядра ОС, апаратного рівня, мережевих політик і цілісності даних у розрізі IaaS, PaaS, SaaS та FaaS.</p>
+</li>
+<li>
+<p>2.2. Математичне моделювання доступності та відмовостійкості: розрахунок коефіцієнта готовності складеної системи <span class="arithmatex">\(A_{\text{system}}\)</span> в умовах паралельного мультихмарного резервування та формалізація штрафних метрик SLA.</p>
+</li>
+<li>
+<p>2.3. Подієво-орієнтовані безсерверні обчислення (FaaS/Serverless): компонентна модель виконання, феномен і фізичні причини «холодного старту» (<span class="arithmatex">\(T_{\text{cold}}\)</span>), аналітичні моделі тарифікації процесорного часу й квантування пам'яті.</p>
+</li>
+<li>
+<p>2.4. Економіко-технологічний розрахунок TCO та енергетична ефективність: математична формалізація витрат CapEx проти OpEx, розрахунок витрат на електроживлення та охолодження через метрику PUE (Power Usage Effectiveness), стратегія балансування інстансів (On-Demand, Reserved, Spot).</p>
+</li>
+<li>
+<p>2.5. Архітектурні ліміти, критичні бар'єри та вузькі місця: проблема Vendor Lock-in на рівні специфічних API, пропускна здатність глобальних мереж і затримки синхронізації стану сховищ при реалізації Cloudbursting.</p>
+</li>
+</ul>
+<h3 id="3">3. Практичний індустріальний / фаховий кейс. Архітектурне проектування корпоративної платформи</h3>
+<p><strong>Тема наскрізної задачі.</strong> «Проєктування відмовостійкої гібридної інфраструктури з автоматичним Cloudbursting та оптимізацією TCO для високонавантаженої системи обробки телеметрії розумного міста (Smart City IoT Platform)»</p>
+<h2 id="1-_1">1. Теоретико-концептуальний базис. Еволюція розподілених архітектур та канонічні стандарти хмарних обчислень</h2>
+<h3 id="11-grid-">1.1. Генезис обчислювальних систем: від мейнфреймів і кластерів до Grid-систем</h3>
+<p>Еволюція архітектур обчислювальних систем демонструє циклічну динаміку, де фази максимальної централізації ресурсів закономірно чергуються з етапами їхньої просторової децентралізації. У 1960-х роках фундаментом автоматизованої обробки інформації стали <strong>мейнфрейми</strong> — великі універсальні електронно-обчислювальні машини, найяскравішими представниками яких були системи сімейства IBM System/360, а на теренах вітчизняної школи кібернетики — розроблена в Києві під керівництвом академіка В. М. Глушкова ЕОМ «Дніпро-2» (64-розрядна машина з розвиненим апаратним конвеєром обробки чисел із рухомою комою). </p>
+<p>Архітектурною основою мейнфреймів був монолітний обчислювальний комплекс, розташований у спеціалізованому машинному залі, до якого кінцеві користувачі підключалися через неінтелектуальні термінали введення-виведення. Саме на цьому етапі виникла концепція <strong>квантування часу (time-sharing)</strong>, що дозволяла центральному процесору почергово виділяти кванти часу багатьом термінальним сесіям, створюючи в кожного оператора ілюзію монопольного володіння суперкомп'ютером. Тоді ж професор Джон Маккарті (John McCarthy) сформулював пророчу тезу: комп'ютерні обчислення в майбутньому стануть загальнодоступною комунальною послугою (<strong>Utility Computing</strong>), подібною до електропостачання чи телефонної мережі.</p>
+<p>Мікропроцесорна революція 1980-х років різко змінила вектор розвитку: поява персональних комп'ютерів (ПК) децентралізувала обчислення. Корпоративний сектор перейшов на дворівневу модель «клієнт-сервер», де інтерфейсна логіка виконувалася на робочій станції, а обробка транзакцій — на виділених серверах баз даних. Проте екстенсивне масштабування за принципом «один фізичний сервер під одну прикладну задачу» на межі 1990-х років спричинило серйозну інфраструктурну кризу: середній коефіцієнт утилізації серверних процесорів x86-архітектури не перевищував 5–15%, що зумовлювало колосальні невиправдані витрати на електроенергію, охолодження та простори дата-центрів.</p>
+<p>Відповіддю на вимоги високопродуктивних обчислень (High-Performance Computing, HPC) стала поява <strong>кластерних систем</strong> (зокрема проєкту Beowulf, 1994 рік), де серійні комерційні комп'ютери (Commercial Off-The-Shelf, COTS) об'єднувалися локальною високошвидкісною мережею на базі технологій Fast/Gigabit Ethernet або комутаторів із низькою латентністю Myrinet. Програмна модель таких систем базувалася на передачі повідомлень (пакети PVM, MPICH), забезпечуючи виконання сильнозв'язаних паралельних програм у межах єдиного системного образу (Single System Image).</p>
+<p>Логічним розвитком розподіленого комп'ютингу наприкінці 1990-х років стали <strong>Grid-системи</strong>, концептуалізовані Яном Фостером (Ian Foster) та Карлом Кессельманом (Carl Kesselman). Метою Grid було об'єднання географічно рознесених, гетерогенних обчислювальних потужностей, сховищ даних та наукових приладів, що належали різним адміністративним доменам, у динамічні <strong>віртуальні організації (Virtual Organizations, VO)</strong>. Взаємодія між вузлами базувалася на спеціалізованому проміжному програмному забезпеченні (<strong>middleware</strong>), такому як Globus Toolkit, gLite, UNICORE та NorduGrid ARC.</p>
+<pre class="mermaid"><code>flowchart TD
+    A['1960-ті: Епоха мейнфреймів&lt;br/&gt;IBM System/360, Дніпро-2&lt;br/&gt;Централізовані моноліти, Time-sharing'] --&gt; B['1980-ті: Ера мікропроцесорів та ПК&lt;br/&gt;Децентралізація, клієнт-сервер&lt;br/&gt;Екстенсивне зростання серверних ферм']
+    B --&gt; C['1990-ті: Кластери Beowulf та Grid-системи&lt;br/&gt;HPC, протоколи MPI, проміжне ПЗ Globus/gLite&lt;br/&gt;Об'єднання гетерогенних ресурсів у VO']
+    C --&gt; D['2000-ні: Апаратна віртуалізація x86&lt;br/&gt;Гіпервізори ESXi, KVM, Xen&lt;br/&gt;Консолідація обчислювальних ресурсів']
+    D --&gt; E['Сучасність: Хмарні обчислення&lt;br/&gt;NIST SP 800-145, динамічна еластичність&lt;br/&gt;Абстракція IaaS/PaaS/SaaS/FaaS, Pay-as-you-go']</code></pre>
+<p>Незважаючи на потужні інструменти автентифікації на базі X.509 (Grid Security Infrastructure, GSI), протоколи планування завдань (GRAM) та пересилання терабайтних масивів (GridFTP), Grid-системи не набули комерційного успіху. Вони залишалися орієнтованими переважно на пакетну обробку специфічних наукових задач через пакетні менеджери (PBS, Torque, Condor) і не надавали механізмів миттєвої ізоляції середовищ виконання під довільне клієнтське ПЗ. Необхідний технологічний прорив стався на стику апаратної віртуалізації x86-процесорів (Intel VT-x, AMD-V), веб-інтерфейсів RESTful та глобальних широкосмугових мереж, що породило сучасні <strong>хмарні обчислення (Cloud Computing)</strong>.</p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> Найбільш показовим прикладом класичної Grid-системи є Всесвітня обчислювальна мережа Великого адронного колайдера (WLCG) у CERN, де проміжне ПЗ gLite та ARC координує понад 170 дата-центрів у 42 країнах для обробки петабайтів експериментальних даних у пакетному режимі, тоді як комерційні сервіси на кшталт Netflix повністю функціонують у публічній хмарі AWS, спираючись на динамічну еластичність та автоматичну реакцію на сплески трафіку.</p>
+</blockquote>
+<hr />
+<h3 id="12-nist-sp-800-145">1.2. Формальний канон NIST SP 800-145: декомпозиція п'яти сутнісних характеристик</h3>
+<p>У вересні 2011 року Національний інститут стандартів і технологій США оприлюднив підсумковий документ <strong>NIST Special Publication 800-145</strong>, який став де-факто нормативним інженерним каноном термінології та архітектури хмарних систем. </p>
+<p>Згідно з NIST, <strong>хмарні обчислення (Cloud Computing)</strong> — це модель забезпечення повсюдного, зручного мережевого доступу на вимогу до спільного пулу конфігурованих обчислювальних ресурсів (наприклад, мереж, серверів, систем зберігання даних, додатків і сервісів), які можуть бути оперативно надані та вивільнені з мінімальними управлінськими зусиллями або взаємодією з постачальником послуг.</p>
+<p>Архітектурна цілісність хмари гарантується обов'язковою одночасною наявністю <strong>п'яти сутнісних характеристик (Essential Characteristics)</strong>:</p>
+<ol>
+<li>
+<p><strong>Самообслуговування на вимогу (On-demand self-service).</strong> Споживач може в односторонньому порядку в автоматичному режимі резервувати та конфігурувати обчислювальні можливості (серверний час, обсяги сховищ, параметри мережі) через веб-консоль або прикладний програмний інтерфейс (API) без участі інженерного персоналу постачальника хмарних послуг.</p>
+</li>
+<li>
+<p><strong>Широкий мережевий доступ (Broad network access).</strong> Надані сервіси доступні через стандартні комунікаційні мережі за допомогою уніфікованих механізмів та протоколів (HTTP/S, REST, SOAP), що підтримуються гетерогенними тонкими та товстими клієнтськими платформами (робочі станції, мобільні пристрої, шлюзи Інтернету речей).</p>
+</li>
+<li>
+<p><strong>Об'єднання ресурсів у пул (Resource pooling).</strong> Обчислювальні потужності постачальника консолідуються в єдиний динамічний масив для обслуговування великої кількості клієнтів згідно з <strong>мультитенантною моделлю (multi-tenant model)</strong>. Фізичні та віртуальні ресурси розподіляються динамічно відповідно до коливань попиту. Клієнт абстрагований від точного знання фізичної топології обладнання (не знає точного номера блейд-сервера або стійки), оперуючи високорівневими конструкціями локалізації (географічний регіон, зона доступності — Availability Zone).</p>
+</li>
+<li>
+<p><strong>Миттєва еластичність (Rapid elasticity).</strong> Можливості системи можуть швидко та еластично надаватися, а в деяких випадках автоматично розширюватися (scale-out) при зростанні навантаження й миттєво вивільнятися (scale-in) при його спаді. Для користувача пул ресурсів видається нескінченним, а масштабування відбувається без деградації якості обслуговування.</p>
+</li>
+<li>
+<p><strong>Вимірюваність сервісу (Measured service).</strong> Хмарні системи автоматично контролюють, вимірюють і оптимізують виділення ресурсів на відповідному рівні абстракції (за процесорними циклами, використаною пам'яттю, обсягом збережених гігабайтів, кількістю транзакцій чи смугою пропускання мережі). Усі параметри споживання фіксуються в системних реєстрах, що забезпечує прозорість взаєморозрахунків (модель <strong>Pay-as-you-go</strong>).</p>
+</li>
+</ol>
+<p>Формалізуємо взаємозв'язок між фізичною ємністю пулу, віртуальним виділенням та еластичністю. Нехай у хмарному пулі доступний сукупний фізичний ресурс пам'яті або процесорних ядер ємністю <span class="arithmatex">\(C_{\text{phys}}\)</span>. Провайдер обслуговує <span class="arithmatex">\(M\)</span> активних мультитенантних користувачів, кожному з яких виділено віртуалізовану квоту <span class="arithmatex">\(V_i\)</span>, де <span class="arithmatex">\(i \in \{1, 2, \dots, M\}\)</span>. Коефіцієнт перепідписки ресурсів (<strong>oversubscription ratio</strong>) <span class="arithmatex">\(K_{\text{os}}\)</span> визначається як відношення сумарно задекларованої віртуальної ємності до фізичної:</p>
+<div class="arithmatex">\[K_{\text{os}} = \frac{\sum_{i=1}^{M} V_i}{C_{\text{phys}}}\]</div>
+<p>Якщо фактичне споживання ресурсу <span class="arithmatex">\(i\)</span>-м тенантом у момент часу <span class="arithmatex">\(t\)</span> позначається як <span class="arithmatex">\(u_i(t)\)</span>, де <span class="arithmatex">\(0 \le u_i(t) \le V_i\)</span>, то фундаментальною умовою стабільності та безаварійності хмарного середовища є дотримання нерівності для будь-якого моменту часу <span class="arithmatex">\(t\)</span>:</p>
+<div class="arithmatex">\[\sum_{i=1}^{M} u_i(t) \lt  C_{\text{phys}} - C_{\text{res}}\]</div>
+<p>де <span class="arithmatex">\(C_{\text{res}}\)</span> — зарезервована апаратна ємність системи для забезпечення відмовостійкості гіпервізорів та міграції віртуальних машин у разі збою фізичного обладнання.</p>
+<p>Миттєва еластичність системи оцінюється інтегральним коефіцієнтом розбіжності між реальною потребою в ресурсах <span class="arithmatex">\(U(t) = \sum_{i=1}^{M} u_i(t)\)</span> та виділеним ресурсом <span class="arithmatex">\(R(t)\)</span> протягом інтервалу часу <span class="arithmatex">\([0, T]\)</span>:</p>
+<div class="arithmatex">\[E_{\text{elasticity}} = \frac{1}{T} \int_0^T \frac{|R(t) - U(t)|}{U(t)} \, dt\]</div>
+<p>де <span class="arithmatex">\(E_{\text{elasticity}} \to 0\)</span> відповідає ідеальній еластичності, коли час затримки реакції авто-масштабування <span class="arithmatex">\(\tau_{\text{scale}} \to 0\)</span>, мінімізуючи як брак ресурсів (under-provisioning), так і їхнє надлишкове оплачуване простоювання (over-provisioning).</p>
+<hr />
+<h3 id="13-spi-xaas">1.3. Сервісна ієрархія SPI та еволюція концепції XaaS</h3>
+<p>Класифікація хмарних сервісів за функціональним призначенням традиційно зводиться до трирівневої моделі <strong>SPI</strong> (<strong>S</strong>aaS, <strong>P</strong>aaS, <strong>I</strong>aaS), яка відображає ступінь абстрагування споживача від фізичних та системних компонентів обчислювальної інфраструктури.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph SaaS_Layer [Рівень SaaS: Software as a Service]
+        S_App[Прикладне програмне забезпечення: CRM, ERP, Пошта, Офіс]
+        S_Data[Дані користувача та політики доступу]
+    end
+
+    subgraph PaaS_Layer [Рівень PaaS: Platform as a Service]
+        P_Runtime[Середовище виконання коду: JVM, Node.js, CLR]
+        P_Middle[Проміжне ПЗ, керовані СУБД, черги повідомлень]
+        P_OS[Операційні системи хостів та контейнерів]
+    end
+
+    subgraph IaaS_Layer [Рівень IaaS: Infrastructure as a Service]
+        I_Virt[Шар віртуалізації: Гіпервізори KVM, ESXi, Xen]
+        I_Compute[Обчислювальні ресурси: vCPU, vRAM]
+        I_Storage[Блокові та об’єктні сховища даних]
+        I_Net[Віртуальні мережі, віртуальні комутатори, маршрутизатори]
+    end
+
+    subgraph Hardware_Layer [Фізичний рівень: Центр обробки даних ЦОД]
+        H_Servers[Сервери архітектури x86 / ARM]
+        H_SAN[Системи зберігання даних: SAN, NAS, JBOD]
+        H_Fabric[Фізичні мережеві фабрики: ToR/EoR комутатори, оптичні канали]
+    end
+
+    Hardware_Layer --&gt; IaaS_Layer
+    IaaS_Layer --&gt; PaaS_Layer
+    PaaS_Layer --&gt; SaaS_Layer</code></pre>
+<h4 id="1-iaas-infrastructure-as-a-service">1. Інфраструктура як послуга (IaaS — Infrastructure as a Service)</h4>
+<p>Фундаментальний рівень, де замовнику надаються базові обчислювальні ресурси: процесорні потужності, оперативна пам'ять, дисковий простір та мережеві інтерфейси. Споживач не контролює фізичну інфраструктуру дата-центру, але отримує повний контроль над операційною системою (ОС), конфігурацією віртуальних дисків, мережевими портами та розгорнутими службами. </p>
+<p>Прикладами реалізації є віртуальні інстанси Amazon EC2, сервіс Huawei ECS (Elastic Cloud Server) або інстанси відкритої платформи OpenStack (компонент Nova).</p>
+<h4 id="2-paas-platform-as-a-service">2. Платформа як послуга (PaaS — Platform as a Service)</h4>
+<p>Рівень, призначений для розробників ПЗ. Замовник отримує доступ до розгорнутого, керованого та автоматично масштабованого середовища виконання додатків (наприклад, Java Virtual Machine, Python, .NET Core, Node.js), інтегрованого з керованими базами даних (Database as a Service) та брокерами повідомлень. Провайдер бере на себе встановлення оновлень безпеки ядра ОС, патчів бібліотек та підтримку апаратної цілісності. Споживач контролює виключно вихідний код і конфігурацію додатка. </p>
+<p>Прикладами є AWS Elastic Beanstalk, Google App Engine, Huawei Cloud DevCloud.</p>
+<h4 id="3-saas-software-as-a-service">3. Програмне забезпечення як послуга (SaaS — Software as a Service)</h4>
+<p>Найвищий рівень абстракції, за якого споживач користується готовим програмним додатком, що функціонує в хмарі провайдера. Доступ здійснюється за допомогою тонкого клієнта (веб-браузера) або мобільного застосунку. Користувач не керує ані мережею, ані серверами, ані ОС, ані навіть платформою запуску коду; йому доступна лише модифікація користувацьких налаштувань та завантаження власних даних. </p>
+<p>Прикладами є корпоративні пакети Google Workspace, Microsoft 365, платформи Salesforce.</p>
+<h4 id="4-xaas-everything-as-a-service-faas">4. Еволюція до XaaS (Everything as a Service) та безсерверна модель (FaaS)</h4>
+<p>Розвиток хмарної інженерії призвів до атомізації послуг під парасольковим терміном <strong>XaaS (Все як послуга)</strong>. Зокрема, виділилися:</p>
+<ul>
+<li>
+<p><strong>DaaS (Desktop as a Service)</strong> — віртуалізація робочих столів користувача, де вся графіка й середовище генеруються в ЦОД (протоколи PCoIP, HDP в Huawei FusionAccess);</p>
+</li>
+<li>
+<p><strong>STaaS (Storage as a Service)</strong> — спеціалізовані об'єктні та блокові сховища (Amazon S3, OpenStack Swift);</p>
+</li>
+<li>
+<p><strong>FaaS (Function as a Service / Serverless)</strong> — модель, що доводить PaaS до абсолютного мінімалізму, де одиницею розгортання є атомарна функція, яка виконується за подією (тригером) без постійно запущеного процесу.</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> При проєктуванні інфраструктури хмарного провайдера завдання ізоляції та прискорення вводу-виводу для IaaS-інстансів вирішується спеціалізованими апаратними прискорювачами. Так, архітектура AWS Nitro System або плати Huawei IN200 переносять виконання гіпервізора, віртуальної мережі VPC та операцій з накопичувачами NVMe на окремий PCIe-контролер із мікропроцесором ASIC/ARM, вивільняючи 100% ресурсів центрального процесора хоста для клієнтських віртуальних машин.</p>
+<p><strong>ТИПОВА ПОМИЛКА:</strong> Ототожнення звичайної віртуалізації (наприклад, локально встановленого гіпервізора VMware vSphere або Proxmox VE без автоматизації) із хмарними обчисленнями. Віртуалізація є лише інструментом поділу ресурсів. Якщо адміністратор виділяє віртуальну машину за ручною заявкою користувача через кілька днів, а тарифікація за фактичне споживання відсутня — ця система не задовольняє вимогам NIST і не є хмарою.</p>
+</blockquote>
+<hr />
+<h3 id="14">1.4. Моделі просторового та організаційного розгортання</h3>
+<p>Стандарт NIST SP 800-145 регламентує чотири канонічні моделі розгортання хмарних середовищ, до яких сучасна індустрія додала парадигму мультихмарності.</p>
+<h4 id="1-public-cloud">1. Публічна хмара (Public Cloud)</h4>
+<p>Інфраструктура створюється, експлуатується та підтримується стороннім комерційним провайдером для вільного використання широким загалом або бізнес-клієнтами. Обчислювальні вузли розміщуються у величезних гіпермасштабованих дата-центрах (<strong>Hyperscale Data Centers</strong>). Клієнти ділять фізичні ресурси, але логічно ізольовані програмними межами. Модель забезпечує нульові початкові капітальні витрати та практично миттєве розширення.</p>
+<h4 id="2-private-cloud">2. Приватна хмара (Private Cloud)</h4>
+<p>Інфраструктура призначена для ексклюзивного використання однією організацією, що включає множину внутрішніх споживачів (підрозділів). Вона може перебувати у власності, управлінні та експлуатації як самої організації (<strong>On-Premises Private Cloud</strong>), так і стороннього оператора (<strong>Hosted Private Cloud</strong>), фізично розташовуючись на власній або орендованій площадці. Приватні хмари гарантують повний контроль над контурами безпеки, відповідність регуляторним нормам щодо обігу банківської чи військової таємниці та детерміновану продуктивність мережі, проте вимагають значних початкових витрат на обладнання та утримання персоналу.</p>
+<h4 id="3-community-cloud">3. Громадська хмара (Community Cloud)</h4>
+<p>Спеціалізована інфраструктура, розгорнута для спільного використання конкретною групою організацій, які мають спільні інтереси, місію, протоколи безпеки або нормативні вимоги. Витрати на побудову розподіляються між учасниками спільноти. Типовий приклад — національні академічні хмари університетів або захищені міжвідомчі урядові платформи.</p>
+<h4 id="4-hybrid-cloud">4. Гібридна хмара (Hybrid Cloud)</h4>
+<p>Комбінація з двох або більше чітко розмежованих хмарних інфраструктур (приватних, громадських або публічних), які залишаються самостійними сутностями, але поєднані стандартизованими чи пропрієтарними технологіями взаємодії, що забезпечують переносимість даних та додатків.</p>
+<p>Зв'язок між сегментами гібридної хмари реалізується через шифровані тунелі (IPsec VPN) або виділені магістральні канали зв'язку другого/третього рівнів моделі OSI (AWS Direct Connect, Azure ExpressRoute). </p>
+<p>Ключовим динамічним процесом у гібридній інфраструктурі є архітектурний патерн <strong>Cloudbursting</strong> («вибух у хмару»). Його життєвий цикл формалізується за допомогою машини станів (State Machine), наведеної на рисунку нижче:</p>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; OnPremises_Baseline: Робота в локальній приватній хмарі
+
+    state OnPremises_Baseline {
+        [*] --&gt; MonitoringState: Збір метрик навантаження
+        MonitoringState --&gt; LoadNormal: CPU/RAM утилізація &lt; 80%
+        LoadNormal --&gt; MonitoringState: Запит обслуговано
+    }
+
+    OnPremises_Baseline --&gt; Burst_Triggered: Пороговий сплеск (Утилізація &gt;= 80% понад 3 хв)
+
+    state Cloud_Bursting {
+        Burst_Triggered --&gt; Provisioning: Ініціалізація інстансів у Public Cloud через API
+        Provisioning --&gt; NetworkSync: Розширення оверлейної SDN-мережі (VXLAN/Geneve)
+        NetworkSync --&gt; TrafficRedirection: Балансувальник направляє частину запитів у Public Cloud
+        TrafficRedirection --&gt; ActiveProcessing: Паралельна обробка трафіку Private + Public
+    }
+
+    Cloud_Bursting --&gt; Load_Normalized: Навантаження спало (Утилізація &lt; 50% понад 10 хв)
+    Load_Normalized --&gt; Deprovisioning: Звільнення публічних інстансів (Stop/Terminate)
+    Deprovisioning --&gt; OnPremises_Baseline: Повернення до базової приватної конфігурації</code></pre>
+<h4 id="5-multi-cloud">5. Мультихмарна стратегія (Multi-cloud)</h4>
+<p>На відміну від гібридної моделі (де обов'язкова наявність приватного сегмента), мультихмарність передбачає одночасне використання сервісів декількох <em>незалежних публічних хмарних постачальників</em> (наприклад, AWS + Google Cloud + Cloudflare). Це мінімізує стратегічні ризики прив'язки до одного вендора (<strong>Vendor Lock-in</strong>), оптимізує витрати за рахунок різниці в регіональних тарифах провайдерів та гарантує катастрофостійкість (Disaster Recovery) у разі глобальних аварій на боці одного з гіперскейлерів.</p>
+<p>Систематизуємо характеристики моделей у порівняльній таблиці:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Модель розгортання</th>
+<th style="text-align: left;">Архітектурний контроль споживача</th>
+<th style="text-align: left;">Масштабованість та еластичність</th>
+<th style="text-align: left;">Механізм ізоляції тенантів</th>
+<th style="text-align: left;">Приклад з реальної практики</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Публічна (Public)</strong></td>
+<td style="text-align: left;">Мінімальний (лише в межах наданих API сервісів)</td>
+<td style="text-align: left;">Практично необмежена, автоматичне виділення</td>
+<td style="text-align: left;">Логічна ізоляція (VLAN/VXLAN, віртуалізація ядра)</td>
+<td style="text-align: left;">Розгортання мікросервісів інтернет-магазину в AWS EC2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Приватна (Private)</strong></td>
+<td style="text-align: left;">Повний (від прошивок BIOS/UEFI до операційних систем)</td>
+<td style="text-align: left;">Жорстко обмежена фізичною ємністю придбаного парку</td>
+<td style="text-align: left;">Фізична ізоляція заліза та периметра дата-центру</td>
+<td style="text-align: left;">Внутрішній банківський ЦОД на платформі Proxmox VE або OpenStack</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Громадська (Community)</strong></td>
+<td style="text-align: left;">Колективний (регламентується угодою спільноти)</td>
+<td style="text-align: left;">Обмежена загальним пулом учасників консорціуму</td>
+<td style="text-align: left;">Логічна або зональна фізична ізоляція для членів групи</td>
+<td style="text-align: left;">Хмарне середовище обміну медичними даними лікарень одного регіону</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Гібридна (Hybrid)</strong></td>
+<td style="text-align: left;">Диференційований (повний над On-Prem, обмежений над Cloud)</td>
+<td style="text-align: left;">Гнучка: базова локальна + пікова публічна (Cloudbursting)</td>
+<td style="text-align: left;">Комбінований: фізичний контур для ядра + тунелювання в публічний пул</td>
+<td style="text-align: left;">Процесинг платежів у локальній базі + аналітика логів у Google BigQuery</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Мультихмара (Multi-cloud)</strong></td>
+<td style="text-align: left;">Варіюється залежно від сервісів конкретного вендора</td>
+<td style="text-align: left;">Максимальна глобальна доступність і диверсифікація</td>
+<td style="text-align: left;">Логічна мультитенантність у кількох незалежних провайдерів</td>
+<td style="text-align: left;">Бази даних в Azure SQL, обчислення в AWS, фронтенд-кешування у Cloudflare</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Підприємство розгорнуло корпоративний веб-портал у приватному дата-центрі, використовуючи кластер серверів під керуванням гіпервізора VMware ESXi та СУБД PostgreSQL. Процес надання додаткової віртуальної машини вимагає створення тікета в службі технічної підтримки та його ручного схвалення IT-директором упродовж трьох робочих днів. Чи можна вважати це середовище хмарним відповідно до стандарту NIST SP 800-145?</p>
+<p>A. Так, оскільки використано апаратну віртуалізацію та кластеризацію обчислювальних вузлів.<br />
+B. Так, оскільки інфраструктура функціонує як приватна хмара (Private Cloud) конкретного підприємства.<br />
+C. Ні, оскільки порушено характеристику «Самообслуговування на вимогу» (On-demand self-service) та відсутня миттєва еластичність.<br />
+D. Ні, тому що приватні хмари можна створювати виключно за допомогою відкритого ПЗ (OpenStack/KVM).</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: C.</strong></p>
+<ol>
+<li>
+<p><strong>Повне обґрунтування:</strong> Згідно з NIST SP 800-145, середовище може кваліфікуватися як хмарне <strong>виключно за умови одночасної відповідності всім п'яти сутнісним характеристикам</strong>. Вимога ручного погодження інфраструктурних змін людиною (три робочі дні на обробку тікета) прямо суперечить принципу <strong>On-demand self-service</strong>, який вимагає повністю автоматизованого, одностороннього виділення ресурсів споживачем без втручання персоналу. Також у цьому сценарії відсутня <strong>Rapid elasticity</strong>, оскільки система неспроможна оперативно реагувати на сплески навантаження в реальному часі.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p><strong>Варіант A є хибним:</strong> Наявність віртуалізації є лише допоміжною технологією консолідації й не перетворює автоматично звичайний дата-центр на хмарний.</p>
+</li>
+<li>
+<p><strong>Варіант B є хибним:</strong> Приватна хмара зобов'язана підтримувати всі п'ять критеріїв NIST (зокрема автоматизований портал самообслуговування та вимірюваність використання), а не просто належати одній юридичній особі.</p>
+</li>
+<li>
+<p><strong>Варіант D є хибним:</strong> Стандарт NIST є технологічно нейтральним і не регламентує тип ліцензії програмного забезпечення (комерційне чи Open Source).</p>
+</li>
+</ol>
+</details>
+<hr />
+<h3 id="_4">Вказівки для самостійного осмислення</h3>
+<ol>
+<li>
+<p><strong>Аналіз реальних інфраструктурних контурів.</strong> Дослідіть IT-інфраструктуру вашого навчального закладу або компанії, де ви працюєте. Визначте, які використовувані сервіси підпадають під визначення IaaS, PaaS та SaaS. З'ясуйте, чи задовольняє внутрішня віртуалізована інфраструктура (за її наявності) всім п'яти критеріям NIST SP 800-145, або ж вона є лише класичним віртуалізованим ЦОД.</p>
+</li>
+<li>
+<p><strong>Оцінка меж гібридного хмароутворення.</strong> Розгляньте практичну ситуацію: медична установа має зберегти конфіденційні цифрові картки пацієнтів відповідно до суворих вимог закону про захист персональних даних, але одночасно потребує застосування високонавантаженої нейромережі для обробки рентгенівських знімків, оренда GPU-серверів для якої є економічно доцільною лише в публічній хмарі. Опишіть архітектурне рішення гібридної системи: які дані мають залишатися в приватному сегменті, які — передаватися в публічний, і як має бути організовано канал зв'язку між ними.</p>
+</li>
+<li>
+<p><strong>Техніко-економічне моделювання перепідписки.</strong> Розрахуйте для умовного 16-ядерного фізичного сервера з 64 ГБ оперативної пам'яті граничний коефіцієнт перепідписки <span class="arithmatex">\(K_{\text{os}}\)</span> за процесором та пам'яттю для сценарію розміщення віртуальних машин розробників (Dev-середовище) порівняно зі сценарієм розміщення бойових серверів баз даних (Production-середовище). Обґрунтуйте, чому в одному випадку <span class="arithmatex">\(K_{\text{os}}\)</span> може досягати значення 3.0–4.0, а в іншому суворо обмежений одиницею (<span class="arithmatex">\(K_{\text{os}} \le 1.0\)</span>).</p>
+</li>
+</ol>
+<h2 id="2_1">2. Методологія та аналіз граничних умов. Інженерні моделі, системні обмеження та економіка хмарних інфраструктур</h2>
+<h3 id="21-shared-responsibility-model">2.1. Модель спільної відповідальності (Shared Responsibility Model)</h3>
+<p><strong>Модель спільної відповідальності (Shared Responsibility Model)</strong> є базовою методологічною матрицею, яка формалізує розподіл зон контролю, юридичних зобов'язань та інженерних завдань між постачальником хмарних послуг (<strong>Cloud Service Provider, CSP</strong>) і споживачем (<strong>Tenant / Customer</strong>). Демаркаційна лінія між сторонами не є статичною: вона динамічно зміщується вгору за стеком обчислювальних технологій залежно від обраної моделі обслуговування.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>+---------------------------------------------------------------------------------------+
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>|  Шар технологічного стеку         |   IaaS    |    PaaS    |    FaaS   |     SaaS     |
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>+-----------------------------------+-----------+------------+-----------+--------------+
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>|  Дані та класифікація контенту   | Клієнт    | Клієнт     | Клієнт    | Клієнт       |
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>|  Керування доступом (IAM)        | Клієнт    | Клієнт     | Клієнт    | Клієнт/CSP   |
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>|  Прикладний код / Бізнес-логіка  | Клієнт    | Клієнт     | Клієнт    | Провайдер    |
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>|  Середовище виконання (Runtime)  | Клієнт    | Провайдер  | Провайдер | Провайдер    |
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>|  Операційна система (Guest OS)   | Клієнт    | Провайдер  | Провайдер | Провайдер    |
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>|  Мережева конфігурація (Traffic) | Клієнт    | Клієнт/CSP | Провайдер | Провайдер    |
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>|  Гіпервізор та віртуалізація     | Провайдер | Провайдер  | Провайдер | Провайдер    |
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>|  Фізичні сервери, СЗД, ЦОД       | Провайдер | Провайдер  | Провайдер | Провайдер    |
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>+---------------------------------------------------------------------------------------+
+</span></code></pre></div>
+<ul>
+<li>
+<p><strong>Рівень IaaS:</strong> Провайдер гарантує фізичну цілісність ЦОД, функціонування серверного парку, охолодження, енергопостачання та роботу гіпервізора. Споживач несе виключну відповідальність за встановлення критичних оновлень ядра гостьової ОС, захист мережевого периметра (налаштування Security Groups, IPTables), сегментацію віртуальних мереж і коректність шифрування дисків.</p>
+</li>
+<li>
+<p><strong>Рівень PaaS:</strong> Межа відповідальності провайдера піднімається до рівня операційної системи та середовища виконання (наприклад, актуальні версії .NET CLR, JVM або інтерпретатора Python). Відповідальність клієнта зосереджена на архітектурі коду, конфігурації підключень до баз даних і налаштуванні правил взаємної автентифікації.</p>
+</li>
+<li>
+<p><strong>Рівень FaaS:</strong> Провайдер бере на себе керування життєвим циклом контейнерів виконання, автоматичне горизонтальне масштабування та виділення системних ресурсів. Споживач відповідає за коректність бізнес-логіки атомарної функції, її залежності та безпеку конфігурації тригерів (наприклад, політики доступу в API Gateway).</p>
+</li>
+<li>
+<p><strong>Рівень SaaS:</strong> Провайдер контролює весь стек від заліза до призначеного для користувача інтерфейсу. Споживач відповідає виключно за керування обліковими записами, розподіл прав доступу, запобігання витоку автентифікаційних токенів і правильність класифікації збережених даних.</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>ВАЖЛИВО:</strong> Фундаментальний закон кібербезпеки в хмарі формулюється так: <em>«Постачальник відповідає за безпеку самої ХМАРИ (Security OF the Cloud), тоді як споживач несе повну відповідальність за безпеку даних та операцій В ХМАРІ (Security IN the Cloud)»</em>. Жоден сертифікат безпеки провайдера (наприклад, ISO/IEC 27001 чи SOC 2) не захищає дані користувача, якщо інженер припустився помилки в налаштуваннях прав доступу чи відкрив загальний доступ до сховища.</p>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У 2019 році корпорація Capital One зазнала зламу, що скомпрометував персональні дані понад 100 мільйонів клієнтів. Атака відбулася через вразливість Server-Side Request Forgery (SSRF) у брандмауері веб-додатків (WAF), розгорнутому на віртуальній машині AWS EC2. Нападник отримав доступ до сервісу метаданих інстансу (IMDSv1) та скомпрометував тимчасові токени ролі IAM. Цей інцидент став хрестоматійним доказом моделі спільної відповідальності: апаратна та гіпервізорна інфраструктура AWS функціонувала штатно, однак некоректне конфігурування мережевих правил та надлишкові привілеї ролі на боці клієнта призвели до фатального витоку даних.</p>
+</blockquote>
+<p><strong>Граничні умови моделі:</strong> Модель втрачає свою визначеність у ситуаціях, коли злам відбувається через так звані атаки виходу з віртуальної машини (<strong>VM Escape</strong>) або вразливості нульового дня в процесорних мікроархітектурах (наприклад, атаки сторонніми каналами класу Meltdown, Spectre, Downfall). У таких випадках порушується апаратна ізоляція тенантів на рівні фізичного ядра процесора, що знаходиться поза зоною контролю споживача, проте прямі фінансові та репутаційні збитки від компрометації криптографічних ключів повністю покладаються на власника даних.</p>
+<hr />
+<h3 id="22">2.2. Математичне моделювання доступності та відмовостійкості</h3>
+<p>Рівень доступності хмарних систем регламентується угодою про рівень обслуговування (<strong>Service Level Agreement, SLA</strong>). Для інженера комп'ютерних систем критично важливим є перехід від декларативних гарантій провайдера до аналітичного розрахунку ймовірності безвідмовної роботи системи.</p>
+<h4 id="_5">Покрокове математичне виведення сумарної доступності системи</h4>
+<p>Розглянемо корпоративну систему, яка складається з послідовного ланцюга трьох функціональних рівнів: DNS-маршрутизатора, пулу обчислювальних серверів і кластера баз даних.</p>
+<div class="arithmatex">\[\begin{aligned}
+\text{Крок 1: } &amp; \text{Формалізація доступності послідовних компонентів.} \\
+&amp; \text{Нехай система складається з } n \text{ критичних підсистем, вихід із ладу будь-якої з яких} \\
+&amp; \text{призводить до повного зупинення сервісу. За умови статистичної незалежності відмов,} \\
+&amp; \text{доступність послідовного з'єднання } A_{\text{serial}} \text{ виражається добутком:} \\
+&amp; A_{\text{serial}} = \prod_{i=1}^{n} A_i = A_1 \cdot A_2 \cdots A_n \\
+\text{Крок 2: } &amp; \text{Формалізація доступності паралельного (надлишкового) резервування.} \\
+&amp; \text{Для підвищення надійності } i\text{-го рівня розгортається } m_i \text{ ідентичних резервних вузлів.} \\
+&amp; \text{Рівень функціонує, якщо працює хоча б один вузол. Ймовірність одночасної відмови} \\
+&amp; \text{всіх } m_i \text{ вузлів дорівнює } \prod_{j=1}^{m_i} (1 - A_{ij}). \text{ Відповідно, доступність рівня:} \\
+&amp; A_{\text{parallel}, i} = 1 - \prod_{j=1}^{m_i} (1 - A_{ij}) \\
+\text{Крок 3: } &amp; \text{Синтез комбінованої моделі системи.} \\
+&amp; \text{Для системи з } n \text{ послідовних рівнів, де кожен рівень має паралельне резервування:} \\
+&amp; A_{\text{system}} = \prod_{i=1}^{n} \left[ 1 - \prod_{j=1}^{m_i} (1 - A_{ij}) \right] \\
+\text{Крок 4: } &amp; \text{Розрахунок допустимого часу простою (Downtime).} \\
+&amp; \text{Річний час простою } T_{\text{down}} \text{ (у хвилинах) для заданого } A_{\text{system}} \text{ при } T_{\text{year}} = 525\,600 \text{ хв:} \\
+&amp; T_{\text{down}} = T_{\text{year}} \cdot (1 - A_{\text{system}})
+\end{aligned}\]</div>
+<p>Наприклад, якщо сервіс складається з хмарного шлюзу API (<span class="arithmatex">\(A_1 = 0{,}9999\)</span>), двох паралельних зон обчислень IaaS (<span class="arithmatex">\(A_{2,1} = A_{2,2} = 0{,}995\)</span>) та керованої multi-AZ бази даних (<span class="arithmatex">\(A_3 = 0{,}9995\)</span>):</p>
+<div class="arithmatex">\[A_{\text{compute}} = 1 - (1 - 0{,}995)^2 = 1 - (0{,}005)^2 = 1 - 0{,}000025 = 0{,}999975\]</div>
+<div class="arithmatex">\[A_{\text{system}} = 0{,}9999 \cdot 0{,}999975 \cdot 0{,}9995 \approx 0{,}999375 \quad (99{,}9375\%)\]</div>
+<p>Річний простий складе: <span class="arithmatex">\(525\,600 \cdot (1 - 0{,}999375) \approx 328{,}5 \text{ хвилин } (\approx 5{,}47 \text{ години})\)</span>.</p>
+<h4 id="-sla">Фінансово-штрафна модель SLA</h4>
+<p>У разі порушення умов SLA провайдери не компенсують прямі комерційні збитки бізнесу, а надають знижку на майбутні послуги у вигляді компенсаційних кредитів (<strong>Service Credits</strong>):</p>
+<div class="arithmatex">\[\text{Credit (\%)} = \begin{cases} 
+0\%, &amp; \text{якщо } A_{\text{actual}} \ge A_{\text{SLA}} \\
+10\%, &amp; \text{якщо } A_{\text{threshold}, 1} \le A_{\text{actual}} \lt  A_{\text{SLA}} \\
+25\%, &amp; \text{якщо } A_{\text{threshold}, 2} \le A_{\text{actual}} \lt  A_{\text{threshold}, 1} \\
+100\%, &amp; \text{якщо } A_{\text{actual}} \lt  A_{\text{threshold}, 2} 
+\end{cases}\]</div>
+<p><strong>Граничні умови моделі:</strong> Математичний апарат теорії надійності, що базується на перемноженні ймовірностей, <strong>повністю втрачає адекватність за наявності корельованих відмов (Common Cause Failures)</strong>. Якщо резервовані віртуальні машини розташовані в різних зонах доступності, але використовують спільну глобальну площину керування (Control Plane) провайдера, спільний сервіс автентифікації IAM або зазнають збою через помилку конфігурації протоколу динамічної маршрутизації BGP на прикордонних маршрутизаторах, відмови перестають бути незалежними:</p>
+<div class="arithmatex">\[P(\text{Збій вузла } 2 \mid \text{Збій вузла } 1) \gg P(\text{Збій вузла } 2)\]</div>
+<p>У цьому випадку реальна доступність системи стрімко деградує від розрахункових «чотирьох дев'яток» (99.99%) до фактичного рівня надійності найслабшої спільної ланки.</p>
+<hr />
+<h3 id="23-faasserverless">2.3. Подієво-орієнтовані безсерверні обчислення (FaaS/Serverless)</h3>
+<p>Парадигма безсерверних обчислень (<strong>Serverless / FaaS</strong>) змінює класичний життєвий цикл програмного забезпечення: замість постійно активного фонового демона (daemon process) код виконується виключно у відповідь на виникнення зовнішньої події.</p>
+<h4 id="_6">Архітектурна динаміка обробки запиту: «Холодний» проти «Теплого» старту</h4>
+<p>Ключовим системним викликом у FaaS є затримка ініціалізації середовища (<strong>Cold Start</strong>). Діаграма послідовності демонструє різницю між обробкою первинного виклику та повторного звернення:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    actor Client as Клієнтський додаток
+    participant GW as API Gateway
+    participant Orchestrator as FaaS Control Plane
+    participant Node as Worker Host
+    participant Container as MicroVM / Container
+    participant Code as Прикладний обробник (Handler)
+
+    Note over Client,Code: Сценарій 1: Холодний старт (Cold Start)
+    Client-&gt;&gt;GW: HTTP POST /telemetry
+    GW-&gt;&gt;Orchestrator: Маршрутизація виклику функції
+    Note over Orchestrator: Пошук вільного середовища... Не знайдено!
+    Orchestrator-&gt;&gt;Node: Запит на виділення ресурсів (Allocate)
+    Node-&gt;&gt;Container: Створення MicroVM (Firecracker / runC)
+    Container-&gt;&gt;Container: Завантаження RootFS та Guest OS/Kernel
+    Container-&gt;&gt;Code: Ініціалізація Runtime (Node.js/JVM) + глобальних змінних
+    Code--&gt;&gt;Orchestrator: Сигнал готовності (Container Ready)
+    Orchestrator-&gt;&gt;Code: Передача тіла запиту (Payload)
+    Code-&gt;&gt;Code: Виконання бізнес-логіки
+    Code--&gt;&gt;GW: Повернення результату
+    GW--&gt;&gt;Client: HTTP 200 OK (Затримка: T_cold + T_exec)
+
+    Note over Client,Code: Сценарій 2: Теплий старт (Warm Start)
+    Client-&gt;&gt;GW: HTTP POST /telemetry (наступний запит)
+    GW-&gt;&gt;Orchestrator: Маршрутизація виклику функції
+    Note over Orchestrator: Знайдено активний прогрітий контейнер!
+    Orchestrator-&gt;&gt;Code: Миттєва передача Payload (контейнер переіснує)
+    Code-&gt;&gt;Code: Виконання бізнес-логіки
+    Code--&gt;&gt;GW: Повернення результату
+    GW--&gt;&gt;Client: HTTP 200 OK (Затримка: T_exec)</code></pre>
+<p>Математично повний час обробки виклику функції <span class="arithmatex">\(T_{\text{response}}\)</span> визначається виразом:</p>
+<div class="arithmatex">\[T_{\text{response}} = \delta_{\text{cold}} \cdot \left( t_{\text{sched}} + t_{\text{vm\_boot}} + t_{\text{runtime\_init}} \right) + t_{\text{code\_exec}} + t_{\text{network\_rtt}}\]</div>
+<p>де <span class="arithmatex">\(\delta_{\text{cold}} \in \{0, 1\}\)</span> — булева функція стану контейнера (1 — холодний старт, 0 — теплий старт), <span class="arithmatex">\(t_{\text{sched}}\)</span> — затримка планувальника платформи з вибору оптимального хоста, <span class="arithmatex">\(t_{\text{vm\_boot}}\)</span> — час завантаження мінімалістичної віртуальної машини (наприклад, технології Firecracker MicroVM, що становить 5–50 мс), <span class="arithmatex">\(t_{\text{runtime\_init}}\)</span> — час завантаження мовного середовища та статичних конструкторів коду (для C/Go <span class="arithmatex">\(\approx 5\text{–}15\text{ мс}\)</span>, для Java/C# <span class="arithmatex">\(\approx 500\text{–}3000\text{ мс}\)</span> через вагу завантажуваних бібліотек), <span class="arithmatex">\(t_{\text{code\_exec}}\)</span> — безпосередня тривалість обчислень, <span class="arithmatex">\(t_{\text{network\_rtt}}\)</span> — затримка мережевого транспорту.</p>
+<p><strong>Граничні умови моделі:</strong> FaaS-модель демонструє високу ефективність <strong>виключно для короткоживучих незв'язаних задач із випадковим чи імпульсним навантаженням</strong>. </p>
+<p>Вона стає непридатною за таких умов:</p>
+<ol>
+<li>
+<p><strong>Постійне високе навантаження:</strong> Якщо функція викликається безперервно з високою інтенсивністю (сотні запитів на секунду 24/7), сукупна вартість FaaS експоненційно перевищує вартість оренди еквівалентних виділених інстансів IaaS або контейнерів у Kubernetes.</p>
+</li>
+<li>
+<p><strong>Системи жорсткого реального часу:</strong> Наявність непередбачуваного холодного старту (<span class="arithmatex">\(\delta_{\text{cold}} = 1\)</span>) унеможливлює використання FaaS у контурах управління промисловою автоматикою, де затримка відповіді повинна бути детермінованою і не перевищувати одиниць мілісекунд.</p>
+</li>
+<li>
+<p><strong>Задачі з підтримкою стану (Stateful):</strong> Оскільки мікроконтейнери знищуються або перезапускаються без попередження, збереження контексту між викликами всередині пам'яті інстансу неможливе, що змушує використовувати зовнішні сховища (Redis, DynamoDB), вносячи додаткову мережеву затримку в кожну операцію.</p>
+</li>
+</ol>
+<hr />
+<h3 id="24-tco">2.4. Економіко-технологічний розрахунок TCO та енергетична ефективність</h3>
+<p>Інженерне проектування інфраструктур вимагає кількісного обґрунтування вибору між капітальними вкладеннями (<strong>CapEx</strong>) у власне обладнання та операційними видатками (<strong>OpEx</strong>) на публічну хмару.</p>
+<h4 id="pue">Модель енергетичної ефективності ЦОД (PUE)</h4>
+<p>Енергетичний баланс дата-центру описується метрикою <strong>Power Usage Effectiveness (PUE)</strong>:</p>
+<div class="arithmatex">\[PUE = \frac{P_{\text{total}}}{P_{\text{IT}}}\]</div>
+<p>де <span class="arithmatex">\(P_{\text{total}}\)</span> — сумарна електрична потужність, яка споживається всім дата-центром (включаючи компресори кондиціонерів, вентиляцію, ДБЖ, трансформатори, освітлення та системи безпеки), <span class="arithmatex">\(P_{\text{IT}}\)</span> — корисна електрична потужність, що живить безпосередньо обчислювальне обладнання (сервери, дискові масиви, мережеві комутатори). </p>
+<p>За визначенням, <span class="arithmatex">\(PUE \ge 1{,}0\)</span>. Для застарілих серверних кімнат підприємств типовим є значення <span class="arithmatex">\(PUE = 1{,}8 \dots 2{,}2\)</span> (на кожен 1 Вт корисної потужності серверів витрачається ще 1,2 Вт на охолодження та накладні втрати). У гіпермасштабованих ЦОД публічних хмар (AWS, Google, Microsoft) за рахунок прямого фрікулінгу та оптимізації трактів перетворення струму досягається значення <span class="arithmatex">\(PUE = 1{,}1 \dots 1{,}15\)</span>, що дає значну перевагу в собівартості експлуатації одиниці обчислень.</p>
+<h4 id="tco">Порівняльний розрахунок сукупної вартості володіння (TCO)</h4>
+<div class="arithmatex">\[\begin{aligned}
+\text{Крок 1: } &amp; \text{Розрахунок вартості On-Premises інфраструктури за 3 роки.} \\
+&amp; TCO_{\text{on-prem}} = C_{\text{CapEx}} + \sum_{y=1}^{3} \left( C_{\text{power}}(y) + C_{\text{facility}}(y) + C_{\text{maintenance}}(y) + C_{\text{staff}}(y) \right) \\
+&amp; \text{де } C_{\text{power}}(y) = P_{\text{IT}} \cdot PUE \cdot 8760 \text{ год} \cdot \text{Tariff}_{\text{kWh}} \\
+\text{Крок 2: } &amp; \text{Розрахунок вартості публічної хмари за комбінованою тарифною сіткою.} \\
+&amp; TCO_{\text{cloud}} = \sum_{y=1}^{3} \left( C_{\text{Reserved}} + C_{\text{OnDemand}}(y) + C_{\text{Spot}}(y) + C_{\text{Storage}} + C_{\text{EgressNetwork}} \right) \\
+\text{Крок 3: } &amp; \text{Аналітичне визначення точки беззбитковості (Break-even Point).} \\
+&amp; \text{Хмарна міграція виправдана, якщо } TCO_{\text{cloud}} \lt  TCO_{\text{on-prem}} - C_{\text{migration\_loss}}
+\end{aligned}\]</div>
+<h4 id="_7">Стратегія оптимізації цінових моделей у публічній хмарі</h4>
+<p>Для досягнення мінімального <span class="arithmatex">\(TCO_{\text{cloud}}\)</span> застосовується комбінація трьох цінових рівнів:</p>
+<ol>
+<li>
+<p><strong>Базове навантаження (Base Load, 100% часу):</strong> Покривається <strong>Reserved Instances / Savings Plans</strong> (зобов'язання на 1–3 роки дають дисконт до 72%).</p>
+</li>
+<li>
+<p><strong>Передбачувані коливання (Денні цикли):</strong> Обслуговуються за моделлю <strong>On-Demand</strong> (гнучка погодинна/посекундна тарифікація без зобов'язань).</p>
+</li>
+<li>
+<p><strong>Пакетні некритичні обчислення (Batch/Analytics):</strong> Спрямовуються на <strong>Spot/Preemptible Instances</strong> (дисконт до 80–90%), де завдання повинні підтримувати контрольні точки (<strong>Checkpoints</strong>) на випадок раптового вилучення інстансу провайдером із попередженням за 120 секунд.</p>
+</li>
+</ol>
+<p><strong>Граничні умови моделі:</strong> Модель TCO публічної хмари <strong>стає фінансово програшною</strong>, якщо система генерує колосальні обсяги вихідного мережевого трафіку у відкритий Інтернет (<strong>Data Egress</strong>). У більшості хмарних провайдерів вхідний трафік (Ingress) є безкоштовним, але вихідний (Egress) тарифікується за високими ставками (від 0,05 до 0,09 USD за гігабайт). Якщо компанія, наприклад, здійснює роздачу відеопотоків або трансляцію резервних копій у локальне сховище без використання спеціалізованих CDN, плата за трафік може багаторазово перевищити витрати на обчислювальні інстанси, зводячи нанівець усю економію від відмови від власного «заліза».</p>
+<hr />
+<h3 id="25">2.5. Архітектурні ліміти, критичні бар'єри та вузькі місця</h3>
+<p>Під час експлуатації хмарних середовищ інженери стикаються з фізичними та концептуальними обмеженнями:</p>
+<ol>
+<li>
+<p><strong>Вендорний полон (Vendor Lock-in):</strong> Глибока інтеграція коду додатків із пропрієтарними сервісами провайдера (наприклад, специфічні тригери AWS DynamoDB Streams чи черги Azure Service Bus) робить міграцію на іншу платформу економічно еквівалентною повному переписуванню продукту з нуля. Захистом є використання відкритих стандартів та абстракцій (Kubernetes, Terraform, gRPC, Kafka).</p>
+</li>
+<li>
+<p><strong>Мережеві бар'єри та затримка синхронізації при Cloudbursting:</strong> При реалізації гібридної схеми скидання пікового навантаження (рис. машини станів розділу 1.4) критичним вузьким місцем стає когерентність даних. Обчислювальний інстанс у публічній хмарі ініціалізується за лічені хвилини, проте якщо для його роботи потрібна транзакційна база обсягом у десятки терабайтів, розташована локально, мережева затримка RTT (Round-Trip Time) через Інтернет призведе до деградації продуктивності застосунку.</p>
+</li>
+</ol>
+<p>Нижче наведено зведену матрицю системного порівняння досліджуваних моделей:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Модель архітектури</th>
+<th style="text-align: left;">Рівень інженерного контролю</th>
+<th style="text-align: left;">Складність впровадження</th>
+<th style="text-align: left;">Граничні архітектурні ризики</th>
+<th style="text-align: left;">Економічний поріг доцільності</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>IaaS (Infrastructure as a Service)</strong></td>
+<td style="text-align: left;">Повний контроль ОС, мережі, стеків виконання</td>
+<td style="text-align: left;">Середня: вимагає стандартних навичок системного адміністрування</td>
+<td style="text-align: left;">Необхідність самостійного оновлення ядра, повільний старт інстансів (1–5 хв)</td>
+<td style="text-align: left;">Постійне базове навантаження, перенесення готових систем (Lift-and-Shift)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PaaS (Platform as a Service)</strong></td>
+<td style="text-align: left;">Контроль коду та конфігурації платформи</td>
+<td style="text-align: left;">Низька: розгортання через git push або CI/CD конвеєри</td>
+<td style="text-align: left;">Ризик Vendor Lock-in, обмеження у виборі специфічних бібліотек і версій ОС</td>
+<td style="text-align: left;">Прискорена розробка типових веб-додатків та API</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FaaS (Function as a Service)</strong></td>
+<td style="text-align: left;">Контроль виключно атомарної бізнес-функції</td>
+<td style="text-align: left;">Висока: потребує повної перебудови коду на подієву stateless-архітектуру</td>
+<td style="text-align: left;">Непередбачуваний «холодний старт», неможливість прямої взаємодії з пам'яттю</td>
+<td style="text-align: left;">Спорадичні, імпульсні навантаження, фонова обробка файлів та подій IoT</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Hybrid Cloudbursting</strong></td>
+<td style="text-align: left;">Розподілений: локальні вузли + хмарні API</td>
+<td style="text-align: left;">Вкрай висока: потребує складних SDN-мереж (VXLAN) та брокерів</td>
+<td style="text-align: left;">Асинхронне розходження станів баз даних, затримки каналів зв'язку</td>
+<td style="text-align: left;">Передбачувані короткочасні сезонні сплески (наприклад, Black Friday)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Команда розробників проектує платіжний шлюз обробки транзакцій. Архітектор пропонує повністю перевести обробку платежів на платформу FaaS (AWS Lambda) для економії коштів у нічні години. Відомо, що сервіс має жорстку вимогу угоди SLA: час відповіді 99-го перцентиля (<span class="arithmatex">\(P_{99}\)</span>) не повинен перевищувати 80 мс. Базова ініціалізація криптографічних бібліотек у функції займає 250 мс. Чи є запропоноване архітектурне рішення коректним?</p>
+<p>A. Так, оскільки FaaS автоматично масштабується під будь-який потік запитів і забезпечить мінімальну ціну.<br />
+B. Так, за умови увімкнення механізму виділеної паралельності (Provisioned Concurrency) для всіх інстансів.<br />
+C. Ні, тому що наявність «холодного старту» (250 мс) гарантовано порушить вимогу SLA щодо затримки <span class="arithmatex">\(P_{99} \le 80\)</span> мс при виникненні нових викликів.<br />
+D. Ні, оскільки безсерверні функції категорично не підтримують шифрування та протоколи безпеки фінансових операцій.</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: C.</strong></p>
+<ol>
+<li>
+<p><strong>Повне обґрунтування:</strong> Вимога SLA регламентує час відгуку для 99% запитів (<span class="arithmatex">\(P_{99} \le 80\)</span> мс). Будь-який новий виклик функції, який супроводжується холодним стартом, займе щонайменше <span class="arithmatex">\(T_{\text{cold}} = 250 \text{ мс}\)</span> (ініціалізація криптографічних бібліотек) плюс безпосереднє виконання коду <span class="arithmatex">\(t_{\text{code\_exec}}\)</span> та мережева затримка. Таким чином, час відповіді для кожного запиту, що спричинив створення нового мікроконтейнера, перевищить 250 мс, що є неприпустимим порушенням граничної умови SLA.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p><strong>Варіант A є хибним:</strong> Автомасштабування у FaaS вирішує проблему пропускної здатності, але за рахунок породження нових холодних контейнерів, кожен із яких створює пікову затримку (latency spike).</p>
+</li>
+<li>
+<p><strong>Варіант B є технічно неповним і економічно суперечливим:</strong> Хоча <code>Provisioned Concurrency</code> тримає контейнери прогрітими, це вимагає постійної щогодинної оплати зарезервованої ємності, що повністю ліквідує заявлену початкову мету «економії коштів у періоди простою» і перетворює вартість сервісу на еквівалент звичайної IaaS/PaaS віртуальної машини.</p>
+</li>
+<li>
+<p><strong>Варіант D є хибним:</strong> FaaS повністю підтримує виконання сучасних криптографічних алгоритмів і відповідає стандартам PCI-DSS.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h3 id="_8">Вказівки для самостійного осмислення</h3>
+<ol>
+<li>
+<p><strong>Практичний аудит моделі спільної відповідальності.</strong> Спроектуйте розмежування відповідальності для типової трирівневої веб-системи, що розгортається в інфраструктурі AWS. Визначте конкретні ролі (хто встановлює security-патчі, хто створює резервні копії, хто конфігурує TLS-сертифікати), якщо база даних розміщується в керованому сервісі Amazon RDS (PaaS), а бекенд функціонує на віртуальних машинах Amazon EC2 (IaaS).</p>
+</li>
+<li>
+<p><strong>Аналітичний розрахунок точки беззбитковості (On-Premises vs Cloud).</strong> Підприємство експлуатує 20 серверів із сумарним споживанням <span class="arithmatex">\(P_{\text{IT}} = 10\text{ кВт}\)</span> у локальній серверній із <span class="arithmatex">\(PUE = 1{,}9\)</span>. Тариф електроенергії становить <span class="arithmatex">\(0{,}12\text{ USD/кВт}\cdot\text{год}\)</span>. Обчисліть річні витрати лише на електроживлення та охолодження. Порівняйте цей результат із вартістю річної оренди аналогічних за потужністю зарезервованих інстансів у публічного провайдера, якщо відомо, що дата-центр провайдера має <span class="arithmatex">\(PUE = 1{,}12\)</span>.</p>
+</li>
+<li>
+<p><strong>Аналіз архітектурної катастрофостійкості.</strong> Знайдіть та критично оцініть технічний звіт (Post-Mortem / Incident Report) будь-якого масштабного збою глобального хмарного провайдера (наприклад, масштабний збій AWS у регіоні us-east-1 у грудні 2021 року). Ідентифікуйте першопричину інциденту: чи була вона спричинена фізичним виходом обладнання з ладу, чи відмовою логічного рівня керування (Control Plane / DNS / BGP). Зробіть висновок щодо надійності розміщення мультизонних систем у межах одного географічного регіону провайдера.</p>
+</li>
+</ol>
+<h2 id="3_1">3. Практичний індустріальний / фаховий кейс. Архітектурне проектування корпоративної платформи</h2>
+<h3 id="31-cloudbursting-tco-smart-city-iot-platform">3.1. Комплексний фаховий кейс. Проєктування відмовостійкої гібридної інфраструктури з автоматичним Cloudbursting та оптимізацією TCO для Smart City IoT Platform</h3>
+<h4 id="_9">Постановка задачі/ситуації</h4>
+<p>Муніципальний департамент цифрової трансформації впроваджує платформу інтернету речей (<strong>Smart City IoT Platform</strong>) для збору телеметрії з міської інфраструктури (датчики трафіку, лічильники електроенергії, екологічний моніторинг, стан насосних станцій). Система функціонує в режимі 24/7/365 і характеризується різко вираженими добовими та сезонними піками навантаження (ранкові та вечірні транспортні колапси, аварійні погодні умови). </p>
+<p>Згідно з вимогами законодавства про захист інформації, первинні ідентифікаційні дані приладів обліку та критична геопросторова телеметрія повинні фізично зберігатися у власному периметрі організації (On-Premises). Водночас закупівля власного обладнання під пікові навантаження призведе до хронічного простою понад 65% обчислювальних потужностей у міжпіковий період. </p>
+<p>Перед головним системним архітектором поставлено інженерне завдання: спроєктувати гібридну хмарну інфраструктуру з підтримкою механізму <strong>Cloudbursting</strong>, яка гарантує коефіцієнт доступності сервісу <span class="arithmatex">\(A_{\text{system}} \ge 99{,}99\%\)</span>, витримує триразові пікові навантаження та оптимізує сукупну вартість володіння (TCO) за 3-річний життєвий цикл.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Параметр системи</th>
+<th style="text-align: left;">Значення параметра</th>
+<th style="text-align: left;">Примітки та інженерні обмеження</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Кількість підключених IoT-пристроїв</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(500\,000\)</span> вузлів</td>
+<td style="text-align: left;">Генерація пакетів телеметрії за протоколом MQTT/TLS</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Базове (штатне) навантаження</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(20\,000 \text{ запитів/с}\)</span></td>
+<td style="text-align: left;">Спостерігається 80% часу експлуатації</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Пікове навантаження</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(60\,000 \text{ запитів/с}\)</span></td>
+<td style="text-align: left;">До 4 годин на добу під час транспортних піків</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Середній розмір корисного навантаження (Payload)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(1{,}0 \text{ КБ}\)</span></td>
+<td style="text-align: left;">JSON-структура з міткою часу та векторами показників</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Наявна локальна інфраструктура (On-Prem)</strong></td>
+<td style="text-align: left;">16 серверів (1024 vCPU, 4096 ГБ RAM)</td>
+<td style="text-align: left;">OpenStack Victoria, максимальна ємність <span class="arithmatex">\(30\,000 \text{ req/s}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Параметри локального дата-центру</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(PUE = 1{,}85\)</span>, тариф <span class="arithmatex">\(0{,}14 \text{ USD/кВт}\cdot\text{год}\)</span></td>
+<td style="text-align: left;">Середнє енергоспоживання IT-обладнання: <span class="arithmatex">\(12 \text{ кВт}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Початкові капітальні витрати на On-Prem (CapEx)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(160\,000 \text{ USD}\)</span></td>
+<td style="text-align: left;">Амортизація на 3 роки (сервери, комутатори 25 GbE, СЗД)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Операційні витрати On-Prem (OpEx)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(3\,500 \text{ USD/місяць}\)</span></td>
+<td style="text-align: left;">Фонд оплати праці інженерів, ліцензії, оренда каналів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Тариф публічної хмари: On-Demand інстанс (8 vCPU, 32 ГБ)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(0{,}384 \text{ USD/год}\)</span></td>
+<td style="text-align: left;">Базовий тариф IaaS у найближчому регіоні провайдера</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Тариф публічної хмари: Spot інстанс (8 vCPU, 32 ГБ)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(0{,}0768 \text{ USD/год}\)</span></td>
+<td style="text-align: left;">Знижка 80%, ризик відкликання з нотифікацією за 120 с</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Тариф вихідного мережевого трафіку (Egress)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(0{,}07 \text{ USD/ГБ}\)</span></td>
+<td style="text-align: left;">Оплата передачі даних із публічної хмари в Інтернет/On-Prem</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Виділений канал зв'язку (Direct Connect)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(1\,200 \text{ USD/місяць}\)</span></td>
+<td style="text-align: left;">Гарантована смуга <span class="arithmatex">\(10 \text{ Гбіт/с}\)</span>, <span class="arithmatex">\(RTT \le 4 \text{ мс}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Цільовий рівень доступності (SLA Target)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(A_{\text{system}} \ge 99{,}99\%\)</span></td>
+<td style="text-align: left;">Річний ліміт сумарного простою: не більше 52,56 хв</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>flowchart TD
+    subgraph EdgeLayer [Периферія та збір даних: Edge / IoT]
+        DEV[500 000 IoT-пристроїв] --&gt;|MQTT / TLS| LB_EXT[Глобальний DNS / Anycast IP]
+    end
+
+    LB_EXT --&gt;|Вхідний потік| GW_ROUTER{Фронтальний роутер-розподільник}
+
+    subgraph PrivateCloud [Локальна приватна хмара: OpenStack On-Prem]
+        GW_ROUTER --&gt;|Базовий потік: до 30 000 req/s| ONPREM_LB[Local Keepalived HAProxy]
+        ONPREM_LB --&gt; ONPREM_WORKERS[Кластер OpenStack Nova Worker Nodes]
+        ONPREM_WORKERS --&gt; LOCAL_DB[(Master PostgreSQL + TimescaleDB)]
+        ONPREM_MON[Моніторинг Ceilometer / Prometheus] -.-&gt;|Утилізація CPU/RAM &gt;= 80%| BURST_CTRL{Контролер Cloudbursting}
+    end
+
+    subgraph PublicCloud [Публічна хмара: Bursting Capacity]
+        AWS_API[Cloud Orchestration API] --&gt; AUTO_SCALE[Auto Scaling Group: 30% On-Demand + 70% Spot]
+        CLOUD_LB[Cloud Network Load Balancer] --&gt; AUTO_SCALE
+        AUTO_SCALE --&gt; STREAM_FILTER[Stateless агрегація та очищення]
+    end
+
+    subgraph HybridChannel [Захищений транзит даних]
+        DIRECT_CONN[Виділений канал 10 Gbps Direct Connect / IPsec]
+    end
+
+    BURST_CTRL -.-&gt;|API-виклик запуску інстансів| AWS_API
+    GW_ROUTER -.-&gt;|Піковий надлишок: понад 30 000 req/s| CLOUD_LB
+    STREAM_FILTER --&gt;|Агреговані батчі телеметрії| DIRECT_CONN
+    DIRECT_CONN --&gt;|Фіксація даних| LOCAL_DB</code></pre>
+<h4 id="_10">Покроковий аналіз та розв'язок</h4>
+<h5 id="1-cloudbursting">Крок 1. Розрахунок дефіциту обчислювальної потужності та конфігурації Cloudbursting</h5>
+<p>Під час пікового навантаження вхідний потік становить <span class="arithmatex">\(R_{\text{peak}} = 60\,000 \text{ req/s}\)</span>, тоді як локальний кластер здатен гарантовано обробити без деградації затримки <span class="arithmatex">\(R_{\text{onprem}} = 30\,000 \text{ req/s}\)</span>. Дефіцит продуктивності, який необхідно компенсувати за рахунок еластичності публічної хмари:</p>
+<div class="arithmatex">\[\Delta R = R_{\text{peak}} - R_{\text{onprem}} = 60\,000 - 30\,000 = 30\,000 \text{ req/s}\]</div>
+<p>Один обчислювальний інстанс вибраного профілю (8 vCPU, 32 ГБ RAM) здатний обробляти <span class="arithmatex">\(1\,500 \text{ req/s}\)</span> потоку телеметрії. Отже, необхідна кількість додаткових хмарних вузлів <span class="arithmatex">\(N_{\text{burst}}\)</span> становить:</p>
+<div class="arithmatex">\[N_{\text{burst}} = \frac{\Delta R}{\text{Продуктивність інстансу}} = \frac{30\,000}{1\,500} = 20 \text{ інстансів}\]</div>
+<p>Для мінімізації витрат за збереження високої надійності архітектор застосовує змішану стратегію виділення ресурсів:</p>
+<ul>
+<li>
+<p>30% інстансів (<span class="arithmatex">\(20 \cdot 0{,}3 = 6\)</span> вузлів) формуються з відмовостійких <strong>On-Demand</strong> інстансів;</p>
+</li>
+<li>
+<p>70% інстансів (<span class="arithmatex">\(20 \cdot 0{,}7 = 14\)</span> вузлів) розгортаються на базі високорентабельних <strong>Spot</strong> інстансів.</p>
+</li>
+</ul>
+<h5 id="2-sla">Крок 2. Розрахунок надійності та перевірка обмеження SLA</h5>
+<p>Локальний сегмент OpenStack забезпечує доступність <span class="arithmatex">\(A_{\text{onprem}} = 99{,}95\%\)</span>. Публічний хмарний кластер у мультизонній конфігурації надає доступність <span class="arithmatex">\(A_{\text{cloud}} = 99{,}99\%\)</span>. Резервований канал Direct Connect має показник <span class="arithmatex">\(A_{\text{network}} = 99{,}99\%\)</span>. </p>
+<p>Розрахуємо результуючу доступність системи за умови, що відмова основного дата-центру призводить до перенаправлення 100% трафіку в публічну хмару через DNS Failover (маршрутизатор Anycast <span class="arithmatex">\(A_{\text{dns}} = 99{,}999\%\)</span>):</p>
+<div class="arithmatex">\[\begin{aligned}
+\text{Крок 1: } &amp; \text{Розрахунок доступності паралельного обчислювального ядра.} \\
+&amp; A_{\text{core}} = 1 - (1 - A_{\text{onprem}}) \cdot (1 - A_{\text{cloud}}) \\
+&amp; A_{\text{core}} = 1 - (1 - 0{,}9995) \cdot (1 - 0{,}9999) = 1 - (0{,}0005 \cdot 0{,}0001) = 1 - 5\cdot 10^{-8} = 0{,}99999995 \\
+\text{Крок 2: } &amp; \text{Розрахунок надійності послідовного ланцюга (DNS + Мережевий транзит + Core).} \\
+&amp; A_{\text{system}} = A_{\text{dns}} \cdot A_{\text{network}} \cdot A_{\text{core}} \\
+&amp; A_{\text{system}} = 0{,}99999 \cdot 0{,}9999 \cdot 0{,}99999995 \approx 0{,}99989 \quad (99{,}989\%)
+\end{aligned}\]</div>
+<p>Отримане значення <span class="arithmatex">\(A_{\text{system}} = 99{,}989\%\)</span> перевищує встановлений критерій <span class="arithmatex">\(99{,}99\%\)</span>, що відповідає річному простою не більше 57 хвилин (замість допустимих 52,56 хв, що вимагає включення ще одного резервного інтернет-провайдера на рівні DNS).</p>
+<h5 id="3-3-tco-egress-">Крок 3. Розрахунок 3-річного TCO та вартості Egress-трафіку</h5>
+<p>Тривалість пікового періоду: <span class="arithmatex">\(t_{\text{peak}} = 4 \text{ год/добу} = 1\,460 \text{ год/рік}\)</span>.</p>
+<ol>
+<li>
+<p><strong>Витрати на локальний сегмент (On-Premises):</strong></p>
+</li>
+<li>
+<p>Капітальні витрати (CapEx): <span class="arithmatex">\(160\,000 \text{ USD}\)</span>.</p>
+</li>
+<li>
+<p>Електроенергія за 3 роки з урахуванням <span class="arithmatex">\(PUE = 1{,}85\)</span>:
+     $<span class="arithmatex">\(C_{\text{power}} = 12 \text{ кВт} \cdot 1{,}85 \cdot (24 \cdot 365 \cdot 3) \text{ год} \cdot 0{,}14 \text{ USD} = 583\,416 \text{ кВт}\cdot\text{год} \cdot 0{,}14 \approx 81\,678 \text{ USD}\)</span>$</p>
+</li>
+<li>
+<p>Операційне обслуговування (OpEx): <span class="arithmatex">\(3\,500 \text{ USD} \cdot 36 \text{ міс} = 126\,000 \text{ USD}\)</span>.</p>
+</li>
+<li>
+<p>Разом On-Prem за 3 роки: <span class="arithmatex">\(160\,000 + 81\,678 + 126\,000 = 367\,678 \text{ USD}\)</span>.</p>
+</li>
+<li>
+<p><strong>Витрати на публічний сегмент (Cloudbursting):</strong></p>
+</li>
+<li>
+<p>Обчислювальні ресурси за 3 роки (<span class="arithmatex">\(1\,460 \cdot 3 = 4\,380 \text{ год}\)</span>):
+     $<span class="arithmatex">\(C_{\text{compute}} = 4\,380 \cdot (6 \cdot 0{,}384 + 14 \cdot 0{,}0768) = 4\,380 \cdot (2{,}304 + 1{,}0752) = 4\,380 \cdot 3{,}3792 \approx 14\,801 \text{ USD}\)</span>$</p>
+</li>
+<li>
+<p>Витрати на Direct Connect: <span class="arithmatex">\(1\,200 \text{ USD} \cdot 36 \text{ міс} = 43\,200 \text{ USD}\)</span>.</p>
+</li>
+<li>
+<p><strong>Аналіз Egress-трафіку:</strong> При прямому пересиланні всіх сирих даних із хмари обсяг склав би <span class="arithmatex">\(30\,000 \text{ req/s} \cdot 1 \text{ КБ} \cdot 3600 \text{ с} \cdot 4 \text{ год} \cdot 1095 \text{ діб} \approx 473\,040 \text{ ГБ}\)</span>, що коштувало б <span class="arithmatex">\(473\,040 \cdot 0{,}07 = 33\,113 \text{ USD}\)</span>. 
+   Архітектор впроваджує <strong>агрегацію на стороні хмари</strong>: стиснення та батчінг зменшують трафік у 10 разів (<span class="arithmatex">\(47\,304 \text{ ГБ}\)</span>). Витрати на Egress становлять:
+     $<span class="arithmatex">\(C_{\text{egress}} = 47\,304 \cdot 0{,}07 \approx 3\,311 \text{ USD}\)</span>$</p>
+</li>
+<li>
+<p>Разом Cloud за 3 роки: <span class="arithmatex">\(14\,801 + 43\,200 + 3\,311 = 61\,312 \text{ USD}\)</span>.</p>
+</li>
+</ol>
+<p>Загальна сукупна вартість гібридного рішення:</p>
+<div class="arithmatex">\[TCO_{\text{hybrid}} = 367\,678 + 61\,312 = 428\,990 \text{ USD}\]</div>
+<ol>
+<li><strong>Альтернатива: Побудова повністю локального ЦОД на 60 000 req/s:</strong>
+   Потребувала б подвоєння серверного парку (CapEx = <span class="arithmatex">\(320\,000 \text{ USD}\)</span>), подвоєння енерговитрат (<span class="arithmatex">\(163\,356 \text{ USD}\)</span>) та розширення штату інженерів (<span class="arithmatex">\(180\,000 \text{ USD}\)</span>).
+   $<span class="arithmatex">\(TCO_{\text{full\_onprem}} = 320\,000 + 163\,356 + 180\,000 = 663\,356 \text{ USD}\)</span>$</li>
+</ol>
+<p>Економічний ефект від впровадження гібридного Cloudbursting становить:</p>
+<div class="arithmatex">\[\Delta TCO = 663\,356 - 428\,990 = 234\,366 \text{ USD} \quad (\text{економія } 35{,}3\%)\]</div>
+<h4 id="_11">Інтерпретація результатів та альтернативні сценарії</h4>
+<ol>
+<li>
+<p>Гібридна архітектура з механізмом Cloudbursting довела свою повну інженерно-економічну спроможність: забезпечено нормативну доступність <span class="arithmatex">\(99{,}989\%\)</span> за одночасного зниження сукупної вартості володіння на <span class="arithmatex">\(35{,}3\%\)</span> порівняно з екстенсивним локальним масштабуванням.</p>
+</li>
+<li>
+<p>Використання змішаного пулу інстансів (30% On-Demand + 70% Spot) ліквідує ризик деградації сервісу: у разі раптового масового відкликання Spot-інстансів провайдером гарантовані On-Demand інстанси утримують критичні транзакції до моменту автоматичного перезапуску вилучених вузлів.</p>
+</li>
+<li>
+<p>Локальна агрегація та пакетування даних перед відправкою через зовнішній периметр є обов'язковим архітектурним патерном: скорочення обсягів Egress-трафіку в 10 разів усунуло загрозу неконтрольованого зростання операційних витрат.</p>
+</li>
+</ol>
+<p><em>Що б змінилося, якби вхідні дані були іншими?</em></p>
+<ul>
+<li>
+<p>Якби нормативні вимоги дозволяли зберігати 100% даних у публічній хмарі, перехід на чисту модель <strong>Serverless/FaaS</strong> був би ще вигіднішим за умови відсутності постійного потоку, однак при поточному стабільному навантаженні (<span class="arithmatex">\(20\,000 \text{ req/s}\)</span> 24/7) чистий Serverless згенерував би понад <span class="arithmatex">\(120\,000 \text{ USD}\)</span> щомісячних витрат, виявившись абсолютно нерентабельним.</p>
+</li>
+<li>
+<p>Якби затримка виділеного каналу перевищувала <span class="arithmatex">\(50 \text{ мс}\)</span> (наприклад, міжконтинентальний лінк), реалізація синхронного Cloudbursting стала б неможливою через розходження транзакційних блокувань у базі даних, що змусило б перейти до асинхронної реплікації за принципом кінцевої узгодженості (<strong>Eventual Consistency</strong>).</p>
+</li>
+</ul>
+<hr />
+<h3 id="32">3.2. Зведена довідкова система лекції</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термін / Концепція</th>
+<th style="text-align: left;">Формалізація / Сутність</th>
+<th style="text-align: left;">Реальний кейс застосування</th>
+<th style="text-align: left;">Основне обмеження / Ризик</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>NIST SP 800-145</strong></td>
+<td style="text-align: left;">Нормативний стандарт із 5 характеристик, 3 сервісних моделей і 4 моделей розгортання</td>
+<td style="text-align: left;">Оцінка відповідності корпоративної IT-інфраструктури хмарному статусу</td>
+<td style="text-align: left;">Не охоплює специфіку новітніх моделей (FaaS, Edge, Fog Computing)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Мультитенантність (Multi-tenancy)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(K_{\text{os}} = \sum V_i / C_{\text{phys}} &gt; 1\)</span>; спільне використання ресурсів багатьма клієнтами</td>
+<td style="text-align: left;">Віртуалізація обчислювальних ресурсів у гіперскейлерів AWS/GCP</td>
+<td style="text-align: left;">Ефект «галасливого сусіда» (Noisy Neighbor), ризики витоку через CPU cache</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Cloudbursting</strong></td>
+<td style="text-align: left;">Динамічне розширення навантаження: <span class="arithmatex">\(\Delta R = R_{\text{peak}} - R_{\text{onprem}} \to \text{Cloud}\)</span></td>
+<td style="text-align: left;">Сезонні розпродажі (Black Friday) в онлайн-ритейлі</td>
+<td style="text-align: left;">Затримки синхронізації стану БД і висока вартість Egress-трафіку</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Модель спільної відповідальності</strong></td>
+<td style="text-align: left;">Матриця демаркації зон контролю безпеки: Security OF vs Security IN the Cloud</td>
+<td style="text-align: left;">Налаштування мережевих правил доступу AWS Security Groups</td>
+<td style="text-align: left;">Помилки конфігурації на боці замовника призводять до компрометації даних</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Холодний старт (Cold Start)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(T_{\text{response}} = t_{\text{sched}} + t_{\text{vm\_boot}} + t_{\text{runtime\_init}} + t_{\text{exec}}\)</span></td>
+<td style="text-align: left;">Обробка рідкісних звернень до мікросервісів у середовищі AWS Lambda</td>
+<td style="text-align: left;">Непридатність для систем жорсткого реального часу (<span class="arithmatex">\(P_{99}\)</span> latency spike)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PUE (Power Usage Effectiveness)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(PUE = P_{\text{total}} / P_{\text{IT}} \ge 1{,}0\)</span>; індикатор енергетичної якості ЦОД</td>
+<td style="text-align: left;">Проєктування системи прямого фрікулінгу дата-центрів</td>
+<td style="text-align: left;">Локальні серверні мають високий <span class="arithmatex">\(PUE \approx 2{,}0\)</span>, що збільшує TCO</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Вендорний полон (Vendor Lock-in)</strong></td>
+<td style="text-align: left;">Технологічна залежність прикладного ПЗ від специфічних закритих API провайдера</td>
+<td style="text-align: left;">Використання пропрієтарних механізмів AWS DynamoDB або Azure CosmosDB</td>
+<td style="text-align: left;">Колосальні фінансові витрати у разі необхідності міграції до іншого вендора</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="33">3.3. Контрольні питання та завдання</h3>
+<h4 id="_12">Прикладні тестові завдання</h4>
+<ol>
+<li>
+<p><strong>Кейс про відмовостійкість архітектури.</strong> Архітектор проєктує розподілену систему, що складається з трьох послідовно залежних сервісів. Сервіс аутентифікації розгорнуто в одному регіоні з SLA <span class="arithmatex">\(A_1 = 99{,}9\%\)</span>. Сервіс обчислень дубльовано паралельно у двох незалежних зонах доступності з індивідуальними SLA <span class="arithmatex">\(A_{2,1} = A_{2,2} = 99{,}0\%\)</span>. База даних функціонує в керованому кластері з <span class="arithmatex">\(A_3 = 99{,}99\%\)</span>. Яка сумарна доступність системи <span class="arithmatex">\(A_{\text{total}}\)</span> за умови статистичної незалежності збоїв?</p>
+</li>
+<li>
+<p>A. <span class="arithmatex">\(99{,}99\%\)</span></p>
+</li>
+<li>
+<p>B. <span class="arithmatex">\(99{,}88\%\)</span></p>
+</li>
+<li>
+<p>C. <span class="arithmatex">\(99{,}00\%\)</span></p>
+</li>
+<li>
+<p>D. <span class="arithmatex">\(98{,}89\%\)</span></p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Розрахунок:</strong></p>
+</li>
+<li>
+<p>Доступність обчислювального рівня з паралельним резервуванням:<br />
+<span class="arithmatex">\(A_2 = 1 - (1 - 0{,}99) \cdot (1 - 0{,}99) = 1 - (0{,}01)^2 = 1 - 0{,}0001 = 0{,}9999 \quad (99{,}99\%)\)</span>.</p>
+</li>
+<li>
+<p>Доступність усієї послідовної системи:<br />
+<span class="arithmatex">\(A_{\text{total}} = A_1 \cdot A_2 \cdot A_3 = 0{,}999 \cdot 0{,}9999 \cdot 0{,}99999 \approx 0{,}99889 \quad (99{,}88\%)\)</span>.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong> Варіант A враховує лише найкращий компонент. Варіант C бере найгірший одиничний вузол без урахування резервування. Варіант D виникає при помилковому перемноженні нерезервованих показників.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p><strong>Кейс про економічну доцільність FaaS.</strong> Застосунок виконує фонову обробку зображень. Середньодобова кількість викликів становить <span class="arithmatex">\(100\,000\)</span>. Кожен виклик триває <span class="arithmatex">\(200 \text{ мс}\)</span> і споживає <span class="arithmatex">\(512 \text{ МБ}\)</span> RAM. Тариф FaaS: <span class="arithmatex">\(0{,}0000166667 \text{ USD}\)</span> за кожні <span class="arithmatex">\(1 \text{ ГБ}\cdot\text{с}\)</span> та <span class="arithmatex">\(0{,}20 \text{ USD}\)</span> за <span class="arithmatex">\(1\,000\,000\)</span> викликів. Вартість еквівалентного постійно запущеного екземпляра IaaS становить <span class="arithmatex">\(15 \text{ USD/місяць}\)</span>. Що є економічно вигіднішим для 30-денного періоду?</p>
+</li>
+<li>
+<p>A. FaaS вигідніший, оскільки витрати складуть близько <span class="arithmatex">\(5{,}60 \text{ USD}\)</span>.</p>
+</li>
+<li>
+<p>B. IaaS вигідніший, оскільки FaaS коштуватиме понад <span class="arithmatex">\(45 \text{ USD}\)</span>.</p>
+</li>
+<li>
+<p>C. Витрати абсолютно ідентичні.</p>
+</li>
+<li>
+<p>D. FaaS не можна застосовувати для обробки зображень через обмеження пам'яті.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: A.</strong></p>
+<ol>
+<li>
+<p><strong>Розрахунок:</strong></p>
+</li>
+<li>
+<p>Кількість викликів за місяць: <span class="arithmatex">\(100\,000 \cdot 30 = 3\,000\,000\)</span>.</p>
+</li>
+<li>
+<p>Плата за кількість викликів: <span class="arithmatex">\(3 \cdot 0{,}20 \text{ USD} = 0{,}60 \text{ USD}\)</span>.</p>
+</li>
+<li>
+<p>Споживання ресурсів: <span class="arithmatex">\(3\,000\,000 \text{ викликів} \cdot 0{,}2 \text{ с} \cdot 0{,}5 \text{ ГБ} = 300\,000 \text{ ГБ}\cdot\text{с}\)</span>.</p>
+</li>
+<li>
+<p>Плата за обчислення: <span class="arithmatex">\(300\,000 \cdot 0{,}0000166667 \approx 5{,}00 \text{ USD}\)</span>.</p>
+</li>
+<li>
+<p>Сумарно FaaS: <span class="arithmatex">\(5{,}00 + 0{,}60 = 5{,}60 \text{ USD/місяць}\)</span>.</p>
+</li>
+<li>
+<p>Порівняння: <span class="arithmatex">\(5{,}60 \text{ USD (FaaS)} &lt; 15{,}00 \text{ USD (IaaS)}\)</span>.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong> Варіант B базується на помилці переведення мілісекунд у секунди. Варіант D спростовується практикою: ліміти пам'яті сучасних FaaS (до 10 ГБ) з надлишком покривають задачі обробки фотографій.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p><strong>Кейс про мережеву архітектуру гібридної хмари.</strong> Під час тестування Cloudbursting виявлено, що час відгуку інтернет-магазину в публічній хмарі зріс із <span class="arithmatex">\(40 \text{ мс}\)</span> до <span class="arithmatex">\(850 \text{ мс}\)</span>. Профіль застосунку: бекенд у публічній хмарі робить 25 послідовних синхронних SQL-запитів до бази даних, що залишилася в локальному On-Premises дата-центрі. Затримка каналу (RTT) становить <span class="arithmatex">\(32 \text{ мс}\)</span>. У чому полягає першопричина деградації?</p>
+</li>
+<li>
+<p>A. Нестача виділених vCPU на публічних інстансах.</p>
+</li>
+<li>
+<p>B. Блокування портів брандмауером Direct Connect.</p>
+</li>
+<li>
+<p>C. Мережева затримка послідовних звернень (Network Chattiness): <span class="arithmatex">\(25 \cdot 32 \text{ мс} = 800 \text{ мс}\)</span> накладних витрат лише на транспорт.</p>
+</li>
+<li>
+<p>D. Помилка алгоритму балансування навантаження Round Robin.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: C.</strong></p>
+<ol>
+<li>
+<p><strong>Обґрунтування:</strong> Це класична інженерна проблема розподілених систем, відома як «chatty application». Послідовне виконання 25 мережевих запитів через канал із затримкою <span class="arithmatex">\(32 \text{ мс}\)</span> неминуче додає <span class="arithmatex">\(25 \times 32 = 800 \text{ мс}\)</span> чистого часу очікування мережевих пакетів, незалежно від потужності серверів.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong> Варіанти A, B та D ігнорують математичний внесок затримки транспортування сигналів у послідовних синхронних операціях.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p><strong>Кейс про порушення суверенітету даних.</strong> Європейський банк розгорнув систему онлайн-банкінгу в публічній хмарі американського гіперскейлера у дата-центрі, розташованому в Німеччині. Адміністративний доступ до керування ключами шифрування (AWS KMS) налаштовано з використанням глобальної ролі IAM, сервери якої фізично розміщені в регіоні us-east-1 (США). Який фундаментальний нормативно-архітектурний ризик створено?</p>
+</li>
+<li>
+<p>A. Неможливість масштабування через географічну віддаленість.</p>
+</li>
+<li>
+<p>B. Порушення регламенту GDPR та ризик дії закону US CLOUD Act щодо доступу іноземних урядів до ключів шифрування.</p>
+</li>
+<li>
+<p>C. Зниження продуктивності шифрування на рівні локальних дисків.</p>
+</li>
+<li>
+<p>D. Технічна неможливість автентифікації користувачів у межах одного континенту.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Обґрунтування:</strong> Закон US CLOUD Act зобов'язує американські технологічні корпорації надавати доступ до даних за судовим ордером незалежно від фізичного місця розташування серверів. Якщо площина керування та ключі шифрування контролюються з юрисдикції США, європейський банк втрачає повний цифровий суверенітет і порушує суворі норми GDPR.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong> Інші варіанти розглядають технічні аспекти, які не є першопричиною юридичних та регуляторних ризиків у цьому сценарії.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h4 id="_13">Завдання для самостійної роботи</h4>
+<h5 id="_14">Постановка задачі</h5>
+<p>Фінтех-стартап розробляє сервіс міжнародних переказів із використанням архітектури мікросервісів. Наразі система функціонує на базі 8 локальних фізичних серверів у власному офісі. Компанія залучила інвестиції та планує масштабуватися з <span class="arithmatex">\(10\,000\)</span> до <span class="arithmatex">\(1\,000\,000\)</span> активних користувачів протягом року. Архітектору необхідно представити технічній раді план міграції на публічну хмару.</p>
+<h5 id="_15">Завдання для виконання</h5>
+<ol>
+<li>
+<p>Проведіть декомпозицію системи на компоненти за моделями IaaS, PaaS та FaaS, визначивши для кожного сервісу (шлюз авторизації, транзакційний рушій, генератор PDF-виписок, звітність) найбільш релевантний шар абстракції.</p>
+</li>
+<li>
+<p>Складіть матрицю спільної відповідальності (Shared Responsibility Matrix) для розгортання транзакційного ядра в обраній моделі, чітко розмежувавши завдання команди стартапу та інженерів хмарного провайдера.</p>
+</li>
+<li>
+<p>Розрахуйте сумарний коефіцієнт доступності системи <span class="arithmatex">\(A_{\text{system}}\)</span>, якщо зовнішній трафік надходить через Cloudflare (<span class="arithmatex">\(A_1 = 99{,}99\%\)</span>), обробляється контейнерами в керованому кластері Kubernetes (<span class="arithmatex">\(A_2 = 99{,}95\%\)</span>), а дані записуються у відмовостійку multi-region базу даних (<span class="arithmatex">\(A_3 = 99{,}999\%\)</span>).</p>
+</li>
+<li>
+<p>Оцініть ризики прив'язки до постачальника (Vendor Lock-in) та сформулюйте перелік із чотирьох відкритих технологій і стандартів, які необхідно використати на етапі проектування для гарантування безболісної міграції між різними хмарними платформами.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

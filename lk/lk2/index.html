@@ -1,0 +1,2988 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../lk1/">
+      
+      
+        <link rel="next" href="../lk3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lk1/" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lb/lb1/" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Апаратні механізми віртуалізації процесорів та архітектура гіпервізорів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Паравіртуалізація, системна контейнеризація та мережеві сховища даних
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування конвергентного кластера віртуалізації високої доступності
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Апаратні механізми віртуалізації процесорів та архітектура гіпервізорів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Апаратні механізми віртуалізації процесорів та архітектура гіпервізорів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-ia-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Критерії віртуалізовності Попека — Голдберга, проблема сімнадцяти чутливих невідокремлених інструкцій архітектури IA-32 та концепція динамічної двійкової трансляції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-intel-vt-x-amd-v-vmx-root-non-root-vm-entry-vm-exit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Апаратна віртуалізація Intel VT-x та AMD-V: двовимірний простір привілеїв VMX Root / Non-Root та життєвий цикл переходів VM-Entry / VM-Exit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-vmcs-vmcb-slat-extended-page-tables-nested-page-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Внутрішня будова структури VMCS (VMCB) та механізми апаратної трансляції пам'яті другого рівня SLAT (Extended Page Tables / Nested Page Tables)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-type-1-bare-metal-type-2-hosted-vmware-esxi-kvm-microsoft-hyper-v-vmbus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Класифікація гіпервізорів (Type 1 Bare-Metal проти Type 2 Hosted): монолітна модель ядра (VMware ESXi, KVM) проти мікроядерної архітектури (Microsoft Hyper-V, шина VMBus)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Паравіртуалізація, системна контейнеризація та мережеві сховища даних
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Паравіртуалізація, системна контейнеризація та мережеві сховища даних">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-xen-dom0domu-virtio-virtqueue-vring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Модель паравіртуалізації ядра Xen (Dom0/DomU) та відкритий стандарт абстракції вводу-виводу VirtIO на базі кільцевих буферів Virtqueue (vring)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-linux-namespaces-cgroups-v2-overlayfs-copy-on-write" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Віртуалізація рівня операційної системи: простори імен ядра Linux (Namespaces), механізми контролю ресурсів cgroups v2 та файлові системи OverlayFS (Copy-on-Write)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Математичне моделювання щільності розміщення віртуальних машин і контейнерів з урахуванням коефіцієнтів перепідписки пам'яті та процесорів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. Математичне моделювання щільності розміщення віртуальних машин і контейнерів з урахуванням коефіцієнтів перепідписки пам&#39;яті та процесорів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Аналіз граничних умов та крайових ситуацій
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-fibre-channel-san-ip-san-iscsi-pnfs-nfs-v41-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Мережеві системи зберігання даних: протокольні стеки Fibre Channel SAN, IP SAN (iSCSI), архітектура паралельної файлової системи pNFS (NFS v4.1) та блейд-системи
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-noisy-neighbor-io-vm-exit-tlb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Критичні бар'єри та граничні умови продуктивності: ефект «шумного сусіда» (Noisy Neighbor), деградація пропускної здатності I/O через часті цикли VM-Exit та вичерпання простору трансляцій TLB
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування конвергентного кластера віртуалізації високої доступності
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Проєктування конвергентного кластера віртуалізації високої доступності">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-kvmvirtio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Міграція критичної корпоративної білінгової системи на гібридний кластер KVM/VirtIO та контейнери під керуванням гібридної СЗД
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Міграція критичної корпоративної білінгової системи на гібридний кластер KVM/VirtIO та контейнери під керуванням гібридної СЗД">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-vcpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок процесорних потужностей та конфігурація vCPU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ept-huge-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Розрахунок пам'яті та ліквідація накладних витрат EPT через Huge Pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-san" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Розрахунок пропускної здатності дискової підсистеми та конфігурація SAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-virtio-scsi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Налаштування паравіртуалізованого контролера VirtIO-SCSI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Апаратні механізми віртуалізації процесорів та архітектура гіпервізорів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Паравіртуалізація, системна контейнеризація та мережеві сховища даних
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування конвергентного кластера віртуалізації високої доступності
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Апаратні механізми віртуалізації процесорів та архітектура гіпервізорів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Апаратні механізми віртуалізації процесорів та архітектура гіпервізорів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-ia-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Критерії віртуалізовності Попека — Голдберга, проблема сімнадцяти чутливих невідокремлених інструкцій архітектури IA-32 та концепція динамічної двійкової трансляції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-intel-vt-x-amd-v-vmx-root-non-root-vm-entry-vm-exit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Апаратна віртуалізація Intel VT-x та AMD-V: двовимірний простір привілеїв VMX Root / Non-Root та життєвий цикл переходів VM-Entry / VM-Exit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-vmcs-vmcb-slat-extended-page-tables-nested-page-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Внутрішня будова структури VMCS (VMCB) та механізми апаратної трансляції пам'яті другого рівня SLAT (Extended Page Tables / Nested Page Tables)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-type-1-bare-metal-type-2-hosted-vmware-esxi-kvm-microsoft-hyper-v-vmbus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Класифікація гіпервізорів (Type 1 Bare-Metal проти Type 2 Hosted): монолітна модель ядра (VMware ESXi, KVM) проти мікроядерної архітектури (Microsoft Hyper-V, шина VMBus)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Паравіртуалізація, системна контейнеризація та мережеві сховища даних
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Паравіртуалізація, системна контейнеризація та мережеві сховища даних">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-xen-dom0domu-virtio-virtqueue-vring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Модель паравіртуалізації ядра Xen (Dom0/DomU) та відкритий стандарт абстракції вводу-виводу VirtIO на базі кільцевих буферів Virtqueue (vring)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-linux-namespaces-cgroups-v2-overlayfs-copy-on-write" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Віртуалізація рівня операційної системи: простори імен ядра Linux (Namespaces), механізми контролю ресурсів cgroups v2 та файлові системи OverlayFS (Copy-on-Write)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Математичне моделювання щільності розміщення віртуальних машин і контейнерів з урахуванням коефіцієнтів перепідписки пам'яті та процесорів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. Математичне моделювання щільності розміщення віртуальних машин і контейнерів з урахуванням коефіцієнтів перепідписки пам&#39;яті та процесорів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Аналіз граничних умов та крайових ситуацій
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-fibre-channel-san-ip-san-iscsi-pnfs-nfs-v41-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Мережеві системи зберігання даних: протокольні стеки Fibre Channel SAN, IP SAN (iSCSI), архітектура паралельної файлової системи pNFS (NFS v4.1) та блейд-системи
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-noisy-neighbor-io-vm-exit-tlb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Критичні бар'єри та граничні умови продуктивності: ефект «шумного сусіда» (Noisy Neighbor), деградація пропускної здатності I/O через часті цикли VM-Exit та вичерпання простору трансляцій TLB
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування конвергентного кластера віртуалізації високої доступності
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Проєктування конвергентного кластера віртуалізації високої доступності">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-kvmvirtio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Міграція критичної корпоративної білінгової системи на гібридний кластер KVM/VirtIO та контейнери під керуванням гібридної СЗД
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Міграція критичної корпоративної білінгової системи на гібридний кластер KVM/VirtIO та контейнери під керуванням гібридної СЗД">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-vcpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок процесорних потужностей та конфігурація vCPU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ept-huge-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Розрахунок пам'яті та ліквідація накладних витрат EPT через Huge Pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-san" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Розрахунок пропускної здатності дискової підсистеми та конфігурація SAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-virtio-scsi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Налаштування паравіртуалізованого контролера VirtIO-SCSI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="2">Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних</h1>
+<h2 id="_1">Мета лекції</h2>
+<p>Сформувати у майбутніх інженерів комп'ютерних систем комплексні фундаментальні знання та системне інженерне розуміння архітектурних засад віртуалізації обчислювальних ресурсів на стику апаратного та програмного забезпечення. У межах лекції розглядаються низькорівневі апаратні розширення процесорів x86-64 для прямої підтримки віртуалізації, аналізуються математичні та апаратні обмеження класичної концепції «перехоплення та емуляції», досліджуються внутрішні механізми монолітних і мікроядерних гіпервізорів першого типу, паравіртуалізованого вводу-виводу VirtIO, примітивів ізоляції ядра Linux (Namespaces, cgroups v2) та багатошарових файлових систем. Особлива увага приділяється інженерним принципам інтеграції обчислювальних вузлів із мережевими системами зберігання даних (Fibre Channel SAN, iSCSI, pNFS) та гіперконвергентними платформами, що забезпечує практичну підготовку до проєктування, оптимізації та експлуатації відмовостійких високопродуктивних хмарних інфраструктур корпоративного й академічного рівня.</p>
+<h2 id="_2">Очікувані результати навчання</h2>
+<ol>
+<li>
+<p><strong>Знання та розуміння.</strong> Здобувачі вищої освіти засвоять теоретичні положення критеріїв Попека — Голдберга щодо віртуалізовності обчислювальних архітектур, детальний механізм перемикання станів процесора у просторах VMX Root та VMX Non-Root з використанням керуючої структури VMCS, а також структурні відмінності між монолітною моделлю ядра гіпервізора та мікроядерною концепцією з шиною VMBus.</p>
+</li>
+<li>
+<p><strong>Застосування.</strong> Студенти набудуть практичних навичок конфігурування паравіртуалізованих черг Virtqueue підсистеми VirtIO, налаштування ізоляції процесів за допомогою просторів імен ядра Linux та обмеження обчислювальних квот через контрольні групи cgroups v2, а також проєктування схем підключення дискових масивів LUN до кластерів віртуалізації засобами Fibre Channel та iSCSI.</p>
+</li>
+<li>
+<p><strong>Аналіз.</strong> Слухачі зможуть виконувати порівняльний аналіз накладних витрат процесорного часу, спричинених апаратними подіями VM-Exit та багатоетапною трансляцією пам'яті другого рівня SLAT (EPT/NPT), досліджувати метрики пропускної здатності й латентності протоколів зберігання даних, а також виявляти системні фактори деградації продуктивності за умов інтенсивного мультитенантного навантаження.</p>
+</li>
+<li>
+<p><strong>Оцінювання та синтез.</strong> Майбутні фахівці зможуть критично оцінювати компроміси між рівнем безпеки довіреної бази обчислень (TCB) та швидкодією систем вводу-виводу, обґрунтовувати вибір між апаратною віртуалізацією та контейнеризацією для гетерогенних задач хмарної обробки даних, а також синтезувати комплексні технічні рішення для розгортання конвергентних і блейд-інфраструктур центрів обробки даних.</p>
+</li>
+</ol>
+<hr />
+<h2 id="_3">Детальний покроковий план лекції</h2>
+<h3 id="1-">1. Теоретико-концептуальний базис. Апаратні механізми віртуалізації процесорів та архітектура гіпервізорів</h3>
+<ul>
+<li>
+<p>1.1. Критерії віртуалізовності Попека — Голдберга, проблема сімнадцяти чутливих невідокремлених інструкцій архітектури IA-32 та концепція динамічної двійкової трансляції.</p>
+</li>
+<li>
+<p>1.2. Апаратна віртуалізація Intel VT-x та AMD-V: двовимірний простір привілеїв VMX Root / Non-Root та життєвий цикл переходів VM-Entry / VM-Exit.</p>
+</li>
+<li>
+<p>1.3. Внутрішня будова структури VMCS (VMCB) та механізми апаратної трансляції пам'яті другого рівня SLAT (Extended Page Tables / Nested Page Tables).</p>
+</li>
+<li>
+<p>1.4. Класифікація гіпервізорів (Type 1 Bare-Metal проти Type 2 Hosted): монолітна модель ядра (VMware ESXi, KVM) проти мікроядерної архітектури (Microsoft Hyper-V, шина VMBus).</p>
+</li>
+</ul>
+<h3 id="2_1">2. Методологія та аналіз граничних умов. Паравіртуалізація, системна контейнеризація та мережеві сховища даних</h3>
+<ul>
+<li>
+<p>2.1. Модель паравіртуалізації ядра Xen (Dom0/DomU) та відкритий стандарт абстракції вводу-виводу VirtIO на базі кільцевих буферів Virtqueue (vring).</p>
+</li>
+<li>
+<p>2.2. Віртуалізація рівня операційної системи: простори імен ядра Linux (Namespaces), механізми контролю ресурсів cgroups v2 та файлові системи OverlayFS (Copy-on-Write).</p>
+</li>
+<li>
+<p>2.3. Математичне моделювання щільності розміщення віртуальних машин і контейнерів з урахуванням коефіцієнтів перепідписки пам'яті та процесорів.</p>
+</li>
+<li>
+<p>2.4. Мережеві системи зберігання даних: протокольні стеки Fibre Channel SAN, IP SAN (iSCSI), архітектура паралельної файлової системи pNFS (NFS v4.1) та блейд-системи.</p>
+</li>
+<li>
+<p>2.5. Критичні бар'єри та вузькі місця: накладні витрати циклів VM-Exit, вичерпання асоціативного буфера трансляції TLB та ефект міжвіртуальної конкуренції за ресурси (Noisy Neighbor).</p>
+</li>
+</ul>
+<h3 id="3">3. Практичний індустріальний / фаховий кейс. Проєктування конвергентного кластера віртуалізації високої доступності</h3>
+<p><strong>Тема наскрізної задачі.</strong> «Міграція транзакційного ядра автоматизованої банківської системи з монолітної інфраструктури на відмовостійкий кластер KVM/VirtIO та мікросервісні контейнери під керуванням гібридної СЗД Fibre Channel / NVMe-oF».</p>
+<h2 id="1-_1">1. Теоретико-концептуальний базис. Апаратні механізми віртуалізації процесорів та архітектура гіпервізорів</h2>
+<h3 id="11-ia-32">1.1. Критерії віртуалізовності Попека — Голдберга, проблема сімнадцяти чутливих невідокремлених інструкцій архітектури IA-32 та концепція динамічної двійкової трансляції</h3>
+<p>У системній комп'ютерній інженерії концептуальним фундаментом побудови обчислювальних середовищ є <strong>віртуалізація апаратного забезпечення</strong>, яка полягає у створенні абстрактного програмного прошарку між фізичним обладнанням і операційною системою. Формальні вимоги до архітектури процесорів, здатних ефективно підтримувати віртуалізацію без надлишкових програмних накладних витрат, були сформульовані Джеральдом Попеком та Робертом Голдбергом у 1974 році. Відповідно до класичної моделі, будь-яка обчислювальна машина функціонує у двох базових станах: привілейованому системному режимі, призначеному для ядра операційної системи, та непривілейованому режимі користувача, в якому виконуються прикладні процеси. Усі машинні інструкції довільної процесорної системи математично поділяються на три неперетинні множини:</p>
+<div class="arithmatex">\[I = I_{\text{privileged}} \cup I_{\text{sensitive}} \cup I_{\text{innocuous}}\]</div>
+<p>де <span class="arithmatex">\(I\)</span> позначає повний набір команд мікропроцесорної архітектури. Множина <span class="arithmatex">\(I_{\text{privileged}}\)</span> представляє <strong>привілейовані інструкції</strong>, виконання яких у непривілейованому режимі роботи процесора автоматично детектується апаратурою та спричиняє генерацію системного виключення захисту, передаючи керування обробнику виняткових ситуацій операційної системи. Множина <span class="arithmatex">\(I_{\text{sensitive}}\)</span> охоплює <strong>чутливі інструкції</strong>, які класифікуються на дві взаємопов'язані категорії: інструкції контролю поведінки, що безпосередньо змінюють конфігурацію апаратних ресурсів платформи (маніпулювання регістрами керування, перемикання дескрипторів пам'яті, маскування переривань), та інструкції, чутливі до стану, результат виконання яких або вигляд вихідних даних залежить від поточного рівня привілеїв процесора. Множина <span class="arithmatex">\(I_{\text{innocuous}}\)</span> охоплює <strong>безпечні інструкції</strong>, виконання яких не змінює конфігурацію системи та не залежить від активного режиму привілеїв процесора.</p>
+<p>Фундаментальна теорема Попека — Голдберга стверджує, що довільна комп'ютерна архітектура підтримує рекурсивну повну віртуалізацію за моделлю перехоплення та емуляції (<strong>Trap-and-Emulate</strong>) тоді й лише тоді, коли множина всіх її чутливих команд є строгою підмножиною привілейованих команд:</p>
+<div class="arithmatex">\[I_{\text{sensitive}} \subseteq I_{\text{privileged}}\]</div>
+<p>Якщо ця умова виконується, монітор віртуальних машин (<strong>Virtual Machine Monitor, VMM</strong>) розгортається у найвищому за привілеями фізичному стані процесора, тоді як гостьова операційна система розміщується у непривілейованому режимі. Будь-яка спроба гостьового ядра виконати чутливу інструкцію призводить до апаратного генерування виключення захисту (<strong>trap</strong>). Апаратний блок процесора автоматично перехоплює виконання, зупиняє гостьовий потік, фіксує контекст і безпечно передає керування коду VMM, який аналізує прагнення гостьової ОС, програмно емулює очікувану модифікацію віртуального обладнання та відновлює виконання гостьового коду.</p>
+<p>Архітектура процесорів x86 (IA-32) від моменту свого створення не задовольняла теорему Попека — Голдберга. Класичний механізм захисту IA-32 спирається на модель чотирьох кілець привілеїв, де Ring 0 відведено ядру операційної системи, Ring 1 та Ring 2 зарезервовано для системних сервісів і драйверів пристроїв, а Ring 3 слугує простором виконання прикладних процесів. Головна проблема полягала в існуванні <strong>сімнадцяти критичних інструкцій</strong>, які були чутливими, але не викликали апаратного виключення під час їх виконання у кільцях із нижчими привілеями (Ring 1–3). </p>
+<p>До цієї критичної групи належать інструкції маніпуляції регістрами прапорців, зокрема <code>POPF</code> та <code>PUSHF</code>, інструкції зчитування базових системних регістрів дескрипторних таблиць <code>SGDT</code>, <code>SIDT</code>, <code>SLDT</code>, команди зчитування стану процесора <code>SMSW</code>, а також низка операцій перевірки прав доступу до сегментів <code>LAR</code>, <code>LSL</code>, <code>VERR</code>, <code>VERW</code>. Наприклад, інструкція <code>POPF</code> завантажує значення зі стека в регістр прапорців <code>EFLAGS</code>, включно з бітом дозволу апаратних переривань <code>IF</code>. При виконанні інструкції <code>POPF</code> гостьовим ядром у кільці Ring 1 процесор не генерував виключення загального захисту <code>#GP</code>, а просто ігнорував спробу змінити біт <code>IF</code>, мовчки записуючи всі інші нечутливі біти. У результаті операційна система вважала, що переривання заблоковано, тоді як апаратний процесор продовжував їх генерацію, що руйнувало логіку диспетчеризації задач та викликало фатальний крах гостьової системи.</p>
+<p>Для подолання архітектурної неповноти платформи x86 була розроблена технологія <strong>динамічної двійкової трансляції</strong> коду (<strong>Dynamic Binary Translation, DBT</strong>). Сутність методології полягає в тому, що VMM розбиває двійковий машиний код немодифікованої гостьової операційної системи на послідовності базових блоків перед безпосереднім виконанням. VMM парсить інструкції кожного блока: нечутливі інструкції залишаються без змін і спрямовуються на пряме виконання фізичним процесором із нативною швидкістю, тоді як сімнадцять проблемних інструкцій вилучаються та на льоту замінюються безпечним викликом процедури-емулятора гіпервізора (<strong>VMM callback</strong>). Трансльовані безпечні блоки кешуються у спеціальному динамічному буфері (<strong>Trace Cache</strong>), щоб мінімізувати накладні витрати під час циклічного повторення коду.</p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> Технологія динамічної двійкової трансляції дозволила компанії VMware у 1999 році створити перший комерційний продукт віртуалізації VMware Workstation для платформи x86, забезпечивши запуск систем Windows NT та Linux без модифікації їхніх ядер на стандартних процесорах Pentium II, незважаючи на повну апаратну невідповідність процесора вимогам Попека — Голдберга.</p>
+</blockquote>
+<p>Накладні витрати процесорного часу при двійковій трансляції <span class="arithmatex">\(T_{\text{DBT}}\)</span> формалізуються функціональною залежністю:</p>
+<div class="arithmatex">\[T_{\text{DBT}} = T_{\text{native}} \cdot (1 - \alpha) + \alpha \cdot \left( t_{\text{parse}} + t_{\text{translate}} + t_{\text{emulate}} \right) + t_{\text{cache\_miss}}\]</div>
+<p>де <span class="arithmatex">\(T_{\text{native}}\)</span> позначає час безпосереднього виконання нечутливих інструкцій блоку, <span class="arithmatex">\(\alpha\)</span> є коефіцієнтом частки чутливих інструкцій у виконуваному коді гостьової системи, <span class="arithmatex">\(t_{\text{parse}}\)</span> позначає затримку синтаксичного аналізу двійкового коду, <span class="arithmatex">\(t_{\text{translate}}\)</span> визначає часові витрати на генерацію нової послідовності інструкцій, <span class="arithmatex">\(t_{\text{emulate}}\)</span> є часом програмного моделювання стану віртуального процесора, а <span class="arithmatex">\(t_{\text{cache\_miss}}\)</span> позначає штрафний час пошуку та витіснення блоків із кешу трансляцій VMM.</p>
+<hr />
+<h3 id="12-intel-vt-x-amd-v-vmx-root-non-root-vm-entry-vm-exit">1.2. Апаратна віртуалізація Intel VT-x та AMD-V: двовимірний простір привілеїв VMX Root / Non-Root та життєвий цикл переходів VM-Entry / VM-Exit</h3>
+<p>Програмна двійкова трансляція, попри свою революційність, створювала суттєве навантаження на підсистему пам'яті та кеш процесора першого рівня, що обумовило необхідність докорінної апаратної модернізації архітектури x86. У відповідь на вимоги індустрії корпорації Intel та AMD представили технології апаратної підтримки віртуалізації (<strong>Hardware-Assisted Virtualization, HVM</strong>): <strong>Intel VT-x</strong> (кодове ім'я Vanderpool, 2005 рік) та <strong>AMD-V</strong> (кодове ім'я Pacifica, 2006 рік).</p>
+<p>Апаратні розширення кардинально змінили простір привілеїв процесора x86-64 шляхом додавання нового ортогонального виміру функціонування. Фізичний процесор отримав два паралельні режими операційного середовища:</p>
+<ol>
+<li>
+<p><strong>Режим VMX Root Operation.</strong> Повноправний режим роботи фізичного обладнання, призначений для функціонування системного гіпервізора. У цьому режимі зберігається класична ієрархія кілець захисту від Ring 0 до Ring 3, а процесор повністю виконує всі інструкції без примусового апаратного перехоплення.</p>
+</li>
+<li>
+<p><strong>Режим VMX Non-Root Operation.</strong> Контрольований режим роботи, в якому розгортається віртуальна машина. Поведінка процесора модифікується: спроба виконати певні операції автоматично блокується апаратурою з генерацією події виходу в гіпервізор. Усередині Non-Root режиму присутні власні повноцінні кільця захисту Ring 0–3, завдяки чому ядро гостьової операційної системи виконується на рідному рівні Ring 0 (Non-Root), а прикладні процеси гостя — на рівні Ring 3 (Non-Root).</p>
+</li>
+</ol>
+<p>Впровадження режимів VMX дозволило запустити немодифіковані операційні системи на нативному рівні Ring 0, остаточно ліквідувавши проблему сімнадцяти проблемних інструкцій IA-32 без необхідності програмної двійкової трансляції.</p>
+<p>Взаємодія між режимами VMX та життєвий цикл функціонування віртуального процесора підпорядковуються строгій циклічній машині станів, що ілюструється наведеною схемою.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; RealMode: Ініціалізація хоста
+    RealMode --&gt; VMX_Root: Виконання інструкції VMXON (Ring 0)
+
+    state VMX_Root {
+        [*] --&gt; HypervisorInit
+        HypervisorInit --&gt; VMCS_Setup: Конфігурація структури VMCS
+        VMCS_Setup --&gt; VMCLEAR_VMPTRLD: Прив'язка фізичної адреси VMCS
+    }
+
+    VMX_Root --&gt; VMX_NonRoot: Інструкція VMLAUNCH / VMRESUME (VM-Entry)
+
+    state VMX_NonRoot {
+        [*] --&gt; GuestKernel: Ring 0 Non-Root (Ядро гостьової ОС)
+        GuestKernel --&gt; GuestUser: Перехід у Ring 3 Non-Root
+        GuestUser --&gt; GuestKernel: Системний виклик гостя
+        GuestKernel --&gt; InterceptTrigger: Чутлива дія (I/O, EPT Fault, HLT)
+    }
+
+    VMX_NonRoot --&gt; VMX_Root: Апаратне перехоплення (VM-Exit)
+
+    state VMX_Root {
+        VMExit_Handler: Обробка причини виходу VMM
+        State_Emulation: Програмна емуляція віртуального стану
+        VMExit_Handler --&gt; State_Emulation
+        State_Emulation --&gt; Resume_Prep: Оновлення VMCS Guest-State
+    }
+
+    Resume_Prep --&gt; VMX_NonRoot: Інструкція VMRESUME (VM-Entry)
+    VMX_Root --&gt; RealMode: Інструкція VMXOFF (Вимкнення VMX)</code></pre>
+<p>Життєвий цикл апаратної віртуалізації процесора складається з послідовності чітко детермінованих етапів:</p>
+<ol>
+<li>
+<p>Активація розширень VMX здійснюється перевіркою підтримки технології через інструкцію <code>CPUID</code>, після чого встановлюється біт <code>CR4.VMXE = 1</code>, і виконується інструкція <code>VMXON</code>, яка переводить систему в режим <strong>VMX Root Operation</strong>.</p>
+</li>
+<li>
+<p>Підготовка структур даних вимагає виділення вирівняної 4-кілобайтної сторінки пам'яті під керівну структуру віртуальної машини, виконання інструкції <code>VMCLEAR</code> для очищення її полів та виклику <code>VMPTRLD</code> для встановлення адреси активної структури в локальному процесорі.</p>
+</li>
+<li>
+<p>Перехід у гостьовий простір (<strong>VM-Entry</strong>) реалізується за допомогою команди <code>VMLAUNCH</code> (для первинного запуску) або <code>VMRESUME</code> (для поновлення сесії після перехоплення), під час чого процесор апаратно вичитує гостьовий контекст і передає потік виконання віртуальній машині в режимі <strong>VMX Non-Root Operation</strong>.</p>
+</li>
+<li>
+<p>Виникнення події перехоплення (<strong>VM-Exit</strong>) ініціюється, коли код у віртуальній машині виконує інструкцію або операцію, яка відмічена в бітових масках конфігурації як така, що вимагає втручання гіпервізора (наприклад, інструкція зупинки <code>HLT</code>, скидання кешу <code>INVD</code>, спроба модифікації базового регістра адресації сторінок <code>CR3</code> чи операції з портами вводу-виводу). Фізичний процесор негайно призупиняє гостьовий конвеєр, зберігає поточні регістри в пам'ять, відновлює стан гіпервізора та перемикається у VMX Root Operation.</p>
+</li>
+<li>
+<p>Обробка та повернення виконуються кодом VMM, який читає причину перехоплення, вносить необхідні коригування в образ гостьового простору і викликає <code>VMRESUME</code>, поновлюючи цикл обчислень.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>ТИПОВА ПОМИЛКА:</strong> Поширена думка, що впровадження апаратної віртуалізації Intel VT-x або AMD-V повністю усуває програмні затримки гіпервізора та робить швидкість виконання довільного коду абсолютно ідентичною нативному серверу. На практиці подія VM-Exit є важкою апаратно-мікрокодовою транзакцією, яка вимагає від 500 до 1500 тактів фізичного процесора лише на перемикання контекстів, скидання конвеєра інструкцій та збереження регістрів, що при частих зверненнях гостьової ОС до апаратури може спричинити відчутну деградацію продуктивності.</p>
+</blockquote>
+<hr />
+<h3 id="13-vmcs-vmcb-slat-extended-page-tables-nested-page-tables">1.3. Внутрішня будова структури VMCS (VMCB) та механізми апаратної трансляції пам'яті другого рівня SLAT (Extended Page Tables / Nested Page Tables)</h3>
+<p>Апаратна взаємодія між хостом і віртуальною машиною повністю контролюється через спеціалізовану структуру даних, яка в технології Intel VT-x має назву <strong>Virtual Machine Control Structure (VMCS)</strong>, а в процесорах AMD-V позначається як <strong>Virtual Machine Control Block (VMCB)</strong>. Структура VMCS займає 4 КБ фізичної пам'яті, має бути вирівняна за межею сторінки (4096 байтів) і доступна для запису та читання виключно через спеціалізовані процесорні команди <code>VMWRITE</code> та <code>VMREAD</code>. Спроба прямого доступу до області VMCS через стандартні команди <code>MOV</code> спричиняє невизначену поведінку процесора або виключення пам'яті.</p>
+<p>Внутрішня архітектура VMCS поділяється на шість функціональних логічних блоків, які повністю описують стан і правила функціонування віртуального ядра:</p>
+<ul>
+<li>
+<p><strong>Область стану гостьової системи (Guest-State Area).</strong> Зберігає повний апаратний зріз віртуального процесора, який завантажується під час операції VM-Entry і автоматично оновлюється під час події VM-Exit. Сюди входять регістри загального призначення, регістри керування <code>CR0</code>, <code>CR3</code>, <code>CR4</code>, покажчик поточної інструкції <code>RIP</code>, регістр прапорців <code>RFLAGS</code>, системні селектори сегментів (<code>CS</code>, <code>SS</code>, <code>DS</code>, <code>ES</code>, <code>FS</code>, <code>GS</code>), їхні базові адреси, ліміти та атрибути доступу, а також значення базових регістрів глобальної та переривальної таблиць дескрипторів <code>GDTR</code> та <code>IDTR</code>.</p>
+</li>
+<li>
+<p><strong>Область стану хостової системи (Host-State Area).</strong> Фіксує незмінний апаратний контекст ядра гіпервізора у режимі VMX Root Operation. Містить системні регістри <code>CR0</code>, <code>CR3</code>, <code>CR4</code>, селектори та бази сегментів, покажчик стека хоста <code>RSP</code>, точку входу обробника переривань гіпервізора <code>RIP</code>, куди передається потік керування відразу після завершення процедури збереження контексту VM-Exit.</p>
+</li>
+<li>
+<p><strong>Поля керування виконанням віртуального процесора (VM-Execution Control Fields).</strong> Складаються з набору бітових масок, які регламентують події, що викликають примусовий вихід VM-Exit. Визначають параметри обробки зовнішніх переривань, контролюють доступ до таймерів <code>TSC</code>, портів вводу-виводу (через використання бітових карт портового простору I/O Bitmaps A та B), а також обмежують модифікацію специфічних бітів у регістрах <code>CR0</code> і <code>CR4</code> через маски тіньових регістрів.</p>
+</li>
+<li>
+<p><strong>Поля керування переходами VM-Exit (VM-Exit Control Fields).</strong> Визначають правила трансформації апаратного стану процесора під час виходу з гостьового простору, зокрема розрядність процесора хоста (32 або 64 біти), збереження або скидання специфічних налагоджувальних регістрів керування та таймерів переривань MSR.</p>
+</li>
+<li>
+<p><strong>Поля керування переходами VM-Entry (VM-Entry Control Fields).</strong> Визначають алгоритми ініціалізації процесора під час входу у віртуальну машину, зокрема правила передачі та ін'єкції у гостьову ОС переривань, виключень або сигналів NMI (Non-Maskable Interrupt), наявних у черзі гіпервізора.</p>
+</li>
+<li>
+<p><strong>Поля діагностики причини виходу (VM-Exit Information Fields).</strong> Заповнюються мікрокодом процесора під час кожного перехоплення і містять точну причину виходу (<strong>Basic Exit Reason</strong>), додатковий кваліфікатор помилки, інформацію про перервану інструкцію та лінійну адресу порушення доступу до пам'яті (Guest-Physical Address).</p>
+</li>
+</ul>
+<p>Паралельно з контролем процесорних інструкцій виникає завдання ізоляції та трансляції адрес оперативної пам'яті. У ранніх версіях гіпервізорів використовувався програмний метод <strong>тіньових таблиць сторінок (Shadow Page Tables, SPT)</strong>. У цій моделі VMM був змушений підтримувати два набори таблиць: таблиці гостьової ОС, що зіставляли віртуальну адресу гостя (<strong>Guest Virtual Address, GVA</strong>) з уявною фізичною адресою гостя (<strong>Guest Physical Address, GPA</strong>), та тіньові таблиці гіпервізора, які безпосередньо завантажувалися у фізичний регістр <code>CR3</code> процесора і відображали GVA напряму в хостову фізичну адресу (<strong>Host Physical Address, HPA</strong>). Будь-яка зміна структури сторінок у гостьовій системі вимагала генерації виключення Page Fault (<code>#PF</code>), перехоплення VMM та тривалої синхронізації таблиць у програмному коді.</p>
+<p>Кардинальним технологічним проривом стало впровадження апаратної трансляції сторінок другого рівня (<strong>Second Level Address Translation, SLAT</strong>), яка в процесорах Intel отримала назву <strong>Extended Page Tables (EPT)</strong>, а в рішеннях AMD — <strong>Nested Page Tables (NPT)</strong>. </p>
+<p>При використанні EPT апаратний модуль диспетчера пам'яті (<strong>Memory Management Unit, MMU</strong>) самостійно реалізує двомірну трансляцію адрес. Регістр <code>CR3</code> віртуального процесора вказує на гостьову таблицю сторінок (яка перебуває у просторі GPA), тоді як новий апаратний регістр процесора — покажчик розширених таблиць сторінок (<strong>Extended Page Table Pointer, EPTP</strong>) — містить хостову фізичну адресу HPA базової таблиці сторінок EPT гіпервізора.</p>
+<p>Трансляція адреси відбувається у два послідовні вкладені етапи:</p>
+<div class="arithmatex">\[\text{GVA} \xrightarrow{\text{Guest Page Tables (CR3)}} \text{GPA} \xrightarrow{\text{Extended Page Tables (EPTP)}} \text{HPA}\]</div>
+<p>Оскільки фізичний процесор може зчитувати структури даних лише за реальними фізичними адресами HPA, кожен крок трансляції гостьової таблиці вимагає повного вкладеного обходу чотирирівневої таблиці EPT. За відсутності необхідних адрес у кеші буфера асоціативної трансляції (<strong>Translation Lookaside Buffer, TLB</strong>) кількість звернень до шини пам'яті різко зростає. </p>
+<p>Для 64-розрядної архітектури з 4-рівневими таблицями сторінок максимальна кількість звернень до оперативної пам'яті для трансляції однієї віртуальної адреси становить:</p>
+<div class="arithmatex">\[N_{\text{access}} = (L_{\text{guest}} + 1) \cdot L_{\text{EPT}} + L_{\text{guest}} = (4 + 1) \cdot 4 + 4 = 24 \text{ звернення}\]</div>
+<p>де <span class="arithmatex">\(L_{\text{guest}}\)</span> дорівнює 4 (кількість рівнів у класичній гостьовій таблиці сторінок PML4 <span class="arithmatex">\(\to\)</span> PDPT <span class="arithmatex">\(\to\)</span> PD <span class="arithmatex">\(\to\)</span> PT), а <span class="arithmatex">\(L_{\text{EPT}}\)</span> дорівнює 4 (кількість рівнів вкладених розширених таблиць сторінок EPT4 <span class="arithmatex">\(\to\)</span> EPT3 <span class="arithmatex">\(\to\)</span> EPT2 <span class="arithmatex">\(\to\)</span> EPT1). </p>
+<p>Щоб нівелювати затримку 24 послідовних звернень до пам'яті, сучасні мікропроцесори використовують вбудовані апаратні кеші EPT-TLB та механізм ідентифікації віртуальних процесорів (<strong>Virtual Processor ID, VPID</strong>). VPID додає числовий тег віртуального процесора до кожного запису в TLB, усуваючи необхідність повної інвалідації кешу трансляції адрес при кожному переході VM-Exit та VM-Entry.</p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У мікроархітектурі Intel Nehalem інтеграція технологій EPT та VPID дозволила скоротити накладні витрати циклу VM-Exit більш ніж на 35%, що забезпечило промислове розгортання транзакційних баз даних із високою інтенсивністю випадкового доступу до пам'яті (наприклад, Oracle Database та SAP HANA) у віртуалізованих середовищах із втратою продуктивності менше ніж 2% у порівнянні з голим залізом.</p>
+</blockquote>
+<hr />
+<h3 id="14-type-1-bare-metal-type-2-hosted-vmware-esxi-kvm-microsoft-hyper-v-vmbus">1.4. Класифікація гіпервізорів (Type 1 Bare-Metal проти Type 2 Hosted): монолітна модель ядра (VMware ESXi, KVM) проти мікроядерної архітектури (Microsoft Hyper-V, шина VMBus)</h3>
+<p>У системній архітектурі віртуалізованих комплексів керуючий програмний рівень класифікується залежно від положення гіпервізора відносно фізичного обладнання. Класична типологія Роберта Голдберга розділяє системи на дві великі категорії:</p>
+<ol>
+<li>
+<p><strong>Гіпервізори типу 1 (Type 1 / Bare-Metal).</strong> Програмні комплекси, які завантажуються безпосередньо на фізичний сервер і мають повний контроль над апаратним забезпеченням. Вони виступають у ролі спеціалізованого компактного ядра операційної системи, орієнтованого виключно на диспетчеризацію ресурсів віртуальних машин. Використовуються у промислових центрах обробки даних і хмарних сервісах (VMware ESXi, KVM, Microsoft Hyper-V, Xen).</p>
+</li>
+<li>
+<p><strong>Гіпервізори типу 2 (Type 2 / Hosted).</strong> Програми, які функціонують у просторі користувача стандартної операційної системи загального призначення (Windows, Linux, macOS) як звичайні системні процеси. Доступ до фізичного обладнання, виділення процесорних квантів і робота з пам'яттю реалізуються через стандартні системні виклики хостового ядра, що вносить подвійні накладні витрати на перемикання контексту (Oracle VirtualBox, VMware Workstation).</p>
+</li>
+</ol>
+<p>Ієрархічна структура та класифікація архітектурних підходів до проектування сучасних гіпервізорів представлена на рисунку нижче.</p>
+<pre class="mermaid"><code>flowchart TD
+    HYP[Гіпервізори віртуалізації]
+
+    HYP --&gt; T1[Type 1: Bare-Metal / Автономні]
+    HYP --&gt; T2[Type 2: Hosted / Хостові]
+
+    T2 --&gt; T2_Ex[Приклади: Oracle VirtualBox, VMware Workstation]
+
+    T1 --&gt; MONO[Монолітна архітектура]
+    T1 --&gt; MICRO[Мікроядерна архітектура]
+    T1 --&gt; KVM_M[Інтегрована модель ядра]
+
+    MONO --&gt; ESXi[VMware ESXi: VMkernel + драйвери у просторі ядра]
+    MICRO --&gt; HYPERV[Microsoft Hyper-V: Тонке ядро + Root Partition + VMBus]
+    KVM_M --&gt; KVM[Linux KVM: kvm.ko + QEMU User-Space Helper]</code></pre>
+<p>У середовищі промислових гіпервізорів першого типу існує фундаментальне архітектурне розмежування за способом організації драйверів обладнання: <strong>монолітна архітектура</strong> та <strong>мікроядерна архітектура</strong>.</p>
+<p><strong>Монолітна архітектура (на прикладі VMware ESXi).</strong>
+Ядро гіпервізора VMware ESXi, відоме як <strong>VMkernel</strong>, повністю інтегрує в свій адресний простір усі ключові системні компоненти: планувальник процесів, стек віртуалізації пам'яті, власну кластерну файлову систему VMFS, стек мережевих протоколів, а також повну базу спеціалізованих драйверів фізичного обладнання. </p>
+<p>Гостьові віртуальні машини звертаються до емульованих або паравіртуалізованих пристроїв, запити від яких обробляються кодом драйверів безпосередньо всередині VMkernel без залучення додаткових операційних систем чи зовнішніх контекстів. Перевагою монолітного підходу є висока швидкість обробки пакетів і команд дискового вводу-виводу завдяки мінімальній кількості перемикань процесорних режимів. Головний недолік полягає в суттєвому розширенні <strong>довіреної бази обчислень (Trusted Computing Base, TCB)</strong>. Помилка або вразливість у складному драйвері волоконно-оптичного HBA-адаптера стороннього виробника загрожує стабільності всього фізичного сервера, оскільки код виконується з найвищими привілеями у ядрі. Крім того, VMware змушена підтримувати обмежений список апаратної сумісності (<strong>Hardware Compatibility List, HCL</strong>), що виключає запуск системи на побутовому чи нестандартному серверному обладнанні.</p>
+<p><strong>Мікроядерна архітектура (на прикладі Microsoft Hyper-V).</strong>
+Архітектура Hyper-V базується на граничній мінімізації ядра, що виконується у найвищому рівні привілеїв. Розмір власного мікроядра Hyper-V становить менше 1,5 МБ. Воно не містить у своєму складі жодного стороннього драйвера фізичного пристрою та відповідає виключно за створення ізольованих апаратних розділів (<strong>Partitions</strong>), планування процесорних потоків та первинну конфігурацію сторінок пам'яті через розширення SLAT.</p>
+<p>Керування системою та обслуговування обладнання покладено на спеціальний привілейований розділ — <strong>батьківський розділ (Parent Partition)</strong>, під керуванням повнофункціональної 64-розрядної операційної системи Windows Server. Батьківський розділ запускається першим, володіє доступом до реального простору апаратних пристроїв і містить весь стек рідних драйверів виробників обладнання. Усі інші віртуальні машини запускаються у <strong>дочірніх розділах (Child Partitions)</strong>.</p>
+<p>Взаємодія між розділами реалізується на основі високоефективного транспорту — віртуальної шини зв'язку <strong>VMBus</strong>, організованої у спільній фізичній пам'яті. У батьківському розділі запущені постачальники віртуальних служб (<strong>Virtualization Service Providers, VSP</strong>), які транслюють абстрактні запити від дочірніх розділів до реальних системних драйверів. У гостьових ОС дочірніх розділів інсталюються клієнти віртуальних служб (<strong>Virtualization Service Clients, VSC</strong>), які безпосередньо взаємодіють із шиною VMBus.</p>
+<p>Перевага мікроядерної структури полягає у винятковій надійності: аварія чи перезапуск мережевого драйвера в батьківському розділі не призводить до фатального краху мікроядра гіпервізора, а апаратна сумісність автоматично охоплює весь спектр обладнання, для якого існують драйвери під Windows Server. Основним компромісом є додаткова латентність під час міжрозділової маршрутизації через пам'ять VMBus.</p>
+<p><em>Таблиця 1.1 — Систематизація архітектурних підходів до серверної віртуалізації</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Архітектурний підхід</th>
+<th style="text-align: left;">Рівень абстракції та ядро</th>
+<th style="text-align: left;">Механізм обробки I/O</th>
+<th style="text-align: left;">Ключові переваги</th>
+<th style="text-align: left;">Головні недоліки та ризики</th>
+<th style="text-align: left;">Приклад з реальної практики</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Монолітний Type 1</strong></td>
+<td style="text-align: left;">Єдине високоефективне спеціалізоване ядро (VMkernel) без хостової ОС</td>
+<td style="text-align: left;">Драйвери пристроїв інтегровані безпосередньо в адресний простір ядра</td>
+<td style="text-align: left;">Максимальна пропускна здатність I/O, пряме керування ресурсами</td>
+<td style="text-align: left;">Великий розмір TCB, ризик краху через сторонній драйвер, вузький HCL</td>
+<td style="text-align: left;">VMware ESXi vSphere</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Мікроядерний Type 1</strong></td>
+<td style="text-align: left;">Надтонкий гіпервізор (&lt;1,5 МБ) та привілейований батьківський розділ</td>
+<td style="text-align: left;">Розділення на VSP (хост) та VSC (гість) через шину VMBus у пам'яті</td>
+<td style="text-align: left;">Висока надійність ядра, величезна база сумісних драйверів Windows Server</td>
+<td style="text-align: left;">Накладні витрати на передачу повідомлень між розділами по VMBus</td>
+<td style="text-align: left;">Microsoft Hyper-V Server</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Інтегрований Type 1 (KVM)</strong></td>
+<td style="text-align: left;">Модуль стандартного ядра Linux (<code>kvm.ko</code>), віртуальна машина як процес</td>
+<td style="text-align: left;">Паравіртуалізовані черги VirtIO та простір емуляції QEMU</td>
+<td style="text-align: left;">Гнучкість Linux-екосистеми, нативна підтримка планувальника CFS та cgroups</td>
+<td style="text-align: left;">Потреба суворого контролю прав доступу до процесу QEMU та пристрою <code>/dev/kvm</code></td>
+<td style="text-align: left;">Red Hat Enterprise Linux KVM / Proxmox VE</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Хостовий Type 2</strong></td>
+<td style="text-align: left;">Додаток користувацького простору поверх звичайної ОС загального призначення</td>
+<td style="text-align: left;">Трансляція I/O крізь системні виклики та драйвери хостової ОС</td>
+<td style="text-align: left;">Простота встановлення, відсутність вимог до спеціалізованого обладнання</td>
+<td style="text-align: left;">Низька продуктивність, подвійна диспетчеризація, ризик збоїв від хостових програм</td>
+<td style="text-align: left;">Oracle VirtualBox, VMware Workstation</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Чому архітектуру KVM відносять до гіпервізорів першого типу (Type 1 Bare-Metal), незважаючи на те, що для її функціонування використовується операційна система Linux та користувацький процес QEMU?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: KVM перетворює саме стандартне монолітне ядро Linux на повноцінний гіпервізор Type 1, усуваючи проміжний рівень хостової ОС.</strong></p>
+<ol>
+<li>
+<p><strong>Аналітичне обґрунтування:</strong> При завантаженні модуля <code>kvm.ko</code> ядро Linux починає безпосередньо виконувати функції монітора віртуальних машин, перемикаючи фізичний процесор у режим VMX Root Operation. Ядро Linux самостійно керує апаратною структурою VMCS, ініціює інструкції <code>VMLAUNCH</code>/<code>VMRESUME</code> і обробляє перехоплення VM-Exit на найвищому рівні системних привілеїв. Процес QEMU у просторі користувача не виступає гіпервізором Type 2: він виконує допоміжну роль брокера конфігурації, налаштування пам'яті та емуляції некритичних пристроїв, взаємодіючи з ядром через дескриптор <code>/dev/kvm</code>. Віртуальні процесори (vCPU) диспетчеризуються штатним планувальником ядра Linux (CFS) безпосередньо на фізичні ядра процесора, забезпечуючи прямий контакт з апаратурою без подвійної трансляції, характерної для Type 2.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Твердження, що KVM є Type 2 через наявність консолі bash або графічної оболонки X11, є методологічно хибним, оскільки наявність користувацького оточення не змінює того факту, що виконання коду vCPU контролюється мікрокодом процесора та модулем ядра на рівні bare-metal.</p>
+</li>
+<li>
+<p>Концепція подвійної операційної системи тут відсутня: гостьові інструкції не транслюються у системні виклики Linux <code>read()</code> чи <code>write()</code>, а виконуються безпосередньо на кристалі у режимі VMX Non-Root.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h3 id="_4">Вказівки для самостійного осмислення</h3>
+<ol>
+<li>
+<p>Дослідіть за допомогою документації Intel 64 and IA-32 Architectures Software Developer’s Manual структуру системного регістра VMCS, визначивши перелік полів, які необхідно обов'язково налаштувати гіпервізору для успішного переходу з VMX Root у VMX Non-Root за інструкцією VMLAUNCH без генерації виключення VM-Instruction Error.</p>
+</li>
+<li>
+<p>Проаналізуйте математичні моделі латентності трансляції адрес у системах з підтримкою EPT і складіть аналітичний звіт щодо впливу розміру сторінок пам'яті (стандартні 4 КБ проти Huge Pages 2 МБ та 1 ГБ) на мінімізацію кількості промахів у дворівневому апаратному буфері асоціативної трансляції TLB.</p>
+</li>
+<li>
+<p>Зіставте принципи реалізації та функціональні можливості шини Microsoft VMBus із паравіртуалізованою підсистемою Linux VirtIO, оцінивши надійність ізоляції адресних просторів при використанні спільної пам'яті як каналу транспортування дескрипторів вводу-виводу.</p>
+</li>
+</ol>
+<h2 id="2_2">2. Методологія та аналіз граничних умов. Паравіртуалізація, системна контейнеризація та мережеві сховища даних</h2>
+<h3 id="21-xen-dom0domu-virtio-virtqueue-vring">2.1. Модель паравіртуалізації ядра Xen (Dom0/DomU) та відкритий стандарт абстракції вводу-виводу VirtIO на базі кільцевих буферів Virtqueue (vring)</h3>
+<p>Неможливість класичної архітектури IA-32 забезпечити апаратну ізоляцію без суттєвих втрат продуктивності на двійкову трансляцію спонукала до розробки методології <strong>паравіртуалізації</strong>. Її концептуальна відмінність від повної емуляції полягає у відмові від приховування факту віртуалізації від операційної системи. Ядро гостьової системи модифікується на етапі компіляції таким чином, що замість прямого виконання невіртуалізовних інструкцій воно використовує спеціалізовані процедурні інтерфейси взаємодії з монітором віртуальних машин.</p>
+<p>Еталонною реалізацією даного підходу став гіпервізор <strong>Xen</strong>, чия архітектура базується на розбитті обчислювального простору на ізольовані домени. Керуючий домен найвищого рівня, відомий як <strong>Domain 0 (Dom0)</strong>, запускається гіпервізором першим, функціонує з розширеними апаратними повноваженнями, містить нативні драйвери реальних фізичних пристроїв і надає інструментарій адміністрування. Гостьові операційні системи функціонують у межах користувацьких доменів <strong>Domain U (DomU)</strong> і повністю позбавлені можливості прямого звернення до апаратних шин введення/виведення.</p>
+<p>Для реалізації безпечного та швидкого обміну повідомленнями між Dom0 та DomU використовується <strong>розділена драйверна модель</strong> (<strong>Split-Driver Model</strong>). Замість монолітного драйвера пристрою програмний стек розділяється на дві асиметричні компоненти. У просторі гостьового ядра DomU функціонує фронтенд-драйвер (<strong>Frontend Driver</strong>), який реалізує стандартний для даної ОС інтерфейс блокового чи мережевого пристрою, але замість фізичних регістрів записує запити в оперативну пам'ять. У просторі Dom0 працює бекенд-драйвер (<strong>Backend Driver</strong>), який зчитує ці запити зі спільного адресного простору і транслює їх до реального апаратного драйвера хоста.</p>
+<p>Транспортування даних між доменами спирається на дві низькорівневі підсистеми гіпервізора Xen:</p>
+<ul>
+<li>
+<p><strong>Таблиці дозволів (Grant Tables).</strong> Механізм контрольованого надання доступу до сторінок пам'яті, який дозволяє гостьовому домену делегувати право читання або запису конкретного фрейму пам'яті іншому домену без необхідності дорогого копіювання даних через адресний простір гіпервізора.</p>
+</li>
+<li>
+<p><strong>Канали подій (Event Channels).</strong> Асинхронний механізм сигналізації, що виступає програмним еквівалентом апаратних переривань, забезпечуючи передачу бітових повідомлень про наявність нових даних або завершення операції між доменами та ядром гіпервізора.</p>
+</li>
+</ul>
+<p>Розвиток апаратних засобів HVM дозволив виконувати немодифіковані процесорні інструкції з нативною швидкістю, проте віртуалізація вводу-виводу залишалася критичним вузьким місцем. Емуляція апаратних контролерів (наприклад, мережевої плати Intel E1000 чи IDE-контролера) вимагає перехоплення кожного запису в порти вводу-виводу, генеруючи тисячі перемикань VM-Exit на секунду. </p>
+<p>Уніфікація вирішення цієї проблеми була реалізована через відкритий промисловий стандарт <strong>VirtIO</strong>. VirtIO пропонує абстрактну шину пристроїв та паравіртуалізовані драйвери для гостьової операційної системи (<code>virtio_net</code>, <code>virtio_blk</code>, <code>virtio_scsi</code>), які взаємодіють із моделлю пристрою в гіпервізорі через спільну структуру даних — <strong>Virtqueue</strong>.</p>
+<p>В основі кожної черги Virtqueue лежить кільцевий буфер (<strong>vring</strong>), розміщений у фізичній пам'яті, доступній обом сторонам взаємодії. Структурно черга складається з трьох самостійних масивів:</p>
+<ol>
+<li>
+<p><strong>Таблиця дескрипторів (Descriptor Table).</strong> Масив фіксованого розміру, де кожен елемент містить адресу буфера у фізичній пам'яті гостя (GPA), його довжину, прапорець напрямку передачі даних (читання або запис) та індекс наступного зв'язаного дескриптора у разі фрагментованих пакетів.</p>
+</li>
+<li>
+<p><strong>Кільце доступних буферів (Available Ring).</strong> Структура, в яку гостьовий драйвер записує індекси сформованих дескрипторів, що готові до вичитування та обробки гіпервізором.</p>
+</li>
+<li>
+<p><strong>Кільце використаних буферів (Used Ring).</strong> Структура, куди сторона хоста повертає оброблені дескриптори разом із розміром фактично переданих даних.</p>
+</li>
+</ol>
+<p>Взаємодія компонентів за протоколом VirtIO у часовому просторі демонструє механізм безапаратного асинхронного транспортування повідомлень за технологією нульового копіювання (<strong>Zero-Copy</strong>).</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant App as Застосунок (Guest User Space)
+    participant Front as VirtIO Frontend Driver (Guest Kernel)
+    participant VRing as Shared Virtqueue (Host Memory)
+    participant Back as VirtIO Backend / QEMU (Host)
+    participant Phys as Фізичний контролер (NIC / NVMe)
+
+    App-&gt;&gt;Front: Системний виклик I/O (write)
+    Note over Front: Формування списку дескрипторів
+    Front-&gt;&gt;VRing: Запис адрес буферів у Descriptor Table
+    Front-&gt;&gt;VRing: Оновлення індексу в Available Ring
+    Front-&gt;&gt;Back: Оповіщення через дверний дзвінок Doorbell (I/O Port / MMIO write)
+    Note over Back,VRing: Зчитування доступних дескрипторів
+    Back-&gt;&gt;Phys: Передача буфера в DMA-кільце обладнання
+    Phys--&gt;&gt;Back: Апаратне переривання про завершення DMA
+    Back-&gt;&gt;VRing: Запис індексу та довжини в Used Ring
+    Back-&gt;&gt;Front: Ін'єкція віртуального переривання (vIRQ)
+    Front--&gt;&gt;App: Розблокування та повернення статусу виконання</code></pre>
+<hr />
+<h3 id="22-linux-namespaces-cgroups-v2-overlayfs-copy-on-write">2.2. Віртуалізація рівня операційної системи: простори імен ядра Linux (Namespaces), механізми контролю ресурсів cgroups v2 та файлові системи OverlayFS (Copy-on-Write)</h3>
+<p>Віртуалізація рівня операційної системи, широко відома як <strong>контейнеризація</strong>, становить принципово іншу парадигму ізоляції програмного середовища. Якщо гіпервізори абстрагують фізичне обладнання, емулюючи незалежну апаратну платформу для кожної віртуальної машини, то контейнеризація забезпечує створення ізольованих користувацьких просторів, які спільно використовують єдине монолітне ядро хостової операційної системи Linux.</p>
+<p>Основним інструментом створення бар'єрів видимості між процесами є механізм <strong>просторів імен ядра Linux (Namespaces)</strong>. Простір імен трансформує глобальні системні ресурси ядра у локальні сутності, доступні лише процесам, прикріпленим до конкретного екземпляра простору імен. Сучасне ядро підтримує вісім незалежних підсистем просторів імен:</p>
+<ul>
+<li>
+<p>Простір ідентифікаторів процесів (<strong>PID Namespace</strong>) ізолює дерево процесів, завдяки чому головний процес у контейнері отримує системний ідентифікатор PID 1 і право керування дочірніми процесами, залишаючись звичайним процесом із довільним глобальним PID на рівні хостової ОС.</p>
+</li>
+<li>
+<p>Мережевий простір (<strong>NET Namespace</strong>) надає процесам персональний мережевий стек, що включає власні мережеві інтерфейси (наприклад, віртуальну пару <code>veth</code>), незалежні таблиці маршрутизації, правила фільтрації <code>iptables</code>/<code>nftables</code> та простір портів TCP/UDP.</p>
+</li>
+<li>
+<p>Простір точок монтування (<strong>MNT Namespace</strong>) забезпечує ізоляцію списку змонтованих файлових систем, що дозволяє кожному контейнеру мати індивідуальне кореневе дерево каталогів (<code>rootfs</code>) без взаємного впливу на дисковий простір хоста.</p>
+</li>
+<li>
+<p>Простір міжпроцесної взаємодії (<strong>IPC Namespace</strong>) ізолює системні черги повідомлень System V, семафори та сегменти спільної оперативної пам'яті POSIX.</p>
+</li>
+<li>
+<p>Простір системних ідентифікаторів (<strong>UTS Namespace</strong>) дозволяє задавати унікальні мережеві імена вузла (<code>hostname</code>) та домену для кожного контейнера.</p>
+</li>
+<li>
+<p>Простір користувачів (<strong>USER Namespace</strong>) відображає ідентифікатори користувачів і груп (UID/GID) усередині контейнера на інші значення на хості, що дозволяє безпечно надавати процесу привілеї користувача <code>root</code> (UID 0) в межах ізольованого середовища без надання прав адміністратора на фізичному сервері.</p>
+</li>
+<li>
+<p>Простір контрольних груп (<strong>CGROUP Namespace</strong>) маскує повний вигляд системного дерева контрольних груп, запобігаючи витоку інформації про структуру хостової конфігурації.</p>
+</li>
+<li>
+<p>Простір часу (<strong>Time Namespace</strong>) дозволяє встановлювати індивідуальні зміщення системних годинників процесора без модифікації загального часу фізичного хоста.</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>ВАЖЛИВО:</strong> Простори імен забезпечують виключно просторову ізоляцію ресурсів (видимість об'єктів), але принципово не здатні обмежувати обсяг їх використання. Без задіяння механізму контрольних груп довільний процес усередині контейнера здатний повністю захопити всі ресурси процесора чи оперативної пам'яті хоста, спричинивши відмову в обслуговуванні всієї системи.</p>
+</blockquote>
+<p>Для кількісного обмеження та вимірювання утилізації ресурсів застосовується механізм <strong>контрольних груп другого покоління (cgroups v2)</strong>. На відміну від застарілої структури cgroups v1, де кожна підсистема (пам'ять, процесор, диск) мала окреме ортогональне дерево, у cgroups v2 реалізовано єдину уніфіковану ієрархію процесів. </p>
+<p>Керування процесорними квотами в cgroups v2 здійснюється за допомогою планувальника <strong>CFS (Completely Fair Scheduler)</strong> через два параметри у псевдофайлі <code>cpu.max</code>: допустиму квоту процесорного часу (<span class="arithmatex">\(\text{quota}\)</span>) та тривалість базового періоду (<span class="arithmatex">\(\text{period}\)</span>), виражені в мікросекундах. </p>
+<p>Обмеження пам'яті регламентується суворими порогами: <code>memory.max</code> встановлює абсолютний жорсткий ліміт споживання RAM, перевищення якого призводить до активації механізму аварійного завершення процесів ядра <strong>OOM-Killer (Out-Of-Memory Killer)</strong>, тоді як параметр <code>memory.high</code> виступає гнучким порогом, досягнення якого змушує ядро штучно уповільнювати операції виділення пам'яті процесом та ініціювати фоновий скид даних на диск.</p>
+<p>Файлова підсистема контейнерів будується на основі багатошарових файлових систем типу <strong>OverlayFS</strong>. Архітектура OverlayFS об'єднує два роздільні каталоги в єдину результуючу точку монтування: каталог нижнього рівня (<strong>lowerdir</strong>), який містить незмінні дані базового образу і доступний виключно для читання, та каталог верхнього рівня (<strong>upperdir</strong>), призначений для фіксації змін у режимі читання-запису. </p>
+<p>Будь-яка модифікація існуючого файлу з нижнього шару активує механізм <strong>копіювання при записі (Copy-on-Write, CoW)</strong>: ядро створює повну копію відповідного файлу в каталозі upperdir і застосовує зміни лише до неї, гарантуючи незмінність базового образу для решти контейнерів.</p>
+<hr />
+<h3 id="23">2.3. Математичне моделювання щільності розміщення віртуальних машин і контейнерів з урахуванням коефіцієнтів перепідписки пам'яті та процесорів</h3>
+<p>Оцінка максимальної кількості ізольованих середовищ (віртуальних машин або контейнерів), які можуть стабільно функціонувати на одному фізичному сервері, є фундаментальним завданням проєктування хмарної інфраструктури. Моделювання базується на оптимізації багатопараметричної системи нерівностей з урахуванням апаратних обмежень фізичного сервера та коефіцієнтів агресивного спільного використання обчислювальних потужностей — <strong>перепідписки (overcommit)</strong>.</p>
+<p>Формалізація процесу розрахунку лімітів консолідації виконується за наведеною покроковою процедурою:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 1 (Розрахунок ліміту за процесорними ядрами):} &amp; \quad N_{\text{CPU}} = \left\lfloor \frac{C_{\text{cores}} \cdot k_{\text{threads}} \cdot K_{\text{vCPU}}}{c_{\text{req}}} \right\rfloor \\
+\text{Крок 2 (Розрахунок ліміту за оперативною пам'яттю):} &amp; \quad N_{\text{RAM}} = \left\lfloor \frac{M_{\text{total}} \cdot (1 - \mu_{\text{res}}) - M_{\text{host}}}{m_{\text{req}} \cdot (1 - \sigma_{\text{share}})} \right\rfloor \\
+\text{Крок 3 (Врахування накладних витрат дискового I/O):} &amp; \quad N_{\text{IOPS}} = \left\lfloor \frac{I_{\text{storage}} \cdot (1 - \delta_{\text{burst}})}{i_{\text{req}}} \right\rfloor \\
+\text{Крок 4 (Фінальний синтез граничної щільності):} &amp; \quad \rho_{\text{max}} = \min \left( N_{\text{CPU}}, N_{\text{RAM}}, N_{\text{IOPS}} \right)
+\end{aligned}
+\]</div>
+<p>де <span class="arithmatex">\(C_{\text{cores}}\)</span> позначає кількість фізичних ядер процесора, <span class="arithmatex">\(k_{\text{threads}}\)</span> є коефіцієнтом апаратної багатопоточності (для технології Simultaneous Multithreading / Hyper-Threading <span class="arithmatex">\(k_{\text{threads}} = 2\)</span>), <span class="arithmatex">\(K_{\text{vCPU}}\)</span> позначає коефіцієнт перепідписки віртуальних процесорів (для віртуальних машин комерційних хмар зазвичай обирається в діапазоні <span class="arithmatex">\(K_{\text{vCPU}} \in [2.0; 4.0]\)</span>, тоді як для контейнеризованих мікросервісів може досягати <span class="arithmatex">\(K_{\text{vCPU}} \in [6.0; 10.0]\)</span>), а <span class="arithmatex">\(c_{\text{req}}\)</span> визначає вимоги окремого інстансу до кількості віртуальних ядер vCPU. </p>
+<p>У моделі пам'яті <span class="arithmatex">\(M_{\text{total}}\)</span> позначає загальний обсяг фізичної оперативної пам'яті сервера в гігабайтах, <span class="arithmatex">\(\mu_{\text{res}}\)</span> позначає коефіцієнт резервування пам'яті під непередбачені системні сплески (<span class="arithmatex">\(\mu_{\text{res}} \approx 0{,}1\)</span>), <span class="arithmatex">\(M_{\text{host}}\)</span> визначає обсяг пам'яті, зарезервованої виключно для потреб ядра гіпервізора чи хостової ОС (зазвичай від 4 до 16 ГБ), <span class="arithmatex">\(m_{\text{req}}\)</span> позначає номінальний обсяг RAM для однієї ВМ або контейнера, а <span class="arithmatex">\(\sigma_{\text{share}}\)</span> позначає коефіцієнт дедуплікації пам'яті (завдяки роботі алгоритмів Kernel Samepage Merging у KVM або Transparent Page Sharing у VMware ESXi, для однакових гостьових ОС <span class="arithmatex">\(\sigma_{\text{share}} \approx 0{,}15 \dots 0{,}30\)</span>). </p>
+<p>У підсистемі вводу/виводу <span class="arithmatex">\(I_{\text{storage}}\)</span> визначає сумарну продуктивність сховища в операціях вводу/виводу за секунду (IOPS), <span class="arithmatex">\(\delta_{\text{burst}}\)</span> позначає коефіцієнт пікового демпфування, а <span class="arithmatex">\(i_{\text{req}}\)</span> — середнє навантаження IOPS, що генерується одним інстансом.</p>
+<h4 id="_5">Аналіз граничних умов та крайових ситуацій</h4>
+<p>Наведена математична модель перестає бути релевантною та демонструє критичні помилки прогнозування у наступних інженерних та експлуатаційних ситуаціях:</p>
+<ol>
+<li>
+<p><strong>Сплеск навантаження пам'яті при агресивному коефіцієнті перепідписки.</strong> Якщо коефіцієнт перепідписки пам'яті базується на припущенні, що процеси рідко використовують виділений ліміт у повному обсязі, раптове одночасне виділення пам'яті всіма гостями (наприклад, під час масового запуску індексації в базах даних) призводить до вичерпання фізичного пулу. У середовищі віртуальних машин активується механізм витіснення сторінок у файл підкачки (<strong>Hypervisor Swapping</strong>) або агресивний роздув кульок пам'яті (<strong>Memory Ballooning</strong>), що спричиняє експоненційне зростання латентності доступу до RAM від наносекунд до мілісекунд, викликаючи так званий параліч підкачки (<strong>Swap Thrashing</strong>). У контейнерних середовищах відсутність механізму ізоляції при вичерпанні лімітів призводить до неконтрольованого спрацьовування механізму OOM-Killer, який починає примусово аварійно вбивати критичні процеси на хості.</p>
+</li>
+<li>
+<p><strong>Нерівномірність NUMA-архітектури (Non-Uniform Memory Access).</strong> У багатопроцесорних серверах модель рівномірного розподілу втрачає адекватність, якщо планувальник vCPU розподіляє віртуальні ядра на один фізичний процесорний сокет, а пам'ять для них виділяє з вузла, підключеного до іншого сокета. Міжсокетні передачі даних шиною QPI/UPI додають критичні затримки, через що продуктивність падає на 20–40%, попри наявність формально вільних ресурсів.</p>
+</li>
+</ol>
+<hr />
+<h3 id="24-fibre-channel-san-ip-san-iscsi-pnfs-nfs-v41-">2.4. Мережеві системи зберігання даних: протокольні стеки Fibre Channel SAN, IP SAN (iSCSI), архітектура паралельної файлової системи pNFS (NFS v4.1) та блейд-системи</h3>
+<p>Централізовані мережеві сховища даних становлять базис для реалізації функцій високої доступності (<strong>High Availability</strong>) та міграції віртуальних машин у гарячому режимі (<strong>Live Migration</strong>). Відокремлення дискових накопичувачів від серверного вузла вимагає організації спеціалізованих мереж передачі даних.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Blade_Chassis ["Блейд-шасі (Модульна інфраструктура)"]
+        Blade1["Сервер-лезо 1 (Compute Node)"]
+        Blade2["Сервер-лезо 2 (Compute Node)"]
+        Midplane["Пасивна об'єднуюча панель (Midplane Fabric)"]
+        SW_Module["Вбудовані комутаційні модулі (Pass-Through / Switch)"]
+
+        Blade1 &lt;==&gt;|Внутрішня шина Mezzanine| Midplane
+        Blade2 &lt;==&gt;|Внутрішня шина Mezzanine| Midplane
+        Midplane &lt;==&gt; SW_Module
+    end
+
+    subgraph Storage_Networks ["Мережеві фабрики передачі даних"]
+        FC_SAN["Fibre Channel SAN (8/16/32 Gbps, Lossless)"]
+        IP_SAN["IP SAN / iSCSI (10/25/100 GbE, TCP/IP, Jumbo Frames)"]
+        pNFS_Net["pNFS Network (Розділення Control і Data потоків)"]
+    end
+
+    SW_Module &lt;==&gt;|Оптичні лінки| FC_SAN
+    SW_Module &lt;==&gt;|Ethernet лінки| IP_SAN
+    SW_Module &lt;==&gt;|IP мережа| pNFS_Net</code></pre>
+<p><strong>1. Мережі зберігання даних Fibre Channel (FC SAN).</strong>
+Fibre Channel є спеціалізованим оптичним протокольним стеком, спроєктованим для передачі блокових команд SCSI без втрат кадрів на апаратному рівні. Безперервність потоку забезпечується механізмом керування кредитами між буферами (<strong>Buffer-to-Buffer Credits, BB_Credit</strong>): передавач відправляє кадр лише у випадку, якщо приймальний порт підтвердив наявність вільного буферного простору. </p>
+<p>Кожен порт і вузол у фабриці FC ідентифікується 64-бітним ідентифікатором <strong>World Wide Name (WWN)</strong>. Безпека доступу досягається комбінацією двох процедур: <strong>зонуванням (Zoning)</strong> на рівні FC-комутаторів, що обмежує комунікацію лише між виділеними HBA-портами серверів та портами СЗД, і <strong>маскуванням LUN (LUN Masking)</strong> на рівні дискового масиву, яке дозволяє конкретному серверу монтувати лише виділені для нього логічні томи.</p>
+<p><strong>2. Мережі зберігання IP SAN на основі протоколу iSCSI.</strong>
+Протокол iSCSI забезпечує інкапсуляцію блокових команд SCSI у звичайні пакети TCP/IP через стандартні мережі Ethernet на порту 3260. Вузол-споживач виступає у ролі <strong>ініціатора (iSCSI Initiator)</strong>, а дискова підсистема — у ролі <strong>цільового пристрою (iSCSI Target)</strong>. Адресація в системі стандартизована через використання імен <strong>IQN (iSCSI Qualified Name)</strong>. </p>
+<p>Основним фактором затримок у програмному iSCSI є великі накладні витрати на обробку стека TCP/IP центральним процесором сервера. Для підвищення пропускної здатності використовують плати апаратного розвантаження протоколу TCP (<strong>TCP Offload Engine, TOE</strong>) або спеціалізовані адаптери iSCSI HBA. Обов'язковою інженерною вимогою до комутаторів Ethernet у мережах iSCSI є активація режиму надвеликих кадрів (<strong>Jumbo Frames</strong>) зі збільшенням розміру MTU до 9000 байтів, що скорочує кількість генерованих заголовків і переривань процесора у шість разів.</p>
+<p><strong>3. Паралельна файлова система pNFS (NFS v4.1).</strong>
+Традиційний протокол NFS містить фундаментальне обмеження: клієнти надсилають як метадані, так і самі потоки даних на єдиний NFS-сервер, який швидко стає критичним вузьким місцем усієї інфраструктури. </p>
+<p>Специфікація <strong>pNFS (Parallel NFS)</strong>, стандартизована в RFC 5661, докорінно змінює цю топологію шляхом просторового розділення шляхів керування та шляхів збереження. Клієнт звертається до сервера метаданих (<strong>Metadata Server, MDS</strong>) виключно за структурою розміщення даних — макетом (<strong>Layout</strong>). Отримавши макет, клієнт встановлює прямі високошвидкісні паралельні з'єднання безпосередньо з множиною розподілених серверів зберігання даних (<strong>Data Servers</strong>), зчитуючи блоки через протоколи NFS, iSCSI або Fibre Channel.</p>
+<p><strong>4. Блейд-системи та модульна конвергентна інфраструктура.</strong>
+Сучасні центри обробки даних використовують блейд-архітектури для досягнення екстремальної щільності обчислень. Блейд-сервери (леза) монтуються у спільне шасі, в якому реалізовано правило <strong>1-2-3-4</strong>: одне компактне шасі замінює десятки кабелів, займає вдвічі менше простору у стійці, скорочує споживання електроенергії на охолодження втричі та вчетверо спрощує щоденне адміністрування. </p>
+<p>Сервери не мають власних блоків живлення, важких радіаторів чи зовнішніх портів. Усі комунікації виконуються через високошвидкісну пасивну об'єднуючу панель (<strong>Midplane</strong>), до якої зі зворотного боку шасі підключаються дубльовані модулі живлення, блоки охолодження та внутрішні комутаційні фабрики (FC SAN та 10/40GbE комутатори). На кожному сервері встановлюються мезонінні плати (<strong>Mezzanine Cards</strong>), що забезпечують прямий апаратний інтерфейс із комутаційними модулями без використання зовнішньої кабельної розводки.</p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У хмарній інфраструктурі AWS концепція паравіртуалізації та класичного апаратного вводу-виводу була переосмислена у системі AWS Nitro: усі функції обробки VirtIO-черг, емуляції дискових контролерів NVMe, мережевого стека VPC та шифрування були повністю винесені з процесора хоста на спеціалізовані апаратні ASIC-чипи та SoC-контролери, повернувши віртуальним машинам 100% обчислювальної потужності центральних процесорів сервера.</p>
+</blockquote>
+<hr />
+<h3 id="25-noisy-neighbor-io-vm-exit-tlb">2.5. Критичні бар'єри та граничні умови продуктивності: ефект «шумного сусіда» (Noisy Neighbor), деградація пропускної здатності I/O через часті цикли VM-Exit та вичерпання простору трансляцій TLB</h3>
+<p>Експлуатація високонавантажених обчислювальних платформ виявляє фундаментальні фізичні та архітектурні бар'єри, які неможливо усунути суто програмними методами оптимізації. </p>
+<p>Головним негативним явищем у публічних та приватних мультитенантних середовищах є <strong>ефект шумного сусіда (Noisy Neighbor Effect)</strong>. Він виникає тоді, коли одна віртуальна машина починає аномально споживати неподільні спільні фізичні ресурси хостового сервера, провокуючи непередбачувану деградацію швидкодії сусідніх незалежних віртуальних машин.</p>
+<p>Механізми виникнення ефекту «шумного сусіда» базуються на взаємному витісненні критичних системних структур:</p>
+<ul>
+<li>
+<p><strong>Витіснення кеш-пам'яті останнього рівня (Last Level Cache, LLC / L3).</strong> Більшість сучасних процесорів x86-64 мають спільний L3-кеш для всіх ядер одного кристала або CCX-комплексу. Якщо одна ВМ виконує потокову обробку масивних неструктурованих даних, вона безперервно заповнює рядки кешу L3 своїми адресами, витісняючи структури сусідніх ВМ. Внаслідок цього сусіди зазнають різкого падіння швидкості доступу через зростання частки промахів у кеші (<strong>Cache Misses</strong>) та змушені звертатися до значно повільнішої фізичної оперативної пам'яті.</p>
+</li>
+<li>
+<p><strong>Насичення пропускної здатності шини оперативної пам'яті.</strong> Контролер пам'яті фізичного процесора має фіксовану смугу пропускання. Якщо один процес генерує агресивний потік читання/запису пам'яті, черга запитів контролера блокується, викликаючи мікрозатримки доступу для решти обчислювальних задач, навіть якщо обсяг доступної RAM не вичерпано.</p>
+</li>
+</ul>
+<p>Другим критичним бар'єром продуктивності є <strong>шторм перехоплень (VM-Exit Storm)</strong>. У системах зі значною інтенсивністю взаємодії з віртуальними пристроями або частими системними перериваннями процесор витрачає значну частку бюджету тактів не на корисні обчислення, а на перемикання контексту. </p>
+<p>Якщо додаток усередині віртуальної машини генерує 100 000 операцій вводу/виводу або звернень до таймерів на секунду, а середній час обробки одного циклу VM-Exit (збереження стану VMCS, вхід у VMM, диспетчеризація та повернення VM-Entry) становить 1000 тактів на процесорі з тактовою частотою 2,5 ГГц:</p>
+<div class="arithmatex">\[\text{Втрати часу} = \frac{100\,000 \cdot 1000}{2{,}5 \cdot 10^9} = \frac{10^8}{2{,}5 \cdot 10^9} = 0{,}04 \text{ (4\% від загальної потужності одного ядра)}\]</div>
+<p>У разі виникнення штормів перехоплень при паралельному опитуванні кількох віртуальних пристроїв цей показник може перевищувати 30–50% доступного процесорного фонду хоста, призводячи до колапсу планувальника.</p>
+<p>Третім системним бар'єром є <strong>вичерпання простору буфера асоціативної трансляції (TLB Eviction Cascade)</strong>. Як було визначено у підрозділі 1.3, апаратна трансляція сторінок SLAT (EPT/NPT) вимагає до 24 звернень до пам'яті при промаху в TLB. Якщо віртуалізована база даних виділяє терабайти пам'яті зі стандартним розміром сторінки 4 КБ, таблиці сторінок EPT розростаються до гігабайтних обсягів. Обмежений розмір апаратного буфера TLB призводить до безперервного витіснення адресних записів, і процесор витрачає до 20–30% свого конвеєрного часу суто на обхід сторінкових структур у пам'яті (<strong>Page Table Walking</strong>). </p>
+<p>Єдиним архітектурним вирішенням цієї проблеми є обов'язковий перехід на використання великих сторінок пам'яті (<strong>Huge Pages</strong> розміром 2 МБ або 1 ГБ), що зменшує глибину дерева трансляції та збільшує ефективний обсяг пам'яті, покритий одним записом TLB, у 512 або 262 144 рази відповідно.</p>
+<p><em>Таблиця 2.1 — Матриця зіставлення технологій віртуалізації, ізоляції та транспортування даних</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Технологічний стек віртуалізації / ізоляції</th>
+<th style="text-align: left;">Механізм розподілу ресурсів</th>
+<th style="text-align: left;">Рівень накладних витрат (Оверхед)</th>
+<th style="text-align: left;">Складність впровадження</th>
+<th style="text-align: left;">Критичні ризики / Обмеження</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Апаратна віртуалізація HVM (KVM / ESXi)</strong></td>
+<td style="text-align: left;">Планувальник гіпервізора, структури VMCS/VMCB, апаратні EPT</td>
+<td style="text-align: left;">Середній (2–7% CPU через VM-Exit; латентність двомірного SLAT)</td>
+<td style="text-align: left;">Середня (вимагає наявності апаратних прапорців VT-x/AMD-V)</td>
+<td style="text-align: left;">Деградація I/O при частих перериваннях, ризик витіснення L3-кешу, роздуття таблиць EPT</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Паравіртуалізований ввід-вивід (VirtIO)</strong></td>
+<td style="text-align: left;">Кільцеві черги Virtqueue у спільній пам'яті, дверні дзвінки Doorbell</td>
+<td style="text-align: left;">Низький (1–3% у порівнянні з нативним залізом)</td>
+<td style="text-align: left;">Низька (підтримується коробковими драйверами Linux і Windows)</td>
+<td style="text-align: left;">Необхідність встановлення спеціальних гостьових драйверів (VirtIO tools)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Контейнеризація ядра (cgroups v2 + Namespaces)</strong></td>
+<td style="text-align: left;">Безпосередньо планувальник CFS ядра хоста, єдиний адресний простір</td>
+<td style="text-align: left;">Мінімальний (&lt; 0,5%, нативна швидкість)</td>
+<td style="text-align: left;">Низька (стандартні механізми ядра Linux)</td>
+<td style="text-align: left;">Відсутність апаратної ізоляції, спільна вразливість перед атаками на ядро хоста</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Мережі Fibre Channel (FC SAN)</strong></td>
+<td style="text-align: left;">Виділені оптичні фабрики, апаратний контроль кредитів BB_Credit</td>
+<td style="text-align: left;">Вкрай низький (апаратна розвантаження команд на HBA)</td>
+<td style="text-align: left;">Висока (вимагає дорогої інфраструктури та навичок FC Zoning)</td>
+<td style="text-align: left;">Жорстка прив'язка до сумісних пристроїв, висока капітальна вартість обладнання</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Блокові мережі IP SAN (iSCSI)</strong></td>
+<td style="text-align: left;">Передача SCSI через TCP/IP стек стандартної Ethernet-інфраструктури</td>
+<td style="text-align: left;">Помірний (навантаження CPU при відсутності плати TOE)</td>
+<td style="text-align: left;">Низька (функціонує на стандартних комутаторах)</td>
+<td style="text-align: left;">Чутливість до джиттеру мережі, критична вимога налаштування Jumbo Frames (MTU 9000)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Під час тестування високопродуктивної системи управління базами даних PostgreSQL, розгорнутої всередині віртуальної машини KVM на сервері з архітектурою NUMA (2 сокети по 32 ядра, 512 ГБ RAM), інженери зафіксували раптове падіння пропускної здатності транзакцій (TPS) на 45% за умов зростання кількості клієнтських підключень. Водночас сумарне завантаження процесорних ядер хоста не перевищувало 60%. Діагностика ядра показала лавиноподібне зростання лічильника системних переривань та високий відсоток часу, проведеного процесором у стані очікування пам'яті. У чому полягає першопричина деградації та які інженерні кроки необхідно вжити для усунення цієї проблеми?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: Розсинхронізація топології NUMA між віртуальними процесорами (vCPU) та фізичною пам'яттю (Remote Memory Access) у поєднанні з промахами EPT-TLB через використання стандартних сторінок пам'яті розміром 4 КБ.</strong></p>
+<ol>
+<li>
+<p><strong>Поетапний аналітичний розв'язок кейсу:</strong></p>
+</li>
+<li>
+<p><strong>Аналіз причини деградації:</strong> За замовчуванням гіпервізор KVM і планувальник Linux CFS можуть виділяти віртуальні процесори на фізичних ядрах першого сокета (Node 0), тоді як сторінки оперативної пам'яті для віртуальної машини були виділені з контролера пам'яті другого сокета (Node 1). Кожен доступ до оперативної пам'яті вимагав перетину міжсокетної шини зв'язку (Intel UPI / AMD Infinity Fabric), що спричинило зростання затримок у 2–3 рази. Крім того, при використанні сторінок пам'яті розміром 4 КБ база даних із сотнями гігабайтів активного пулу спричинила вичерпання асоціативного буфера EPT-TLB, через що кожен промах призводив до 24 вкладених звернень до пам'яті через повільну міжсокетну шину.</p>
+</li>
+<li>
+<p><strong>Поетапний план усунення несправності:</strong></p>
+<ul>
+<li>
+<p>Виконати жорстку фіксацію віртуальних процесорів та пам'яті (<strong>vCPU Pinning &amp; NUMA Node Binding</strong>) у межах одного фізичного NUMA-вузла за допомогою утиліти <code>numactl</code> або відповідної конфігурації libvirt (<code>&lt;numatune&gt;</code> та <code>&lt;cputune&gt;</code>).</p>
+</li>
+<li>
+<p>Налаштувати на рівні хостової операційної системи та всередині віртуальної машини підтримку прозорих або статичних великих сторінок пам'яті (<strong>Huge Pages</strong>) розміром 2 МБ чи 1 ГБ, що кардинально скоротить глибину обходу сторінкових таблиць EPT та стабілізує розмір кешу EPT-TLB.</p>
+</li>
+<li>
+<p>Перевірити активацію паравіртуалізованих контролерів <code>virtio-scsi</code> з підтримкою багаточерговості (<strong>Multiqueue</strong>), що дозволить розподілити переривання операцій вводу/виводу по окремих ядрах процесора, усунувши вузькі місця одного віртуального контролера.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Спроба вирішити проблему простим додаванням додаткових ядер vCPU лише поглибить кризу, оскільки збільшить конкуренцію за спільний L3-кеш та посилить міжсокетний трафік.</p>
+</li>
+<li>
+<p>Переведення дискової підсистеми з локальних накопичувачів на iSCSI без вирішення проблеми внутрішньої трансляції пам'яті додасть додатковий оверхед мережевого стека, не усуваючи першопричину латентності обчислень на кристалі.</p>
+</li>
+</ol>
+</details>
+<h2 id="3_1">3. Практичний індустріальний / фаховий кейс. Проєктування конвергентного кластера віртуалізації високої доступності</h2>
+<h3 id="31-kvmvirtio">3.1. Комплексний фаховий кейс. Міграція критичної корпоративної білінгової системи на гібридний кластер KVM/VirtIO та контейнери під керуванням гібридної СЗД</h3>
+<h4 id="_6">Постановка задачі / ситуації</h4>
+<p>Провідний телекомунікаційний оператор національного масштабу експлуатує застарілу монолітну білінгову систему, розгорнуту на фізичних серверах архітектури x86 попереднього покоління без використання технологій віртуалізації. У зв'язку зі стрімким зростанням абонентської бази та впровадженням нових тарифних планів поточна інфраструктура вичерпала ліміти масштабованості. Періодичний розрахунок балансів абонентів у пікові години викликає тривалі затримки обробки транзакцій, а апаратні збої окремих серверів призводять до простоїв тривалістю понад дві години, що порушує вимоги угоди про рівень обслуговування (<strong>Service-Level Agreement, SLA</strong>). </p>
+<p>Керівництвом ІТ-департаменту прийнято стратегічне рішення про повну модернізацію обчислювального комплексу. Архітектура цільової системи передбачає гібридну модель: ядро реляційної бази даних транзакційного білінгу мігрує у віртуальні машини під керуванням гіпервізора <strong>KVM</strong> із паравіртуалізованими драйверами <strong>VirtIO</strong>, а користувацький вебінтерфейс, аналітичні мікросервіси та API-шлюзи контейнеризуються за допомогою платформи <strong>Docker</strong> з оркестрацією в кластері. Усі дискові операції мають обслуговуватися централізованою мережевою системою зберігання даних високої доступності.</p>
+<p><em>Таблиця 3.1 — Вхідні технічні параметри та вимоги до проєкту модернізації білінгового комплексу</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Параметр системи</th>
+<th style="text-align: left;">Поточне значення (Legacy)</th>
+<th style="text-align: left;">Цільове значення (Проєкт)</th>
+<th style="text-align: left;">Технічні примітки та обмеження</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Цільовий рівень доступності (SLA)</strong></td>
+<td style="text-align: left;">99,5% (простій до 43,8 год/рік)</td>
+<td style="text-align: left;">99,999% (простій &lt; 5,26 хв/рік)</td>
+<td style="text-align: left;">Вимога резервування обчислювальних вузлів за схемою <span class="arithmatex">\(N+1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Максимальний час відновлення (RTO)</strong></td>
+<td style="text-align: left;">120 хвилин (ручне перемикання)</td>
+<td style="text-align: left;"><span class="arithmatex">\(\le 1\)</span> хвилина (автоматичний фейловер)</td>
+<td style="text-align: left;">Забезпечується кластерними скриптами та Live Migration</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Максимальна втрата даних (RPO)</strong></td>
+<td style="text-align: left;">До 15 хвилин</td>
+<td style="text-align: left;">0 секунд (абсолютний нуль)</td>
+<td style="text-align: left;">Синхронна реплікація транзакційних логів на рівні СЗД</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Пікове транзакційне навантаження</strong></td>
+<td style="text-align: left;">8 500 IOPS (дискова черга блокується)</td>
+<td style="text-align: left;">45 000 IOPS</td>
+<td style="text-align: left;">Розмір блоку транзакцій становить 8 КБ (читання/запис 70/30)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Латентність дискового вводу-виводу</strong></td>
+<td style="text-align: left;">12–18 мс (жорсткі диски SAS 15k)</td>
+<td style="text-align: left;"><span class="arithmatex">\(\le 0,8\)</span> мс</td>
+<td style="text-align: left;">Використання виділеної фабрики FC SAN та NVMe All-Flash</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Пул фізичних серверів</strong></td>
+<td style="text-align: left;">8 застарілих стійкових серверів 2U</td>
+<td style="text-align: left;">3 блейд-сервери у спільному шасі</td>
+<td style="text-align: left;">Кожен сервер: 2x AMD EPYC 7763 (128 ядер), 1024 ГБ DDR4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Бюджет на розгортання та ліцензії</strong></td>
+<td style="text-align: left;">Не обмежено</td>
+<td style="text-align: left;">Фіксований ліміт 120 000 USD</td>
+<td style="text-align: left;">Пріоритет відкритого ПЗ (KVM, Linux, Ceph, Docker)</td>
+</tr>
+</tbody>
+</table>
+<p>Архітектурна топологія модернізованого кластера, що об'єднує блейд-сервери, комутаційні фабрики та гібридну СЗД, представлена на схемі нижче.</p>
+<pre class="mermaid"><code>flowchart TD
+    Client[Зовнішні абонентські запити та API] --&gt; LB[Апаратний балансувальник навантаження F5 BIG-IP]
+
+    subgraph Blade_System [Модульне блейд-шасі високої доступності]
+        subgraph Node1 [Блейд-вузол 1]
+            KVM1[Гіпервізор KVM / Linux Kernel]
+            VM_DB1[ВМ: Oracle DB Primary / VirtIO-SCSI]
+            Cont1[Контейнери: Web / Billing API]
+            KVM1 --- VM_DB1
+            KVM1 --- Cont1
+        end
+
+        subgraph Node2 [Блейд-вузол 2]
+            KVM2[Гіпервізор KVM / Linux Kernel]
+            VM_DB2[ВМ: Standby DB / VirtIO-SCSI]
+            Cont2[Контейнери: Web / Billing API]
+            KVM2 --- VM_DB2
+            KVM2 --- Cont2
+        end
+
+        subgraph Node3 [Блейд-вузол 3: Гарячий резерв N+1]
+            KVM3[Гіпервізор KVM / Failover Host]
+            Cont3[Контейнери: Analytics / Worker Pods]
+            KVM3 --- Cont3
+        end
+    end
+
+    LB --&gt; Cont1
+    LB --&gt; Cont2
+    LB --&gt; Cont3
+
+    subgraph Fabric_Networks [Комутаційна інфраструктура шасі]
+        SW_ETH[2x 25GbE Ethernet Switches: Міжсерверна синхронізація та трафік API]
+        SW_FC[2x 32Gbps Fibre Channel SAN Switches: Fabric A та Fabric B]
+    end
+
+    Node1 &lt;==&gt;|Mezzanine 25GbE| SW_ETH
+    Node2 &lt;==&gt;|Mezzanine 25GbE| SW_ETH
+    Node3 &lt;==&gt;|Mezzanine 25GbE| SW_ETH
+
+    Node1 &lt;==&gt;|Dual-Port 32G FC HBA| SW_FC
+    Node2 &lt;==&gt;|Dual-Port 32G FC HBA| SW_FC
+    Node3 &lt;==&gt;|Dual-Port 32G FC HBA| SW_FC
+
+    subgraph Storage_Tier [Система зберігання даних All-Flash]
+        SAN_Controller[2x Active-Active контролери СЗД з дзеркальованим кешем]
+        NVMe_Pool[(Пул накопичувачів NVMe SSD / RAID 2.0+)]
+        SAN_Controller --- NVMe_Pool
+    end
+
+    SW_FC &lt;==&gt; SAN_Controller</code></pre>
+<h4 id="_7">Покроковий аналіз та розв'язок</h4>
+<h5 id="1-vcpu">Крок 1. Розрахунок процесорних потужностей та конфігурація vCPU</h5>
+<p>Для гарантування стабільності транзакційного ядра бази даних білінгу неприпустимо використовувати перепідписку процесорних ресурсів, тоді як для вебконтейнерів допустиме динамічне ущільнення.</p>
+<p>Розрахунок доступного пулу ядер на одному блейд-сервері з двома процесорами AMD EPYC 7763:</p>
+<div class="arithmatex">\[C_{\text{physical}} = 2 \times 64 = 128 \text{ фізичних ядер (256 логічних потоків при SMT=2)}\]</div>
+<p>Для забезпечення ізоляції бази даних формується віртуальна машина, якій виділяється 64 виділені потоки із жорсткою прив'язкою до першого процесорного сокета (<strong>vCPU Pinning</strong> за допомогою утиліти <code>virsh vcpupin</code>). Це виключає взаємне витіснення L3-кешу іншими процесами. Решта ядер другого сокета виділяється під виконання мікросервісів контейнерного середовища з коефіцієнтом перепідписки <span class="arithmatex">\(K_{\text{vCPU}} = 3{,}0\)</span>:</p>
+<div class="arithmatex">\[C_{\text{cont\_pool}} = (128 - 64) \times 2 = 128 \text{ логічних потоків}\]</div>
+<div class="arithmatex">\[C_{\text{cont\_virtual}} = C_{\text{cont\_pool}} \times K_{\text{vCPU}} = 128 \times 3{,}0 = 384 \text{ vCPU для контейнерів}\]</div>
+<p>Такий розподіл гарантує, що база даних не відчуває деградації обчислювальної швидкодії навіть у моменти пікових навантажень на вебінтерфейси.</p>
+<h5 id="2-ept-huge-pages">Крок 2. Розрахунок пам'яті та ліквідація накладних витрат EPT через Huge Pages</h5>
+<p>Пул оперативної пам'яті фізичного сервера становить 1024 ГБ. Для бази даних потрібно виділити <span class="arithmatex">\(M_{\text{DB}} = 512 \text{ ГБ}\)</span>. </p>
+<p>При використанні стандартних сторінок пам'яті розміром 4 КБ кількість записів у таблицях сторінок становить:</p>
+<div class="arithmatex">\[N_{\text{pages}} = \frac{512 \times 1024 \times 1024 \text{ КБ}}{4 \text{ КБ}} = 134\,217\,728 \text{ сторінок}\]</div>
+<p>Така колосальна кількість сторінок повністю перевантажує апаратний буфер трансляції TLB та викликає безперервні промахи із 24 вкладеними зверненнями до пам'яті при двомірній трансляції SLAT. Для вирішення проблеми в операційній системі хоста налаштовується статичне виділення великих сторінок пам'яті (<strong>Huge Pages</strong>) розміром 1 ГБ:</p>
+<div class="arithmatex">\[N_{\text{huge\_pages}} = \frac{512 \text{ ГБ}}{1 \text{ ГБ}} = 512 \text{ сторінок}\]</div>
+<p>Зменшення кількості записів у 262 144 рази дозволяє повністю утримати робочий набір адрес у кеші TLB, усуваючи накладні витрати на трансляцію адрес пам'яті майже до 0%.</p>
+<h5 id="3-san">Крок 3. Розрахунок пропускної здатності дискової підсистеми та конфігурація SAN</h5>
+<p>Пікове навантаження на систему становить <span class="arithmatex">\(I_{\text{peak}} = 45\,000 \text{ IOPS}\)</span> із середнім розміром блоку <span class="arithmatex">\(B = 8 \text{ КБ}\)</span>.</p>
+<p>Мінімальна пропускна здатність каналу зв'язку становить:</p>
+<div class="arithmatex">\[BW = I_{\text{peak}} \times B = 45\,000 \times 8 \text{ КБ} = 360\,000 \text{ КБ/с} \approx 351{,}56 \text{ МБ/с}\]</div>
+<p>Для забезпечення високої надійності використовується дводжерельна оптична фабрика <strong>Fibre Channel 32 Gbps</strong> (Fabric A та Fabric B). Пропускна здатність одного порту 32G FC з урахуванням кодування 64b/66b становить:</p>
+<div class="arithmatex">\[BW_{\text{FC32}} = 3\,200 \text{ МБ/с}\]</div>
+<p>Фактичне завантаження каналу не перевищуватиме:</p>
+<div class="arithmatex">\[\eta = \frac{351{,}56}{3\,200} \times 100\% \approx 10{,}98\%\]</div>
+<p>Це забезпечує десятикратний запас пропускної здатності, гарантуючи латентність передачі кадру крізь оптичний комутатор менше ніж 0,02 мс.</p>
+<h5 id="4-virtio-scsi">Крок 4. Налаштування паравіртуалізованого контролера VirtIO-SCSI</h5>
+<p>Для зв'язку віртуальної машини з LUN-томом на СЗД замість застарілого драйвера <code>virtio-blk</code> застосовується сучасний контролер <code>virtio-scsi</code> із підтримкою багаточерговості (<strong>Multiqueue</strong>). Кількість черг vring встановлюється рівною кількості виділених vCPU для бази даних (<span class="arithmatex">\(Q = 64\)</span>). </p>
+<p>Це дозволяє кожному віртуальному ядру надсилати команди вводу-виводу у власний кільцевий буфер без виникнення міжядерних блокувань spinlock, скорочуючи загальну затримку дискових операцій до рівня 0,45 мс, що повністю відповідає критеріям таблиці 3.1.</p>
+<h4 id="_8">Інтерпретація результатів та альтернативні сценарії</h4>
+<p>У результаті впровадження розробленого проєкту досягнуто повне виконання вимог бізнес-метрик:</p>
+<ol>
+<li>
+<p>Забезпечено коефіцієнт доступності на рівні 99,999% завдяки розгортанню третього блейд-сервера як холодного та теплого резерву, що у разі апаратної відмови будь-якого основного вузла автоматично приймає навантаження за час менше ніж 40 секунд.</p>
+</li>
+<li>
+<p>Ліквідовано шторми перехоплень VM-Exit завдяки переходу на протокол VirtIO-SCSI та виділенню сторінок Huge Pages розміром 1 ГБ.</p>
+</li>
+<li>
+<p>Досягнуто нульового показника RPO за рахунок синхронного дзеркалювання журналу транзакцій між контролерами СЗД через виділену оптичну фабрику Fibre Channel.</p>
+</li>
+</ol>
+<p>Якщо розглянути альтернативний сценарій, за якого загальний бюджет проєкту було б скорочено на 70%, а закупівля спеціалізованого обладнання Fibre Channel виявилася б неможливою, інженерне рішення зазнало б таких докорінних змін:</p>
+<ul>
+<li>
+<p>Відмова від мереж FC SAN на користь протоколу <strong>iSCSI (IP SAN)</strong> через існуючі комутатори 10GbE або використання гіперконвергентної архітектури на базі розподіленого сховища <strong>Ceph</strong>.</p>
+</li>
+<li>
+<p>Обов'язкове впровадження кадрів <strong>Jumbo Frames (MTU 9000)</strong> на всіх інтерфейсах передачі даних для компенсації навантаження на процесори від програмної обробки стека TCP/IP.</p>
+</li>
+<li>
+<p>Збільшення часу відновлення RTO з 40 секунд до 5–10 хвилин через необхідність програмної синхронізації та відновлення кворуму в розподілених файлових системах.</p>
+</li>
+</ul>
+<hr />
+<h3 id="32">3.2. Зведена довідкова система лекції</h3>
+<p><em>Таблиця 3.2 — Фундаментальні поняття, технології та архітектурні концепції системної віртуалізації</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термін / Концепція</th>
+<th style="text-align: left;">Формалізація / Сутність</th>
+<th style="text-align: left;">Реальний кейс застосування</th>
+<th style="text-align: left;">Основне обмеження / Ризик</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Теорема Попека — Голдберга</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(I_{\text{sensitive}} \subseteq I_{\text{privileged}}\)</span></td>
+<td style="text-align: left;">Архітектурна оцінка можливості прямої віртуалізації процесорів</td>
+<td style="text-align: left;">Класична архітектура x86 містить 17 чутливих непривілейованих команд</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Intel VT-x / AMD-V</strong></td>
+<td style="text-align: left;">Апаратні режими VMX Root (гіпервізор) та Non-Root (гість)</td>
+<td style="text-align: left;">Запуск немодифікованих операційних систем у KVM, ESXi, Hyper-V</td>
+<td style="text-align: left;">Накладні витрати на цикли перемикання контексту VM-Exit (до 1500 тактів)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Керуюча структура VMCS</strong></td>
+<td style="text-align: left;">4 КБ фізичної пам'яті для збереження стану та умов перехоплення</td>
+<td style="text-align: left;">Апаратне керування життєвим циклом vCPU через команди <code>VMREAD</code>/<code>VMWRITE</code></td>
+<td style="text-align: left;">Помилка конфігурації полів призводить до аварійної зупинки процесора</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SLAT (EPT / NPT)</strong></td>
+<td style="text-align: left;">Двомірна апаратна трансляція <span class="arithmatex">\(\text{GVA} \to \text{GPA} \to \text{HPA}\)</span> за допомогою MMU</td>
+<td style="text-align: left;">Зменшення програмних накладних витрат на обслуговування таблиць сторінок</td>
+<td style="text-align: left;">При промахах у TLB вимагає до 24 послідовних звернень до шини пам'яті</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Huge Pages</strong></td>
+<td style="text-align: left;">Використання сторінок пам'яті розміром 2 МБ або 1 ГБ замість 4 КБ</td>
+<td style="text-align: left;">Оптимізація пам'яті для великих баз даних (Oracle, SAP HANA, PostgreSQL)</td>
+<td style="text-align: left;">Фрагментація фізичної пам'яті хоста та складність динамічного виділення</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>VirtIO / Virtqueue</strong></td>
+<td style="text-align: left;">Кільцевий буфер vring у спільній пам'яті за принципом Zero-Copy</td>
+<td style="text-align: left;">Високошвидкісні віртуальні диски та мережеві карти у KVM і QEMU</td>
+<td style="text-align: left;">Вимагає наявності спеціалізованих драйверів усередині гостьової ОС</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Linux Namespaces</strong></td>
+<td style="text-align: left;">8 підсистем ядра для просторової ізоляції ресурсів (PID, NET тощо)</td>
+<td style="text-align: left;">Формування ізольованого системного оточення контейнерів Docker і LXC</td>
+<td style="text-align: left;">Забезпечує лише видимість об'єктів, але не обмежує споживання ресурсів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Linux cgroups v2</strong></td>
+<td style="text-align: left;">Уніфікована ієрархія лімітування CPU, RAM, дискового I/O та PID</td>
+<td style="text-align: left;">Запобігання вичерпанню пам'яті сервера через параметри <code>memory.max</code></td>
+<td style="text-align: left;">Жорсткий ліміт викликає аварійне вбивство процесу механізмом OOM-Killer</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Fibre Channel SAN</strong></td>
+<td style="text-align: left;">Блоковий протокол передачі команд SCSI поверх оптичної фабрики</td>
+<td style="text-align: left;">Побудова критичних сховищ корпоративного класу з нульовими втратами</td>
+<td style="text-align: left;">Висока вартість HBA-адаптерів і оптичних комутаторів, складність зонінгу</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>iSCSI (IP SAN)</strong></td>
+<td style="text-align: left;">Інкапсуляція команд SCSI у пакети TCP/IP через мережу Ethernet</td>
+<td style="text-align: left;">Економічне підключення сховищ у хмарних платформах OpenStack, Proxmox</td>
+<td style="text-align: left;">Додаткове навантаження на CPU хоста при відсутності плат апаратного розвантаження TOE</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>pNFS (NFS v4.1)</strong></td>
+<td style="text-align: left;">Просторове розділення потоків метаданих (MDS) і блоків даних (DS)</td>
+<td style="text-align: left;">Масштабовані паралельні файлові системи для кластерів аналізу великих даних</td>
+<td style="text-align: left;">Складність адміністрування та підвищені вимоги до мережевої інфраструктури</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Блейд-сервери</strong></td>
+<td style="text-align: left;">Модульна система з високою щільністю обчислень на базі Midplane</td>
+<td style="text-align: left;">Консолідація обчислювальних ресурсів у великих центрах обробки даних</td>
+<td style="text-align: left;">Залежність усіх лез від надійності єдиної пасивної панелі та компонентів шасі</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="33">3.3. Контрольні питання та завдання</h3>
+<h4 id="_9">Прикладні тестові завдання</h4>
+<ol>
+<li>
+<p>Під час міграції високонавантаженого сервера бази даних у середовище KVM адміністратор помітив, що час відгуку на запити зріс у чотири рази. Аналіз показав надзвичайно велику кількість промахів у буфері трансляції сторінок пам'яті (TLB Misses), хоча процесор підтримує апаратні таблиці EPT. Яке інженерне рішення є найбільш ефективним для ліквідації цієї проблеми?</p>
+</li>
+<li>
+<p>A. Заміна паравіртуалізованого драйвера <code>virtio-blk</code> на емульований контролер IDE.</p>
+</li>
+<li>
+<p>B. Налаштування статичних великих сторінок пам'яті (<strong>Huge Pages</strong>) розміром 1 ГБ на хості та прокидання їх у віртуальну машину.</p>
+</li>
+<li>
+<p>C. Збільшення коефіцієнта перепідписки пам'яті у конфігураційному файлі гіпервізора.</p>
+</li>
+<li>
+<p>D. Переведення віртуальної машини з режиму VMX Non-Root у режим емуляції за допомогою двійкової трансляції.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Обґрунтування:</strong> При використанні технології SLAT (EPT) кожен промах у TLB вимагає двомірного обходу сторінок, що у найгіршому випадку генерує до 24 звернень до фізичної пам'яті. Виділення пулу пам'яті сторінками по 1 ГБ скорочує розмір таблиць трансляції у 262 144 рази у порівнянні зі стандартними сторінками 4 КБ. У результаті весь обсяг адрес віртуальної машини успішно кешується в апаратному буфері EPT-TLB процесора, зводячи кількість промахів до абсолютного мінімуму.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A є грубою помилкою, оскільки перехід на емуляцію застарілого IDE-контролера замість VirtIO спровокує масові цикли VM-Exit і лише катастрофічно погіршить роботу дискової підсистеми.</p>
+</li>
+<li>
+<p>Варіант C призведе до ще більшої конкуренції за пам'ять та активації механізмів витіснення сторінок на диск (swapping), що поглибить кризу продуктивності.</p>
+</li>
+<li>
+<p>Варіант D пропонує повернення до застарілої програмної двійкової трансляції, яка виконується значно повільніше за апаратну віртуалізацію HVM.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>У системі контейнеризації Docker один із мікросервісів почав неконтрольовано виділяти пам'ять через витік у коді (memory leak). Це призвело до раптового аварійного завершення критичного системного демона бази даних, що функціонував на тому ж хостовому сервері, хоча сам проблемний контейнер продовжував роботу. Яка помилка конфігурації призвела до цього інциденту?</p>
+</li>
+<li>
+<p>A. Контейнери було запущено без ізоляції простору імен PID Namespace.</p>
+</li>
+<li>
+<p>B. Адміністратор не встановив обмеження <code>memory.max</code> у відповідній контрольній групі cgroups для проблемного контейнера.</p>
+</li>
+<li>
+<p>C. Файлова система контейнера не підтримувала механізм Copy-on-Write у драйвері OverlayFS.</p>
+</li>
+<li>
+<p>D. Для контейнера не було налаштовано виділений віртуальний комутатор Open vSwitch.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Обґрунтування:</strong> Механізм просторів імен (Namespaces) ізолює лише видимість процесів, але не обмежує фізичне споживання ресурсів. Якщо в cgroups (cgroups v2) не задано ліміт <code>memory.max</code>, процес у контейнері може спожити всю доступну фізичну пам'ять сервера. Коли пам'ять повністю вичерпується, ядро Linux активує OOM-Killer. Алгоритм OOM обирає жертву на основі евристичного балу <code>oom_score</code>. Через це процес бази даних, який легітимно утримував великий обсяг пам'яті під буферний пул, був помилково ідентифікований як головний споживач і примусово завершений сигналом SIGKILL замість контейнера-винуватця.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A є хибним, оскільки відсутність PID Namespace не дозволила б контейнеру ізолювати власне дерево процесів, але це ніяк безпосередньо не впливає на глобальний розподіл фізичної пам'яті ядром.</p>
+</li>
+<li>
+<p>Варіант C стосується виключно збереження файлів на диску та шарів образу, не маючи стосунку до виділення сторінок RAM.</p>
+</li>
+<li>
+<p>Варіант D впливає на мережеву комунікацію і не може захистити оперативну пам'ять від вичерпання.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>Інженер проєктує мережу IP SAN на основі протоколу iSCSI для підключення пулу сховищ до серверів віртуалізації з мережевими інтерфейсами 10GbE. Під час навантажувального тестування зафіксовано високе завантаження процесорів серверів (до 40% CPU overhead) виключно на обслуговування операцій вводу-виводу. Яке комплексне налаштування мережі та апаратури дозволить суттєво знизити це навантаження?</p>
+</li>
+<li>
+<p>A. Зменшення розміру MTU до 576 байтів для фрагментації пакетів та використання протоколу TFTP.</p>
+</li>
+<li>
+<p>B. Активація підтримки Jumbo Frames (MTU 9000) на всій трасі комутації та використання мережевих карт із модулем TCP Offload Engine (TOE).</p>
+</li>
+<li>
+<p>C. Відключення механізму LUN Masking на контролері системи зберігання даних.</p>
+</li>
+<li>
+<p>D. Переведення мережевих інтерфейсів у режим віртуальної локальної мережі без тегування кадрів 802.1Q.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Обґрунтування:</strong> Програмна обробка великої кількості стандартних мережевих пакетів із розміром MTU 1500 байтів генерує сотні тисяч апаратних переривань на секунду, змушуючи центральний процесор витрачати ресурси на парсинг заголовків TCP/IP. Збільшення розміру кадру до 9000 байтів (Jumbo Frames) скорочує кількість генерованих пакетів та переривань у шість разів. Використання мережевих плат із підтримкою апаратного розвантаження TCP (TOE) повністю переносить розрахунок контрольних сум, фрагментацію та складання сегментів TCP на спеціалізований процесор мережевої карти, розвантажуючи CPU хоста для корисних обчислень віртуальних машин.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A лише збільшить кількість пакетів у кілька разів, що призведе до миттєвого колапсу черг переривань процесора.</p>
+</li>
+<li>
+<p>Варіант C стосується виключно прав доступу до дискових томів LUN і жодним чином не оптимізує мережевий стек.</p>
+</li>
+<li>
+<p>Варіант D не впливає на розмір кадрів або апаратне розвантаження обчислень стека TCP/IP.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>Чому при передачі великих масивів даних між гостьовою операційною системою та хостом стандарт VirtIO забезпечує значно вищу пропускну здатність у порівнянні з емуляцією реального апаратного адаптера Intel E1000?</p>
+</li>
+<li>
+<p>A. Драйвер VirtIO автоматично переводить процесор хоста в режим двійкової трансляції коду.</p>
+</li>
+<li>
+<p>B. VirtIO використовує кільцеві буфери Virtqueue у спільній оперативній пам'яті, усуваючи необхідність емуляції поциклового доступу до регістрів шини PCI та мінімізуючи виклики VM-Exit.</p>
+</li>
+<li>
+<p>C. VirtIO повністю відключає механізми захисту пам'яті MMU у гостьовій операційній системі.</p>
+</li>
+<li>
+<p>D. Драйвер VirtIO працює виключно поверх мережевого протоколу UDP без підтвердження доставки.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Обґрунтування:</strong> При емуляції фізичного адаптера (як-от Intel E1000) кожен запис гостьової ОС у віртуальні регістри пристрою спричиняє апаратний вихід VM-Exit для перехоплення гіпервізором. VirtIO реалізує паравіртуалізовану модель: гостьовий драйвер пакетно записує сотні дескрипторів буферів у пам'ять черги Virtqueue (Available Ring) і виконує лише один сигнал Doorbell для сповіщення хоста. Це реалізує принцип Zero-Copy та скорочує кількість важких контекстних перемикань на кілька порядків.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A є абсурдним, оскільки VirtIO розроблений саме для оптимізації систем апаратної віртуалізації HVM і не використовує застарілу двійкову трансляцію.</p>
+</li>
+<li>
+<p>Варіант C грубо порушує принципи функціонування ОС: вимкнення MMU унеможливило б роботу віртуальної пам'яті та захист процесів.</p>
+</li>
+<li>
+<p>Варіант D не відповідає дійсності, оскільки рівень VirtIO функціонує на канальному рівні емуляції шини і не визначає протоколи транспортного рівня TCP/UDP.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h4 id="_10">Завдання для самостійної роботи</h4>
+<h5 id="_11">Постановка задачі</h5>
+<p>Вам доручено виконати обов'язки провідного архітектора інфраструктури для великої платформи електронної комерції. Наближається період сезонного пікового розпродажу («Black Friday»), під час якого очікується п'ятикратне зростання інтенсивності запитів до системи каталогу товарів та платіжного шлюзу. База даних працює під керуванням PostgreSQL на віртуальній машині KVM, а зовнішній вебінтерфейс побудовано на базі мікросервісів у контейнерах Docker. Фізичний серверний кластер складається з 4 двосокетних серверів на базі процесорів Intel Xeon Gold (по 24 ядра на сокет, технологія Hyper-Threading увімкнена) та 512 ГБ оперативної пам'яті на кожен вузол. Сховище даних побудовано на базі масиву All-Flash iSCSI SAN.</p>
+<h5 id="_12">Завдання для виконання</h5>
+<ol>
+<li>
+<p>Розрахуйте точну кількість доступних обчислювальних ресурсів фізичного кластера та визначте гранично допустимі коефіцієнти перепідписки віртуальних процесорів окремо для пулу контейнерів вебінтерфейсу та окремо для транзакційної бази даних PostgreSQL.</p>
+</li>
+<li>
+<p>Складіть конфігураційний план виділення оперативної пам'яті для віртуальної машини бази даних з обов'язковим розрахунком обсягу виділення статичних сторінок Huge Pages розміром 2 МБ, пояснивши вплив цього налаштування на стабільність асоціативного буфера трансляції EPT-TLB.</p>
+</li>
+<li>
+<p>Розробіть схему мережевої взаємодії для підключення серверів до системи зберігання даних iSCSI SAN, визначивши параметри мережевих адаптерів, конфігурацію об'єднання лінків (LACP Bonding) та вимоги до налаштування розміру MTU на комутаторах.</p>
+</li>
+<li>
+<p>Сформулюйте набір правил для контрольних груп cgroups v2 та профілів ізоляції просторів імен, які унеможливлять виникнення ефекту «шумного сусіда» між аналітичними фоновими процесами та клієнтськими контейнерами обробки платежів.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

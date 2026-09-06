@@ -1,0 +1,2320 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../lb1/">
+      
+      
+        <link rel="next" href="../lb3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#no-2-bastion-host" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lk/lk1/" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lb1/" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Підготовка середовища та розгортання проєкту (Крок 0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Підготовка середовища та розгортання проєкту (Крок 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Перевірка інструментів та створення робочої директорії
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Налаштування облікових записів та перевірка прав доступу
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Порядок виконання роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Порядок виконання роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Індивідуальні завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Покроковий алгоритм та розв'язок еталонного прикладу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Покроковий алгоритм та розв&#39;язок еталонного прикладу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-confignetwork_schemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Створення файлу конфігурації мережі config/network_schema.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-scriptsvpc_builderpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Реалізація модуля побудови інфраструктури scripts/vpc_builder.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-deploy_networkpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Головна програма розгортання та діагностики deploy_network.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Запуск, тестування та перевірка результатів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Запуск, тестування та перевірка результатів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Верифікація безпеки та наскрізного підключення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Вимоги до змісту звіту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Контрольні запитання для захисту роботи
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Підготовка середовища та розгортання проєкту (Крок 0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Підготовка середовища та розгортання проєкту (Крок 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Перевірка інструментів та створення робочої директорії
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Налаштування облікових записів та перевірка прав доступу
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Порядок виконання роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Порядок виконання роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Індивідуальні завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Покроковий алгоритм та розв'язок еталонного прикладу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Покроковий алгоритм та розв&#39;язок еталонного прикладу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-confignetwork_schemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Створення файлу конфігурації мережі config/network_schema.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-scriptsvpc_builderpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Реалізація модуля побудови інфраструктури scripts/vpc_builder.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-deploy_networkpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Головна програма розгортання та діагностики deploy_network.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Запуск, тестування та перевірка результатів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Запуск, тестування та перевірка результатів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Верифікація безпеки та наскрізного підключення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Вимоги до змісту звіту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Контрольні запитання для захисту роботи
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="no-2-bastion-host">Лабораторна робота № 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host</h1>
+<p><strong>Мета:</strong> Дослідження фундаментальних принципів функціонування програмно-конфігурованих мереж (SDN) у хмарних середовищах, здобуття практичних навичок проєктування багаторівневої ізольованої топології Virtual Private Cloud (AWS VPC), конфігурування публічних і приватних підмереж, таблиць маршрутизації, шлюзів доступу (Internet Gateway, NAT Gateway), реалізації багаторівневого захисту за допомогою Security Groups і Network ACL, а також розгортання та тестування захищеного вузла доступу (Bastion Host / Jump Box) для адміністрування приватних обчислювальних ресурсів кіберфізичних систем.</p>
+<p><strong>Стек технологій та інструменти:</strong></p>
+<ul>
+<li>
+<p><strong>Мова програмування та середовище автоматизації:</strong> Python 3.10+ (CPython), віртуальне оточення <code>venv</code>.</p>
+</li>
+<li>
+<p><strong>Платформа та бібліотеки:</strong> Хмарна платформа Amazon Web Services (AWS), SDK-бібліотека <code>boto3</code> (v1.34+), <code>botocore</code> (v1.34+), утиліта форматування таблиць <code>tabulate</code> (v0.9+).</p>
+</li>
+<li>
+<p><strong>Інструменти розробки та діагностики:</strong> AWS CLI v2, клієнт OpenSSH (з підтримкою SSH Agent Forwarding та ProxyJump), утиліти мережевого тестування Linux (<code>traceroute</code>, <code>netcat</code>, <code>curl</code>, <code>iproute2</code>, <code>dig</code>).</p>
+</li>
+</ul>
+<hr />
+<h2 id="1">1 Теоретичні відомості</h2>
+<p>У сучасних хмарних обчислювальних центрах фізична мережева інфраструктура повністю абстрагована за допомогою технологій <strong>програмно-конфігурованих мереж (Software-Defined Networking, SDN)</strong>. Замість статичного комутаційного обладнання та фізичного розведення кабелів віртуальне середовище функціонує на базі накладених мереж (<strong>Overlay Networks</strong>), які використовують протокол інкапсуляції <strong>VXLAN (Virtual Extensible LAN)</strong> або <strong>Geneve</strong>. </p>
+<p>Кадри канального рівня (Layer 2) інкапсулюються у стандартні UDP-пакети базової фізичної мережі дата-центру (<strong>Underlay Network</strong>), що дозволяє створювати мільйони повністю ізольованих віртуальних мереж із довільною адресацією поверх спільної апаратної комутаційної фабрики.</p>
+<p>Базовим логічним доменом ізоляції обчислювальних ресурсів у хмарі є <strong>віртуальна приватна хмара (Virtual Private Cloud, AWS VPC)</strong> або <strong>віртуальна мережа (Azure VNet)</strong>. Віртуальна приватна хмара являє собою виділену приватну мережу, прив'язану до певного географічного регіону провайдера. При створенні VPC виділяється первинний блок адрес на основі стандарту безкласової адресації (<strong>CIDR — Classless Inter-Domain Routing</strong>) згідно з міжнародною специфікацією RFC 1918 для приватних мереж (наприклад, <code>10.0.0.0/16</code>, що надає <span class="arithmatex">\(2^{16} = 65536\)</span> адрес).</p>
+<p><pre class="mermaid"><code>flowchart TD
+    Internet(("🌐 Мережа Інтернет"))
+    AdminLaptop["💻 Робоча станція адміністратора"]
+
+    subgraph CloudVPC ["Хмарна віртуальна мережа (VPC: 10.0.0.0/16)"]
+        IGW["Internet Gateway&lt;br/&gt;(Двосторонній Static 1:1 NAT)"]
+
+        subgraph PublicSubnet ["Публічна підмережа (Public Subnet: 10.0.1.0/24, AZ: eu-central-1a)"]
+            Bastion["Bastion Host / Jump Box&lt;br/&gt;Public IP: 3.120.10.5&lt;br/&gt;Private IP: 10.0.1.10"]
+            NAT_GW["AWS NAT Gateway&lt;br/&gt;Elastic IP: 3.120.10.99&lt;br/&gt;Private IP: 10.0.1.50"]
+            RT_Pub["Таблиця маршрутизації Public RT&lt;br/&gt;• 10.0.0.0/16 → local&lt;br/&gt;• 0.0.0.0/0 → igw-id"]
+        end
+
+        subgraph PrivateSubnet ["Приватна підмережа (Private Subnet: 10.0.2.0/24, AZ: eu-central-1a)"]
+            Worker["CPS Worker Node / Sensor Aggregator&lt;br/&gt;Public IP: Немає&lt;br/&gt;Private IP: 10.0.2.20"]
+            RT_Priv["Таблиця маршрутизації Private RT&lt;br/&gt;• 10.0.0.0/16 → local&lt;br/&gt;• 0.0.0.0/0 → nat-gw-id"]
+        end
+    end
+
+    Internet &lt;--&gt; IGW
+    IGW &lt;--&gt; Bastion
+
+    AdminLaptop ==&gt;|"1. SSH Вхідний трафік (Port 22)"| Bastion
+    Bastion ==&gt;|"2. Внутрішній SSH перехід (ProxyJump)"| Worker
+
+    Worker ==&gt;|"3. Вихідна телеметрія / Оновлення"| NAT_GW
+    NAT_GW ==&gt;|"4. Вихідний SNAT через EIP"| IGW</code></pre>
+<em>Рисунок 1.1 — Топологія дворівневої ізольованої хмарної мережі з публічною та приватною підмережами, шлюзами доступу та сервером-бастіоном</em>
+<em>Рисунок 1.1 — Топологія дворівневої ізольованої хмарної мережі з публічною та приватною підмережами, шлюзами доступу та сервером-бастіоном</em></p>
+<p>Внутрішній адресний простір VPC фрагментується на дискретні сегменти — <strong>підмережі (Subnets)</strong>, кожна з яких фізично розміщується у конкретній зоні доступності (<strong>Availability Zone, AZ</strong>). </p>
+<p>У хмарній інженерії підмережі суворо класифікуються на два типи:</p>
+<ul>
+<li>
+<p><strong>Публічні підмережі (Public Subnets).</strong> Підмережі, чия асоційована таблиця маршрутизації містить маршрут за замовчуванням (<code>0.0.0.0/0</code>), спрямований на <strong>Інтернет-шлюз (Internet Gateway, IGW)</strong>. Вузли у такій підмережі можуть отримувати публічні IP-адреси та безпосередньо взаємодіяти з Інтернетом через двостороннє статичне транслювання адрес (1:1 NAT).</p>
+</li>
+<li>
+<p><strong>Приватні підмережі (Private Subnets).</strong> Підмережі, які не мають прямого маршруту до Internet Gateway. Віртуальні машини в таких підмережах володіють виключно приватними IP-адресами, що робить їх повністю невидимими та недосяжними для несанкціонованого сканування із зовнішніх мереж.</p>
+</li>
+</ul>
+<p>Під час розрахунку адресного простору підмереж діє обов'язкове правило резервування системних адрес. У будь-якій підмережі хмари AWS перші чотири IP-адреси та остання адреса блоку зарезервовані провайдером для службових потреб:</p>
+<ol>
+<li>
+<p>Адреса з індексом <code>.0</code> — базовий номер мережі (Network Address).</p>
+</li>
+<li>
+<p>Адреса з індексом <code>.1</code> — адреса віртуального маршрутизатора VPC (VPC Router).</p>
+</li>
+<li>
+<p>Адреса з індексом <code>.2</code> — адреса внутрішнього DNS-сервера (Amazon Provided DNS).</p>
+</li>
+<li>
+<p>Адреса з індексом <code>.3</code> — зарезервовано платформою для майбутнього функціоналу.</p>
+</li>
+<li>
+<p>Остання адреса діапазону (наприклад, <code>.255</code> для <code>/24</code>) — широкомовна адреса (Broadcast Address).</p>
+</li>
+</ol>
+<p>Кількість корисних IP-адрес <span class="arithmatex">\(N_{\text{usable}}\)</span>, доступних для призначення інтерфейсам віртуальних машин у підмережі з довжиною маски <span class="arithmatex">\(M\)</span> біт, розраховується за формулою:</p>
+<div class="arithmatex">\[N_{\text{usable}} = 2^{(32 - M)} - 5\]</div>
+<p>де <span class="arithmatex">\(M\)</span> — довжина префікса маски підмережі у форматі CIDR (<span class="arithmatex">\(16 \le M \le 28\)</span>). Наприклад, для підмережі <code>10.0.1.0/24</code> (<span class="arithmatex">\(M = 24\)</span>) загальна кількість адрес становить <span class="arithmatex">\(2^8 = 256\)</span>, а число корисних адрес дорівнює <span class="arithmatex">\(N_{\text{usable}} = 256 - 5 = 251\)</span>.</p>
+<p>Умова безаварійного розбиття кореневого простору VPC із маскою <span class="arithmatex">\(M_{\text{VPC}}\)</span> на множину з <span class="arithmatex">\(k\)</span> підмереж із масками <span class="arithmatex">\(M_i\)</span> вимагає виконання закону збереження адресного простору без перекриття діапазонів:</p>
+<div class="arithmatex">\[\sum_{i=1}^{k} 2^{(32 - M_i)} \le 2^{(32 - M_{\text{VPC}})}\]</div>
+<p>Керування трафіком забезпечують віртуальні <strong>таблиці маршрутизації (Route Tables)</strong>. Маршрутизатор VPC аналізує IP-пакети відповідно до алгоритму найдовшого префіксного збігу (<strong>Longest Prefix Match</strong>). Локальний маршрут (наприклад, <code>10.0.0.0/16 -&gt; local</code>) завжди створюється автоматично та володіє найвищим пріоритетом для обміну трафіком всередині VPC. </p>
+<p>Для надання приватним інстансам можливості ініціювати вихідні підключення до Інтернету (наприклад, для надсилання звітів телеметрії в зовнішні API або завантаження оновлень безпеки) без надання їм публічних адрес, у публічній підмережі розгортається керований <strong>шлюз трансляції мережевих адрес (NAT Gateway)</strong>. Шлюз NAT прив'язується до статичної публічної адреси <strong>Elastic IP (EIP)</strong> та виконує динамічну заміну вихідних адрес клієнтських пакетів (<strong>Source NAT / PAT</strong>).</p>
+<p>Безпека мережевої взаємодії реалізується на двох рубежах:</p>
+<ol>
+<li>
+<p><strong>Групи безпеки (Security Groups, SG).</strong> Віртуальний міжмережевий екран рівня мережевого адаптера (vNIC / ENI). Працює за принципом <strong>Stateful</strong> (із фіксацією стану з'єднань): якщо вхідний пакет дозволено правилом Ingress, зворотний трафік відповіді автоматично пропускається через таблицю <code>conntrack</code> незалежно від вихідних правил Egress. Містить виключно дозволяючі правила (<strong>Allow-only</strong>).</p>
+</li>
+<li>
+<p><strong>Мережеві списки контролю доступу (Network ACL, NACL).</strong> Міжмережевий екран периметра підмережі. Працює за принципом <strong>Stateless</strong> (без збереження стану): вхідний та вихідний трафік фільтруються абсолютно незалежно, що вимагає обов'язкового явного відкриття діапазону <strong>ефемерних портів (1024–65535)</strong> для зворотних відповідей. Правила обробляються строго послідовно за номерами від 1 до 32766 до першого збігу та підтримують явні заборони (<strong>Deny</strong>).</p>
+</li>
+</ol>
+<p><pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant Admin as Робоча станція адміністратора
+    participant Bastion as Bastion Host (Public Subnet: 10.0.1.10)
+    participant Worker as CPS Worker (Private Subnet: 10.0.2.20)
+    participant NAT as AWS NAT Gateway (Public Subnet)
+    participant ExtAPI as Зовнішній сервер оновлень / NTP
+
+    Admin-&gt;&gt;Bastion: 1. TCP Handshake + SSH Auth (Port 22, Elastic IP)
+    Note over Admin,Bastion: Встановлення тунелю SSH ProxyJump
+    Admin-&gt;&gt;Worker: 2. Наскрізний зашифрований SSH канал через Bastion
+    Note over Worker: Адміністратор отримує термінальний доступ (Shell)
+
+    Worker-&gt;&gt;NAT: 3. Вихідний HTTP GET / NTP запит (Src: 10.0.2.20)
+    Note over NAT: Заміна Src IP на Elastic IP (Source NAT)
+    NAT-&gt;&gt;ExtAPI: 4. Перенаправлення запиту в Інтернет (Src: Elastic IP)
+    ExtAPI--&gt;&gt;NAT: 5. Відповідь сервера (Dst: Elastic IP)
+    Note over NAT: Зворотна трансляція за таблицею сесій (DNAT)
+    NAT--&gt;&gt;Worker: 6. Доставка відповіді (Dst: 10.0.2.20)</code></pre>
+<em>Рисунок 1.2 — Діаграма послідовності встановлення захищеного тунелю SSH ProxyJump та проходження вихідного трафіку через NAT Gateway</em></p>
+<p>Для безпечного адміністрування ізольованих вузлів приватної підмережі застосовується патерн <strong>Bastion Host (Jump Box)</strong>. Сервер-бастіон розгортається у публічній підмережі з мінімальним набором системних служб та суворо обмеженими правилами Security Group, які дозволяють вхідний доступ виключно за протоколом SSH (порт 22) з довірених IP-адрес адміністратора. </p>
+<p>Приватні вузли налаштовуються так, що їхня група безпеки дозволяє вхідний SSH-трафік <strong>виключно від групи безпеки Bastion Host</strong>. Доступ реалізується за технологією <strong>SSH ProxyJump</strong> (<code>ssh -J</code>), за якої автентифікаційні ключі зберігаються лише на локальній машині інженера та не копіюються на проміжний сервер-бастіон.</p>
+<hr />
+<h2 id="2-0">2 Підготовка середовища та розгортання проєкту (Крок 0)</h2>
+<p>Перед початком проектування та програмного розгортання мережевої інфраструктури необхідно підготувати робочу директорію, налаштувати віртуальне середовище мови Python, встановити необхідні бібліотеки та перевірити конфігурацію облікових даних доступу до хмарної платформи.</p>
+<h3 id="21">2.1 Перевірка інструментів та створення робочої директорії</h3>
+<p>Відкрийте емулятор терміналу та перевірте версії встановленого програмного забезпечення:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span>--version
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>aws<span class="w"> </span>--version
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ssh<span class="w"> </span>-V
+</span></code></pre></div>
+<p>Створіть робочу ієрархію каталогів лабораторної роботи та активуйте ізольоване віртуальне середовище:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/cloud_labs/lab2_vpc_network
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>~/cloud_labs/lab2_vpc_network
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</span></code></pre></div>
+<p>Сформуйте файлову структуру проєкту відповідно до такої схеми:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>lab2_vpc_network/
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── config/
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│   └── network_schema.json     # Специфікація параметрів мережі та підмереж
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├── scripts/
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│   ├── __init__.py
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│   ├── vpc_builder.py          # Модуль низькорівневого розгортання VPC/Subnets/Gateways
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│   └── network_diagnostics.py  # Модуль верифікації зв'язності та таблиць маршрутизації
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>├── output/
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>│   ├── network_state.json      # Згенерований стан ідентифікаторів ресурсів
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>│   └── routing_report.txt      # Текстовий звіт перевірки маршрутів
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>├── requirements.txt            # Залежності Python
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>└── deploy_network.py           # Головний виконуваний скрипт оркестрації
+</span></code></pre></div>
+<p>Створіть файл <code>requirements.txt</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>boto3&gt;=1.34.0
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>botocore&gt;=1.34.0
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>tabulate&gt;=0.9.0
+</span></code></pre></div>
+<p>Виконайте інсталяцію бібліотек:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span></code></pre></div>
+<h3 id="22">2.2 Налаштування облікових записів та перевірка прав доступу</h3>
+<p>Перевірте коректність налаштування активного профілю AWS CLI за допомогою виклику служби STS:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aws<span class="w"> </span>sts<span class="w"> </span>get-caller-identity
+</span></code></pre></div>
+<p>У разі роботи в середовищі AWS Academy або за використання виділеного навчального профілю встановіть цільовий регіон розгортання:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>default.region<span class="w"> </span><span class="s2">"eu-central-1"</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>default.output_format<span class="w"> </span><span class="s2">"json"</span>
+</span></code></pre></div>
+<hr />
+<h2 id="3">3 Порядок виконання роботи</h2>
+<h3 id="31">3.1 Індивідуальні завдання</h3>
+<p>Здобувач вищої освіти обирає індивідуальний варіант згідно зі своїм номером у списку академічної групи. Необхідно спроєктувати та програмно розгорнути повну мережеву інфраструктуру VPC відповідно до адресних блоків, зон доступності та параметрів безпеки, наведених у таблиці 3.1.</p>
+<p><em>Таблиця 3.1 — Специфікація індивідуальних параметрів мережевої інфраструктури</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Варіант</th>
+<th style="text-align: left;">Адресний простір VPC (CIDR)</th>
+<th style="text-align: left;">Публічна підмережа (CIDR / AZ)</th>
+<th style="text-align: left;">Приватна підмережа (CIDR / AZ)</th>
+<th style="text-align: left;">Цільовий сервіс КФС у приватній зоні</th>
+<th style="text-align: center;">Додатковий порт Ingress у SG Worker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: left;"><code>10.10.0.0/16</code></td>
+<td style="text-align: left;"><code>10.10.1.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;"><code>10.10.10.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;">SCADA Master Gateway</td>
+<td style="text-align: center;">TCP 502 (Modbus)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: left;"><code>10.20.0.0/16</code></td>
+<td style="text-align: left;"><code>10.20.1.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;"><code>10.20.20.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;">MQTT Broker Node</td>
+<td style="text-align: center;">TCP 1883 (MQTT)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: left;"><code>10.30.0.0/16</code></td>
+<td style="text-align: left;"><code>10.30.2.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;"><code>10.30.50.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;">OPC UA Industrial Server</td>
+<td style="text-align: center;">TCP 4840 (OPC UA)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: left;"><code>172.16.0.0/16</code></td>
+<td style="text-align: left;"><code>172.16.1.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;"><code>172.16.100.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;">CoAP Sensor Concentrator</td>
+<td style="text-align: center;">UDP 5683 (CoAP)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: left;"><code>172.17.0.0/16</code></td>
+<td style="text-align: left;"><code>172.17.10.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;"><code>172.17.20.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;">InfluxDB Telemetry Core</td>
+<td style="text-align: center;">TCP 8086 (HTTP API)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: left;"><code>172.18.0.0/16</code></td>
+<td style="text-align: left;"><code>172.18.5.0/24</code> (eu-central-1c)</td>
+<td style="text-align: left;"><code>172.18.15.0/24</code> (eu-central-1c)</td>
+<td style="text-align: left;">RTSP Camera Stream Processor</td>
+<td style="text-align: center;">TCP 554 (RTSP)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: left;"><code>192.168.0.0/16</code></td>
+<td style="text-align: left;"><code>192.168.1.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;"><code>192.168.10.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;">Robotic Arm PLC Controller</td>
+<td style="text-align: center;">TCP 2000 (Proprietary)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: left;"><code>10.40.0.0/16</code></td>
+<td style="text-align: left;"><code>10.40.1.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;"><code>10.40.2.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;">Redis In-Memory State DB</td>
+<td style="text-align: center;">TCP 6379 (Redis)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: left;"><code>10.50.0.0/16</code></td>
+<td style="text-align: left;"><code>10.50.10.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;"><code>10.50.30.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;">BACnet Smart Building Hub</td>
+<td style="text-align: center;">UDP 47808 (BACnet)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>10</strong></td>
+<td style="text-align: left;"><code>172.19.0.0/16</code></td>
+<td style="text-align: left;"><code>172.19.1.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;"><code>172.19.80.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;">Prometheus Node Exporter</td>
+<td style="text-align: center;">TCP 9100 (Metrics)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>11</strong></td>
+<td style="text-align: left;"><code>192.168.0.0/16</code></td>
+<td style="text-align: left;"><code>192.168.100.0/24</code> (eu-central-1c)</td>
+<td style="text-align: left;"><code>192.168.200.0/24</code> (eu-central-1c)</td>
+<td style="text-align: left;">CAN-over-Ethernet Gateway</td>
+<td style="text-align: center;">UDP 20001 (Raw CAN)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>12</strong></td>
+<td style="text-align: left;"><code>10.60.0.0/16</code></td>
+<td style="text-align: left;"><code>10.60.1.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;"><code>10.60.40.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;">Smart Grid Phasor Unit</td>
+<td style="text-align: center;">TCP 4712 (IEEE C37.118)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>13</strong></td>
+<td style="text-align: left;"><code>172.20.0.0/16</code></td>
+<td style="text-align: left;"><code>172.20.10.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;"><code>172.20.30.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;">DNP3 Utility Substation</td>
+<td style="text-align: center;">TCP 20000 (DNP3)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>14</strong></td>
+<td style="text-align: left;"><code>10.70.0.0/16</code></td>
+<td style="text-align: left;"><code>10.70.2.0/24</code> (eu-central-1c)</td>
+<td style="text-align: left;"><code>10.70.20.0/24</code> (eu-central-1c)</td>
+<td style="text-align: left;">Digital Twin Simulation Core</td>
+<td style="text-align: center;">TCP 9000 (gRPC)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>15</strong></td>
+<td style="text-align: left;"><code>172.21.0.0/16</code></td>
+<td style="text-align: left;"><code>172.21.1.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;"><code>172.21.50.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;">OTA Firmware Update Server</td>
+<td style="text-align: center;">TCP 8443 (HTTPS)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>16</strong></td>
+<td style="text-align: left;"><code>192.168.0.0/16</code></td>
+<td style="text-align: left;"><code>192.168.20.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;"><code>192.168.30.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;">LoRaWAN Network Server</td>
+<td style="text-align: center;">UDP 1700 (Semtech GW)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>17</strong></td>
+<td style="text-align: left;"><code>10.80.0.0/16</code></td>
+<td style="text-align: left;"><code>10.80.1.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;"><code>10.80.100.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;">Medical Vital Telemetry Hub</td>
+<td style="text-align: center;">TCP 8883 (MQTTS)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>18</strong></td>
+<td style="text-align: left;"><code>172.22.0.0/16</code></td>
+<td style="text-align: left;"><code>172.22.5.0/24</code> (eu-central-1c)</td>
+<td style="text-align: left;"><code>172.22.25.0/24</code> (eu-central-1c)</td>
+<td style="text-align: left;">Automated Guided Vehicle DB</td>
+<td style="text-align: center;">TCP 27017 (MongoDB)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>19</strong></td>
+<td style="text-align: left;"><code>10.90.0.0/16</code></td>
+<td style="text-align: left;"><code>10.90.10.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;"><code>10.90.90.0/24</code> (eu-central-1b)</td>
+<td style="text-align: left;">Real-time Edge ML Node</td>
+<td style="text-align: center;">TCP 8000 (FastAPI)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>20</strong></td>
+<td style="text-align: left;"><code>172.23.0.0/16</code></td>
+<td style="text-align: left;"><code>172.23.1.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;"><code>172.23.70.0/24</code> (eu-central-1a)</td>
+<td style="text-align: left;">Environmental Sensor Logger</td>
+<td style="text-align: center;">TCP 3306 (MySQL)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="32">3.2 Покроковий алгоритм та розв'язок еталонного прикладу</h3>
+<p>У цьому підрозділі наведено повний базовий еталонний розв'язок для створення VPC з адресним простором <code>10.0.0.0/16</code>, публічною підмережею <code>10.0.1.0/24</code>, приватною підмережею <code>10.0.2.0/24</code>, повним комплектом шлюзів (IGW, NAT Gateway), таблиць маршрутизації, пар ключів та двох інстансів (Bastion Host і Private Worker).</p>
+<h4 id="1-confignetwork_schemajson">Крок 1. Створення файлу конфігурації мережі <code>config/network_schema.json</code></h4>
+<p>Створіть файл конфігурації із повним описом мережевих блоків:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eu-central-1"</span><span class="p">,</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">"vpc_cidr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.0.0/16"</span><span class="p">,</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">"vpc_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cps-reference-vpc"</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">"public_subnet"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">"cidr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.1.0/24"</span><span class="p">,</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nt">"az"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eu-central-1a"</span><span class="p">,</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cps-public-subnet-1a"</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span><span class="nt">"private_subnet"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="nt">"cidr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.2.0/24"</span><span class="p">,</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="nt">"az"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eu-central-1a"</span><span class="p">,</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cps-private-subnet-1a"</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">  </span><span class="nt">"ami_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ami-0faab6bdbac9486fb"</span><span class="p">,</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">  </span><span class="nt">"instance_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"t3.micro"</span><span class="p">,</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">  </span><span class="nt">"key_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cps-lab2-key"</span><span class="p">,</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">  </span><span class="nt">"custom_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">8080</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="p">}</span>
+</span></code></pre></div>
+<h4 id="2-scriptsvpc_builderpy">Крок 2. Реалізація модуля побудови інфраструктури <code>scripts/vpc_builder.py</code></h4>
+<p>Створіть скрипт автоматизованого розгортання компонентів VPC:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientError</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="k">class</span><span class="w"> </span><span class="nc">VPCNetworkBuilder</span><span class="p">:</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="sd">"""Модуль програмного створення повної інфраструктури VPC, шлюзів та підмереж."""</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"region"</span><span class="p">,</span> <span class="s2">"eu-central-1"</span><span class="p">)</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">"ec2"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_resource</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">"ec2"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">create_key_pair</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="w">        </span><span class="sd">"""Створення пари SSH ключів та збереження приватного ключа на диск."""</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>        <span class="n">key_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"key_name"</span><span class="p">]</span>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">delete_key_pair</span><span class="p">(</span><span class="n">KeyName</span><span class="o">=</span><span class="n">key_name</span><span class="p">)</span>
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>            <span class="n">key_resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">create_key_pair</span><span class="p">(</span><span class="n">KeyName</span><span class="o">=</span><span class="n">key_name</span><span class="p">)</span>
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>            <span class="n">key_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key_name</span><span class="si">}</span><span class="s2">.pem"</span>
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">key_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">kf</span><span class="p">:</span>
+</span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>                <span class="n">kf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">key_resp</span><span class="p">[</span><span class="s2">"KeyMaterial"</span><span class="p">])</span>
+</span><span id="__span-8-30"><a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>            <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">key_path</span><span class="p">,</span> <span class="mo">0o400</span><span class="p">)</span>
+</span><span id="__span-8-31"><a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Згенеровано SSH-ключ: </span><span class="si">{</span><span class="n">key_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-32"><a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"KeyPath"</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">key_path</span><span class="p">)</span>
+</span><span id="__span-8-33"><a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>            <span class="k">return</span> <span class="n">key_name</span>
+</span><span id="__span-8-34"><a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a>        <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-8-35"><a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[ERROR] Помилка генерації ключа: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-36"><a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>            <span class="k">raise</span> <span class="n">e</span>
+</span><span id="__span-8-37"><a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>
+</span><span id="__span-8-38"><a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">build_network_topology</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span id="__span-8-39"><a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a><span class="w">        </span><span class="sd">"""Послідовне створення VPC, підмереж, IGW, NAT GW та таблиць маршрутизації."""</span>
+</span><span id="__span-8-40"><a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення VPC з CIDR </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'vpc_cidr'</span><span class="p">]</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-8-41"><a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a>        <span class="n">vpc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_resource</span><span class="o">.</span><span class="n">create_vpc</span><span class="p">(</span><span class="n">CidrBlock</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"vpc_cidr"</span><span class="p">])</span>
+</span><span id="__span-8-42"><a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a>        <span class="n">vpc</span><span class="o">.</span><span class="n">wait_until_available</span><span class="p">()</span>
+</span><span id="__span-8-43"><a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a>        <span class="n">vpc</span><span class="o">.</span><span class="n">create_tags</span><span class="p">(</span><span class="n">Tags</span><span class="o">=</span><span class="p">[{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"vpc_name"</span><span class="p">]}])</span>
+</span><span id="__span-8-44"><a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a>
+</span><span id="__span-8-45"><a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a>        <span class="c1"># Увімкнення підтримки імен DNS</span>
+</span><span id="__span-8-46"><a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">modify_vpc_attribute</span><span class="p">(</span><span class="n">VpcId</span><span class="o">=</span><span class="n">vpc</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">EnableDnsSupport</span><span class="o">=</span><span class="p">{</span><span class="s2">"Value"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+</span><span id="__span-8-47"><a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">modify_vpc_attribute</span><span class="p">(</span><span class="n">VpcId</span><span class="o">=</span><span class="n">vpc</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">EnableDnsHostnames</span><span class="o">=</span><span class="p">{</span><span class="s2">"Value"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+</span><span id="__span-8-48"><a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"VpcId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">vpc</span><span class="o">.</span><span class="n">id</span>
+</span><span id="__span-8-49"><a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] VPC створено. ID: </span><span class="si">{</span><span class="n">vpc</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-50"><a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a>
+</span><span id="__span-8-51"><a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a>        <span class="c1"># 1. Створення Internet Gateway</span>
+</span><span id="__span-8-52"><a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Створення та приєднання Internet Gateway..."</span><span class="p">)</span>
+</span><span id="__span-8-53"><a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a>        <span class="n">igw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_resource</span><span class="o">.</span><span class="n">create_internet_gateway</span><span class="p">()</span>
+</span><span id="__span-8-54"><a id="__codelineno-8-54" name="__codelineno-8-54" href="#__codelineno-8-54"></a>        <span class="n">igw</span><span class="o">.</span><span class="n">attach_to_vpc</span><span class="p">(</span><span class="n">VpcId</span><span class="o">=</span><span class="n">vpc</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span id="__span-8-55"><a id="__codelineno-8-55" name="__codelineno-8-55" href="#__codelineno-8-55"></a>        <span class="n">igw</span><span class="o">.</span><span class="n">create_tags</span><span class="p">(</span><span class="n">Tags</span><span class="o">=</span><span class="p">[{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'vpc_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">-igw"</span><span class="p">}])</span>
+</span><span id="__span-8-56"><a id="__codelineno-8-56" name="__codelineno-8-56" href="#__codelineno-8-56"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"InternetGatewayId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">igw</span><span class="o">.</span><span class="n">id</span>
+</span><span id="__span-8-57"><a id="__codelineno-8-57" name="__codelineno-8-57" href="#__codelineno-8-57"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] IGW створено та приєднано. ID: </span><span class="si">{</span><span class="n">igw</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-58"><a id="__codelineno-8-58" name="__codelineno-8-58" href="#__codelineno-8-58"></a>
+</span><span id="__span-8-59"><a id="__codelineno-8-59" name="__codelineno-8-59" href="#__codelineno-8-59"></a>        <span class="c1"># 2. Створення підмереж</span>
+</span><span id="__span-8-60"><a id="__codelineno-8-60" name="__codelineno-8-60" href="#__codelineno-8-60"></a>        <span class="n">pub_cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"public_subnet"</span><span class="p">]</span>
+</span><span id="__span-8-61"><a id="__codelineno-8-61" name="__codelineno-8-61" href="#__codelineno-8-61"></a>        <span class="n">priv_cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"private_subnet"</span><span class="p">]</span>
+</span><span id="__span-8-62"><a id="__codelineno-8-62" name="__codelineno-8-62" href="#__codelineno-8-62"></a>
+</span><span id="__span-8-63"><a id="__codelineno-8-63" name="__codelineno-8-63" href="#__codelineno-8-63"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення публічної підмережі </span><span class="si">{</span><span class="n">pub_cfg</span><span class="p">[</span><span class="s1">'cidr'</span><span class="p">]</span><span class="si">}</span><span class="s2"> у зоні </span><span class="si">{</span><span class="n">pub_cfg</span><span class="p">[</span><span class="s1">'az'</span><span class="p">]</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-8-64"><a id="__codelineno-8-64" name="__codelineno-8-64" href="#__codelineno-8-64"></a>        <span class="n">pub_subnet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_resource</span><span class="o">.</span><span class="n">create_subnet</span><span class="p">(</span>
+</span><span id="__span-8-65"><a id="__codelineno-8-65" name="__codelineno-8-65" href="#__codelineno-8-65"></a>            <span class="n">VpcId</span><span class="o">=</span><span class="n">vpc</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">CidrBlock</span><span class="o">=</span><span class="n">pub_cfg</span><span class="p">[</span><span class="s2">"cidr"</span><span class="p">],</span> <span class="n">AvailabilityZone</span><span class="o">=</span><span class="n">pub_cfg</span><span class="p">[</span><span class="s2">"az"</span><span class="p">]</span>
+</span><span id="__span-8-66"><a id="__codelineno-8-66" name="__codelineno-8-66" href="#__codelineno-8-66"></a>        <span class="p">)</span>
+</span><span id="__span-8-67"><a id="__codelineno-8-67" name="__codelineno-8-67" href="#__codelineno-8-67"></a>        <span class="n">pub_subnet</span><span class="o">.</span><span class="n">create_tags</span><span class="p">(</span><span class="n">Tags</span><span class="o">=</span><span class="p">[{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="n">pub_cfg</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]}])</span>
+</span><span id="__span-8-68"><a id="__codelineno-8-68" name="__codelineno-8-68" href="#__codelineno-8-68"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">modify_subnet_attribute</span><span class="p">(</span>
+</span><span id="__span-8-69"><a id="__codelineno-8-69" name="__codelineno-8-69" href="#__codelineno-8-69"></a>            <span class="n">SubnetId</span><span class="o">=</span><span class="n">pub_subnet</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">MapPublicIpOnLaunch</span><span class="o">=</span><span class="p">{</span><span class="s2">"Value"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+</span><span id="__span-8-70"><a id="__codelineno-8-70" name="__codelineno-8-70" href="#__codelineno-8-70"></a>        <span class="p">)</span>
+</span><span id="__span-8-71"><a id="__codelineno-8-71" name="__codelineno-8-71" href="#__codelineno-8-71"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"PublicSubnetId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pub_subnet</span><span class="o">.</span><span class="n">id</span>
+</span><span id="__span-8-72"><a id="__codelineno-8-72" name="__codelineno-8-72" href="#__codelineno-8-72"></a>
+</span><span id="__span-8-73"><a id="__codelineno-8-73" name="__codelineno-8-73" href="#__codelineno-8-73"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення приватної підмережі </span><span class="si">{</span><span class="n">priv_cfg</span><span class="p">[</span><span class="s1">'cidr'</span><span class="p">]</span><span class="si">}</span><span class="s2"> у зоні </span><span class="si">{</span><span class="n">priv_cfg</span><span class="p">[</span><span class="s1">'az'</span><span class="p">]</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-8-74"><a id="__codelineno-8-74" name="__codelineno-8-74" href="#__codelineno-8-74"></a>        <span class="n">priv_subnet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_resource</span><span class="o">.</span><span class="n">create_subnet</span><span class="p">(</span>
+</span><span id="__span-8-75"><a id="__codelineno-8-75" name="__codelineno-8-75" href="#__codelineno-8-75"></a>            <span class="n">VpcId</span><span class="o">=</span><span class="n">vpc</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">CidrBlock</span><span class="o">=</span><span class="n">priv_cfg</span><span class="p">[</span><span class="s2">"cidr"</span><span class="p">],</span> <span class="n">AvailabilityZone</span><span class="o">=</span><span class="n">priv_cfg</span><span class="p">[</span><span class="s2">"az"</span><span class="p">]</span>
+</span><span id="__span-8-76"><a id="__codelineno-8-76" name="__codelineno-8-76" href="#__codelineno-8-76"></a>        <span class="p">)</span>
+</span><span id="__span-8-77"><a id="__codelineno-8-77" name="__codelineno-8-77" href="#__codelineno-8-77"></a>        <span class="n">priv_subnet</span><span class="o">.</span><span class="n">create_tags</span><span class="p">(</span><span class="n">Tags</span><span class="o">=</span><span class="p">[{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="n">priv_cfg</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]}])</span>
+</span><span id="__span-8-78"><a id="__codelineno-8-78" name="__codelineno-8-78" href="#__codelineno-8-78"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"PrivateSubnetId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">priv_subnet</span><span class="o">.</span><span class="n">id</span>
+</span><span id="__span-8-79"><a id="__codelineno-8-79" name="__codelineno-8-79" href="#__codelineno-8-79"></a>
+</span><span id="__span-8-80"><a id="__codelineno-8-80" name="__codelineno-8-80" href="#__codelineno-8-80"></a>        <span class="c1"># 3. Виділення Elastic IP та створення NAT Gateway</span>
+</span><span id="__span-8-81"><a id="__codelineno-8-81" name="__codelineno-8-81" href="#__codelineno-8-81"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Виділення Elastic IP для NAT Gateway..."</span><span class="p">)</span>
+</span><span id="__span-8-82"><a id="__codelineno-8-82" name="__codelineno-8-82" href="#__codelineno-8-82"></a>        <span class="n">eip_resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">allocate_address</span><span class="p">(</span><span class="n">Domain</span><span class="o">=</span><span class="s2">"vpc"</span><span class="p">)</span>
+</span><span id="__span-8-83"><a id="__codelineno-8-83" name="__codelineno-8-83" href="#__codelineno-8-83"></a>        <span class="n">allocation_id</span> <span class="o">=</span> <span class="n">eip_resp</span><span class="p">[</span><span class="s2">"AllocationId"</span><span class="p">]</span>
+</span><span id="__span-8-84"><a id="__codelineno-8-84" name="__codelineno-8-84" href="#__codelineno-8-84"></a>        <span class="n">nat_public_ip</span> <span class="o">=</span> <span class="n">eip_resp</span><span class="p">[</span><span class="s2">"PublicIp"</span><span class="p">]</span>
+</span><span id="__span-8-85"><a id="__codelineno-8-85" name="__codelineno-8-85" href="#__codelineno-8-85"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"NatElasticIp"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nat_public_ip</span>
+</span><span id="__span-8-86"><a id="__codelineno-8-86" name="__codelineno-8-86" href="#__codelineno-8-86"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"NatAllocationId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">allocation_id</span>
+</span><span id="__span-8-87"><a id="__codelineno-8-87" name="__codelineno-8-87" href="#__codelineno-8-87"></a>
+</span><span id="__span-8-88"><a id="__codelineno-8-88" name="__codelineno-8-88" href="#__codelineno-8-88"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення NAT Gateway у публічній підмережі </span><span class="si">{</span><span class="n">pub_subnet</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-8-89"><a id="__codelineno-8-89" name="__codelineno-8-89" href="#__codelineno-8-89"></a>        <span class="n">nat_gw_resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">create_nat_gateway</span><span class="p">(</span>
+</span><span id="__span-8-90"><a id="__codelineno-8-90" name="__codelineno-8-90" href="#__codelineno-8-90"></a>            <span class="n">SubnetId</span><span class="o">=</span><span class="n">pub_subnet</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">AllocationId</span><span class="o">=</span><span class="n">allocation_id</span>
+</span><span id="__span-8-91"><a id="__codelineno-8-91" name="__codelineno-8-91" href="#__codelineno-8-91"></a>        <span class="p">)</span>
+</span><span id="__span-8-92"><a id="__codelineno-8-92" name="__codelineno-8-92" href="#__codelineno-8-92"></a>        <span class="n">nat_gw_id</span> <span class="o">=</span> <span class="n">nat_gw_resp</span><span class="p">[</span><span class="s2">"NatGateway"</span><span class="p">][</span><span class="s2">"NatGatewayId"</span><span class="p">]</span>
+</span><span id="__span-8-93"><a id="__codelineno-8-93" name="__codelineno-8-93" href="#__codelineno-8-93"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"NatGatewayId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nat_gw_id</span>
+</span><span id="__span-8-94"><a id="__codelineno-8-94" name="__codelineno-8-94" href="#__codelineno-8-94"></a>
+</span><span id="__span-8-95"><a id="__codelineno-8-95" name="__codelineno-8-95" href="#__codelineno-8-95"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Очікування переходу NAT Gateway </span><span class="si">{</span><span class="n">nat_gw_id</span><span class="si">}</span><span class="s2"> у стан 'available' (2-3 хв)..."</span><span class="p">)</span>
+</span><span id="__span-8-96"><a id="__codelineno-8-96" name="__codelineno-8-96" href="#__codelineno-8-96"></a>        <span class="n">nat_waiter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s2">"nat_gateway_available"</span><span class="p">)</span>
+</span><span id="__span-8-97"><a id="__codelineno-8-97" name="__codelineno-8-97" href="#__codelineno-8-97"></a>        <span class="n">nat_waiter</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">NatGatewayIds</span><span class="o">=</span><span class="p">[</span><span class="n">nat_gw_id</span><span class="p">])</span>
+</span><span id="__span-8-98"><a id="__codelineno-8-98" name="__codelineno-8-98" href="#__codelineno-8-98"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] NAT Gateway готовий до роботи. Public IP: </span><span class="si">{</span><span class="n">nat_public_ip</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-99"><a id="__codelineno-8-99" name="__codelineno-8-99" href="#__codelineno-8-99"></a>
+</span><span id="__span-8-100"><a id="__codelineno-8-100" name="__codelineno-8-100" href="#__codelineno-8-100"></a>        <span class="c1"># 4. Створення та конфігурування таблиць маршрутизації</span>
+</span><span id="__span-8-101"><a id="__codelineno-8-101" name="__codelineno-8-101" href="#__codelineno-8-101"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Налаштування таблиці маршрутизації для публічної підмережі..."</span><span class="p">)</span>
+</span><span id="__span-8-102"><a id="__codelineno-8-102" name="__codelineno-8-102" href="#__codelineno-8-102"></a>        <span class="n">pub_rt</span> <span class="o">=</span> <span class="n">vpc</span><span class="o">.</span><span class="n">create_route_table</span><span class="p">()</span>
+</span><span id="__span-8-103"><a id="__codelineno-8-103" name="__codelineno-8-103" href="#__codelineno-8-103"></a>        <span class="n">pub_rt</span><span class="o">.</span><span class="n">create_tags</span><span class="p">(</span><span class="n">Tags</span><span class="o">=</span><span class="p">[{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="s2">"cps-public-rt"</span><span class="p">}])</span>
+</span><span id="__span-8-104"><a id="__codelineno-8-104" name="__codelineno-8-104" href="#__codelineno-8-104"></a>        <span class="n">pub_rt</span><span class="o">.</span><span class="n">create_route</span><span class="p">(</span><span class="n">DestinationCidrBlock</span><span class="o">=</span><span class="s2">"0.0.0.0/0"</span><span class="p">,</span> <span class="n">GatewayId</span><span class="o">=</span><span class="n">igw</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span id="__span-8-105"><a id="__codelineno-8-105" name="__codelineno-8-105" href="#__codelineno-8-105"></a>        <span class="n">pub_rt</span><span class="o">.</span><span class="n">associate_with_subnet</span><span class="p">(</span><span class="n">SubnetId</span><span class="o">=</span><span class="n">pub_subnet</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span id="__span-8-106"><a id="__codelineno-8-106" name="__codelineno-8-106" href="#__codelineno-8-106"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"PublicRouteTableId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pub_rt</span><span class="o">.</span><span class="n">id</span>
+</span><span id="__span-8-107"><a id="__codelineno-8-107" name="__codelineno-8-107" href="#__codelineno-8-107"></a>
+</span><span id="__span-8-108"><a id="__codelineno-8-108" name="__codelineno-8-108" href="#__codelineno-8-108"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Налаштування таблиці маршрутизації для приватної підмережі..."</span><span class="p">)</span>
+</span><span id="__span-8-109"><a id="__codelineno-8-109" name="__codelineno-8-109" href="#__codelineno-8-109"></a>        <span class="n">priv_rt</span> <span class="o">=</span> <span class="n">vpc</span><span class="o">.</span><span class="n">create_route_table</span><span class="p">()</span>
+</span><span id="__span-8-110"><a id="__codelineno-8-110" name="__codelineno-8-110" href="#__codelineno-8-110"></a>        <span class="n">priv_rt</span><span class="o">.</span><span class="n">create_tags</span><span class="p">(</span><span class="n">Tags</span><span class="o">=</span><span class="p">[{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="s2">"cps-private-rt"</span><span class="p">}])</span>
+</span><span id="__span-8-111"><a id="__codelineno-8-111" name="__codelineno-8-111" href="#__codelineno-8-111"></a>        <span class="n">priv_rt</span><span class="o">.</span><span class="n">create_route</span><span class="p">(</span><span class="n">DestinationCidrBlock</span><span class="o">=</span><span class="s2">"0.0.0.0/0"</span><span class="p">,</span> <span class="n">NatGatewayId</span><span class="o">=</span><span class="n">nat_gw_id</span><span class="p">)</span>
+</span><span id="__span-8-112"><a id="__codelineno-8-112" name="__codelineno-8-112" href="#__codelineno-8-112"></a>        <span class="n">priv_rt</span><span class="o">.</span><span class="n">associate_with_subnet</span><span class="p">(</span><span class="n">SubnetId</span><span class="o">=</span><span class="n">priv_subnet</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span id="__span-8-113"><a id="__codelineno-8-113" name="__codelineno-8-113" href="#__codelineno-8-113"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"PrivateRouteTableId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">priv_rt</span><span class="o">.</span><span class="n">id</span>
+</span><span id="__span-8-114"><a id="__codelineno-8-114" name="__codelineno-8-114" href="#__codelineno-8-114"></a>
+</span><span id="__span-8-115"><a id="__codelineno-8-115" name="__codelineno-8-115" href="#__codelineno-8-115"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span>
+</span><span id="__span-8-116"><a id="__codelineno-8-116" name="__codelineno-8-116" href="#__codelineno-8-116"></a>
+</span><span id="__span-8-117"><a id="__codelineno-8-117" name="__codelineno-8-117" href="#__codelineno-8-117"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setup_security_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span id="__span-8-118"><a id="__codelineno-8-118" name="__codelineno-8-118" href="#__codelineno-8-118"></a><span class="w">        </span><span class="sd">"""Створення груп безпеки для Bastion Host та Private Worker."""</span>
+</span><span id="__span-8-119"><a id="__codelineno-8-119" name="__codelineno-8-119" href="#__codelineno-8-119"></a>        <span class="n">vpc_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"VpcId"</span><span class="p">]</span>
+</span><span id="__span-8-120"><a id="__codelineno-8-120" name="__codelineno-8-120" href="#__codelineno-8-120"></a>
+</span><span id="__span-8-121"><a id="__codelineno-8-121" name="__codelineno-8-121" href="#__codelineno-8-121"></a>        <span class="c1"># SG для Bastion Host</span>
+</span><span id="__span-8-122"><a id="__codelineno-8-122" name="__codelineno-8-122" href="#__codelineno-8-122"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Створення Security Group для Bastion Host..."</span><span class="p">)</span>
+</span><span id="__span-8-123"><a id="__codelineno-8-123" name="__codelineno-8-123" href="#__codelineno-8-123"></a>        <span class="n">bastion_sg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">create_security_group</span><span class="p">(</span>
+</span><span id="__span-8-124"><a id="__codelineno-8-124" name="__codelineno-8-124" href="#__codelineno-8-124"></a>            <span class="n">GroupName</span><span class="o">=</span><span class="s2">"cps-bastion-sg"</span><span class="p">,</span>
+</span><span id="__span-8-125"><a id="__codelineno-8-125" name="__codelineno-8-125" href="#__codelineno-8-125"></a>            <span class="n">Description</span><span class="o">=</span><span class="s2">"Security Group for Bastion Jump Host"</span><span class="p">,</span>
+</span><span id="__span-8-126"><a id="__codelineno-8-126" name="__codelineno-8-126" href="#__codelineno-8-126"></a>            <span class="n">VpcId</span><span class="o">=</span><span class="n">vpc_id</span>
+</span><span id="__span-8-127"><a id="__codelineno-8-127" name="__codelineno-8-127" href="#__codelineno-8-127"></a>        <span class="p">)</span>
+</span><span id="__span-8-128"><a id="__codelineno-8-128" name="__codelineno-8-128" href="#__codelineno-8-128"></a>        <span class="n">bastion_sg_id</span> <span class="o">=</span> <span class="n">bastion_sg</span><span class="p">[</span><span class="s2">"GroupId"</span><span class="p">]</span>
+</span><span id="__span-8-129"><a id="__codelineno-8-129" name="__codelineno-8-129" href="#__codelineno-8-129"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">authorize_security_group_ingress</span><span class="p">(</span>
+</span><span id="__span-8-130"><a id="__codelineno-8-130" name="__codelineno-8-130" href="#__codelineno-8-130"></a>            <span class="n">GroupId</span><span class="o">=</span><span class="n">bastion_sg_id</span><span class="p">,</span>
+</span><span id="__span-8-131"><a id="__codelineno-8-131" name="__codelineno-8-131" href="#__codelineno-8-131"></a>            <span class="n">IpPermissions</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-8-132"><a id="__codelineno-8-132" name="__codelineno-8-132" href="#__codelineno-8-132"></a>                <span class="p">{</span>
+</span><span id="__span-8-133"><a id="__codelineno-8-133" name="__codelineno-8-133" href="#__codelineno-8-133"></a>                    <span class="s2">"IpProtocol"</span><span class="p">:</span> <span class="s2">"tcp"</span><span class="p">,</span>
+</span><span id="__span-8-134"><a id="__codelineno-8-134" name="__codelineno-8-134" href="#__codelineno-8-134"></a>                    <span class="s2">"FromPort"</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+</span><span id="__span-8-135"><a id="__codelineno-8-135" name="__codelineno-8-135" href="#__codelineno-8-135"></a>                    <span class="s2">"ToPort"</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+</span><span id="__span-8-136"><a id="__codelineno-8-136" name="__codelineno-8-136" href="#__codelineno-8-136"></a>                    <span class="s2">"IpRanges"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"CidrIp"</span><span class="p">:</span> <span class="s2">"0.0.0.0/0"</span><span class="p">,</span> <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"SSH from Internet"</span><span class="p">}]</span>
+</span><span id="__span-8-137"><a id="__codelineno-8-137" name="__codelineno-8-137" href="#__codelineno-8-137"></a>                <span class="p">}</span>
+</span><span id="__span-8-138"><a id="__codelineno-8-138" name="__codelineno-8-138" href="#__codelineno-8-138"></a>            <span class="p">]</span>
+</span><span id="__span-8-139"><a id="__codelineno-8-139" name="__codelineno-8-139" href="#__codelineno-8-139"></a>        <span class="p">)</span>
+</span><span id="__span-8-140"><a id="__codelineno-8-140" name="__codelineno-8-140" href="#__codelineno-8-140"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"BastionSecurityGroupId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">bastion_sg_id</span>
+</span><span id="__span-8-141"><a id="__codelineno-8-141" name="__codelineno-8-141" href="#__codelineno-8-141"></a>
+</span><span id="__span-8-142"><a id="__codelineno-8-142" name="__codelineno-8-142" href="#__codelineno-8-142"></a>        <span class="c1"># SG для Private Worker</span>
+</span><span id="__span-8-143"><a id="__codelineno-8-143" name="__codelineno-8-143" href="#__codelineno-8-143"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Створення Security Group для Private Worker..."</span><span class="p">)</span>
+</span><span id="__span-8-144"><a id="__codelineno-8-144" name="__codelineno-8-144" href="#__codelineno-8-144"></a>        <span class="n">worker_sg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">create_security_group</span><span class="p">(</span>
+</span><span id="__span-8-145"><a id="__codelineno-8-145" name="__codelineno-8-145" href="#__codelineno-8-145"></a>            <span class="n">GroupName</span><span class="o">=</span><span class="s2">"cps-private-worker-sg"</span><span class="p">,</span>
+</span><span id="__span-8-146"><a id="__codelineno-8-146" name="__codelineno-8-146" href="#__codelineno-8-146"></a>            <span class="n">Description</span><span class="o">=</span><span class="s2">"Security Group for Private CPS Nodes"</span><span class="p">,</span>
+</span><span id="__span-8-147"><a id="__codelineno-8-147" name="__codelineno-8-147" href="#__codelineno-8-147"></a>            <span class="n">VpcId</span><span class="o">=</span><span class="n">vpc_id</span>
+</span><span id="__span-8-148"><a id="__codelineno-8-148" name="__codelineno-8-148" href="#__codelineno-8-148"></a>        <span class="p">)</span>
+</span><span id="__span-8-149"><a id="__codelineno-8-149" name="__codelineno-8-149" href="#__codelineno-8-149"></a>        <span class="n">worker_sg_id</span> <span class="o">=</span> <span class="n">worker_sg</span><span class="p">[</span><span class="s2">"GroupId"</span><span class="p">]</span>
+</span><span id="__span-8-150"><a id="__codelineno-8-150" name="__codelineno-8-150" href="#__codelineno-8-150"></a>
+</span><span id="__span-8-151"><a id="__codelineno-8-151" name="__codelineno-8-151" href="#__codelineno-8-151"></a>        <span class="c1"># Дозвіл SSH виключно від Bastion SG</span>
+</span><span id="__span-8-152"><a id="__codelineno-8-152" name="__codelineno-8-152" href="#__codelineno-8-152"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">authorize_security_group_ingress</span><span class="p">(</span>
+</span><span id="__span-8-153"><a id="__codelineno-8-153" name="__codelineno-8-153" href="#__codelineno-8-153"></a>            <span class="n">GroupId</span><span class="o">=</span><span class="n">worker_sg_id</span><span class="p">,</span>
+</span><span id="__span-8-154"><a id="__codelineno-8-154" name="__codelineno-8-154" href="#__codelineno-8-154"></a>            <span class="n">IpPermissions</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-8-155"><a id="__codelineno-8-155" name="__codelineno-8-155" href="#__codelineno-8-155"></a>                <span class="p">{</span>
+</span><span id="__span-8-156"><a id="__codelineno-8-156" name="__codelineno-8-156" href="#__codelineno-8-156"></a>                    <span class="s2">"IpProtocol"</span><span class="p">:</span> <span class="s2">"tcp"</span><span class="p">,</span>
+</span><span id="__span-8-157"><a id="__codelineno-8-157" name="__codelineno-8-157" href="#__codelineno-8-157"></a>                    <span class="s2">"FromPort"</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+</span><span id="__span-8-158"><a id="__codelineno-8-158" name="__codelineno-8-158" href="#__codelineno-8-158"></a>                    <span class="s2">"ToPort"</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+</span><span id="__span-8-159"><a id="__codelineno-8-159" name="__codelineno-8-159" href="#__codelineno-8-159"></a>                    <span class="s2">"UserIdGroupPairs"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"GroupId"</span><span class="p">:</span> <span class="n">bastion_sg_id</span><span class="p">,</span> <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"SSH from Bastion Only"</span><span class="p">}]</span>
+</span><span id="__span-8-160"><a id="__codelineno-8-160" name="__codelineno-8-160" href="#__codelineno-8-160"></a>                <span class="p">},</span>
+</span><span id="__span-8-161"><a id="__codelineno-8-161" name="__codelineno-8-161" href="#__codelineno-8-161"></a>                <span class="p">{</span>
+</span><span id="__span-8-162"><a id="__codelineno-8-162" name="__codelineno-8-162" href="#__codelineno-8-162"></a>                    <span class="s2">"IpProtocol"</span><span class="p">:</span> <span class="s2">"tcp"</span><span class="p">,</span>
+</span><span id="__span-8-163"><a id="__codelineno-8-163" name="__codelineno-8-163" href="#__codelineno-8-163"></a>                    <span class="s2">"FromPort"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"custom_port"</span><span class="p">],</span>
+</span><span id="__span-8-164"><a id="__codelineno-8-164" name="__codelineno-8-164" href="#__codelineno-8-164"></a>                    <span class="s2">"ToPort"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"custom_port"</span><span class="p">],</span>
+</span><span id="__span-8-165"><a id="__codelineno-8-165" name="__codelineno-8-165" href="#__codelineno-8-165"></a>                    <span class="s2">"UserIdGroupPairs"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"GroupId"</span><span class="p">:</span> <span class="n">bastion_sg_id</span><span class="p">,</span> <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"Telemetry Ingress"</span><span class="p">}]</span>
+</span><span id="__span-8-166"><a id="__codelineno-8-166" name="__codelineno-8-166" href="#__codelineno-8-166"></a>                <span class="p">}</span>
+</span><span id="__span-8-167"><a id="__codelineno-8-167" name="__codelineno-8-167" href="#__codelineno-8-167"></a>            <span class="p">]</span>
+</span><span id="__span-8-168"><a id="__codelineno-8-168" name="__codelineno-8-168" href="#__codelineno-8-168"></a>        <span class="p">)</span>
+</span><span id="__span-8-169"><a id="__codelineno-8-169" name="__codelineno-8-169" href="#__codelineno-8-169"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"WorkerSecurityGroupId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">worker_sg_id</span>
+</span><span id="__span-8-170"><a id="__codelineno-8-170" name="__codelineno-8-170" href="#__codelineno-8-170"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[SUCCESS] Групи безпеки успішно налаштовані."</span><span class="p">)</span>
+</span><span id="__span-8-171"><a id="__codelineno-8-171" name="__codelineno-8-171" href="#__codelineno-8-171"></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">"BastionSG"</span><span class="p">:</span> <span class="n">bastion_sg_id</span><span class="p">,</span> <span class="s2">"WorkerSG"</span><span class="p">:</span> <span class="n">worker_sg_id</span><span class="p">}</span>
+</span><span id="__span-8-172"><a id="__codelineno-8-172" name="__codelineno-8-172" href="#__codelineno-8-172"></a>
+</span><span id="__span-8-173"><a id="__codelineno-8-173" name="__codelineno-8-173" href="#__codelineno-8-173"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">launch_instances</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span id="__span-8-174"><a id="__codelineno-8-174" name="__codelineno-8-174" href="#__codelineno-8-174"></a><span class="w">        </span><span class="sd">"""Розгортання віртуальних машин у відповідних підмережах."""</span>
+</span><span id="__span-8-175"><a id="__codelineno-8-175" name="__codelineno-8-175" href="#__codelineno-8-175"></a>        <span class="n">key_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_key_pair</span><span class="p">()</span>
+</span><span id="__span-8-176"><a id="__codelineno-8-176" name="__codelineno-8-176" href="#__codelineno-8-176"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setup_security_groups</span><span class="p">()</span>
+</span><span id="__span-8-177"><a id="__codelineno-8-177" name="__codelineno-8-177" href="#__codelineno-8-177"></a>
+</span><span id="__span-8-178"><a id="__codelineno-8-178" name="__codelineno-8-178" href="#__codelineno-8-178"></a>        <span class="c1"># Запуск Bastion Host у публічній підмережі</span>
+</span><span id="__span-8-179"><a id="__codelineno-8-179" name="__codelineno-8-179" href="#__codelineno-8-179"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Запуск інстансу Bastion Host у публічній підмережі..."</span><span class="p">)</span>
+</span><span id="__span-8-180"><a id="__codelineno-8-180" name="__codelineno-8-180" href="#__codelineno-8-180"></a>        <span class="n">bastion_resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">run_instances</span><span class="p">(</span>
+</span><span id="__span-8-181"><a id="__codelineno-8-181" name="__codelineno-8-181" href="#__codelineno-8-181"></a>            <span class="n">ImageId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"ami_id"</span><span class="p">],</span>
+</span><span id="__span-8-182"><a id="__codelineno-8-182" name="__codelineno-8-182" href="#__codelineno-8-182"></a>            <span class="n">InstanceType</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"instance_type"</span><span class="p">],</span>
+</span><span id="__span-8-183"><a id="__codelineno-8-183" name="__codelineno-8-183" href="#__codelineno-8-183"></a>            <span class="n">KeyName</span><span class="o">=</span><span class="n">key_name</span><span class="p">,</span>
+</span><span id="__span-8-184"><a id="__codelineno-8-184" name="__codelineno-8-184" href="#__codelineno-8-184"></a>            <span class="n">MinCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-8-185"><a id="__codelineno-8-185" name="__codelineno-8-185" href="#__codelineno-8-185"></a>            <span class="n">MaxCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-8-186"><a id="__codelineno-8-186" name="__codelineno-8-186" href="#__codelineno-8-186"></a>            <span class="n">SubnetId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"PublicSubnetId"</span><span class="p">],</span>
+</span><span id="__span-8-187"><a id="__codelineno-8-187" name="__codelineno-8-187" href="#__codelineno-8-187"></a>            <span class="n">SecurityGroupIds</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"BastionSecurityGroupId"</span><span class="p">]],</span>
+</span><span id="__span-8-188"><a id="__codelineno-8-188" name="__codelineno-8-188" href="#__codelineno-8-188"></a>            <span class="n">TagSpecifications</span><span class="o">=</span><span class="p">[{</span>
+</span><span id="__span-8-189"><a id="__codelineno-8-189" name="__codelineno-8-189" href="#__codelineno-8-189"></a>                <span class="s2">"ResourceType"</span><span class="p">:</span> <span class="s2">"instance"</span><span class="p">,</span>
+</span><span id="__span-8-190"><a id="__codelineno-8-190" name="__codelineno-8-190" href="#__codelineno-8-190"></a>                <span class="s2">"Tags"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="s2">"cps-bastion-host"</span><span class="p">}]</span>
+</span><span id="__span-8-191"><a id="__codelineno-8-191" name="__codelineno-8-191" href="#__codelineno-8-191"></a>            <span class="p">}]</span>
+</span><span id="__span-8-192"><a id="__codelineno-8-192" name="__codelineno-8-192" href="#__codelineno-8-192"></a>        <span class="p">)</span>
+</span><span id="__span-8-193"><a id="__codelineno-8-193" name="__codelineno-8-193" href="#__codelineno-8-193"></a>        <span class="n">bastion_id</span> <span class="o">=</span> <span class="n">bastion_resp</span><span class="p">[</span><span class="s2">"Instances"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"InstanceId"</span><span class="p">]</span>
+</span><span id="__span-8-194"><a id="__codelineno-8-194" name="__codelineno-8-194" href="#__codelineno-8-194"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"BastionInstanceId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">bastion_id</span>
+</span><span id="__span-8-195"><a id="__codelineno-8-195" name="__codelineno-8-195" href="#__codelineno-8-195"></a>
+</span><span id="__span-8-196"><a id="__codelineno-8-196" name="__codelineno-8-196" href="#__codelineno-8-196"></a>        <span class="c1"># User Data для Private Worker</span>
+</span><span id="__span-8-197"><a id="__codelineno-8-197" name="__codelineno-8-197" href="#__codelineno-8-197"></a>        <span class="n">worker_user_data</span> <span class="o">=</span> <span class="s2">"""#!/bin/bash</span>
+</span><span id="__span-8-198"><a id="__codelineno-8-198" name="__codelineno-8-198" href="#__codelineno-8-198"></a><span class="s2">apt-get update -y</span>
+</span><span id="__span-8-199"><a id="__codelineno-8-199" name="__codelineno-8-199" href="#__codelineno-8-199"></a><span class="s2">apt-get install -y nginx curl net-tools</span>
+</span><span id="__span-8-200"><a id="__codelineno-8-200" name="__codelineno-8-200" href="#__codelineno-8-200"></a><span class="s2">systemctl start nginx</span>
+</span><span id="__span-8-201"><a id="__codelineno-8-201" name="__codelineno-8-201" href="#__codelineno-8-201"></a><span class="s2">systemctl enable nginx</span>
+</span><span id="__span-8-202"><a id="__codelineno-8-202" name="__codelineno-8-202" href="#__codelineno-8-202"></a><span class="s2">echo '{"status": "CPS_WORKER_ONLINE", "environment": "ISOLATED_PRIVATE_SUBNET"}' &gt; /var/www/html/status.json</span>
+</span><span id="__span-8-203"><a id="__codelineno-8-203" name="__codelineno-8-203" href="#__codelineno-8-203"></a><span class="s2">"""</span>
+</span><span id="__span-8-204"><a id="__codelineno-8-204" name="__codelineno-8-204" href="#__codelineno-8-204"></a>
+</span><span id="__span-8-205"><a id="__codelineno-8-205" name="__codelineno-8-205" href="#__codelineno-8-205"></a>        <span class="c1"># Запуск Private Worker у приватній підмережі</span>
+</span><span id="__span-8-206"><a id="__codelineno-8-206" name="__codelineno-8-206" href="#__codelineno-8-206"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Запуск інстансу Private Worker у приватній підмережі..."</span><span class="p">)</span>
+</span><span id="__span-8-207"><a id="__codelineno-8-207" name="__codelineno-8-207" href="#__codelineno-8-207"></a>        <span class="n">worker_resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">run_instances</span><span class="p">(</span>
+</span><span id="__span-8-208"><a id="__codelineno-8-208" name="__codelineno-8-208" href="#__codelineno-8-208"></a>            <span class="n">ImageId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"ami_id"</span><span class="p">],</span>
+</span><span id="__span-8-209"><a id="__codelineno-8-209" name="__codelineno-8-209" href="#__codelineno-8-209"></a>            <span class="n">InstanceType</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"instance_type"</span><span class="p">],</span>
+</span><span id="__span-8-210"><a id="__codelineno-8-210" name="__codelineno-8-210" href="#__codelineno-8-210"></a>            <span class="n">KeyName</span><span class="o">=</span><span class="n">key_name</span><span class="p">,</span>
+</span><span id="__span-8-211"><a id="__codelineno-8-211" name="__codelineno-8-211" href="#__codelineno-8-211"></a>            <span class="n">MinCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-8-212"><a id="__codelineno-8-212" name="__codelineno-8-212" href="#__codelineno-8-212"></a>            <span class="n">MaxCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-8-213"><a id="__codelineno-8-213" name="__codelineno-8-213" href="#__codelineno-8-213"></a>            <span class="n">SubnetId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"PrivateSubnetId"</span><span class="p">],</span>
+</span><span id="__span-8-214"><a id="__codelineno-8-214" name="__codelineno-8-214" href="#__codelineno-8-214"></a>            <span class="n">SecurityGroupIds</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"WorkerSecurityGroupId"</span><span class="p">]],</span>
+</span><span id="__span-8-215"><a id="__codelineno-8-215" name="__codelineno-8-215" href="#__codelineno-8-215"></a>            <span class="n">UserData</span><span class="o">=</span><span class="n">worker_user_data</span><span class="p">,</span>
+</span><span id="__span-8-216"><a id="__codelineno-8-216" name="__codelineno-8-216" href="#__codelineno-8-216"></a>            <span class="n">TagSpecifications</span><span class="o">=</span><span class="p">[{</span>
+</span><span id="__span-8-217"><a id="__codelineno-8-217" name="__codelineno-8-217" href="#__codelineno-8-217"></a>                <span class="s2">"ResourceType"</span><span class="p">:</span> <span class="s2">"instance"</span><span class="p">,</span>
+</span><span id="__span-8-218"><a id="__codelineno-8-218" name="__codelineno-8-218" href="#__codelineno-8-218"></a>                <span class="s2">"Tags"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="s2">"cps-private-worker"</span><span class="p">}]</span>
+</span><span id="__span-8-219"><a id="__codelineno-8-219" name="__codelineno-8-219" href="#__codelineno-8-219"></a>            <span class="p">}]</span>
+</span><span id="__span-8-220"><a id="__codelineno-8-220" name="__codelineno-8-220" href="#__codelineno-8-220"></a>        <span class="p">)</span>
+</span><span id="__span-8-221"><a id="__codelineno-8-221" name="__codelineno-8-221" href="#__codelineno-8-221"></a>        <span class="n">worker_id</span> <span class="o">=</span> <span class="n">worker_resp</span><span class="p">[</span><span class="s2">"Instances"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"InstanceId"</span><span class="p">]</span>
+</span><span id="__span-8-222"><a id="__codelineno-8-222" name="__codelineno-8-222" href="#__codelineno-8-222"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"WorkerInstanceId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">worker_id</span>
+</span><span id="__span-8-223"><a id="__codelineno-8-223" name="__codelineno-8-223" href="#__codelineno-8-223"></a>
+</span><span id="__span-8-224"><a id="__codelineno-8-224" name="__codelineno-8-224" href="#__codelineno-8-224"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Очікування переходу обох інстансів у стан 'running'..."</span><span class="p">)</span>
+</span><span id="__span-8-225"><a id="__codelineno-8-225" name="__codelineno-8-225" href="#__codelineno-8-225"></a>        <span class="n">waiter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s2">"instance_running"</span><span class="p">)</span>
+</span><span id="__span-8-226"><a id="__codelineno-8-226" name="__codelineno-8-226" href="#__codelineno-8-226"></a>        <span class="n">waiter</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="n">bastion_id</span><span class="p">,</span> <span class="n">worker_id</span><span class="p">])</span>
+</span><span id="__span-8-227"><a id="__codelineno-8-227" name="__codelineno-8-227" href="#__codelineno-8-227"></a>
+</span><span id="__span-8-228"><a id="__codelineno-8-228" name="__codelineno-8-228" href="#__codelineno-8-228"></a>        <span class="c1"># Отримання актуальних IP-адрес</span>
+</span><span id="__span-8-229"><a id="__codelineno-8-229" name="__codelineno-8-229" href="#__codelineno-8-229"></a>        <span class="n">b_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">describe_instances</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="n">bastion_id</span><span class="p">])[</span><span class="s2">"Reservations"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"Instances"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-8-230"><a id="__codelineno-8-230" name="__codelineno-8-230" href="#__codelineno-8-230"></a>        <span class="n">w_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">describe_instances</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="n">worker_id</span><span class="p">])[</span><span class="s2">"Reservations"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"Instances"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-8-231"><a id="__codelineno-8-231" name="__codelineno-8-231" href="#__codelineno-8-231"></a>
+</span><span id="__span-8-232"><a id="__codelineno-8-232" name="__codelineno-8-232" href="#__codelineno-8-232"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"BastionPublicIp"</span><span class="p">]</span> <span class="o">=</span> <span class="n">b_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"PublicIpAddress"</span><span class="p">,</span> <span class="s2">"N/A"</span><span class="p">)</span>
+</span><span id="__span-8-233"><a id="__codelineno-8-233" name="__codelineno-8-233" href="#__codelineno-8-233"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"BastionPrivateIp"</span><span class="p">]</span> <span class="o">=</span> <span class="n">b_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"PrivateIpAddress"</span><span class="p">,</span> <span class="s2">"N/A"</span><span class="p">)</span>
+</span><span id="__span-8-234"><a id="__codelineno-8-234" name="__codelineno-8-234" href="#__codelineno-8-234"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"WorkerPrivateIp"</span><span class="p">]</span> <span class="o">=</span> <span class="n">w_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"PrivateIpAddress"</span><span class="p">,</span> <span class="s2">"N/A"</span><span class="p">)</span>
+</span><span id="__span-8-235"><a id="__codelineno-8-235" name="__codelineno-8-235" href="#__codelineno-8-235"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"WorkerPublicIp"</span><span class="p">]</span> <span class="o">=</span> <span class="n">w_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"PublicIpAddress"</span><span class="p">,</span> <span class="s2">"None (Secure Isolated)"</span><span class="p">)</span>
+</span><span id="__span-8-236"><a id="__codelineno-8-236" name="__codelineno-8-236" href="#__codelineno-8-236"></a>
+</span><span id="__span-8-237"><a id="__codelineno-8-237" name="__codelineno-8-237" href="#__codelineno-8-237"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Bastion Host: Public IP = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">'BastionPublicIp'</span><span class="p">]</span><span class="si">}</span><span class="s2">, Private IP = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">'BastionPrivateIp'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-238"><a id="__codelineno-8-238" name="__codelineno-8-238" href="#__codelineno-8-238"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Private Worker: Private IP = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">'WorkerPrivateIp'</span><span class="p">]</span><span class="si">}</span><span class="s2">, Public IP = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">'WorkerPublicIp'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-239"><a id="__codelineno-8-239" name="__codelineno-8-239" href="#__codelineno-8-239"></a>
+</span><span id="__span-8-240"><a id="__codelineno-8-240" name="__codelineno-8-240" href="#__codelineno-8-240"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span>
+</span></code></pre></div>
+<h4 id="3-deploy_networkpy">Крок 3. Головна програма розгортання та діагностики <code>deploy_network.py</code></h4>
+<p>Створіть виконуваний файл верхнього рівня, який виконує розгортання та зберігає параметри інфраструктури:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scripts.vpc_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">VPCNetworkBuilder</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"================================================================="</span><span class="p">)</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"  РОЗГОРТАННЯ ІЗОЛЬОВАНОЇ ХМАРНОЇ МЕРЕЖІ VPC ТА BASTION HOST     "</span><span class="p">)</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"=================================================================</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"config"</span><span class="p">,</span> <span class="s2">"network_schema.json"</span><span class="p">)</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">"output"</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="n">state_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">"network_state.json"</span><span class="p">)</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>    <span class="n">builder</span> <span class="o">=</span> <span class="n">VPCNetworkBuilder</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="n">config_path</span><span class="p">)</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>        <span class="c1"># 1. Створення топології мережі</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>        <span class="n">builder</span><span class="o">.</span><span class="n">build_network_topology</span><span class="p">()</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>        <span class="c1"># 2. Розгортання інстансів</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>        <span class="n">final_state</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">launch_instances</span><span class="p">()</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>        <span class="c1"># 3. Збереження стану в JSON</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">state_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">final_state</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">================================================================="</span><span class="p">)</span>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"                  РЕЗУЛЬТАТИ РОЗГОРТАННЯ VPC                    "</span><span class="p">)</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"================================================================="</span><span class="p">)</span>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>        <span class="n">table_summary</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a>            <span class="p">[</span><span class="s2">"VPC ID"</span><span class="p">,</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">"VpcId"</span><span class="p">]],</span>
+</span><span id="__span-9-36"><a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a>            <span class="p">[</span><span class="s2">"Internet Gateway ID"</span><span class="p">,</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">"InternetGatewayId"</span><span class="p">]],</span>
+</span><span id="__span-9-37"><a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a>            <span class="p">[</span><span class="s2">"Public Subnet (CIDR: 10.0.1.0/24)"</span><span class="p">,</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">"PublicSubnetId"</span><span class="p">]],</span>
+</span><span id="__span-9-38"><a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a>            <span class="p">[</span><span class="s2">"Private Subnet (CIDR: 10.0.2.0/24)"</span><span class="p">,</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">"PrivateSubnetId"</span><span class="p">]],</span>
+</span><span id="__span-9-39"><a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a>            <span class="p">[</span><span class="s2">"NAT Gateway Public Elastic IP"</span><span class="p">,</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">"NatElasticIp"</span><span class="p">]],</span>
+</span><span id="__span-9-40"><a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>            <span class="p">[</span><span class="s2">"Bastion Host Public IP"</span><span class="p">,</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">"BastionPublicIp"</span><span class="p">]],</span>
+</span><span id="__span-9-41"><a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a>            <span class="p">[</span><span class="s2">"Private Worker Private IP"</span><span class="p">,</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">"WorkerPrivateIp"</span><span class="p">]],</span>
+</span><span id="__span-9-42"><a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a>            <span class="p">[</span><span class="s2">"Private Worker Public IP"</span><span class="p">,</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">"WorkerPublicIp"</span><span class="p">]]</span>
+</span><span id="__span-9-43"><a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a>        <span class="p">]</span>
+</span><span id="__span-9-44"><a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a>
+</span><span id="__span-9-45"><a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">table_summary</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">"Компонент інфраструктури"</span><span class="p">,</span> <span class="s2">"Ідентифікатор / IP-адреса"</span><span class="p">],</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">"fancy_grid"</span><span class="p">))</span>
+</span><span id="__span-9-46"><a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a>
+</span><span id="__span-9-47"><a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a>        <span class="n">ssh_key</span> <span class="o">=</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">"KeyPath"</span><span class="p">]</span>
+</span><span id="__span-9-48"><a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a>        <span class="n">bastion_ip</span> <span class="o">=</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">"BastionPublicIp"</span><span class="p">]</span>
+</span><span id="__span-9-49"><a id="__codelineno-9-49" name="__codelineno-9-49" href="#__codelineno-9-49"></a>        <span class="n">worker_ip</span> <span class="o">=</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">"WorkerPrivateIp"</span><span class="p">]</span>
+</span><span id="__span-9-50"><a id="__codelineno-9-50" name="__codelineno-9-50" href="#__codelineno-9-50"></a>
+</span><span id="__span-9-51"><a id="__codelineno-9-51" name="__codelineno-9-51" href="#__codelineno-9-51"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">[ІНСТРУКЦІЯ ДЛЯ ТЕСТУВАННЯ ПІДКЛЮЧЕННЯ]:"</span><span class="p">)</span>
+</span><span id="__span-9-52"><a id="__codelineno-9-52" name="__codelineno-9-52" href="#__codelineno-9-52"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"1. Пряме підключення до Bastion Host:"</span><span class="p">)</span>
+</span><span id="__span-9-53"><a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   ssh -i </span><span class="si">{</span><span class="n">ssh_key</span><span class="si">}</span><span class="s2"> ubuntu@</span><span class="si">{</span><span class="n">bastion_ip</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-9-54"><a id="__codelineno-9-54" name="__codelineno-9-54" href="#__codelineno-9-54"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"2. Наскрізне підключення до Private Worker через Bastion (ProxyJump):"</span><span class="p">)</span>
+</span><span id="__span-9-55"><a id="__codelineno-9-55" name="__codelineno-9-55" href="#__codelineno-9-55"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   ssh -i </span><span class="si">{</span><span class="n">ssh_key</span><span class="si">}</span><span class="s2"> -J ubuntu@</span><span class="si">{</span><span class="n">bastion_ip</span><span class="si">}</span><span class="s2"> ubuntu@</span><span class="si">{</span><span class="n">worker_ip</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-9-56"><a id="__codelineno-9-56" name="__codelineno-9-56" href="#__codelineno-9-56"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"3. Перевірка виходу Private Worker в Інтернет через NAT Gateway (виконати всередині Worker):"</span><span class="p">)</span>
+</span><span id="__span-9-57"><a id="__codelineno-9-57" name="__codelineno-9-57" href="#__codelineno-9-57"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"   curl https://ifconfig.me"</span><span class="p">)</span>
+</span><span id="__span-9-58"><a id="__codelineno-9-58" name="__codelineno-9-58" href="#__codelineno-9-58"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   (Повинна повернутися IP-адреса NAT Gateway: </span><span class="si">{</span><span class="n">final_state</span><span class="p">[</span><span class="s1">'NatElasticIp'</span><span class="p">]</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-9-59"><a id="__codelineno-9-59" name="__codelineno-9-59" href="#__codelineno-9-59"></a>
+</span><span id="__span-9-60"><a id="__codelineno-9-60" name="__codelineno-9-60" href="#__codelineno-9-60"></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+</span><span id="__span-9-61"><a id="__codelineno-9-61" name="__codelineno-9-61" href="#__codelineno-9-61"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">[FATAL ERROR] Аварійна помилка розгортання: </span><span class="si">{</span><span class="n">ex</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-9-62"><a id="__codelineno-9-62" name="__codelineno-9-62" href="#__codelineno-9-62"></a>
+</span><span id="__span-9-63"><a id="__codelineno-9-63" name="__codelineno-9-63" href="#__codelineno-9-63"></a>
+</span><span id="__span-9-64"><a id="__codelineno-9-64" name="__codelineno-9-64" href="#__codelineno-9-64"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+</span><span id="__span-9-65"><a id="__codelineno-9-65" name="__codelineno-9-65" href="#__codelineno-9-65"></a>    <span class="n">main</span><span class="p">()</span>
+</span></code></pre></div>
+<hr />
+<h3 id="33">3.3 Запуск, тестування та перевірка результатів</h3>
+<p>Виконайте запуск розробленого модуля розгортання у терміналі:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>python3<span class="w"> </span>deploy_network.py
+</span></code></pre></div>
+<p>Після успішного створення всіх компонентів на екран виводиться консольний протокол та таблиця створених ресурсів:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>=================================================================
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>  РОЗГОРТАННЯ ІЗОЛЬОВАНОЇ ХМАРНОЇ МЕРЕЖІ VPC ТА BASTION HOST     
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>=================================================================
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>[INFO] Створення VPC з CIDR 10.0.0.0/16...
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>[SUCCESS] VPC створено. ID: vpc-07a8c9d1e2f3b4567
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>[INFO] Створення та приєднання Internet Gateway...
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>[SUCCESS] IGW створено та приєднано. ID: igw-0123456789abcdef0
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>[INFO] Створення публічної підмережі 10.0.1.0/24 у зоні eu-central-1a...
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>[INFO] Створення приватної підмережі 10.0.2.0/24 у зоні eu-central-1a...
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>[INFO] Виділення Elastic IP для NAT Gateway...
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>[INFO] Створення NAT Gateway у публічній підмережі subnet-0pub1111111111111...
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>[INFO] Очікування переходу NAT Gateway nat-01122334455667788 у стан 'available' (2-3 хв)...
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>[SUCCESS] NAT Gateway готовий до роботи. Public IP: 3.120.10.99
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>[INFO] Налаштування таблиці маршрутизації для публічної підмережі...
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>[INFO] Налаштування таблиці маршрутизації для приватної підмережі...
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>[SUCCESS] Згенеровано SSH-ключ: cps-lab2-key.pem
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>[INFO] Створення Security Group для Bastion Host...
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>[INFO] Створення Security Group для Private Worker...
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>[SUCCESS] Групи безпеки успішно налаштовані.
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>[INFO] Запуск інстансу Bastion Host у публічній підмережі...
+</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>[INFO] Запуск інстансу Private Worker у приватній підмережі...
+</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>[INFO] Очікування переходу обох інстансів у стан 'running'...
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>[SUCCESS] Bastion Host: Public IP = 3.120.10.5, Private IP = 10.0.1.10
+</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>[SUCCESS] Private Worker: Private IP = 10.0.2.20, Public IP = None (Secure Isolated)
+</span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>
+</span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>=================================================================
+</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>                  РЕЗУЛЬТАТИ РОЗГОРТАННЯ VPC                    
+</span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>=================================================================
+</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>╒═════════════════════════════════════╤═════════════════════════════╕
+</span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>│ Компонент інфраструктури            │ Ідентифікатор / IP-адреса   │
+</span><span id="__span-11-32"><a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>╞═════════════════════════════════════╪═════════════════════════════╡
+</span><span id="__span-11-33"><a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>│ VPC ID                              │ vpc-07a8c9d1e2f3b4567       │
+</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>│ Internet Gateway ID                 │ igw-0123456789abcdef0       │
+</span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>│ Public Subnet (CIDR: 10.0.1.0/24)   │ subnet-0pub1111111111111    │
+</span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>│ Private Subnet (CIDR: 10.0.2.0/24)  │ subnet-0priv222222222222    │
+</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>│ NAT Gateway Public Elastic IP       │ 3.120.10.99                 │
+</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>│ Bastion Host Public IP              │ 3.120.10.5                  │
+</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>│ Private Worker Private IP           │ 10.0.2.20                   │
+</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>│ Private Worker Public IP            │ None (Secure Isolated)      │
+</span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>╘═════════════════════════════════════╧═════════════════════════════╛
+</span></code></pre></div>
+<h4 id="_1">Верифікація безпеки та наскрізного підключення</h4>
+<ol>
+<li>
+<p>Перевірте неможливість прямого підключення до Private Worker з локальної робочої станції:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span>cps-lab2-key.pem<span class="w"> </span>ubuntu@10.0.2.20<span class="w"> </span>-o<span class="w"> </span><span class="nv">ConnectTimeout</span><span class="o">=</span><span class="m">5</span>
+</span></code></pre></div>
+   <em>Очікуваний результат:</em> Запит завершується помилкою таймауту, оскільки приватна IP-адреса не маршрутизується у відкритому Інтернеті.</p>
+</li>
+<li>
+<p>Виконайте наскрізне підключення через Bastion Host за допомогою команди ProxyJump:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ssh<span class="w"> </span>-i<span class="w"> </span>cps-lab2-key.pem<span class="w"> </span>-J<span class="w"> </span>ubuntu@3.120.10.5<span class="w"> </span>ubuntu@10.0.2.20
+</span></code></pre></div>
+   <em>Очікуваний результат:</em> Успішне відкриття сесії терміналу на вузлі <code>cps-private-worker</code> (запрошення командного рядка <code>ubuntu@ip-10-0-2-20:~$</code>).</p>
+</li>
+<li>
+<p>Перевірте вихід в Інтернет з ізольованого вузла через NAT Gateway:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ubuntu@ip-10-0-2-20:~$<span class="w"> </span>curl<span class="w"> </span>https://ifconfig.me
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="m">3</span>.120.10.99
+</span></code></pre></div>
+   <em>Очікуваний результат:</em> Сервіс повертає публічну IP-адресу <code>3.120.10.99</code>, яка строго відповідає Elastic IP створеного NAT Gateway.</p>
+</li>
+<li>
+<p>Перевірте маршрут проходження пакетів за допомогою утиліти <code>traceroute</code>:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ubuntu@ip-10-0-2-20:~$<span class="w"> </span>traceroute<span class="w"> </span><span class="m">8</span>.8.8.8
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>traceroute<span class="w"> </span>to<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span><span class="o">(</span><span class="m">8</span>.8.8.8<span class="o">)</span>,<span class="w"> </span><span class="m">30</span><span class="w"> </span>hops<span class="w"> </span>max,<span class="w"> </span><span class="m">60</span><span class="w"> </span>byte<span class="w"> </span>packets
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="m">10</span>.0.2.1<span class="w"> </span><span class="o">(</span><span class="m">10</span>.0.2.1<span class="o">)</span><span class="w">  </span><span class="m">0</span>.312<span class="w"> </span>ms<span class="w">  </span><span class="m">0</span>.285<span class="w"> </span>ms<span class="w">  </span><span class="m">0</span>.270<span class="w"> </span>ms
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w"> </span><span class="m">2</span><span class="w">  </span><span class="m">10</span>.0.1.50<span class="w"> </span><span class="o">(</span><span class="m">10</span>.0.1.50<span class="o">)</span><span class="w">  </span><span class="m">1</span>.120<span class="w"> </span>ms<span class="w">  </span><span class="m">1</span>.085<span class="w"> </span>ms<span class="w">  </span><span class="m">1</span>.050<span class="w"> </span>ms
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w"> </span><span class="m">3</span><span class="w">  </span>*<span class="w"> </span>*<span class="w"> </span>*
+</span></code></pre></div>
+   <em>Аналіз результату:</em> Першим хопом є віртуальний маршрутизатор підмережі (<code>10.0.2.1</code>), другим — внутрішній мережевий інтерфейс NAT Gateway у публічній підмережі (<code>10.0.1.50</code>), після чого пакети транслюються в зовнішню мережу.</p>
+</li>
+</ol>
+<hr />
+<h2 id="4">4. Вимоги до змісту звіту</h2>
+<p>Звіт з лабораторної роботи оформлюється відповідно до стандартів вищої освіти у форматі PDF та повинен містити такі обов'язкові структурні елементи:</p>
+<ol>
+<li>
+<p><strong>Титульна сторінка</strong> із зазначенням реквізитів університету, факультету, кафедри, дисципліни, номера лабораторної роботи, теми, академічної групи, ПІБ здобувача та номера індивідуального варіанта.</p>
+</li>
+<li>
+<p><strong>Мета роботи та технічне завдання</strong> індивідуального варіанта згідно з таблицею 3.1.</p>
+</li>
+<li>
+<p><strong>Розрахункова частина:</strong> математичний розрахунок адресного простору (загальна кількість адрес, кількість корисних IP за вирахуванням зарезервованих адрес AWS) для VPC, публічної та приватної підмереж.</p>
+</li>
+<li>
+<p><strong>Схема мережевої топології</strong>, побудована у нотації архітектурних діаграм AWS із відображенням VPC, зон доступності, підмереж, таблиць маршрутизації, шлюзів (IGW, NAT GW), прив'язок Elastic IP та груп безпеки.</p>
+</li>
+<li>
+<p><strong>Повний вихідний код</strong> конфігураційних файлів та скриптів розгортання (<code>network_schema.json</code>, <code>vpc_builder.py</code>, <code>deploy_network.py</code>) із детальними авторськими коментарями.</p>
+</li>
+<li>
+<p><strong>Скріншоти та логи терміналу</strong>, які підтверджують створення інфраструктури, виведення таблиці <code>network_state.json</code>, успішне встановлення з'єднання SSH через ProxyJump та збіг вихідної IP-адреси приватного інстансу з адресою NAT Gateway.</p>
+</li>
+<li>
+<p><strong>Аналітичні висновки</strong>, що містять оцінку переваг використання шлюзів NAT Gateway над прямим призначенням публічних адрес, аналіз затримок передачі пакетів та висновки щодо досягнення мети роботи.</p>
+</li>
+</ol>
+<hr />
+<h2 id="5">5. Контрольні запитання для захисту роботи</h2>
+<ol>
+<li>
+<p>Поясніть концепцію та технічні переваги використання програмно-конфігурованих накладених мереж (SDN / VXLAN) над традиційною технологією віртуальних локальних мереж IEEE 802.1Q (VLAN) у хмарних дата-центрах.</p>
+</li>
+<li>
+<p>Чому хмарна платформа AWS резервує рівно 5 IP-адрес у кожній новоствореній підмережі, яке функціональне призначення має кожна із цих зарезервованих адрес, і як це впливає на вибір маски CIDR?</p>
+</li>
+<li>
+<p>У чому полягає принципова відмінність у механізмах функціонування Internet Gateway (IGW) та NAT Gateway? Чому вузли приватної підмережі не можуть приймати прямі вхідні підключення з Інтернету через NAT Gateway?</p>
+</li>
+<li>
+<p>Розкрийте фундаментальну різницю між групами безпеки (Security Groups) та мережевими списками контролю доступу (Network ACL). Чому для Security Groups не потрібно явно дозволяти вихідний трафік відповідей (Stateful), тоді як для Network ACL це є обов'язковим (Stateless)?</p>
+</li>
+<li>
+<p>Що таке діапазон ефемерних портів (Ephemeral Ports), чому він має значення 1024–65535, і які правила необхідно налаштувати в таблиці Network ACL для коректної доставки відповідей на клієнтські HTTP/HTTPS-запити?</p>
+</li>
+<li>
+<p>Поясніть принцип дії патерну Bastion Host (Jump Box). Чим відрізняється механізм підключення через <code>SSH ProxyJump</code> від використання <code>SSH Agent Forwarding</code>, і чому категорично заборонено зберігати приватні ключі доступу безпосередньо на сервері-бастіоні?</p>
+</li>
+<li>
+<p>Як алгоритм Longest Prefix Match у таблицях маршрутизації визначає пріоритет пересилання пакетів між правилом локального трафіку <code>10.0.0.0/16 -&gt; local</code> та правилом маршруту за замовчуванням <code>0.0.0.0/0 -&gt; nat-gateway-id</code>?</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
