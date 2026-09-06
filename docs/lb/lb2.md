@@ -19,33 +19,34 @@
 
 ```mermaid
 flowchart TD
+    Internet(("🌐 Мережа Інтернет"))
+    AdminLaptop["💻 Робоча станція адміністратора"]
+
     subgraph CloudVPC ["Хмарна віртуальна мережа (VPC: 10.0.0.0/16)"]
+        IGW["Internet Gateway<br/>(Двосторонній Static 1:1 NAT)"]
+
         subgraph PublicSubnet ["Публічна підмережа (Public Subnet: 10.0.1.0/24, AZ: eu-central-1a)"]
-            Bastion[Bastion Host / Jump Box<br/>Public IP: 3.120.10.5<br/>Private IP: 10.0.1.10]
-            NAT_GW[AWS NAT Gateway<br/>Elastic IP: 3.120.10.99<br/>Private IP: 10.0.1.50]
+            Bastion["Bastion Host / Jump Box<br/>Public IP: 3.120.10.5<br/>Private IP: 10.0.1.10"]
+            NAT_GW["AWS NAT Gateway<br/>Elastic IP: 3.120.10.99<br/>Private IP: 10.0.1.50"]
+            RT_Pub["Таблиця маршрутизації Public RT<br/>• 10.0.0.0/16 → local<br/>• 0.0.0.0/0 → igw-id"]
         end
 
         subgraph PrivateSubnet ["Приватна підмережа (Private Subnet: 10.0.2.0/24, AZ: eu-central-1a)"]
-            Worker[CPS Worker Node / Sensor Aggregator<br/>Public IP: Немає<br/>Private IP: 10.0.2.20]
+            Worker["CPS Worker Node / Sensor Aggregator<br/>Public IP: Немає<br/>Private IP: 10.0.2.20"]
+            RT_Priv["Таблиця маршрутизації Private RT<br/>• 10.0.0.0/16 → local<br/>• 0.0.0.0/0 → nat-gw-id"]
         end
-
-        IGW[Internet Gateway<br/>Двосторонній Static 1:1 NAT]
-        
-        RT_Pub[Таблиця маршрутизації Public RT<br/>10.0.0.0/16 -> local<br/>0.0.0.0/0 -> igw-id]
-        RT_Priv[Таблиця маршрутизації Private RT<br/>10.0.0.0/16 -> local<br/>0.0.0.0/0 -> nat-gw-id]
     end
 
-    Internet((Мережа Інтернет)) <===> IGW
-    AdminLaptop[Робоча станція адміністратора] ===>|1. SSH Вхідний трафік (Port 22)| Bastion
-    Bastion ===>|2. Внутрішній SSH перехід (ProxyJump)| Worker
+    Internet <--> IGW
+    IGW <--> Bastion
     
-    IGW <===> PublicSubnet
-    PublicSubnet -.-> RT_Pub
-    PrivateSubnet -.-> RT_Priv
+    AdminLaptop ==>|"1. SSH Вхідний трафік (Port 22)"| Bastion
+    Bastion ==>|"2. Внутрішній SSH перехід (ProxyJump)"| Worker
     
-    Worker ===>|3. Вихідна телеметрія / Оновлення| NAT_GW
-    NAT_GW ===>|4. Вихідний SNAT через EIP| IGW
+    Worker ==>|"3. Вихідна телеметрія / Оновлення"| NAT_GW
+    NAT_GW ==>|"4. Вихідний SNAT через EIP"| IGW
 ```
+*Рисунок 1.1 — Топологія дворівневої ізольованої хмарної мережі з публічною та приватною підмережами, шлюзами доступу та сервером-бастіоном*
 *Рисунок 1.1 — Топологія дворівневої ізольованої хмарної мережі з публічною та приватною підмережами, шлюзами доступу та сервером-бастіоном*
 
 Внутрішній адресний простір VPC фрагментується на дискретні сегменти — **підмережі (Subnets)**, кожна з яких фізично розміщується у конкретній зоні доступності (**Availability Zone, AZ**). 
