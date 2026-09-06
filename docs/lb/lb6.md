@@ -18,8 +18,8 @@
 ```mermaid
 flowchart TD
     subgraph EventSources ["Джерела подій (Event Triggers)"]
-        S3_Event[Завантаження файлу в S3<br/>s3:ObjectCreated:Put]
-        SQS_Event[Поява повідомлення в SQS<br/>Event Source Mapping]
+        S3_Event["Завантаження файлу в S3<br/>(s3:ObjectCreated:Put)"]
+        SQS_Event["Поява повідомлення в SQS<br/>(Event Source Mapping)"]
     end
 
     subgraph LambdaExecutionEnvironment ["Середовище виконання AWS Lambda (Firecracker MicroVM)"]
@@ -36,14 +36,14 @@ flowchart TD
     end
 
     subgraph ActionTargets ["Цільові сервіси реагування"]
-        SNS_Alert[Amazon SNS Topic<br/>Аварійне сповіщення Email / SMS]
-        CW_Logs[Amazon CloudWatch Logs<br/>Повний аудит виконання та метрики]
+        SNS_Alert["Amazon SNS Topic<br/>Аварійне сповіщення Email / SMS"]
+        CW_Logs["Amazon CloudWatch Logs<br/>Повний аудит виконання та метрики"]
     end
 
-    S3_Event ===>|Асинхронний Push виклик| Handler
-    SQS_Event ===>|Подієвий пулінг пачками| Handler
-    Handler ===>|Виявлено аномалію (Threshold Exceeded)| SNS_Alert
-    Handler ===>|Системні логи stdout/stderr| CW_Logs
+    S3_Event ==>|"Асинхронний Push виклик"| Handler
+    SQS_Event ==>|"Подієвий пулінг пачками"| Handler
+    Handler ==>|"Виявлено аномалію (Threshold Exceeded)"| SNS_Alert
+    Handler ==>|"Системні логи stdout / stderr"| CW_Logs
 ```
 *Рисунок 1.1 — Архітектурна схема безсерверного конвеєра обробки телеметрії КФС на базі AWS Lambda, шарів залежностей та подієвих тригерів*
 
@@ -58,23 +58,23 @@ flowchart TD
 ```mermaid
 sequenceDiagram
     autonumber
-    participant Sensor as IoT Контролер КФС
+    actor Sensor as IoT Контролер КФС
     participant S3 as Бакет телеметрії (AWS S3)
     participant Lambda as Безсерверна функція (AWS Lambda)
     participant SNS as Топік тривог (AWS SNS)
-    participant Admin as Черговий інженер КФС
+    actor Admin as Черговий інженер КФС
 
-    Sensor->>S3: 1. Завантаження пакету вимірювань (telemetry_device42.json)
-    S3->>Lambda: 2. Асинхронний тригер s3:ObjectCreated:Put (Bucket, Key)
-    Note over Lambda: 3. Вичитування тіла об'єкта та парсинг JSON
-    Note over Lambda: 4. Порівняння: Значення вібрації > Пороговий ліміт
+    Sensor->>S3: Завантаження пакету вимірювань (telemetry_device42.json)
+    S3->>Lambda: Асинхронний тригер s3:ObjectCreated:Put (Bucket, Key)
+    Note over Lambda: Вичитування тіла об'єкта та парсинг JSON
+    Note over Lambda: Порівняння: Значення вібрації &gt; Пороговий ліміт
     
     alt Виявлено перевищення порогового значення (Anomaly Detected)
-        Lambda->>SNS: 5. Publish(TopicArn, Message=AlertJSON, Subject="CRITICAL ALERT")
-        SNS-->>Admin: 6. Доставка сповіщення через Email / SMS
-        Note over Lambda: 7. Фіксація аварійного інциденту в CloudWatch Logs
+        Lambda->>SNS: Publish(TopicArn, Message=AlertJSON, Subject='CRITICAL ALERT')
+        SNS-->>Admin: Доставка сповіщення через Email / SMS
+        Note over Lambda: Фіксація аварійного інциденту в CloudWatch Logs
     else Показники в межах норми
-        Note over Lambda: 7. Завершення обробки зі статусом NORMAL
+        Note over Lambda: Завершення обробки зі статусом NORMAL
     end
 ```
 *Рисунок 1.2 — Послідовність взаємодії сервісів під час детекції аномалій телеметрії у подієвому конвеєрі*
