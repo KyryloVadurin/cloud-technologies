@@ -1,0 +1,2813 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../lk5/">
+      
+      
+        <link rel="next" href="../lk7/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lk1/" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lb/lb1/" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Моделі, парадигми та формальний апарат автоматизації хмарної інфраструктури
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-iac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Управління станом, безпека конвеєрів розгортання та інженерні обмеження IaC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Наскрізне проєктування відмовостійкого хмарного середовища
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Моделі, парадигми та формальний апарат автоматизації хмарної інфраструктури
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Моделі, парадигми та формальний апарат автоматизації хмарної інфраструктури">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-clickops-infrastructure-as-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Еволюція методів системного адміністрування: криза підходу ClickOps, виникнення проблеми дрейфу конфігурації та концептуальні основи парадигми Infrastructure as Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Теоретико-множинне зіставлення імперативної та декларативної моделей опису систем, математична формалізація ідемпотентності та оператора узгодження станів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-hashicorp-terraform-hcl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Архітектура та компонентна взаємодія оркестратора HashiCorp Terraform: інтерпретація синтаксису HCL, трансляція ресурсів через плагіни провайдерів і топологічне сортування спрямованого ациклічного графа
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-aws-cloudformation-azure-bicep-arm-google-cloud-deployment-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Архітектурні особливості та специфікація нативних декларативних інструментів публічних хмарних платформ: AWS CloudFormation, Azure Bicep / ARM та Google Cloud Deployment Manager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-iac_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Управління станом, безпека конвеєрів розгортання та інженерні обмеження IaC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Управління станом, безпека конвеєрів розгортання та інженерні обмеження IaC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Життєвий цикл і структура файлу стану інфраструктури, вимоги до віддалених бекендів, політики шифрування та синхронізація метаданих ресурсів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Механізми запобігання стану перегонів при розподіленій модифікації інфраструктури за допомогою протоколів розподіленого блокування
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-gitops-oidc-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Архітектура конвеєрів тестування й доставки інфраструктури за принципами GitOps із застосуванням федеративної OIDC-автентифікації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Комплексний статичний аналіз безпеки маніфестів, аудит відповідності регуляторним політикам та прогнозування витрат інфраструктури
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-iac-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Критичні бар'єри та практичні обмеження парадигми IaC: десинхронізація стану, проблема первинного бутстрапінгу, тротлінг API та ризики безпеки
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Наскрізне проєктування відмовостійкого хмарного середовища
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Наскрізне проєктування відмовостійкого хмарного середовища">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-terraform-gitops-github-actions-oidc-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Синтез мультирегіонального відмовостійкого контуру телеметрії кіберфізичної системи засобами Terraform та GitOps-пайплайну GitHub Actions з OIDC-автентифікацією в AWS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Синтез мультирегіонального відмовостійкого контуру телеметрії кіберфізичної системи засобами Terraform та GitOps-пайплайну GitHub Actions з OIDC-автентифікацією в AWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок вхідного навантаження та смуги пропускання мережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Побудова спрямованого ациклічного графа розгортання та розрахунок критичного шляху
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Моделювання надійності та системної доступності
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Оцінка фінансових витрат та відповідності бюджетному ліміту
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Моделі, парадигми та формальний апарат автоматизації хмарної інфраструктури
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-iac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Управління станом, безпека конвеєрів розгортання та інженерні обмеження IaC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Наскрізне проєктування відмовостійкого хмарного середовища
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Моделі, парадигми та формальний апарат автоматизації хмарної інфраструктури
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Моделі, парадигми та формальний апарат автоматизації хмарної інфраструктури">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-clickops-infrastructure-as-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Еволюція методів системного адміністрування: криза підходу ClickOps, виникнення проблеми дрейфу конфігурації та концептуальні основи парадигми Infrastructure as Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Теоретико-множинне зіставлення імперативної та декларативної моделей опису систем, математична формалізація ідемпотентності та оператора узгодження станів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-hashicorp-terraform-hcl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Архітектура та компонентна взаємодія оркестратора HashiCorp Terraform: інтерпретація синтаксису HCL, трансляція ресурсів через плагіни провайдерів і топологічне сортування спрямованого ациклічного графа
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-aws-cloudformation-azure-bicep-arm-google-cloud-deployment-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Архітектурні особливості та специфікація нативних декларативних інструментів публічних хмарних платформ: AWS CloudFormation, Azure Bicep / ARM та Google Cloud Deployment Manager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-iac_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Управління станом, безпека конвеєрів розгортання та інженерні обмеження IaC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Управління станом, безпека конвеєрів розгортання та інженерні обмеження IaC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Життєвий цикл і структура файлу стану інфраструктури, вимоги до віддалених бекендів, політики шифрування та синхронізація метаданих ресурсів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Механізми запобігання стану перегонів при розподіленій модифікації інфраструктури за допомогою протоколів розподіленого блокування
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-gitops-oidc-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Архітектура конвеєрів тестування й доставки інфраструктури за принципами GitOps із застосуванням федеративної OIDC-автентифікації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Комплексний статичний аналіз безпеки маніфестів, аудит відповідності регуляторним політикам та прогнозування витрат інфраструктури
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-iac-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Критичні бар'єри та практичні обмеження парадигми IaC: десинхронізація стану, проблема первинного бутстрапінгу, тротлінг API та ризики безпеки
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Наскрізне проєктування відмовостійкого хмарного середовища
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Наскрізне проєктування відмовостійкого хмарного середовища">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-terraform-gitops-github-actions-oidc-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Синтез мультирегіонального відмовостійкого контуру телеметрії кіберфізичної системи засобами Terraform та GitOps-пайплайну GitHub Actions з OIDC-автентифікацією в AWS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Синтез мультирегіонального відмовостійкого контуру телеметрії кіберфізичної системи засобами Terraform та GitOps-пайплайну GitHub Actions з OIDC-автентифікацією в AWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок вхідного навантаження та смуги пропускання мережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Побудова спрямованого ациклічного графа розгортання та розрахунок критичного шляху
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Моделювання надійності та системної доступності
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Оцінка фінансових витрат та відповідності бюджетному ліміту
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6">Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання</h1>
+<h2 id="_1">Мета лекції</h2>
+<p>Формування у майбутніх інженерів комп'ютерних систем поглиблених теоретичних знань та системних практичних компетентностей щодо проектування, розгортання та супроводу сучасних хмарних інфраструктур за допомогою парадигми «Інфраструктура як код» (Infrastructure as Code, IaC). Лекція спрямована на опанування математичного та логічного апарату декларативного моделювання розподілених обчислювальних ресурсів, вивчення механізмів конвергенції та забезпечення ідемпотентності змін, дослідження внутрішньої компонентної архітектури мультихмарних оркестраторів (на прикладі HashiCorp Terraform) і нативних хмарних рушіїв, а також на набуття інженерних навичок побудови відмовостійких конвеєрів автоматизованого розгортання (GitOps / CI/CD) з безпарольною автентифікацією за протоколом OpenID Connect для забезпечення цілісності та безпеки промислових кіберфізичних і корпоративних платформ.</p>
+<h2 id="_2">Очікувані результати навчання</h2>
+<ol>
+<li>
+<p><strong>Знання та розуміння.</strong> Здобувачі засвоять фундаментальні відмінності між імперативною та декларативною моделями конфігурування обчислювальних систем, теоретичні основи функціонування оператора узгодження станів і властивості ідемпотентності, внутрішню архітектуру інструментів IaC, а також принципи організації розподіленого зберігання та блокування файлів стану інфраструктури.</p>
+</li>
+<li>
+<p><strong>Застосування.</strong> Студенти набудуть практичних умінь самостійно розробляти модульні специфікації інфраструктури предметно-орієнтованими мовами, налаштовувати захищені віддалені сховища стану із взаємним блокуванням паралельних модифікацій, формалізувати конфігурації хмарних ресурсів і впроваджувати автоматизовані процедури безпарольної автентифікації агентів розгортання через протокол OpenID Connect у сучасних платформах безперервної інтеграції.</p>
+</li>
+<li>
+<p><strong>Аналіз.</strong> Слухачі зможуть виконувати структурну декомпозицію інфраструктурних залежностей, аналізувати спрямовані ациклічні графи взаємозв'язків ресурсів для оптимізації критичного шляху виконання паралельних розгортань, порівнювати архітектурні переваги й обмеження мультихмарних рішень щодо нативних інструментів хмарних провайдерів, а також локалізувати джерела дрейфу конфігурації у критичних системах.</p>
+</li>
+<li>
+<p><strong>Оцінювання та синтез.</strong> Майбутні фахівці оволодіють методологією аудиту безпеки й фінансової ефективності коду інфраструктури за допомогою інструментів статичного тестування, навчаться оцінювати ризики виникнення колізій і станів перегонів при паралельній командній розробці та синтезувати комплексні, стійкі до відмов конвеєри доставки інфраструктури за принципами GitOps.</p>
+</li>
+</ol>
+<hr />
+<h2 id="_3">Детальний покроковий план лекції</h2>
+<h3 id="1-">1. Теоретико-концептуальний базис. Моделі, парадигми та формальний апарат автоматизації хмарної інфраструктури</h3>
+<ul>
+<li>
+<p>1.1. Еволюція методів системного адміністрування: криза підходу ClickOps, виникнення проблеми дрейфу конфігурації (Configuration Drift) та концептуальні основи парадигми Infrastructure as Code.</p>
+</li>
+<li>
+<p>1.2. Теоретико-множинне зіставлення імперативної та декларативної моделей опису систем, математична формалізація ідемпотентності та оператора узгодження станів.</p>
+</li>
+<li>
+<p>1.3. Архітектура та компонентна взаємодія оркестратора HashiCorp Terraform: інтерпретація синтаксису HCL, трансляція ресурсів через плагіни провайдерів і топологічне сортування спрямованого ациклічного графа (DAG).</p>
+</li>
+<li>
+<p>1.4. Архітектурні особливості та специфікація нативних декларативних інструментів публічних хмарних платформ: AWS CloudFormation, Azure Bicep / ARM та Google Cloud Deployment Manager.</p>
+</li>
+</ul>
+<h3 id="2-iac">2. Методологія та аналіз граничних умов. Управління станом, безпека конвеєрів розгортання та інженерні обмеження IaC</h3>
+<ul>
+<li>
+<p>2.1. Життєвий цикл і структура файлу стану інфраструктури (State File), вимоги до віддалених бекендів, політики шифрування та синхронізація метаданих ресурсів.</p>
+</li>
+<li>
+<p>2.2. Механізми запобігання стану перегонів (Race Conditions) при розподіленій модифікації інфраструктури за допомогою протоколів розподіленого блокування (State Locking).</p>
+</li>
+<li>
+<p>2.3. Парадигма GitOps та проектування конвеєрів CI/CD розгортання інфраструктури на базі GitHub Actions і GitLab CI з відмовою від довготривалих статичних секретів.</p>
+</li>
+<li>
+<p>2.4. Архітектура безпарольної федеративної автентифікації раннерів за протоколом OpenID Connect (OIDC) у зв'язці з хмарними сервісами управління ідентифікацією та доступом.</p>
+</li>
+<li>
+<p>2.5. Критичні бар'єри та практичні обмеження парадигми IaC: десинхронізація стану внаслідок позаштатних ручних втручань, проблема первинного бутстрапінгу бекенду («куряче яйце»), тротлінг викликів хмарних API за умов масштабного паралелізму та ризики витоку чутливих даних через відкритий стан.</p>
+</li>
+</ul>
+<h3 id="3">3. Практичний індустріальний / фаховий кейс. Наскрізне проєктування відмовостійкого хмарного середовища</h3>
+<p><strong>Тема наскрізної задачі.</strong> «Синтез мультирегіонального відмовостійкого контуру телеметрії кіберфізичної системи засобами Terraform та GitOps-пайплайну GitHub Actions з OIDC-автентифікацією в AWS»</p>
+<h2 id="1-_1">1. Теоретико-концептуальний базис. Моделі, парадигми та формальний апарат автоматизації хмарної інфраструктури</h2>
+<h3 id="11-clickops-infrastructure-as-code">1.1. Еволюція методів системного адміністрування: криза підходу ClickOps, виникнення проблеми дрейфу конфігурації та концептуальні основи парадигми Infrastructure as Code</h3>
+<p>Історичний розвиток обчислювальних систем пройшов шлях від монолітних апаратних комплексів із жорстко фіксованою конфігурацією до віртуалізованих та програмно-керованих середовищ гіпермасштабованих центрів обробки даних. На початкових етапах експлуатації хмарних ресурсів домінував інтуїтивний підхід ручного керування через інтерактивні веб-консолі провайдерів або локальні командні утиліти, який у сучасній інженерній практиці отримав назву <strong>ClickOps</strong>. За такого методу інженер виконує дискретні операції виділення обчислювальних вузлів, комутації віртуальних мереж та налаштування правил маршрутизації безпосередньо в графічному інтерфейсі користувача. </p>
+<p>Практика експлуатації довела критичну непридатність підходу ClickOps для систем корпоративного та індустріального масштабу. Основним деструктивним фактором виступає людський фактор, який проявляється у невідтворюваності складних топологій, відсутності версійності та неможливості документування побічних змін. У результаті виникає феномен <strong>серверів-сніжинок (Snowflake Servers)</strong> — унікальних, конфігурованих вручну інстансів, внутрішня структура яких достеменно невідома навіть системним адміністраторам, що унеможливлює їхнє автоматичне відновлення після аварій.</p>
+<p>Невідворотним наслідком ручних і неструктурованих маніпуляцій є явище <strong>дрейфу конфігурації (Configuration Drift)</strong>. Дрейф конфігурації є процесом спонтанного накопичення розбіжностей між початково спроєктованим нормативним станом інфраструктури та її фактичним операційним станом, зумовленим несанкціонованими виправленнями, екстреними ручними патчами на рівні операційної системи чи прямими коригуваннями мережевих правил в обхід регламентів. </p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У 2012 році інвестиційна компанія Knight Capital Group втратила 440 мільйонів доларів лише за 45 хвилин торгової сесії через те, що інженер вручну розгорнув нову версію торговельного коду лише на семи із восьми серверів кластера, внаслідок чого несинхронізований восьмий сервер з некоректною конфігурацією спричинив лавиноподібну генерацію фіктивних біржових ордерів.</p>
+</blockquote>
+<p>Парадигма <strong>«Інфраструктура як код» (Infrastructure as Code, IaC)</strong> виникла як інженерна відповідь на кризу ручного управління. В її основу покладено фундаментальний принцип: конфігурація обчислювальної інфраструктури (мережі, сервери, сховища, балансувальники навантаження, політики доступу) повинна описуватися у вигляді машиночитаних текстових файлів специфікацій. До цих файлів застосовуються суворі стандарти промислової розробки програмного забезпечення, зокрема контроль версій, статичний аналіз коду, автоматизоване модульне тестування, рецензування змін колегами та автоматизоване безперервне розгортання. Інфраструктура перестає бути статичним середовищем і перетворюється на динамічний програмний артефакт, що піддається строгому аудиту та швидкому тиражуванню.</p>
+<hr />
+<h3 id="12-">1.2. Теоретико-множинне зіставлення імперативної та декларативної моделей опису систем, математична формалізація ідемпотентності та оператора узгодження станів</h3>
+<p>В інженерії програмно-керованих систем історично склалися дві фундаментальні моделі опису інфраструктурних змін: імперативна та декларативна. </p>
+<p>Імперативна модель базується на процедурному описі послідовності кроків, алгоритмів і конкретних команд, які необхідно виконати виконавчому механізму для модифікації ресурсів. Оператор у цьому разі зосереджений на питанні <em>«Як виконати зміну?»</em>. Імперативний підхід реалізується за допомогою традиційних сценаріїв командних оболонок Bash або PowerShell, а також команд інтерфейсів прикладного програмування хмарних провайдерів. Слабким місцем цієї моделі є відсутність розуміння поточного системного контексту: якщо скрипт створення віртуальної машини запускається повторно в середовищі, де ця машина вже функціонує, процедура завершиться або аварійною помилкою дублювання системного імені, або неконтрольованим створенням ще одного платного екземпляра.</p>
+<p>Декларативна модель передбачає специфікацію виключно цільового кінцевого стану середовища, абстрагуючись від технологічного алгоритму його досягнення. Інженер формулює відповідь на запитання <em>«Що повинно існувати?»</em>. Декларативний рушій бере на себе функцію інтерпретації специфікації, опитує поточний стан хмарного оточення через API, будує математичну модель розбіжностей і самостійно розраховує перелік дій, необхідних для досягнення цільового результату.</p>
+<p>Фундаментальною математичною вимогою до декларативних систем є властивість <strong>ідемпотентності (Idempotency)</strong>. Нехай <span class="arithmatex">\(\mathcal{S}\)</span> позначає простір можливих станів хмарної інфраструктури. Визначимо функцію розгортання декларативного маніфесту як відображення <span class="arithmatex">\(\mathcal{F}_{\text{IaC}}: \mathcal{S} \to \mathcal{S}\)</span>. Оператор <span class="arithmatex">\(\mathcal{F}_{\text{IaC}}\)</span> називається ідемпотентним, якщо повторне застосування функції до отриманого результату не змінює стан системи, тобто виконується рівність:</p>
+<div class="arithmatex">\[\mathcal{F}_{\text{IaC}}(\mathcal{F}_{\text{IaC}}(S)) = \mathcal{F}_{\text{IaC}}(S) = S_{\text{target}}, \quad \forall S \in \mathcal{S}\]</div>
+<p>де <span class="arithmatex">\(S_{\text{target}}\)</span> позначає кінцевий бажаний стан інфраструктури, зафіксований у декларативному коді. Це означає, що скільки б разів не виконувалася процедура розгортання без модифікації вихідного маніфесту, стан цільового середовища залишатиметься інваріантним.</p>
+<p>Формалізуємо процес дрейфу конфігурації через теоретико-множинний апарат. Нехай у довільний момент часу <span class="arithmatex">\(t\)</span> актуальний стан інфраструктури репрезентується множиною фізичних та віртуальних ресурсів із відповідними векторами атрибутів <span class="arithmatex">\(S_{\text{actual}}(t) = \{r_1, r_2, \dots, r_n\}\)</span>, а задекларований у системі контролю версій стан описується множиною <span class="arithmatex">\(S_{\text{declared}} = \{d_1, d_2, \dots, d_m\}\)</span>.</p>
+<p>Вектор розбіжності конфігурації, або величина дрейфу <span class="arithmatex">\(\Delta S(t)\)</span>, визначається через симетричну різницю зазначених просторів станів:</p>
+<div class="arithmatex">\[\Delta S(t) = \left( S_{\text{actual}}(t) \setminus S_{\text{declared}} \right) \cup \left( S_{\text{declared}} \setminus S_{\text{actual}}(t) \right) \cup \left\{ r \in S_{\text{actual}}(t) \cap S_{\text{declared}} \mid \text{Attrs}(r) \neq \text{Attrs}(d_r) \right\}\]</div>
+<p>де вираз <span class="arithmatex">\(\text{Attrs}(r) \neq \text{Attrs}(d_r)\)</span> фіксує невідповідність між параметрами існуючого в хмарі ресурсу та його декларативним описом (наприклад, несанкціонована зміна обсягу оперативної пам'яті чи зміна правил фаєрволу).</p>
+<p>Для ліквідації виявленого дрейфу декларативний рушій застосовує <strong>оператор узгодження (Reconciliation Operator, <span class="arithmatex">\(\mathcal{R}\)</span>)</strong>, який трансформує розбіжність <span class="arithmatex">\(\Delta S(t)\)</span> у множину коригувальних дій:</p>
+<div class="arithmatex">\[\mathcal{R}(\Delta S(t)) \to \Delta_{\text{create}} \cup \Delta_{\text{modify}} \cup \Delta_{\text{destroy}}\]</div>
+<p>де <span class="arithmatex">\(\Delta_{\text{create}}\)</span> позначає ресурси, задекларовані в коді, але відсутні в інфраструктурі; <span class="arithmatex">\(\Delta_{\text{modify}}\)</span> описує параметричні зміни ресурсів для приведення їх у нормативні рамки; <span class="arithmatex">\(\Delta_{\text{destroy}}\)</span> охоплює чужорідні елементи, створені вручну поза системою автоматизації, що підлягають депровіженінгу для відновлення чистоти середовища.</p>
+<p>Життєвий цикл оператора узгодження станів описується замкненим контуром зворотного зв'язку, який безперервно транзитує систему через верифікаційні фази.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; DeclaredState: Збереження коду в репозиторії
+    DeclaredState --&gt; RefreshActualState: Ініціалізація інспекції API
+    RefreshActualState --&gt; StateComparison: Отримання поточної топології
+    StateComparison --&gt; DriftDetected: Виявлено розбіжність Delta S(t)
+    StateComparison --&gt; Converged: Розбіжностей немає (Delta S = 0)
+    DriftDetected --&gt; PlanGeneration: Обчислення диференційного графа R
+    PlanGeneration --&gt; PlanApproval: Верифікація безпеки та лімітів
+    PlanApproval --&gt; ExecutionApply: Затвердження оператором / CI
+    ExecutionApply --&gt; Converged: Успішне застосування CRUD
+    ExecutionApply --&gt; Failed: Помилка виклику API провайдера
+    Failed --&gt; RefreshActualState: Відновлення контексту
+    Converged --&gt; [*]: Стан інфраструктури стабільний</code></pre>
+<blockquote>
+<p><strong>ТИПОВА ПОМИЛКА:</strong> Хибним є твердження, що декларативні інструменти не потребують збереження та аналізу поточного стану системи, оскільки вони «завжди знають кінцевий стан». Насправді декларативна парадигма є абсолютно недієздатною без наявності локального або віддаленого шару фіксації поточного стану, оскільки рушій не здатний визначити різницю між необхідністю створити новий ресурс і потребою модифікувати існуючий без прямого зіставлення маніфесту з метаданими раніше виділених об'єктів.</p>
+</blockquote>
+<hr />
+<h3 id="13-hashicorp-terraform-hcl">1.3. Архітектура та компонентна взаємодія оркестратора HashiCorp Terraform: інтерпретація синтаксису HCL, трансляція ресурсів через плагіни провайдерів і топологічне сортування спрямованого ациклічного графа</h3>
+<p>Мультихмарний інструмент <strong>HashiCorp Terraform</strong> є найяскравішим представником декларативних систем оркестрації. Архітектурно Terraform реалізований за модульним принципом із суворим розмежуванням обов'язків між центральним керуючим рушієм і підключаємими зовнішніми модулями. Ядро системи відокремлене від апаратно-залежних деталей конкретних хмар і взаємодіє з ними за допомогою стандартизованих інтерфейсів.</p>
+<p>Компонент <strong>Terraform Core</strong> скомпільований у вигляді статичного бінарного файлу мовою Go. Він містить підсистему синтаксичного аналізу файлів декларативної мови <strong>HashiCorp Configuration Language (HCL)</strong>, підсистему керування файлом стану системи (<code>terraform.tfstate</code>) та алгоритмічний модуль побудови графа залежностей ресурсів. </p>
+<p>Рівень провайдерів формують незалежні зовнішні плагіни (<strong>Terraform Providers</strong>), кожен із яких відповідає за зв'язок із конкретним публічним, приватним хмарним API або апаратним сервісом (наприклад, AWS, Azure, Google Cloud, OpenStack, Proxmox VE). Зв'язок між Terraform Core та плагінами провайдерів реалізовано за допомогою міжпроцесної взаємодії через високопродуктивний протокол <strong>gRPC</strong> через UNIX-сокети або локальні мережеві порти, що забезпечує повну ізоляцію пам'яті та стабільність ядра при можливих збоях у коді сторонніх плагінів.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph CoreEngine ["Ядро оркестратора (Terraform Core)"]
+        HCLFiles["HCL Конфігурації (*.tf)"] --&gt; ParserEngine["Синтаксичний аналізатор HCL"]
+        StateData[("Файл стану (terraform.tfstate)")] &lt;--&gt; GraphEngine["Побудова графа залежностей (DAG)"]
+        ParserEngine --&gt; GraphEngine
+        GraphEngine --&gt; SchedulerPlan["Планувальник та транслятор плану дій"]
+    end
+
+    subgraph RPCBoundary ["Міжпроцесна взаємодія gRPC (RPC over Localhost)"]
+        SchedulerPlan ==&gt;|RPC: Створити ресурс| ProviderAWS["AWS Provider Plugin"]
+        SchedulerPlan ==&gt;|RPC: Оновити конфігурацію| ProviderOpenStack["OpenStack Provider Plugin"]
+        SchedulerPlan ==&gt;|RPC: Зчитати параметри| ProviderK8s["Kubernetes Provider Plugin"]
+    end
+
+    subgraph PhysicalTarget ["Фізичні та віртуальні платформи виконання"]
+        ProviderAWS --&gt;|HTTPS REST API Calls| CloudAWS["Amazon Web Services Data Center"]
+        ProviderOpenStack --&gt;|Keystone / Nova REST API| PrivateCloud["On-Premise OpenStack Cloud"]
+        ProviderK8s --&gt;|Kube-APIServer Calls| K8sCluster["Managed Kubernetes Cluster"]
+    end</code></pre>
+<p>Математичним апаратом побудови плану виконання у Terraform Core є теорія графів. Множина всіх ресурсів інфраструктури формалізується у вигляді <strong>спрямованого ациклічного графа (Directed Acyclic Graph, DAG)</strong> <span class="arithmatex">\(G = (V, E)\)</span>, де множина вершин <span class="arithmatex">\(V = \{v_1, v_2, \dots, v_n\}\)</span> позначає окремі блоки конфігурації ресурсів, а множина орієнтованих ребер <span class="arithmatex">\(E = \{(v_i, v_j)\}\)</span> описує структурні залежності. Наявність ребра <span class="arithmatex">\((v_i, v_j) \in E\)</span> встановлює суворий порядок: виділення ресурсу <span class="arithmatex">\(v_i\)</span> мусить бути повністю завершене до моменту ініціалізації виділення ресурсу <span class="arithmatex">\(v_j\)</span>. </p>
+<p>Залежності між вершинами поділяються на дві категорії:</p>
+<ol>
+<li>
+<p><strong>Неявні залежності (Implicit Dependencies)</strong>, які рушій виявляє автоматично шляхом аналізу посилань на атрибути інших об'єктів у маніфесті (наприклад, підстановка вихідного ідентифікатора створеної віртуальної мережі <code>aws_vpc.main.id</code> у параметр конфігурації підмережі <code>aws_subnet.app.vpc_id</code>).</p>
+</li>
+<li>
+<p><strong>Явні залежності (Explicit Dependencies)</strong>, які інженер безпосередньо задає за допомогою мета-аргументу <code>depends_on</code> у випадках, коли зв'язок між компонентами існує на рівні внутрішньої логіки сервісів, але не виражений через спільні змінні у коді.</p>
+</li>
+</ol>
+<p>Для визначення коректної черговості створення ресурсів ядро здійснює <strong>топологічне сортування</strong> графа <span class="arithmatex">\(G\)</span>. Якщо граф містить хоча б один орієнтований контур (циклічну залежність вигляду <span class="arithmatex">\(v_1 \to v_2 \to \dots \to v_1\)</span>), алгоритм фіксує нерозв'язну помилку циклу і блокує операцію розгортання до ліквідації суперечності.</p>
+<p>Вершини, між якими відсутні шляхи залежності у графі <span class="arithmatex">\(G\)</span>, можуть ініціалізуватися паралельно. Якщо систему розгорнуто з використанням <span class="arithmatex">\(p\)</span> паралельних потоків виконання, мінімально можливий час розгортання всієї системи <span class="arithmatex">\(T_{\text{provision}}\)</span> обмежений довжиною критичного шляху графа:</p>
+<div class="arithmatex">\[T_{\text{provision}} \ge \max_{P \in \text{Paths}(G)} \left( \sum_{v \in P} \tau(v) \right)\]</div>
+<p>де <span class="arithmatex">\(\text{Paths}(G)\)</span> є множиною всіх орієнтованих шляхів від кореневих вершин графа до кінцевих стоків, а <span class="arithmatex">\(\tau(v)\)</span> позначає часову затримку виконання операцій виділення ресурсу <span class="arithmatex">\(v\)</span> через мережеві виклики до API хмари.</p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> Архітектурна ізоляція провайдерів у вигляді окремих gRPC-процесів дозволила спільноті Terraform масштабувати екосистему до понад 3000 незалежних модулів розширення: наприклад, оновлення версії провайдера для взаємодії з OpenStack не потребує перекомпіляції основного бінарного файлу Terraform чи внесення змін у сусідні модулі для AWS.</p>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Чому наявність циклічної залежності в орієнтованому графі ресурсів унеможливлює виконання фази планування розгортання навіть у тому випадку, коли кожен ресурс окремо описано синтаксично правильно?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: Неможливість топологічного сортування графа.</strong></p>
+<ol>
+<li>
+<p>Математичне обґрунтування: алгоритми побудови черговості виконання операцій виділення ресурсів базуються на топологічному сортуванні вершин орієнтованого графа (наприклад, за алгоритмом Кана або обходом у глибину). Обов'язковою умовою існування хоча б одного топологічного порядку є ациклічність графа (<span class="arithmatex">\(DAG\)</span>). Якщо в графі присутній цикл <span class="arithmatex">\(v_i \to \dots \to v_k \to v_i\)</span>, напівступінь заходу для кожної вершини в межах циклу ніколи не стане нульовим. Це створює ситуацію взаємного блокування (Deadlock), за якої жоден із ресурсів циклу не може бути ініціалізований першим, оскільки вимагає попереднього завершення створення іншого ресурсу з того ж ланцюжка.</p>
+</li>
+<li>
+<p>Аналіз дистракторів: гіпотези про те, що затримка виникає через обмеження пропускної здатності мережі або відсутність відповідних API-ендпоінтів у хмарі, є технічно некоректними, оскільки зупинка відбувається на внутрішньому етапі синтаксичного та графового аналізу Terraform Core ще до ініціалізації викликів до хмарних провайдерів.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h3 id="14-aws-cloudformation-azure-bicep-arm-google-cloud-deployment-manager">1.4. Архітектурні особливості та специфікація нативних декларативних інструментів публічних хмарних платформ: AWS CloudFormation, Azure Bicep / ARM та Google Cloud Deployment Manager</h3>
+<p>Поряд із мультихмарними оркестраторами провідні публічні провайдери пропонують власні, глибоко інтегровані інструменти автоматизації інфраструктури. На відміну від сторонніх рішень, нативні засоби мають низку специфічних архітектурних характеристик:</p>
+<ul>
+<li>
+<p>Підтримка нових функцій і ресурсів постачальника в день їхнього офіційного релізу (<strong>Day-0 Support</strong>) без потреби очікувати на оновлення сторонніх бібліотек чи плагінів.</p>
+</li>
+<li>
+<p>Відсутність необхідності самостійного конфігурування та адміністрування зовнішніх серверів або баз даних для збереження файлів стану, оскільки функції управління життєвим циклом вбудовані безпосередньо у внутрішній шар оркестрації платформи.</p>
+</li>
+<li>
+<p>Повна синхронізація із внутрішніми підсистемами авторизації, управління політиками та журналювання подій хмари.</p>
+</li>
+</ul>
+<p>Сервіс <strong>AWS CloudFormation</strong> оперує концепцією <strong>стеків (Stacks)</strong> — логічних груп ресурсів, управління якими здійснюється як єдиним атомарним об'єктом. Маніфести CloudFormation описуються у форматах JSON або YAML. Важливою інженерною особливістю сервісу є функціонал <strong>наборів змін (Change Sets)</strong>, який забезпечує транзакційний попередній перегляд модифікацій перед їхнім застосуванням, а також вбудований механізм автоматичного відкату (<strong>Automated Rollback</strong>) системи до попереднього працездатного стану в разі збою виділення будь-якого компонента зі складу стека.</p>
+<p>У платформі Microsoft Azure першим поколінням декларативного опису були шаблони <strong>Azure Resource Manager (ARM)</strong> на базі синтаксису JSON. Через надмірну вербозність і високу структурну складність читання багаторівневих JSON-документів корпорація Microsoft розробила мову <strong>Bicep</strong>. Bicep є предметно-орієнтованою мовою (DSL), яка пропонує лаконічний і прозорий синтаксис, автоматичну типізацію параметрів та підтримку модульності. Bicep виступає як прозора абстракція над механізмом ARM: файли <code>.bicep</code> транспілюються у стандартні шаблони ARM JSON перед безпосередньою передачею до обчислювального ядра Azure. При цьому інженеру не потрібно керувати блокуваннями чи шифруванням файлу стану, оскільки стан постійно зчитується безпосередньо з шини управління ресурсами Azure.</p>
+<p>Інструмент <strong>Google Cloud Deployment Manager</strong> утилізує маніфести у форматі YAML, доповнені можливістю використання шаблонізатора <strong>Jinja2</strong> або повноцінних скриптів мовою <strong>Python</strong>. Це забезпечує унікальну гнучкість, оскільки дозволяє розробникам застосовувати імперативні конструкції (цикли обходу масивів, умовні розгалуження, динамічні математичні обчислення адресних просторів підмереж) безпосередньо на стадії генерації кінцевого декларативного графа розгортання в Google Cloud Platform.</p>
+<p>Детальний порівняльний аналіз провідних інструментів автоматизації інфраструктури наведено в таблиці 1.1.</p>
+<p><em>Таблиця 1.1 — Систематизація та порівняльний аналіз платформ автоматизації інфраструктури</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Критерій оцінювання</th>
+<th style="text-align: left;">HashiCorp Terraform</th>
+<th style="text-align: left;">AWS CloudFormation</th>
+<th style="text-align: left;">Azure Bicep / ARM</th>
+<th style="text-align: left;">GCP Deployment Manager</th>
+<th style="text-align: left;">Приклад з реальної практики</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Цільова область застосування</strong></td>
+<td style="text-align: left;">Мультихмарні та гібридні інфраструктури (AWS, Azure, GCP, VMware, OpenStack)</td>
+<td style="text-align: left;">Виключно екосистема Amazon Web Services</td>
+<td style="text-align: left;">Виключно екосистема Microsoft Azure</td>
+<td style="text-align: left;">Виключно екосистема Google Cloud Platform</td>
+<td style="text-align: left;">Розгортання резервного датацентру одночасно в AWS та приватному кластері Proxmox VE</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Синтаксична парадигма</strong></td>
+<td style="text-align: left;">Декларативна мова HCL або конфігураційний JSON</td>
+<td style="text-align: left;">Структуровані документи JSON або YAML</td>
+<td style="text-align: left;">Спеціалізована мова Bicep DSL (компіляція в ARM JSON)</td>
+<td style="text-align: left;">Розмітка YAML у поєднанні з шаблонами Python / Jinja2</td>
+<td style="text-align: left;">Опис конфігурації мікросервісного кластера із 50 параметризованими сутностями</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Модель відстеження стану</strong></td>
+<td style="text-align: left;">Явне зовнішнє збереження у файлі <code>terraform.tfstate</code></td>
+<td style="text-align: left;">Неявне внутрішнє керування на рівні сервісу AWS</td>
+<td style="text-align: left;">Неявне керування через контрольну площину Azure Fabric</td>
+<td style="text-align: left;">Неявне збереження стану в базі платформи GCP</td>
+<td style="text-align: left;">Відновлення пошкодженого зв'язку між конфігурацією та хмарним інстансом</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Час доступності нових API-функцій</strong></td>
+<td style="text-align: left;">Залежить від випуску оновлень плагінів провайдера</td>
+<td style="text-align: left;">Миттєва нативна доступність у день релізу (Day-0)</td>
+<td style="text-align: left;">Миттєва нативна доступність у день релізу (Day-0)</td>
+<td style="text-align: left;">Миттєва нативна доступність у день релізу (Day-0)</td>
+<td style="text-align: left;">Термінове впровадження нового типу апаратного шифрування дисків хмари</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Можливості алгоритмічної генерації</strong></td>
+<td style="text-align: left;">Обмежені вбудованими функціями та директивами HCL</td>
+<td style="text-align: left;">Статичний опис із базовими псевдофункціями</td>
+<td style="text-align: left;">Модульна композиція та функції перетворення типів</td>
+<td style="text-align: left;">Повноцінне процедурне програмування на Python</td>
+<td style="text-align: left;">Динамічний розрахунок пулу IP-адрес для 100 ізольованих філій підприємства</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_4">Вказівки для самостійного осмислення</h3>
+<ol>
+<li>
+<p>Зіставте алгебраїчне визначення ідемпотентності системних перетворень із реальними сценаріями збоїв мережевих викликів хмарного API під час виконання операцій виділення дискових накопичувачів, звернувши увагу на ризики часткового застосування змін.</p>
+</li>
+<li>
+<p>Проаналізуйте топологію власного навчального або виробничого проєкту комп'ютерної мережі та побудуйте орієнтований граф взаємозв'язків компонентів, виокремивши критичний шлях розгортання та потенційні точки паралельної ініціалізації ресурсів.</p>
+</li>
+<li>
+<p>Дослідіть архітектурні наслідки заміни мови розмітки JSON на транскомпільовану мову Bicep у хмарному середовищі Azure з точки зору зменшення синтаксичної ентропії коду та зниження ймовірності виникнення інженерних помилок.</p>
+</li>
+</ol>
+<h2 id="2-iac_1">2. Методологія та аналіз граничних умов. Управління станом, безпека конвеєрів розгортання та інженерні обмеження IaC</h2>
+<h3 id="21">2.1. Життєвий цикл і структура файлу стану інфраструктури, вимоги до віддалених бекендів, політики шифрування та синхронізація метаданих ресурсів</h3>
+<p>Управління життєвим циклом інфраструктури в декларативних системах опирається на спеціалізований артефакт — файл стану, відомий у середовищі HashiCorp Terraform як <code>terraform.tfstate</code>. Цей документ у форматі JSON виконує роль моста між абстрактними деклараціями ресурсів у конфігураційних файлах та реальними сутностями, розгорнутими у хмарі. Файл стану фіксує не лише зіставлення імен ресурсів із їхніми хмарними ідентифікаторами, але й зберігає повні знімки атрибутів, службові метадані, версії схем провайдерів та інформацію про явні й неявні залежності.</p>
+<p>Внутрішня організація файлу стану містить сувору таксономію полів. Метаатрибут <code>serial</code> є монотонно зростаючим цілочисельним лічильником, значення якого інкрементується під час кожної успішної модифікації інфраструктури, що уможливлює контроль хронологічної послідовності версій. Поле <code>lineage</code> містить глобально унікальний ідентифікатор екземпляра інфраструктурного проєкту, який генерується під час первинної ініціалізації та запобігає випадковому накладанню або перезапису стану абсолютно іншим проєктом. Масив <code>resources</code> структурує інформацію про кожен керований компонент, включаючи тип провайдера, внутрішні унікальні ідентифікатори, режим виділення та повний хеш конфігураційних властивостей.</p>
+<p>Збереження файлу стану на локальних робочих станціях інженерів у промислових середовищах є неприпустимим через низку деструктивних факторів. По-перше, виникає неминуча розсинхронізація локальних копій стану між учасниками команди розробки. По-друге, маніфест стану за своєю архітектурною природою містить усі конфіденційні параметри у відкритому нешифрованому вигляді, включаючи первинні паролі до систем управління базами даних, сертифікати TLS, приватні ключі та токени доступу, які повертаються хмарними API під час створення ресурсів.</p>
+<p>Для вирішення цих проблем застосовується архітектурний патерн <strong>віддаленого бекенду (Remote Backend)</strong>. Віддалений бекенд делегує функції зберігання стану хмарним сховищам високої доступності, таким як Amazon Simple Storage Service (S3), Google Cloud Storage або Azure Blob Storage. До надійного сховища стану висуваються три критичні інженерні вимоги:</p>
+<ul>
+<li>
+<p>Обов'язкове шифрування даних у стані спокою (Encryption at Rest) із використанням алгоритму AES-256 або сервісів керування криптографічними ключами (AWS KMS, Azure Key Vault, HashiCorp Vault), що унеможливлює несанкціонований доступ до конфіденційних атрибутів ресурсів у разі фізичного викрадення носія.</p>
+</li>
+<li>
+<p>Забезпечення суворої версійності об'єктів (Object Versioning), що дозволяє здійснювати покроковий аудит дій інженерів та виконувати миттєве відновлення попередніх коректних версій стану у разі його пошкодження чи аварійного скидання під час невдалого оновлення.</p>
+</li>
+<li>
+<p>Підтримка безпечного транспорту (Encryption in Transit) за протоколом TLS версії не нижче 1.3 для нейтралізації загроз перехоплення трафіку під час передачі диференційних планів між локальним клієнтом або раннером та центральним сховищем.</p>
+</li>
+</ul>
+<hr />
+<h3 id="22">2.2. Механізми запобігання стану перегонів при розподіленій модифікації інфраструктури за допомогою протоколів розподіленого блокування</h3>
+<p>Паралельна робота декількох інженерів або одночасний запуск незалежних конвеєрів автоматизації над спільним інфраструктурним кодом створює ризик виникнення <strong>стану перегонів (Race Condition)</strong>. Якщо два процеси одночасно зчитають ідентичний початковий стан інфраструктури, згенерують незалежні плани змін та почнуть одночасно застосовувати їх до хмарного середовища, файл стану зазнає фатального пошкодження внаслідок взаємного перезапису транзакцій, що призведе до втрати зв'язку між маніфестами та реальними обчислювальними ресурсами.</p>
+<p>Для забезпечення принципу взаємного виключення (Mutual Exclusion) під час виконання операцій запису використовується технологія <strong>розподіленого блокування стану (State Locking)</strong>. У хмарній екосистемі блокування реалізується або за допомогою розподілених сховищ пар «ключ-значення» із підтримкою транзакційної узгодженості, таких як Amazon DynamoDB, або через нативні механізми лізингу блобів (Blob Lease), реалізовані в Azure Storage.</p>
+<p>Формалізація протоколу розподіленого блокування стану описується такою послідовністю транзакційних кроків:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 1 (Формування дескриптора):} &amp; \quad \mathcal{D}_{\text{lock}} = \langle \text{LockID}, \text{OperationID}, \text{Actor}, \text{Timestamp} \rangle \\
+\text{Крок 2 (Атомарна спроба захоплення):} &amp; \quad \text{PutItem}(\mathcal{D}_{\text{lock}}) \quad \text{за умови} \quad \text{attribute\_not\_exists}(\text{LockID}) \\
+\text{Крок 3 (Отримання та фіксація мютексу):} &amp; \quad \mathcal{M} = \begin{cases} 1, &amp; \text{якщо запис створено (блокування успішне)} \\ 0, &amp; \text{якщо ключ існує (стан гонитви, аварійна зупинка)} \end{cases} \\
+\text{Крок 4 (Критична секція розгортання):} &amp; \quad \text{Виконання CRUD-операцій над хмарним API та оновлення } S_{\text{actual}} \\
+\text{Крок 5 (Атомарне вивільнення блокування):} &amp; \quad \text{DeleteItem}(\text{LockID}) \quad \text{за умови} \quad \text{OperationID} = \mathcal{D}_{\text{lock}}.\text{OperationID}
+\end{aligned}
+\]</div>
+<p>де дескриптор <span class="arithmatex">\(\mathcal{D}_{\text{lock}}\)</span> фіксує ідентифікатор проєкту <span class="arithmatex">\(\text{LockID}\)</span>, унікальний хеш операції <span class="arithmatex">\(\text{OperationID}\)</span>, ідентифікатор сесії ініціатора <span class="arithmatex">\(\text{Actor}\)</span> та часову мітку <span class="arithmatex">\(\text{Timestamp}\)</span>, а змінна <span class="arithmatex">\(\mathcal{M}\)</span> позначає бінарний стан блокувального мютексу.</p>
+<p>Діаграма послідовності демонструє динаміку конкурентної боротьби двох незалежних процесів за право виконання інфраструктурних змін.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    actor DevA as Інженер A (Pull Request)
+    actor DevB as Інженер B (Emergency Hotfix)
+    participant LockDB as База блокувань (DynamoDB / Blob Lease)
+    participant StateStore as Сховище стану (S3 / Blob Storage)
+    participant CloudAPI as Хмарний провайдер (AWS / Azure)
+
+    DevA-&gt;&gt;LockDB: Запит атомарного захоплення LockID
+    LockDB--&gt;&gt;DevA: Мютекс захоплено (HTTP 200 OK)
+    DevA-&gt;&gt;StateStore: Зчитування поточного файлу стану (terraform.tfstate)
+    StateStore--&gt;&gt;DevA: Актуальний знімок стану інфраструктури
+
+    par Конкурентна спроба
+        DevB-&gt;&gt;LockDB: Запит атомарного захоплення того самого LockID
+        LockDB--&gt;&gt;DevB: Помилка: Ресурс заблоковано іншим процесом (HTTP 423 Locked)
+        Note over DevB: Аварійне завершення роботи для запобігання колізії
+    and Виконання критичної секції
+        DevA-&gt;&gt;CloudAPI: Виконання операцій виділення ресурсів
+        CloudAPI--&gt;&gt;DevA: Підтвердження завершення виділення
+        DevA-&gt;&gt;StateStore: Запис модифікованого стану (новий serial)
+        DevA-&gt;&gt;LockDB: Атомарне видалення LockID (звільнення мютексу)
+        LockDB--&gt;&gt;DevA: Блокування успішно знято
+    end</code></pre>
+<p>Якщо блокування не може бути зняте автоматично через критичний збій операційного середовища раннера або раптове знеструмлення мережевого обладнання, стан залишається заблокованим на невизначений термін. У таких граничних випадках регламент вимагає примусової деблокації адміністратором шляхом верифікації відсутності активних процесів і виконання команди <code>force-unlock</code> із зазначенням конкретного <code>LockID</code>.</p>
+<hr />
+<h3 id="23-gitops-oidc-">2.3. Архітектура конвеєрів тестування й доставки інфраструктури за принципами GitOps із застосуванням федеративної OIDC-автентифікації</h3>
+<p>Парадигма <strong>GitOps</strong> масштабує принципи безперервної інтеграції та доставки (CI/CD) на сферу управління системною архітектурою. Головний постулат GitOps проголошує: єдиним джерелом правди про цільовий стан інфраструктури є репозиторій версій Git. Усі модифікації здійснюються виключно через механізм запитів на злиття коду, а синхронізація між оголошеним та фактичним станами делегується автоматизованим конвеєрам розгортання без прямого доступу людей до робочого хмарного оточення.</p>
+<p>Традиційним вузьким місцем безпеки таких конвеєрів довгий час залишалося використання довгоживучих статичних ключів доступу, таких як пари секретів хмарних провайдерів, збережені у змінних середовища раннерів. Компрометація цих секретів або їхнє випадкове потрапляння у відкриті журнали збірки створює загрозу повної втрати контролю над хмарною інфраструктурою.</p>
+<blockquote>
+<p><strong>ВАЖЛИВО:</strong> Використання статичних довготривалих облікових записів у конвеєрах автоматизації заборонено сучасними стандартами кібербезпеки; автентифікація автономних агентів розгортання повинна базуватися виключно на короткоживучих сесійних токенах, отриманих через механізм федеративної довіри.</p>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> Згідно зі статистичними звітами фірми GitGuardian, за останні три роки понад сімдесят відсотків інцидентів витоку корпоративних хмарних облікових даних траплялися саме через випадкову фіксацію статичних пар ключів у публічних репозиторіях або у відкритих журналах виконання конвеєрів CI/CD.</p>
+</blockquote>
+<p>Сучасним стандартом безпечного зв'язку між серверами збірки та хмарними платформами є федеративна автентифікація на базі відкритого протоколу <strong>OpenID Connect (OIDC)</strong>. За цієї схеми між сервером конвеєра (наприклад, GitHub Actions або GitLab CI) та службою управління ідентифікацією хмари (AWS IAM, Azure Active Directory) встановлюються постійні довірчі відносини без передачі паролів.</p>
+<p>Раннер збірки отримує підписаний криптографічним ключем токен JSON Web Token (JWT), що містить контекстні атрибути виконання — <strong>твердження (Claims)</strong>. Серед цих тверджень обов'язково фіксуються назва репозиторію, ідентифікатор гілки, автор запуску та контрольна сума середовища. Хмарна підсистема перевіряє достовірність цифрового підпису емітента токена, зіставляє твердження із попередньо сконфігурованою політикою довіри та видає раннеру тимчасові креденшали доступу з обмеженим часом дії (зазвичай від 15 до 60 хвилин), які автоматично анулюються після завершення кроку розгортання.</p>
+<hr />
+<h3 id="24">2.4. Комплексний статичний аналіз безпеки маніфестів, аудит відповідності регуляторним політикам та прогнозування витрат інфраструктури</h3>
+<p>Інженерна концепція зміщення контролю вліво (<strong>Shift-Left</strong>) вимагає виявлення помилок конфігурації, дефектів безпеки та архітектурних прорахунків на найраніших стадіях життєвого циклу, до моменту безпосереднього виділення ресурсів у хмарі. З цією метою до конвеєрів доставки інфраструктури інтегрується комплекс спеціалізованих статичних аналізаторів.</p>
+<p>Підсистема контролю кодової бази охоплює лінтери синтаксису, сканери вразливостей, перевізники політик корпоративної безпеки та аналізатори вартості хмарних послуг. Сканери безпеки, такі як Checkov, tfsec та Trivy, здійснюють парсинг коду маніфестів та аналізують абстрактне синтаксичне дерево на відповідність бенчмаркам Центру інтернет-безпеки (CIS Benchmarks). Вони автоматично блокують спроби створення відкритих портів у Security Groups, виділення нешифрованих дискових масивів або публічно доступних бакетів об'єктного сховища.</p>
+<p>Паралельно з аудитом безпеки інструменти класу <strong>Policy as Code</strong> (наприклад, Open Policy Agent з мовою специфікації Rego) дозволяють компаніям алгоритмічно регламентувати корпоративні правила використання хмари. Інструмент перевіряє бінарний план розгортання на відповідність суворим організаційним обмеженням, зокрема дозволеним географічним регіонам розгортання, обов'язковим спискам тегів вартості та лімітам типів процесорних інстансів. </p>
+<p>Утиліти фінансового моделювання (зокрема Infracost) виконують декомпозицію запланованих ресурсів, зіставляють їх із публічними прейскурантами хмарних провайдерів і вираховують різницю щомісячних фінансових витрат безпосередньо в інтерфейсі рецензування коду.</p>
+<p>Порівняльний аналіз провідних методологій та інструментів контролю якості інфраструктурного коду зведено в таблиці 2.1.</p>
+<p><em>Таблиця 2.1 — Порівняльна матриця інструментів валідації та контролю якості інфраструктурного коду</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Методологія / Інструмент</th>
+<th style="text-align: left;">Рівень перевірки та ціль</th>
+<th style="text-align: left;">Складність впровадження</th>
+<th style="text-align: left;">Критичні ризики / Обмеження</th>
+<th style="text-align: left;">Приклад з реальної практики</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Синтаксичний лінтинг (TFLint)</strong></td>
+<td style="text-align: left;">Аналіз абстрактного синтаксичного дерева, перевірка відповідності типів і правил іменування провайдерів</td>
+<td style="text-align: left;">Низька (локальний запуск або швидкий крок у CI)</td>
+<td style="text-align: left;">Не здатний виявити логічні та архітектурні дефекти зв'язності компонентів інфраструктури</td>
+<td style="text-align: left;">Виявлення застарілих типів інстансів віртуальних машин до запуску планування</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Статичний аналіз безпеки SAST (Checkov / tfsec)</strong></td>
+<td style="text-align: left;">Перевірка маніфестів на наявність архітектурних вразливостей і порушень стандартів CIS та NIST</td>
+<td style="text-align: left;">Середня (вимагає налаштування винятків і порогів блокування збірок)</td>
+<td style="text-align: left;">Можлива висока частка хибнопозитивних спрацьовувань (False Positives) у складних модульних структурах</td>
+<td style="text-align: left;">Блокування спроби відкриття SSH-порту 22 для глобального Інтернету <code>0.0.0.0/0</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Політики як код (Open Policy Agent / Rego)</strong></td>
+<td style="text-align: left;">Семантичний аудит бінарного плану виконання інфраструктури на відповідність регламентам компанії</td>
+<td style="text-align: left;">Висока (потребує написання складних декларативних правил мовою Rego)</td>
+<td style="text-align: left;">Високий поріг входження для інженерів, ризик блокування термінових критичних виправлень</td>
+<td style="text-align: left;">Заборона створення будь-яких обчислювальних потужностей за межами європейських датацентрів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Фінансовий аудит FinOps (Infracost)</strong></td>
+<td style="text-align: left;">Моделювання та прогнозування динаміки грошових витрат на базі різниці в структурі ресурсів</td>
+<td style="text-align: left;">Низька (підключення через API до прайс-листів хмари)</td>
+<td style="text-align: left;">Не враховує динамічні складові вартості трафіку, плаваючих запитів до баз даних та систем автоскейлінгу</td>
+<td style="text-align: left;">Розрахунок подорожчання інфраструктури при переході з HDD на високопродуктивні NVMe диски</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Наскрізне тестування (Terratest / Go)</strong></td>
+<td style="text-align: left;">Повне фізичне створення тестових ізольованих ресурсів, перевірка їхньої функціональності та негайне видалення</td>
+<td style="text-align: left;">Дуже висока (вимагає знання мови Go та тривалого часу виконання конвеєра)</td>
+<td style="text-align: left;">Висока фінансова вартість виділення реальних ресурсів та значні часові затримки в конвеєрах (до годин)</td>
+<td style="text-align: left;">Перевірка доступності веб-сервісу всередині приватної підмережі через балансувальник навантаження</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="25-iac-api">2.5. Критичні бар'єри та практичні обмеження парадигми IaC: десинхронізація стану, проблема первинного бутстрапінгу, тротлінг API та ризики безпеки</h3>
+<p>Попри революційні переваги автоматизації, парадигма «Інфраструктура як код» має суворі системні та фізичні граничні умови, за яких теоретичні моделі втрачають ефективність або стають джерелом катастрофічних збоїв.</p>
+<p>Першим фундаментальним бар'єром є <strong>порушення монополії на управління станом</strong>. Якщо в інфраструктурі поряд із конвеєром автоматизації зберігається можливість ручного втручання через вебінтерфейс або аварійні CLI-скрипти, система потрапляє у стан десинхронізації, аналогічний розщепленню мозку (Split-Brain). У таких умовах рушій узгодження стикається із непередбачуваними наслідками: якщо інженер вручну видалив підмережу в хмарі, подальша спроба коду розгорнути залежну віртуальну машину викличе лавину каскадних помилок хмарного API, паралізуючи весь цикл розгортання.</p>
+<p>Другим інженерним бар'єром виступає <strong>проблема первинного бутстрапінгу («курки та яйця»)</strong>. Для того щоб Terraform міг надійно функціонувати у командному режимі, йому необхідний віддалений бекенд зі сховищем стану та базою блокувань. Проте самі ці ресурси (наприклад, бакет AWS S3 та таблиця DynamoDB) також є об'єктами хмарної інфраструктури. Спроба описати ці первинні ресурси тим самим кодом, який буде в них зберігатися, створює замкнену циклічну залежність. Для її подолання інженери змушені застосовувати двоетапний підхід: спершу створювати бекенд через локальний стан, мігрувати його у хмару, і лише потім підключати віддалену оркестрацію для решти систем.</p>
+<p>Третьою критичною граничною умовою є <strong>ліміти та тротлінг хмарних інтерфейсів (API Rate Limiting)</strong>. При масштабуванні інфраструктури до тисяч об'єктів фаза оновлення стану надсилає величезну кількість паралельних HTTP-запитів до API хмарного провайдера. Контролери API публічних хмар для захисту від перевантажень активують захисні механізми примусового обмеження швидкості обробки запитів, повертаючи помилки коду HTTP 429 Too Many Requests. За умови недостатнього налаштування алгоритмів експоненційного відступу (Exponential Backoff) це призводить до раптового переривання процесу розгортання та фіксації стану у невизначеному напівзруйнованому вигляді.</p>
+<p>Четвертим бар'єром є <strong>проблема управління динамічними секретами всередині файлу стану</strong>. Навіть якщо змінна в маніфесті мови HCL позначена прапорцем <code>sensitive = true</code>, що блокує її відображення в терміналі чи журналах збірки, вона однаково записується у файл стану віддаленого бекенду у відкритому текстовому вигляді. Якщо зловмисник отримає доступ до сховища файлів стану через недостатньо сувору політику розмежування доступу на рівні об'єктного сховища, вся інформаційна безпека корпоративної системи буде повністю скомпрометована.</p>
+<hr />
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Під час виконання етапу розгортання нової підмережі в інфраструктурному проєкті раннер CI/CD аварійно завершив роботу через знеструмлення хоста, не виконавши очищення мютексу блокування. Наступний запуск конвеєра зависає з помилкою отримання блокування стану (HTTP 423 Locked). Якою має бути строга послідовність інженерних дій для безпечного відновлення процесу розгортання без ризику втрати цілісності даних стану?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: Ідентифікація відсутності паралельних процесів, ручне зняття блокування через ідентифікатор LockID та примусова синхронізація стану.</strong></p>
+<ol>
+<li>
+<p>Послідовний інженерний алгоритм вирішення проблеми:</p>
+</li>
+<li>
+<p>Крок 1: Проведення аудиту активних процесів. Необхідно достеменно переконатися в журналах CI/CD та на хостах збірки, що аварійний процес розгортання повністю припинив роботу і не продовжує фонове надсилання запитів до API хмарного провайдера.</p>
+</li>
+<li>
+<p>Крок 2: Отримання дескриптора мертвого блокування. Із системного журналу помилки Terraform витягується унікальний рядок <code>LockID</code> (наприклад, <code>b41d2f78-654c-4e89-9132-7634bc6719ab</code>), що однозначно вказує на конкретний сеанс, який залишив запис у базі блокувань.</p>
+</li>
+<li>
+<p>Крок 3: Виконання контрольованого деблокування. Адміністратор із відповідними привілеями виконує команду <code>terraform force-unlock &lt;LockID&gt;</code>. Це видаляє запис мютексу зі сховища блокувань (DynamoDB або Azure Blob Lease).</p>
+</li>
+<li>
+<p>Крок 4: Аудит розбіжностей та синхронізація. Запускається процедура оновлення контексту за допомогою команди <code>terraform refresh</code> або генерація плану <code>terraform plan</code>. Рушій опитує хмару через API, звіряє її з останнім зафіксованим станом і встановлює, чи не залишилися ресурси у незавершеному або проміжному стані, після чого конвеєр може бути перезапущений у штатному режимі.</p>
+</li>
+<li>
+<p>Аналіз некоректних дій: спроба просто перезапустити команду без зняття блокування призводитиме до нескінченного очікування звільнення мютексу; ручне видалення всього файлу стану або таблиці блокувань спричинить втрату метаданих про всю інфраструктуру, після чого Terraform почне дублювати ресурси та генерувати помилки конфлікту унікальних імен об'єктів.</p>
+</li>
+</ol>
+</details>
+<h2 id="3_1">3. Практичний індустріальний / фаховий кейс. Наскрізне проєктування відмовостійкого хмарного середовища</h2>
+<h3 id="31-terraform-gitops-github-actions-oidc-aws">3.1. Комплексний фаховий кейс. Синтез мультирегіонального відмовостійкого контуру телеметрії кіберфізичної системи засобами Terraform та GitOps-пайплайну GitHub Actions з OIDC-автентифікацією в AWS</h3>
+<h4 id="_5">Постановка задачі / ситуації</h4>
+<p>Промислове підприємство розгортає систему моніторингу критичної кіберфізичної інфраструктури (розумної енергомережі класу Smart Grid), яка об'єднує <span class="arithmatex">\(N = 50\,000\)</span> розподілених інтелектуальних датчиків телеметрії. Датчики здійснюють періодичне надсилання пакетів даних із параметрами напруги, частоти та температури на центральні вузли обробки. Головною інженерною вимогою є забезпечення безперервної доступності сервісу з коефіцієнтом готовності не нижче <span class="arithmatex">\(99{,}99\%\)</span> (допустимий сумарний час простою не більше 52,6 хвилин на рік) та максимальним часом наскрізної затримки обробки <span class="arithmatex">\(L \le 50\text{ мс}\)</span>. </p>
+<p>Для досягнення поставлених показників архітектура системи має функціонувати в режимі активного резервування (<strong>Active-Passive Hot-Standby</strong>) у двох географічно віддалених регіонах публічної хмари Amazon Web Services: основному <code>eu-central-1</code> (Франкфурт) та резервному <code>eu-west-1</code> (Дублін). Вся інфраструктура, включаючи мережеві топології VPC, кластери безсерверних контейнерів AWS Fargate, глобально репліковані бази даних Amazon DynamoDB та політики DNS-перемикання Amazon Route 53, повинна розгортатися суто декларативно через Terraform. До конвеєра розгортання висуваються безкомпромісні вимоги безпеки: повна заборона постійних секретів у репозиторії (використання OIDC), автоматичний захист від стану перегонів при паралельних запусках конвеєрів та суворий контроль щомісячного бюджету.</p>
+<p>Параметри технічного завдання та граничні обмеження наведено в таблиці 3.1.</p>
+<p><em>Таблиця 3.1 — Вхідні параметри, технічні та бюджетні обмеження кіберфізичної системи</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Параметр системи</th>
+<th style="text-align: left;">Числове значення</th>
+<th style="text-align: left;">Одиниці вимірювання</th>
+<th style="text-align: left;">Системні обмеження та коментарі</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Кількість сенсорів (<span class="arithmatex">\(N\)</span>)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(50\,000\)</span></td>
+<td style="text-align: left;">одиниць</td>
+<td style="text-align: left;">Активні контролери телеметрії Smart Grid</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Частота опитування (<span class="arithmatex">\(f\)</span>)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(0{,}2\)</span></td>
+<td style="text-align: left;">Гц (1 пакет / 5 с)</td>
+<td style="text-align: left;">Рівномірний розподіл генерації трафіку</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Розмір корисного пакета (<span class="arithmatex">\(S_{\text{packet}}\)</span>)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(512\)</span></td>
+<td style="text-align: left;">Байт</td>
+<td style="text-align: left;">Бінарний серіалізований формат Protocol Buffers</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Цільова доступність (<span class="arithmatex">\(A_{\text{target}}\)</span>)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(99{,}99\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\%\)</span></td>
+<td style="text-align: left;">Клас надійності High Availability (Four Nines)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Граничний бюджет витрат (<span class="arithmatex">\(C_{\text{max}}\)</span>)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(4\,500\)</span></td>
+<td style="text-align: left;">USD / місяць</td>
+<td style="text-align: left;">Сукупна вартість обчислень, мережі та сховищ</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Основний регіон розгортання</strong></td>
+<td style="text-align: left;"><code>eu-central-1</code></td>
+<td style="text-align: left;">назва регіону</td>
+<td style="text-align: left;">Первинний обчислювальний кластер (Frankfurt)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Резервний регіон розгортання</strong></td>
+<td style="text-align: left;"><code>eu-west-1</code></td>
+<td style="text-align: left;">назва регіону</td>
+<td style="text-align: left;">Резервний контур гарячого відновлення (Ireland)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Гранична затримка передачі (<span class="arithmatex">\(L_{\text{max}}\)</span>)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(50\)</span></td>
+<td style="text-align: left;">мілісекунд</td>
+<td style="text-align: left;">Максимально допустимий час доставки телеметрії</td>
+</tr>
+</tbody>
+</table>
+<p>На рисунку 3.1 наведено комплексну топологію взаємодії конвеєра автоматизованого розгортання та мультирегіональної хмарної інфраструктури.</p>
+<p><pre class="mermaid"><code>flowchart TD
+    subgraph RepoPipeline ["Система контролю версій та CI/CD"]
+        GitRepo["GitHub Repository (HCL Code)"] --&gt; ActionsRunner["GitHub Actions Runner"]
+        ActionsRunner &lt;--&gt;|1. OIDC AssumeRoleWithWebIdentity| AWS_IAM["AWS IAM Role (No Secrets)"]
+        ActionsRunner &lt;--&gt;|2. Acquire State Lock| LockTable[("DynamoDB Lock Table: LockID")]
+        ActionsRunner &lt;--&gt;|3. Read / Write State| RemoteS3[("S3 Backend (Encrypted AES-256)")]
+    end
+
+    subgraph AWSCloud ["Хмарна інфраструктура AWS"]
+        DNS["Route 53 Failover Routing Policy"]
+
+        subgraph RegionPrimary ["Primary Region: eu-central-1 (Frankfurt)"]
+            NLB1["Network Load Balancer (Primary)"]
+            ECS1["ECS Fargate Tasks (Telemetry Ingestion)"]
+            NLB1 --&gt; ECS1
+        end
+
+        subgraph RegionSecondary ["Secondary Region: eu-west-1 (Ireland)"]
+            NLB2["Network Load Balancer (Standby)"]
+            ECS2["ECS Fargate Tasks (Standby Fleet)"]
+            NLB2 --&gt; ECS2
+        end
+
+        GlobalDB[("DynamoDB Global Tables (Bi-directional Replication)")]
+
+        DNS --&gt;|Active Traffic| NLB1
+        DNS -.-&gt;|Health Check Failover| NLB2
+        ECS1 --&gt; GlobalDB
+        ECS2 --&gt; GlobalDB
+    end
+
+    ActionsRunner ==&gt;|4. Terraform Apply DAG| RegionPrimary
+    ActionsRunner ==&gt;|4. Terraform Apply DAG| RegionSecondary
+    ActionsRunner ==&gt;|4. Terraform Apply DAG| DNS</code></pre>
+<em>Рисунок 3.1 — Архітектурна блок-схема автоматизованого розгортання мультирегіонального контуру телеметрії</em></p>
+<hr />
+<h4 id="_6">Покроковий аналіз та розв'язок</h4>
+<h5 id="1">Крок 1. Розрахунок вхідного навантаження та смуги пропускання мережі</h5>
+<p>Для визначення вимог до мережевого обладнання та вибору типу балансувальника навантаження необхідно розрахувати вхідну смугу пропускання потоку даних <span class="arithmatex">\(B_{\text{in}}\)</span>, яка генерується датчиками кіберфізичної мережі. Смуга пропускання обчислюється як добуток кількості пристроїв, частоти надсилання повідомлень та розміру одного інформаційного пакета за формулою:</p>
+<div class="arithmatex">\[B_{\text{in}} = N \cdot f \cdot S_{\text{packet}}\]</div>
+<p>Підставляючи вихідні інженерні параметри із таблиці 3.1, отримуємо значення пропускної спроможності, необхідної для гарантування стабільного каналу передачі:</p>
+<div class="arithmatex">\[B_{\text{in}} = 50\,000 \cdot 0{,}2 \text{ с}^{-1} \cdot 512 \text{ Байт} = 5\,120\,000 \text{ Байт/с} = 5{,}12 \text{ МБ/с}\]</div>
+<p>Переводячи отриману величину у стандартні мережеві одиниці вимірювання, знаходимо мінімальну пропускну здатність вхідного мережевого інтерфейсу:</p>
+<div class="arithmatex">\[B_{\text{in (Mbps)}} = \frac{5\,120\,000 \cdot 8}{10^6} = 40{,}96 \text{ Мбіт/с}\]</div>
+<p>Сумарна інтенсивність потоку транзакцій становить <span class="arithmatex">\(\lambda = N \cdot f = 50\,000 \cdot 0{,}2 = 10\,000 \text{ транзакцій/с (RPS)}\)</span>. Таке навантаження вимагає використання балансувальника мережевого рівня Network Load Balancer (NLB), що функціонує на рівні L4 моделі OSI та забезпечує обробку мільйонів запитів за секунду з мінімальною додатковою апаратною затримкою менше однієї мілісекунди.</p>
+<h5 id="2">Крок 2. Побудова спрямованого ациклічного графа розгортання та розрахунок критичного шляху</h5>
+<p>Процес створення мультирегіональної системи засобами Terraform формалізується спрямованим ациклічним графом <span class="arithmatex">\(G = (V, E)\)</span>. Для мінімізації часу розгортання інструмент ініціалізує незалежні ресурси паралельно. </p>
+<p>Критичний шлях графа <span class="arithmatex">\(P_{\text{crit}}\)</span> визначається як ланцюг залежностей із максимальною сумою часу ініціалізації компонентів:</p>
+<div class="arithmatex">\[T_{\text{provision}} = \sum_{v \in P_{\text{crit}}} \tau(v)\]</div>
+<p>де <span class="arithmatex">\(\tau(v)\)</span> — тривалість апаратного виділення та мережевої реєстрації ресурсу <span class="arithmatex">\(v\)</span> через API хмарного провайдера. </p>
+<p>Критичний ланцюг розгортання в основному регіоні включає послідовність таких кроків:</p>
+<ol>
+<li>
+<p>Створення віртуальної приватної мережі <code>aws_vpc.primary</code> із часом виділення <span class="arithmatex">\(\tau_1 = 15\text{ с}\)</span>.</p>
+</li>
+<li>
+<p>Створення ізольованих підмереж <code>aws_subnet.primary_private</code> із часом конфігурації <span class="arithmatex">\(\tau_2 = 10\text{ с}\)</span>.</p>
+</li>
+<li>
+<p>Розгортання реплікованої таблиці бази даних <code>aws_dynamodb_table.telemetry</code> із реплікою в сусідній регіон із часом <span class="arithmatex">\(\tau_3 = 120\text{ с}\)</span>.</p>
+</li>
+<li>
+<p>Ініціалізація сервісу балансування навантаження <code>aws_lb.primary_nlb</code> та реєстрація цільових груп із тривалістю <span class="arithmatex">\(\tau_4 = 90\text{ с}\)</span>.</p>
+</li>
+<li>
+<p>Розгортання контейнерних завдань <code>aws_ecs_service.telemetry_processor</code> із часом виділення <span class="arithmatex">\(\tau_5 = 65\text{ с}\)</span>.</p>
+</li>
+</ol>
+<p>Підставляючи значення затримок у формулу критичного шляху, отримуємо теоретичний мінімум тривалості виконання команди <code>terraform apply</code>:</p>
+<div class="arithmatex">\[T_{\text{provision}} = 15\text{ с} + 10\text{ с} + 120\text{ с} + 90\text{ с} + 65\text{ с} = 300\text{ с} = 5{,}0 \text{ хвилин}\]</div>
+<p>Завдяки паралельному обходу графа компоненти резервного регіону <code>eu-west-1</code> створюються одночасно з первинним, тому загальний час виділення інфраструктури не подвоюється, а лімітується тривалістю розгортання найповільнішого ресурсу — глобальної бази даних DynamoDB.</p>
+<h5 id="3_2">Крок 3. Моделювання надійності та системної доступності</h5>
+<p>Для перевірки досягнення цільового рівня надійності <span class="arithmatex">\(A_{\text{target}} \ge 99{,}99\%\)</span> розрахуємо ймовірність безвідмовної роботи системи. За умови незалежності відмов інфраструктури в різних регіонах з індивідуальними коефіцієнтами доступності <span class="arithmatex">\(A_1 = A_2 = 0{,}999\)</span> та ймовірністю коректного спрацьовування DNS-механізму перемикання трафіку <span class="arithmatex">\(P_{\text{failover}} = 0{,}9995\)</span>, результуюча доступність обчислюється за правилом додавання ймовірностей для паралельних систем:</p>
+<div class="arithmatex">\[A_{\text{sys}} = 1 - \left( (1 - A_1) \cdot (1 - A_2) \right) - \left( (1 - P_{\text{failover}}) \cdot (1 - A_1) \right)\]</div>
+<p>Підставивши значення, отримаємо математичну оцінку доступності:</p>
+<div class="arithmatex">\[A_{\text{sys}} = 1 - \left( (1 - 0{,}999) \cdot (1 - 0{,}999) \right) - \left( (1 - 0{,}9995) \cdot (1 - 0{,}999) \right) = 1 - 10^{-6} - 5 \cdot 10^{-7} = 0{,}9999985\]</div>
+<p>Отримане значення доступності становить <span class="arithmatex">\(99{,}99985\%\)</span>, що повністю перекриває нормативні вимоги бізнесу (<span class="arithmatex">\(99{,}99\%\)</span>) і забезпечує стійкість системи навіть у разі повної катастрофічної деградації датацентрів одного з європейських регіонів.</p>
+<h5 id="4">Крок 4. Оцінка фінансових витрат та відповідності бюджетному ліміту</h5>
+<p>Щомісячні операційні витрати <span class="arithmatex">\(C_{\text{total}}\)</span> формуються із вартості контейнерних обчислень Fargate (<span class="arithmatex">\(C_{\text{compute}}\)</span>), витрат на мережеві балансувальники NLB (<span class="arithmatex">\(C_{\text{nlb}}\)</span>), витрат на обслуговування таблиць DynamoDB (<span class="arithmatex">\(C_{\text{db}}\)</span>) та вартості передачі міжрегіонального трафіку (<span class="arithmatex">\(C_{\text{traffic}}\)</span>):</p>
+<div class="arithmatex">\[C_{\text{total}} = C_{\text{compute}} + C_{\text{nlb}} + C_{\text{db}} + C_{\text{traffic}}\]</div>
+<p>На основі чинних тарифів хмарного постачальника маємо такі складові щомісячного бюджету:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(C_{\text{compute}} = 1\,850\text{ USD}\)</span> (основний та мінімальний резервний пули Fargate на базі 16 vCPU та 32 ГБ RAM).</p>
+</li>
+<li>
+<p><span class="arithmatex">\(C_{\text{nlb}} = 75\text{ USD}\)</span> (два активні мережеві балансувальники в обох регіонах із підтримкою обробки LCU).</p>
+</li>
+<li>
+<p><span class="arithmatex">\(C_{\text{db}} = 1\,420\text{ USD}\)</span> (режим On-Demand для обробки <span class="arithmatex">\(10\,000\text{ WCU}\)</span> та крос-регіональної реплікації).</p>
+</li>
+<li>
+<p><span class="arithmatex">\(C_{\text{traffic}} = 450\text{ USD}\)</span> (вихідний трафік обсягом <span class="arithmatex">\(13{,}25\text{ ТБ/місяць}\)</span> за тарифом <span class="arithmatex">\(0{,}034\text{ USD/ГБ}\)</span>).</p>
+</li>
+</ul>
+<p>Сумарна місячна вартість експлуатації становить:</p>
+<div class="arithmatex">\[C_{\text{total}} = 1\,850 + 75 + 1\,420 + 450 = 3\,795\text{ USD / місяць}\]</div>
+<p>Отримане значення <span class="arithmatex">\(3\,795\text{ USD} \le 4\,500\text{ USD}\)</span>, що свідчить про повну фінансову валідність спроєктованої архітектури із запасом міцності за бюджетом у <span class="arithmatex">\(15{,}6\%\)</span>.</p>
+<hr />
+<h4 id="_7">Інтерпретація результатів та альтернативні сценарії</h4>
+<p>Застосування парадигми «Інфраструктура як код» на базі Terraform та безпечного конвеєра з OIDC-автентифікацією дозволило спроєктувати та верифікувати мультирегіональний контур з гарантованою відмовостійкістю <span class="arithmatex">\(99{,}99985\%\)</span> за повного дотримання вимог кібербезпеки та бюджетних обмежень.</p>
+<p>Аналіз альтернативних сценаріїв виявляє такі системні залежності:</p>
+<ol>
+<li>
+<p>Якщо кількість сенсорів масштабується на порядок (<span class="arithmatex">\(N = 500\,000\)</span>), потік даних зросте до <span class="arithmatex">\(409{,}6\text{ Мбіт/с}\)</span>, а витрати на режим DynamoDB On-Demand сягнуть понад <span class="arithmatex">\(14\,000\text{ USD}\)</span>, що вимагатиме від архітектора переходу на ресурсно-виділений режим із попередньо зарезервованою ємністю (Provisioned Capacity with Auto-Scaling), а також агрегації телеметрії у часові буфери засобами Amazon Kinesis Data Streams.</p>
+</li>
+<li>
+<p>Якщо нормативні вимоги законодавства (наприклад, суворий регламент GDPR) вимагатимуть збереження даних виключно в межах однієї юрисдикції без права резервного копіювання до Ірландії, рішення з мультирегіональним резервуванням стане юридично недійсним. У такому разі архітектуру необхідно модифікувати до мультивендорної гібридної моделі, де резервний контур розгортається у локальному приватному кластері OpenStack або Proxmox VE всередині країни за допомогою відповідних провайдерів Terraform.</p>
+</li>
+</ol>
+<hr />
+<h3 id="32">3.2. Зведена довідкова система лекції</h3>
+<p>Підсумкова система термінів і концепцій, вивчених у рамках модуля, систематизована в таблиці 3.2.</p>
+<p><em>Таблиця 3.2 — Зведена довідкова система концепцій та інструментів автоматизації хмари</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термін / Концепція</th>
+<th style="text-align: left;">Формалізація / Сутність</th>
+<th style="text-align: left;">Реальний кейс застосування</th>
+<th style="text-align: left;">Основне обмеження / Ризик</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Інфраструктура як код (IaC)</strong></td>
+<td style="text-align: left;">Опис топологій комп'ютерних систем у вигляді текстових декларативних або імперативних маніфестів</td>
+<td style="text-align: left;">Автоматизоване створення 100 ідентичних тестових середовищ для розробників ПЗ</td>
+<td style="text-align: left;">Висока початкова вартість рефакторингу та опису успадкованих систем (Legacy)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Дрейф конфігурації (Drift)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(\Delta S(t) = S_{\text{actual}}(t) \setminus S_{\text{declared}} \cup S_{\text{declared}} \setminus S_{\text{actual}}(t)\)</span></td>
+<td style="text-align: left;">Виявлення ручної модифікації правил міжмережевого екрана в консолі веб-доступу</td>
+<td style="text-align: left;">Не виявляється без регулярного активного опитування API хмарного постачальника</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ідемпотентність</strong></td>
+<td style="text-align: left;">Алгебраїчна інваріантність системного перетворення: <span class="arithmatex">\(\mathcal{F}(\mathcal{F}(S)) = \mathcal{F}(S) = S_{\text{target}}\)</span></td>
+<td style="text-align: left;">Багаторазовий перезапуск падіння конвеєра CI без дублювання віртуальних машин</td>
+<td style="text-align: left;">Порушується у разі використання недекларативних скриптових вставок (Local-Exec)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Файл стану (<code>.tfstate</code>)</strong></td>
+<td style="text-align: left;">Мапінг реальних хмарних метаданих та ID на абстрактні декларації ресурсів у форматі JSON</td>
+<td style="text-align: left;">Збереження інформації про згенеровані паролі баз даних та прив'язку дисків до серверів</td>
+<td style="text-align: left;">Ризик витоку конфіденційних даних у відкритому вигляді у разі компрометації сховища</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Блокування стану (Locking)</strong></td>
+<td style="text-align: left;">Розподілений мютекс взаємного виключення на базі записів NoSQL чи орендних блоків сховища</td>
+<td style="text-align: left;">Запобігання колізіям під час одночасного злиття двох Pull Request інженерами команди</td>
+<td style="text-align: left;">Зависання процесів при аварійному падінні раннера (потребує <code>force-unlock</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Спрямований ациклічний граф (DAG)</strong></td>
+<td style="text-align: left;">Топологічна модель зв'язків <span class="arithmatex">\(G=(V, E)\)</span>, що визначає черговість виділення об'єктів</td>
+<td style="text-align: left;">Паралельна ініціалізація 20 незалежних підмереж у різних зонах доступності</td>
+<td style="text-align: left;">Виникнення фатальної помилки розгортання при появі циклічних посилань у коді</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>GitOps</strong></td>
+<td style="text-align: left;">Методологія управління інфраструктурою, за якої репозиторій Git є єдиним джерелом правди</td>
+<td style="text-align: left;">Повне відновлення промислового кластера після масштабного збою шляхом повторного запуску CI</td>
+<td style="text-align: left;">Повна залежність процесу розгортання від доступності сервісів хостингу коду (GitHub/GitLab)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Федерація OIDC</strong></td>
+<td style="text-align: left;">Безпарольна автентифікація раннерів збірки на базі короткоживучих підписаних токенів JWT</td>
+<td style="text-align: left;">Отримання прав доступу до хмари AWS агентом GitHub Actions без статичних ключів</td>
+<td style="text-align: left;">Ризик надмірних привілеїв у разі некоректної фільтрації контекстних Claims</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Політики як код (PaC)</strong></td>
+<td style="text-align: left;">Алгоритмічна перевірка інфраструктурного плану правилами безпеки перед його застосуванням</td>
+<td style="text-align: left;">Заборона створення публічно відкритих бакетів S3 на рівні корпоративного стандарту</td>
+<td style="text-align: left;">Уповільнення швидкості релізів через додатковий етап верифікації у пайплайні</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="33">3.3. Контрольні питання та завдання</h3>
+<h4 id="_8">Прикладні тестові завдання</h4>
+<ol>
+<li>
+<p>Під час автоматизованого оновлення конфігурації кластера за допомогою Terraform конвеєр завершився аварійно через тайм-аут мережі. Після усунення мережевого збою повторний запуск процесу негайно завершується помилкою <code>Error: Error acquiring the state lock: ConditionalCheckFailedException</code>. Що є технічною першопричиною цієї поведінки?</p>
+<ul>
+<li>
+<p>A. Файл стану був остаточно пошкоджений та видалений із хмарного сховища віддаленого бекенду.</p>
+</li>
+<li>
+<p>B. Запис блокування у базі даних DynamoDB залишився активним, оскільки попередній процес перервався до виконання секції звільнення мютексу.</p>
+</li>
+<li>
+<p>C. Хмарний провайдер заблокував IP-адресу раннера через перевищення допустимих лімітів викликів API.</p>
+</li>
+<li>
+<p>D. Провайдер Terraform виявив циклічну залежність між ресурсами у файлі маніфесту HCL.</p>
+</li>
+</ul>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p>Повне аналітичне обґрунтування: протокол розподіленого блокування перед початком модифікації записує спеціальний дескриптор <code>LockID</code> у таблицю DynamoDB за допомогою умови атомарності <code>attribute_not_exists(LockID)</code>. Якщо процес виконання операції аварійно обривається (наприклад, через знеструмлення або переривання мережевого з'єднання), блок коду, який відповідає за коректне завершення роботи та видалення запису з таблиці, не викликається. Наступний запуск зчитує наявний активний запис блокування, отримує відмову в атомарному створенні власного блокування та перериває роботу, запобігаючи небезпеці одночасного перезапису.</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+<ul>
+<li>
+<p>Варіант A є хибним, оскільки віддалений бекенд підтримує ізоляцію та версійність; незавершений запис не видаляє об'єкт із бакета.</p>
+</li>
+<li>
+<p>Варіант C є хибним, оскільки помилка <code>ConditionalCheckFailedException</code> є внутрішньою помилкою логіки умовних операцій DynamoDB, а не помилкою тротлінгу HTTP 429.</p>
+</li>
+<li>
+<p>Варіант D є хибним, оскільки перевірка ациклічності графа здійснюється на етапі синтаксичної валідації до спроби захоплення мютексу віддаленого стану.</p>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>Інженер налаштовує безпечну взаємодію між конвеєром GitHub Actions та AWS за допомогою OpenID Connect (OIDC). Після запуску конвеєр отримує відмову <code>AccessDenied: Not authorized to perform sts:AssumeRoleWithWebIdentity</code>. Журнал показує, що токен JWT був успішно згенерований платформою GitHub. У якому компоненті конфігурації найімовірніше допущено архітектурну помилку?</p>
+<ul>
+<li>
+<p>A. У конфігураційному файлі <code>terraform.tfstate</code> не встановлено прапорець шифрування AES-256.</p>
+</li>
+<li>
+<p>B. У довірчій політиці (Trust Policy) ролі AWS IAM параметри умовних тверджень (Claims <code>repo</code> або <code>aud</code>) не збігаються з контекстом запиту раннера.</p>
+</li>
+<li>
+<p>C. На сервері GitHub Actions закінчився термін дії ліцензійного сертифіката провайдера Terraform.</p>
+</li>
+<li>
+<p>D. Балансувальник навантаження NLB відхилив запит автентифікації через перевищення ліміту вхідних пакетів.</p>
+</li>
+</ul>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p>Повне аналітичне обґрунтування: сервіс безпеки AWS Security Token Service (STS) перевіряє твердження (Claims), зашиті всередину підписаного криптографічного токена JWT. Якщо довірча політика ролі IAM містить умову, що запити дозволено приймати лише від репозиторію <code>repo:org/prod-infra:ref:refs/heads/main</code>, а конвеєр був запущений із гілки функціоналу <code>feature/network</code>, виникає невідповідність тверджень, і STS блокує видачу тимчасових облікових даних із кодом відмови у доступі.</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+<ul>
+<li>
+<p>Варіант A є хибним, тому що помилка виникає на етапі ідентифікації процесу у сервісі AWS STS до початку читання файлу стану.</p>
+</li>
+<li>
+<p>Варіант C є хибним, оскільки Terraform є відкритим програмним забезпеченням і не використовує механізми ліцензійних ключів для плагінів у цій операції.</p>
+</li>
+<li>
+<p>Варіант D є хибним, оскільки балансувальники навантаження не беруть участі у взаємодії між раннером та сервісом автентифікації IAM/STS.</p>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>У проєкті Terraform виникла потреба створити віртуальну мережу, групу безпеки та інстанс віртуального сервера. Інженер описав ресурси, але під час виконання планування виникла критична помилка графа залежностей <code>Cycle: aws_security_group.web, aws_instance.server</code>. Яка помилка в маніфесті спричинила цей стан?</p>
+<ul>
+<li>
+<p>A. Сервер посилається на ID групи безпеки, а одне із правил цієї групи безпеки одночасно посилається на публічну IP-адресу цього самого сервера.</p>
+</li>
+<li>
+<p>B. Для віртуального сервера виділено більший обсяг пам'яті, ніж фізично доступно на апаратному хості.</p>
+</li>
+<li>
+<p>C. У маніфесті використано провайдер AWS застарілої версії, що не підтримує протокол IPv6.</p>
+</li>
+<li>
+<p>D. До бази блокувань DynamoDB було надіслано два паралельні запити на читання.</p>
+</li>
+</ul>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: A.</strong></p>
+<ol>
+<li>
+<p>Повне аналітичне обґрунтування: циклічна залежність у графі виникає тоді, коли неможливо встановити лінійний порядок топологічного сортування. Якщо для створення сервера <code>aws_instance</code> потрібен готовий ідентифікатор групи безпеки <code>aws_security_group</code>, а правило всередині самої групи безпеки як вхідний аргумент вимагає IP-адресу ще не створеного сервера, утворюється контур <span class="arithmatex">\(V_{\text{server}} \to V_{\text{sg}} \to V_{\text{server}}\)</span>, який ядро Terraform Core відхиляє як математично нерозв'язний.</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+<ul>
+<li>
+<p>Варіант B є хибним, оскільки ресурси валідуються на відповідність типам інстансів хмари на етапі виконання виклику API, а не під час перевірки графа.</p>
+</li>
+<li>
+<p>Варіант C є хибним, оскільки застарілість провайдера призводить до синтаксичних помилок відсутності полів, а не до замкнених циклів залежностей.</p>
+</li>
+<li>
+<p>Варіант D є хибним, оскільки база блокувань не бере участі в аналізі структури зв'язків між ресурсами всередині HCL-файлів.</p>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>Інфраструктура бази даних розгорнута декларативно через Terraform. Системний адміністратор усунув аварію у вихідний день, увійшов до вебінтерфейсу консолі AWS і вручну змінив тип дискового сховища екземпляра бази даних із <code>gp2</code> на високопродуктивний <code>io2</code>, подвоївши розмір диска. Що відбудеться під час наступного виконання штатного автоматизованого конвеєра <code>terraform apply</code>?</p>
+<ul>
+<li>
+<p>A. Конвеєр автоматично оновить вихідний код маніфесту в репозиторії Git, узгодивши його зі змінами в консолі.</p>
+</li>
+<li>
+<p>B. Рушій виявить дрейф конфігурації, розрахує план приведення реального ресурсу до задекларованого в коді стану і спробує повернути тип <code>gp2</code>.</p>
+</li>
+<li>
+<p>C. Terraform проігнорує зміну і видалить базу даних із хмари для усунення розбіжності.</p>
+</li>
+<li>
+<p>D. Хмарне сховище S3 заблокує доступ до файлу стану через виявлення невідповідності цифрового підпису.</p>
+</li>
+</ul>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p>Повне аналітичне обґрунтування: декларативний рушій вважає єдиним авторитетним стандартом код, зафіксований у репозиторії. Під час кроку <code>refresh</code> Terraform опитує API хмари, зчитує нові параметри (<code>io2</code>), порівнює їх із кодом (де залишився <code>gp2</code>), фіксує дрейф конфігурації <span class="arithmatex">\(\Delta S(t)\)</span> і генерує коригувальний план дій, спрямований на повернення ресурсу в попередній стан, описаний кодом.</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+<ul>
+<li>
+<p>Варіант A є хибним, оскільки Terraform ніколи не модифікує вихідні файли коду HCL у репозиторії Git на основі даних із хмари.</p>
+</li>
+<li>
+<p>Варіант C є хибним, оскільки перестворення ресурсу відбувається лише у випадках, коли зміна атрибута вимагає видалення відповідно до обмежень хмарного API (ForceNew), а модифікація типу диска зазвичай є динамічною операцією оновлення на місці.</p>
+</li>
+<li>
+<p>Варіант D є хибним, оскільки файл стану фіксує технічний стан середовища і не виконує функції криптографічного захисту від авторизованих адміністративних операцій.</p>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<hr />
+<h4 id="_9">Завдання для самостійної роботи</h4>
+<h5 id="_10">Постановка задачі</h5>
+<p>Уявіть себе провідним інженером комп'ютерних систем у нафтогазовій компанії. Вашій команді доручено перевести критичну систему збору даних із 200 клапанних вузлів магістрального газопроводу з ручного управління (ClickOps) на парадигму «Інфраструктура як код». Наразі всі сервери збору даних розгорнуті вручну в приватному хмарному середовищі під управлінням OpenStack, а база даних конфігурацій знаходиться в Amazon Web Services. Поточний стан не задокументований, у вихідні дні інженери періодично вносять несанкціоновані зміни безпосередньо через SSH-консолі, що періодично спричиняє розсинхронізацію та аварійні зупинки телеметрії.</p>
+<h5 id="_11">Завдання для виконання</h5>
+<ol>
+<li>
+<p>Складіть формалізований перелік інфраструктурних компонентів системи та сформуйте початковий план імпорту наявних фізичних і віртуальних ресурсів у стан Terraform без зупинки поточного технологічного процесу збору телеметрії.</p>
+</li>
+<li>
+<p>Спроєктуйте архітектуру безпечного віддаленого бекенду для збереження файлу стану, реалізувавши захист від витоку чутливих конфігураційних параметрів та налаштувавши механізм взаємного блокування змін.</p>
+</li>
+<li>
+<p>Розробіть маніфест автоматизованого конвеєра збірки на базі GitHub Actions або GitLab CI, у якому передбачено багатоетапну статичну валідацію коду, аудит безпеки за стандартами CIS та безпарольну автентифікацію за протоколом OpenID Connect.</p>
+</li>
+<li>
+<p>Проведіть аналіз граничних умов спроєктованої системи та опишіть регламент дій чергового інженера на випадок одночасного зависання розподіленого блокування та виявлення критичного дрейфу конфігурації під час аварії на газопроводі.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2888 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../lk6/">
+      
+      
+        <link rel="next" href="../../lb/lb1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#7" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lk1/" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lb/lb1/" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Модель нульової довіри, формалізований контроль доступу та архітектура розподіленої спостережуваності
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-disaster-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерія високої доступності, стратегії Disaster Recovery та розподілена аналітика даних
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування відмовостійкої архітектури критичної інформаційної системи
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Модель нульової довіри, формалізований контроль доступу та архітектура розподіленої спостережуваності
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Модель нульової довіри, формалізований контроль доступу та архітектура розподіленої спостережуваності">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-shared-responsibility-model-zero-trust-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Математична формалізація моделі спільної відповідальності за безпеку (Shared Responsibility Model) та постулати архітектури нульової довіри (Zero-Trust Architecture) в хмарних середовищах
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-iam-rbac-abac-sts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Булева алгебра оцінки політик IAM, гранулярне розмежування повноважень за моделями RBAC та ABAC і криптографічний механізм генерації короткоживучих токенів безпеки через службу STS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-observability-opentelemetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Тріада розподіленої спостережуваності (Observability): чисельні часові ряди метрик, централізовані структуровані журнали подій та граф наскрізного розподіленого трасування транзакцій на базі стандарту OpenTelemetry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-z-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Статистичні алгоритми виявлення інфраструктурних аномалій у режимі реального часу з використанням динамічних коридорів сезонності та аналізу Z-оцінки
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-disaster-recovery_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерія високої доступності, стратегії Disaster Recovery та розподілена аналітика даних
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Інженерія високої доступності, стратегії Disaster Recovery та розподілена аналітика даних">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-bcdr-rto-rpo-mtbf-mttr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Формалізовані критерії надійності: аналітична оптимізація цільової функції витрат BCDR у залежності від метрик RTO, RPO, MTBF та MTTR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-backup-and-restore-pilot-light-warm-standby-multi-region-active-active" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Архітектурні патерни аварійного відновлення (Backup and Restore, Pilot Light, Warm Standby, Multi-Region Active-Active) та механізми асинхронної і синхронної реплікації сховищ даних
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-data-lake-aws-athena-google-bigquery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Алгоритмічні засади безсерверних аналітичних рушіїв над Data Lake (AWS Athena, Google BigQuery) та оптимізація фінансових витрат через використання бінарних стовпчикових форматів зберігання даних
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-mlops-data-drift-psi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Методологія MLOps: детекція концептуального зсуву даних (Data Drift) у промислових моделях машинного навчання за індексом стабільності популяції (PSI) та контури автоматичного перенавчання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-cap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Критичні бар'єри та граничні обмеження: мережева латентність передачі даних між віддаленими дата-центрами, теорема CAP і дилема узгодженості станів розподілених баз даних при розривах каналів зв'язку
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування відмовостійкої архітектури критичної інформаційної системи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Проєктування відмовостійкої архітектури критичної інформаційної системи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-iot-smartgrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Проєктування відмовостійкої інфраструктури системи обробки телеметрії IoT-мережі розумного енергокомплексу SmartGrid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Проєктування відмовостійкої інфраструктури системи обробки телеметрії IoT-мережі розумного енергокомплексу SmartGrid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rto-rpo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Аналітичний розрахунок оптимальних метрик стійкості RTO та RPO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Синтез архітектурної стратегії аварійного відновлення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Оптимізація витрат на безсерверний аналітичний конвеєр
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-data-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Розрахунок показника зсуву даних (Data Drift) для прогнозної моделі споживання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Модель нульової довіри, формалізований контроль доступу та архітектура розподіленої спостережуваності
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-disaster-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерія високої доступності, стратегії Disaster Recovery та розподілена аналітика даних
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування відмовостійкої архітектури критичної інформаційної системи
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Модель нульової довіри, формалізований контроль доступу та архітектура розподіленої спостережуваності
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Модель нульової довіри, формалізований контроль доступу та архітектура розподіленої спостережуваності">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-shared-responsibility-model-zero-trust-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Математична формалізація моделі спільної відповідальності за безпеку (Shared Responsibility Model) та постулати архітектури нульової довіри (Zero-Trust Architecture) в хмарних середовищах
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-iam-rbac-abac-sts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Булева алгебра оцінки політик IAM, гранулярне розмежування повноважень за моделями RBAC та ABAC і криптографічний механізм генерації короткоживучих токенів безпеки через службу STS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-observability-opentelemetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Тріада розподіленої спостережуваності (Observability): чисельні часові ряди метрик, централізовані структуровані журнали подій та граф наскрізного розподіленого трасування транзакцій на базі стандарту OpenTelemetry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-z-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Статистичні алгоритми виявлення інфраструктурних аномалій у режимі реального часу з використанням динамічних коридорів сезонності та аналізу Z-оцінки
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-disaster-recovery_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерія високої доступності, стратегії Disaster Recovery та розподілена аналітика даних
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Інженерія високої доступності, стратегії Disaster Recovery та розподілена аналітика даних">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-bcdr-rto-rpo-mtbf-mttr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Формалізовані критерії надійності: аналітична оптимізація цільової функції витрат BCDR у залежності від метрик RTO, RPO, MTBF та MTTR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-backup-and-restore-pilot-light-warm-standby-multi-region-active-active" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Архітектурні патерни аварійного відновлення (Backup and Restore, Pilot Light, Warm Standby, Multi-Region Active-Active) та механізми асинхронної і синхронної реплікації сховищ даних
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-data-lake-aws-athena-google-bigquery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Алгоритмічні засади безсерверних аналітичних рушіїв над Data Lake (AWS Athena, Google BigQuery) та оптимізація фінансових витрат через використання бінарних стовпчикових форматів зберігання даних
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-mlops-data-drift-psi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Методологія MLOps: детекція концептуального зсуву даних (Data Drift) у промислових моделях машинного навчання за індексом стабільності популяції (PSI) та контури автоматичного перенавчання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-cap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Критичні бар'єри та граничні обмеження: мережева латентність передачі даних між віддаленими дата-центрами, теорема CAP і дилема узгодженості станів розподілених баз даних при розривах каналів зв'язку
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування відмовостійкої архітектури критичної інформаційної системи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Проєктування відмовостійкої архітектури критичної інформаційної системи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-iot-smartgrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Проєктування відмовостійкої інфраструктури системи обробки телеметрії IoT-мережі розумного енергокомплексу SmartGrid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Проєктування відмовостійкої інфраструктури системи обробки телеметрії IoT-мережі розумного енергокомплексу SmartGrid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rto-rpo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Аналітичний розрахунок оптимальних метрик стійкості RTO та RPO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Синтез архітектурної стратегії аварійного відновлення
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Оптимізація витрат на безсерверний аналітичний конвеєр
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-data-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Розрахунок показника зсуву даних (Data Drift) для прогнозної моделі споживання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="7">Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних</h1>
+<h2 id="_1">Мета лекції</h2>
+<p>Формування у майбутніх інженерів комп'ютерних систем цілісного комплексу фундаментальних знань та інженерних компетентностей, необхідних для проєктування, розгортання та експлуатації захищених, високонадійних та еластичних розподілених хмарних систем. Вивчення дисципліни орієнтоване на глибоке освоєння математичних, алгоритмічних та архітектурних засад контролю доступу на базі парадигми нульової довіри (Zero-Trust), створення замкнених контурів спостережуваності (Observability) для детекції аномалій в інфраструктурі, мінімізацію ризиків простою за допомогою стратегій аварійного відновлення (Disaster Recovery) з урахуванням граничних умов теореми CAP, а також побудову оптимізованих за вартістю конвеєрів аналітики великих даних і моніторингу стабільності моделей машинного навчання в промислових середовищах.</p>
+<h2 id="_2">Очікувані результати навчання</h2>
+<ol>
+<li>
+<p><strong>Знання та розуміння.</strong> Студенти повинні продемонструвати поглиблене розуміння математичного апарату оцінки політик безпеки IAM, моделей розподілу відповідальності (Shared Responsibility Model), інфраструктурних засад спостережуваності розподілених систем, а також теоретичних критеріїв оптимізації часових параметрів <span class="arithmatex">\(RTO\)</span> та <span class="arithmatex">\(RPO\)</span> при проєктуванні катастрофостійких середовищ.</p>
+</li>
+<li>
+<p><strong>Застосування.</strong> Студенти повинні навчитися синтезувати декларативні правила доступу за моделями RBAC та ABAC, розгортати контури розподіленої телеметрії з кореляційним трасуванням запитів, конфігурувати сценарії автоматизованого відновлення ресурсів (Auto-remediation) та налаштовувати крос-регіональну синхронізацію даних для мінімізації часу відновлення сервісів.</p>
+</li>
+<li>
+<p><strong>Аналіз.</strong> Студенти повинні критично аналізувати вузькі місця в мережевих та обчислювальних топологіях хмарних рішень за допомогою системних журналів аудиту, детермінувати причини апаратних та програмних збоїв за метриками Z-score, а також розраховувати компромісні співвідношення між фінансовою вартістю надлишкових географічних кластерів і гарантованим рівнем доступності сервісів (<span class="arithmatex">\(SLA\)</span>).</p>
+</li>
+<li>
+<p><strong>Оцінювання та синтез.</strong> Студенти повинні набути здатності самостійно проєктувати відмовостійкі архітектурні комплекси на базі багаторегіональних конфігурацій, обґрунтовувати вибір між різними стратегіями аварійного відновлення з урахуванням затримок мережевої реплікації даних, а також розробляти високоефективні безсерверні конвеєри для аналітичної обробки неструктурованих масивів інформації з детекцією дрейфу ознак (Data Drift) у системах штучного інтелекту.</p>
+</li>
+</ol>
+<hr />
+<h2 id="_3">Детальний покроковий план лекції</h2>
+<h3 id="1-">1. Теоретико-концептуальний базис. Модель нульової довіри, формалізований контроль доступу та архітектура розподіленої спостережуваності</h3>
+<ul>
+<li>
+<p>1.1. Математична формалізація моделі спільної відповідальності за безпеку (Shared Responsibility Model) та постулати архітектури нульової довіри (Zero-Trust Architecture) в хмарних середовищах.</p>
+</li>
+<li>
+<p>1.2. Булева алгебра оцінки політик IAM, гранулярне розмежування повноважень за моделями RBAC та ABAC і криптографічний механізм генерації короткоживучих токенів безпеки через службу STS.</p>
+</li>
+<li>
+<p>1.3. Тріада розподіленої спостережуваності (Observability): чисельні часові ряди метрик, централізовані структуровані журнали подій та граф наскрізного розподіленого трасування транзакцій на базі стандарту OpenTelemetry.</p>
+</li>
+<li>
+<p>1.4. Статистичні алгоритми виявлення інфраструктурних аномалій у режимі реального часу з використанням динамічних коридорів сезонності та аналізу Z-оцінки.</p>
+</li>
+</ul>
+<h3 id="2-disaster-recovery">2. Методологія та аналіз граничних умов. Інженерія високої доступності, стратегії Disaster Recovery та розподілена аналітика даних</h3>
+<ul>
+<li>
+<p>2.1. Формалізовані критерії надійності: аналітична оптимізація цільової функції витрат BCDR у залежності від метрик RTO, RPO, MTBF та MTTR.</p>
+</li>
+<li>
+<p>2.2. Архітектурні патерни аварійного відновлення (Backup and Restore, Pilot Light, Warm Standby, Multi-Region Active-Active) та механізми асинхронної і синхронної реплікації сховищ даних.</p>
+</li>
+<li>
+<p>2.3. Алгоритмічні засади безсерверних аналітичних рушіїв над Data Lake (AWS Athena, Google BigQuery) та оптимізація фінансових витрат через використання бінарних стовпчикових форматів зберігання даних.</p>
+</li>
+<li>
+<p>2.4. Методологія MLOps: детекція концептуального зсуву даних (Data Drift) у промислових моделях машинного навчання за індексом стабільності популяції (PSI) та контури автоматичного перенавчання.</p>
+</li>
+<li>
+<p>2.5. Критичні бар'єри та граничні обмеження: мережева латентність передачі даних між віддаленими дата-центрами, теорема CAP і дилема узгодженості станів розподілених баз даних при розривах каналів зв'язку.</p>
+</li>
+</ul>
+<h3 id="3">3. Практичний індустріальний / фаховий кейс. Проєктування відмовостійкої архітектури критичної інформаційної системи</h3>
+<p><strong>Тема наскрізної задачі.</strong> «Проєктування відмовостійкої інфраструктури системи обробки телеметрії IoT-мережі розумного енергокомплексу з багаторівневим IAM-захистом, моніторингом відхилень та крос-регіональним Disaster Recovery»</p>
+<h2 id="1-_1">1. Теоретико-концептуальний базис. Модель нульової довіри, формалізований контроль доступу та архітектура розподіленої спостережуваності</h2>
+<h3 id="11-shared-responsibility-model-zero-trust-architecture">1.1. Математична формалізація моделі спільної відповідальності за безпеку (Shared Responsibility Model) та постулати архітектури нульової довіри (Zero-Trust Architecture) в хмарних середовищах</h3>
+<p>Архітектурна парадигма хмарних обчислень докорінно змінює традиційну модель інформаційної безпеки, що базувалася на захисті фізичного локального периметра організації. У розподіленому комп'ютерному середовищі відповідальність за захист апаратних ресурсів, системного оточення та користувацьких даних чітко розмежовується між постачальником хмарних послуг (<strong>Cloud Service Provider, CSP</strong>) і споживачем (<strong>Customer</strong>) у межах концепції, відомої як <strong>Модель спільної відповідальності за безпеку (Shared Responsibility Model)</strong>. </p>
+<p>Для строгого інженерного аналізу зазначений розподіл можна формалізувати за допомогою теорії множин. Нехай уся множина компонентів обчислювальної системи позначається як <span class="arithmatex">\(\mathcal{L}\)</span>, де кожен шар ієрархічно відповідає за певний рівень абстракції:</p>
+<div class="arithmatex">\[\mathcal{L} = \{ l_{\text{phys}}, l_{\text{hw}}, l_{\text{hyp}}, l_{\text{net}}, l_{\text{os}}, l_{\text{runtime}}, l_{\text{app}}, l_{\text{data}} \}\]</div>
+<p>У цій моделі елемент <span class="arithmatex">\(l_{\text{phys}}\)</span> позначає фізичний захист периметра серверних приміщень і систем життєзабезпечення центрів обробки даних, <span class="arithmatex">\(l_{\text{hw}}\)</span> — надійність апаратного серверного та комутаційного обладнання, <span class="arithmatex">\(l_{\text{hyp}}\)</span> — шар гіпервізора та ізоляцію віртуальних машин, <span class="arithmatex">\(l_{\text{net}}\)</span> — контроль віртуалізованих мережевих потоків і маршрутизації, <span class="arithmatex">\(l_{\text{os}}\)</span> — керування гостьовими операційними системами та встановлення виправлень безпеки ядра, <span class="arithmatex">\(l_{\text{runtime}}\)</span> — конфігурацію контейнерного або інтерпретованого середовища виконання, <span class="arithmatex">\(l_{\text{app}}\)</span> — прикладний вихідний код і логіку сервісів, а <span class="arithmatex">\(l_{\text{data}}\)</span> — класифікацію, керування життєвим циклом та криптографічний захист інформаційних активів.</p>
+<p>Загальний простір відповідальності за безпеку системи <span class="arithmatex">\(\mathcal{S}\)</span> є об'єднанням зон контролю постачальника <span class="arithmatex">\(\mathcal{S}_{\text{CSP}}\)</span> та споживача <span class="arithmatex">\(\mathcal{S}_{\text{Cust}}\)</span>, причому перетин зон у більшості випадків мінімізується для уникнення регуляторної невизначеності:</p>
+<div class="arithmatex">\[\mathcal{S} = \mathcal{S}_{\text{CSP}} \cup \mathcal{S}_{\text{Cust}}, \quad \mathcal{S}_{\text{CSP}} \cap \mathcal{S}_{\text{Cust}} = \emptyset\]</div>
+<p>Межа поділу сфер відповідальності прямо детермінується обраною сервісною моделлю функціонування хмарної інфраструктури:</p>
+<div class="arithmatex">\[\mathcal{S}_{\text{CSP}}(\text{IaaS}) = \{ l_{\text{phys}}, l_{\text{hw}}, l_{\text{hyp}} \}, \quad \mathcal{S}_{\text{Cust}}(\text{IaaS}) = \{ l_{\text{net}}, l_{\text{os}}, l_{\text{runtime}}, l_{\text{app}}, l_{\text{data}} \}\]</div>
+<div class="arithmatex">\[\mathcal{S}_{\text{CSP}}(\text{PaaS}) = \{ l_{\text{phys}}, l_{\text{hw}}, l_{\text{hyp}}, l_{\text{net}}, l_{\text{os}}, l_{\text{runtime}} \}, \quad \mathcal{S}_{\text{Cust}}(\text{PaaS}) = \{ l_{\text{app}}, l_{\text{data}} \}\]</div>
+<div class="arithmatex">\[\mathcal{S}_{\text{CSP}}(\text{SaaS}) = \{ l_{\text{phys}}, l_{\text{hw}}, l_{\text{hyp}}, l_{\text{net}}, l_{\text{os}}, l_{\text{runtime}}, l_{\text{app}} \}, \quad \mathcal{S}_{\text{Cust}}(\text{SaaS}) = \{ l_{\text{data}} \}\]</div>
+<p>Таким чином, у моделі інфраструктури як сервісу клієнт зберігає повний адміністративний контроль над віртуалізованою операційною системою та мережею, водночас беручи на себе ризики щодо їхньої вразливості, тоді як у безсерверних обчисленнях та платформених сервісах операційна безпека делегується провайдеру, залишаючи користувачу контроль виключно над конфігурацією доступу й цілісністю даних.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph CSP_Domain ["Зона відповідальності Cloud Service Provider"]
+        Phys["Фізична інфраструктура центрів обробки даних"]
+        HW["Апаратні платформи серверів та систем зберігання"]
+        Hyp["Шар абстракції віртуалізації та гіпервізор"]
+    end
+
+    subgraph Boundaries ["Межі розмежування відповідальності"]
+        IaaS_Line["Межа IaaS: Віртуальні диски та мережеві адаптери"]
+        PaaS_Line["Межа PaaS: Керовані середовища виконання та СУБД"]
+        SaaS_Line["Межа SaaS: Прикладний програмний інтерфейс"]
+    end
+
+    subgraph Cust_Domain ["Зона відповідальності споживача хмари"]
+        OS["Гостьові операційні системи та системні служби"]
+        NetConf["Віртуальні мережі, таблиці маршрутизації та Security Groups"]
+        IAM_Data["Автентифікація, авторизація IAM та шифрування даних"]
+    end
+
+    Phys --&gt; HW --&gt; Hyp
+    Hyp -.-&gt; IaaS_Line
+    IaaS_Line --&gt; OS --&gt; NetConf
+    NetConf -.-&gt; PaaS_Line
+    PaaS_Line --&gt; IAM_Data
+    IAM_Data -.-&gt; SaaS_Line</code></pre>
+<p>У критично важливих комп'ютерних системах розмиття класичного периметра вимагає переходу до архітектурної парадигми <strong>нульової довіри (Zero-Trust Architecture, ZTA)</strong>. Її основоположні принципи сформульовано у стандарті NIST SP 800-207. </p>
+<p>Головна концептуальна зміна полягає у відмові від неявної довіри до будь-якого компонента системи незалежно від його фізичного чи логічного розташування (навіть якщо запит походить із внутрішньої ізольованої підмережі). Будь-яка взаємодія розглядається крізь призму потенційної скомпрометованості середовища передачі даних. </p>
+<p>Архітектура нульової довіри базується на трьох взаємопов'язаних постулатах:</p>
+<ol>
+<li>
+<p>Кожен суб'єкт, транзакція та інформаційний потік повинні проходити безперервну динамічну автентифікацію та авторизацію перед наданням доступу до цільового ресурсу.</p>
+</li>
+<li>
+<p>Реалізація принципу найменших привілеїв здійснюється шляхом надання доступу строго в обсязі, необхідному для виконання конкретної атомарної задачі, із обмеженням тривалості сесії.</p>
+</li>
+<li>
+<p>Проєктування топології та програмних інтерфейсів виконується з обов'язковим припущенням, що противник уже присутній усередині інфраструктури, що вимагає тотального шифрування трафіку й мікросегментації мережі.</p>
+</li>
+</ol>
+<p>Динамічне рішення про авторизацію у концепції нульової довіри приймається системним двигуном політик (<strong>Policy Engine</strong>) на основі обчислення функції довіри <span class="arithmatex">\(\mathcal{T}\)</span>. Вона зіставляє параметри суб'єкта <span class="arithmatex">\(s\)</span>, характеристики запитуваної дії <span class="arithmatex">\(a\)</span>, властивості об'єкта <span class="arithmatex">\(r\)</span> та вектор контексту середовища <span class="arithmatex">\(\mathbf{c} = [c_{\text{ip}}, c_{\text{time}}, c_{\text{device}}, c_{\text{geo}}]\)</span> із граничним порогом допустимого ризику <span class="arithmatex">\(\theta_{\text{risk}}\)</span>:</p>
+<div class="arithmatex">\[\mathcal{T}(s, a, r, \mathbf{c}) = \sum_{i=1}^{k} w_i \cdot \phi_i(s, a, r, \mathbf{c})\]</div>
+<p>де <span class="arithmatex">\(\phi_i\)</span> представляють оціночні функції безпеки (наприклад, оцінка відповідності пристрою політикам оновлення, рівень підозрілості IP-адреси, відповідність геолокаційного профілю), а <span class="arithmatex">\(w_i\)</span> — відповідні вагові коефіцієнти. Доступ надається виключно за умови перевищення розрахованого значення довіри над динамічним порогом ризику: <span class="arithmatex">\(\mathcal{T}(s, a, r, \mathbf{c}) \ge \theta_{\text{risk}}\)</span>.</p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У 2019 році злам американського фінансового гіганта Capital One стався через підміну запитів на стороні сервера (<strong>Server-Side Request Forgery, SSRF</strong>) у брандмауері веб-застосунків WAF. Оскільки сервіс працював із надлишково привілейованою IAM-роллю, зловмисник через внутрішній сервіс метаданих EC2 отримав тимчасові токени безпеки та вивантажив понад 100 мільйонів персональних записів клієнтів із сотень кошиків Amazon S3.</p>
+</blockquote>
+<hr />
+<h3 id="12-iam-rbac-abac-sts">1.2. Булева алгебра оцінки політик IAM, гранулярне розмежування повноважень за моделями RBAC та ABAC і криптографічний механізм генерації короткоживучих токенів безпеки через службу STS</h3>
+<p>Центральним ядром реалізації парадигми нульової довіри в сучасних публічних і корпоративних хмарах виступає служба <strong>Керування ідентифікацією та доступом (Identity and Access Management, IAM)</strong>. Архітектурно IAM є розподіленим високонадійним комплексом, що поєднує каталог облікових записів (<strong>Identity Provider</strong>), механізми перевірки автентичності та інтерпретатор декларативних правил безпеки (<strong>Policy Enforcement Point</strong>).</p>
+<p>Розподіл повноважень спирається на дві головні моделі контролю доступу. Першою є <strong>керування доступом на основі ролей (Role-Based Access Control, RBAC)</strong>, за якого права прив'язуються до абстрактних ролей (наприклад, системний адміністратор, мережевий інженер, аудитор безпеки), а користувачі асоціюються з відповідними ролями. Головним обмеженням RBAC в умовах динамічних хмарних систем є неможливість врахування контекстних параметрів запиту без створення надлишкової кількості статичних комбінацій ролей. </p>
+<p>Для подолання цього бар'єра застосовується <strong>керування доступом на основі атрибутів (Attribute-Based Access Control, ABAC)</strong>. У моделі ABAC авторизаційні рішення базуються на наборах атрибутів (або метаданих у вигляді ключ-значення, зазвичай реалізованих як хмарні теги): атрибутах суб'єкта (підрозділ, посада, пройдений тип автентифікації), об'єкта (середовище розгортання, рівень конфіденційності даних, власник проекту) та параметрах середовища (діапазон IP-адрес, поточний час, протокол шифрування).</p>
+<p>Декларативні політики безпеки IAM описуються машиночитаними документами (найчастіше у форматі JSON) і складаються з набору інструкцій. Кожна інструкція містить декларацію ефекту (<strong>Effect</strong>: <code>Allow</code> або <code>Deny</code>), перелік дій (<strong>Action</strong>), перелік цільових ресурсів (<strong>Resource</strong>, що ідентифікуються глобальними уніфікованими іменами на кшталт ARN або Resource ID) та логічний блок контекстних умов (<strong>Condition</strong>).</p>
+<p>Логіка обчислення підсумкового рішення авторизаційного запиту <span class="arithmatex">\(\mathcal{D}(\text{req})\)</span> формалізується в рамках булевої алгебри як суперпозиція правил явного дозволу та явної заборони:</p>
+<div class="arithmatex">\[\mathcal{D}(\text{req}) = \left( \bigvee_{p \in \mathcal{P}_{\text{allow}}} \text{Eval}(p, \text{req}) \right) \bigwedge \neg \left( \bigvee_{q \in \mathcal{P}_{\text{deny}}} \text{Eval}(q, \text{req}) \right)\]</div>
+<p>де <span class="arithmatex">\(\text{req}\)</span> позначає кортеж вхідного запиту <span class="arithmatex">\(\langle \text{Principal}, \text{Action}, \text{Resource}, \text{Context} \rangle\)</span>, <span class="arithmatex">\(\mathcal{P}_{\text{allow}}\)</span> — множина всіх застосовних до запиту політик з інструкцією <code>Effect: Allow</code>, а <span class="arithmatex">\(\mathcal{P}_{\text{deny}}\)</span> — множина політик, що містять інструкцію <code>Effect: Deny</code>. Функція <span class="arithmatex">\(\text{Eval}(p, \text{req})\)</span> є предикатом, який набуває значення <span class="arithmatex">\(\text{true}\)</span> тоді і тільки тоді, коли всі критерії політики <span class="arithmatex">\(p\)</span> за діями, ресурсами та контекстними обмеженнями істинно зіставляються з параметрами запиту <span class="arithmatex">\(\text{req}\)</span>.</p>
+<p>З математичного виразу випливають три фундаментальні правила інтерпретації правил IAM:</p>
+<ol>
+<li>
+<p>За замовчуванням будь-який запит відхиляється на основі принципу неявної заборони (<strong>Default Deny</strong>), якщо відсутня хоча б одна політика, що генерує результат <span class="arithmatex">\(\text{true}\)</span> для підмножини явного дозволу.</p>
+</li>
+<li>
+<p>Для успішного виконання операції необхідна наявність хоча б однієї політики, що явно дозволяє дію над вказаним ресурсом.</p>
+</li>
+<li>
+<p>Якщо хоча б одна політика з множини <span class="arithmatex">\(\mathcal{P}_{\text{deny}}\)</span> оцінюється як <span class="arithmatex">\(\text{true}\)</span>, вона інвертується логічним запереченням і безапеляційно блокує виконання запиту, демонструючи безумовний пріоритет явної заборони (<strong>Explicit Deny</strong>) над будь-якими дозволами.</p>
+</li>
+</ol>
+<p>Для захисту програмних агентів, мікросервісів та апаратних контролерів від компрометації статичних облікових даних у сучасних хмарах застосовується відмова від довготривалих секретних ключів на користь короткоживучих токенів. Цей процес реалізується за допомогою <strong>Служби безпеки токенів (Security Token Service, STS)</strong>.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; Unauthenticated: Ініціалізація інстансу / клієнта
+    Unauthenticated --&gt; Validating: Виклик API STS AssumeRole з підписаним запитом
+    Validating --&gt; Rejected: Невідповідність Trust Policy / Невідомий суб'єкт
+    Rejected --&gt; [*]
+    Validating --&gt; ActiveToken: Успішна валідація та генерація ефемерних креденшалів
+
+    state ActiveToken {
+        [*] --&gt; InUse: Доступ до хмарних ресурсів за допомогою SessionToken
+        InUse --&gt; InUse: Виконання авторизованих операцій
+        InUse --&gt; WarningThreshold: Наближення до часу Expiration (T &lt; 15 хв)
+    }
+
+    WarningThreshold --&gt; Rotating: Фоновий виклик служби оновлення ключів (IMDSv2)
+    Rotating --&gt; ActiveToken: Отримання нового токена без зупинки процесів
+    ActiveToken --&gt; Expired: Час валідності вичерпано (TTL = 0)
+    Expired --&gt; [*]: Блокування подальших запитів (403 Forbidden)</code></pre>
+<p>При використанні тимчасових облікових даних обчислювальний ресурс (наприклад, віртуальна машина або контейнер) звертається до служби метаданих інстансу (<strong>Instance Metadata Service версії 2, IMDSv2</strong>) або безпосередньо викликає API-метод <code>AssumeRole</code> служби STS. Служба перевіряє політику довіри (<strong>Trust Policy</strong>) ролі, визначаючи, чи має право даний ресурс набувати цієї ролі. </p>
+<p>У разі успішної перевірки генерується тимчасовий кортеж, що містить ідентифікатор ключа доступу (<strong>Access Key ID</strong>), секретний ключ (<strong>Secret Access Key</strong>) та криптографічний сесійний токен (<strong>Session Token</strong>), валідність яких обмежується заданим часом життя (<strong>Time To Live, TTL</strong>, від 15 хвилин до 12 годин). Кожен наступний HTTP-запит до API хмарного провайдера підписується за допомогою гешування HMAC-SHA256 (наприклад, алгоритм AWS Signature Version 4), куди обов'язково включається сесійний токен.</p>
+<p><em>Таблиця 7.1 — Систематизація методів та технологій розмежування доступу в розподіленій інфраструктурі</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Парадигма / Механізм</th>
+<th style="text-align: left;">Теоретична основа</th>
+<th style="text-align: left;">Критерій прийняття рішення</th>
+<th style="text-align: left;">Рівень масштабованості</th>
+<th style="text-align: left;">Приклад з реальної практики</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Рольовий контроль (RBAC)</strong></td>
+<td style="text-align: left;">Теорія графів зв'язків користувач-роль</td>
+<td style="text-align: left;">Належність облікового запису до статичної ролі</td>
+<td style="text-align: left;">Низький в динамічних середовищах через розростання кількості ролей</td>
+<td style="text-align: left;">Призначення ролі <code>NetworkAdmin</code> для налаштування VPN-шлюзів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Атрибутивний контроль (ABAC)</strong></td>
+<td style="text-align: left;">Булева алгебра предикатів над множинами метаданих</td>
+<td style="text-align: left;">Збіг значень тегів суб'єкта, об'єкта та контексту середовища</td>
+<td style="text-align: left;">Вкрай високий за рахунок уніфікованих правил політик</td>
+<td style="text-align: left;">Дозвіл запису в чергу повідомлень лише за умови <code>ResourceTag/Env == PrincipalTag/Env</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Списки доступу (ACL)</strong></td>
+<td style="text-align: left;">Таблиці відповідності суб'єкт-право на рівні об'єкта</td>
+<td style="text-align: left;">Пряма наявність ідентифікатора у властивостях ресурсу</td>
+<td style="text-align: left;">Критично низький, ускладнює глобальний централізований аудит</td>
+<td style="text-align: left;">Спадкові дозволи читання/запису для об'єктів у кошиках Amazon S3 або Azure Blob</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Федеративна ідентифікація (SAML / OIDC)</strong></td>
+<td style="text-align: left;">Асиметрична криптографія та інфраструктура відкритих ключів PKI</td>
+<td style="text-align: left;">Наявність валідного криптографічного підпису зовнішнього IdP</td>
+<td style="text-align: left;">Високий у корпоративних мультихмарних сценаріях</td>
+<td style="text-align: left;">Автентифікація інженерів у хмарній консолі через Microsoft Entra ID (Active Directory)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>ТИПОВА ПОМИЛКА:</strong> Збереження статичних довготривалих ключів доступу (IAM Access Keys) безпосередньо всередині конфігураційних файлів застосунків чи кодової бази git-репозиторіїв. У разі компрометації репозиторію зловмисники сканують код ботами за лічені хвилини. Інженерно правильним рішенням є виключне використання IAM-ролей, прив'язаних до інстансів чи контейнерів через IMDSv2, де життєвим циклом та ротацією токенів керує платформа.</p>
+</blockquote>
+<hr />
+<h3 id="13-observability-opentelemetry">1.3. Тріада розподіленої спостережуваності (Observability): чисельні часові ряди метрик, централізовані структуровані журнали подій та граф наскрізного розподіленого трасування транзакцій на базі стандарту OpenTelemetry</h3>
+<p>Підтримання стабільності та діагностика складних високоробастних систем вимагає впровадження концепції <strong>спостережуваності (Observability)</strong>. На відміну від пасивного моніторингу, що констатує збої через аналіз відомих симптомів, спостережуваність є властивістю системи, що дозволяє за її зовнішніми вихідними даними (телеметрією) повністю реконструювати будь-який внутрішній стан, включно з виявленням непередбачених аномалій, що не були запрограмовані у статичних алертах.</p>
+<p>Інженерний каркас спостережуваності базується на так званій тріаді телеметричних сигналів:</p>
+<p>Чисельні <strong>метрики (Metrics)</strong> представляють собою агреговані часові ряди, оптимізовані для швидкого математичного аналізу та моніторингу тенденцій функціонування апаратних і віртуальних ресурсів. Кожна точка метрики описується кортежем:</p>
+<div class="arithmatex">\[M(t) = \langle t, v, \mathcal{K} \rangle\]</div>
+<p>де <span class="arithmatex">\(t\)</span> — часова мітка, <span class="arithmatex">\(v \in \mathbb{R}\)</span> — скалярне числове значення (наприклад, відсоток утилізації CPU, використання пам'яті, кількість дискових операцій IOPS), а <span class="arithmatex">\(\mathcal{K} = \{ (k_1, val_1), \dots, (k_n, val_n) \}\)</span> — скінченна множина пар ключ-значення, що задають вимірність метрики (ідентифікатор інстансу, зона доступності, сервісний домен). </p>
+<p>Метрики характеризуються мінімальними накладними витратами на зберігання й передачу, дозволяючи виконувати високопродуктивні аналітичні агрегації у реальному часі за допомогою таких платформ, як <strong>Amazon CloudWatch Metrics</strong> або <strong>Azure Monitor Metrics</strong>.</p>
+<p>Централізовані структуровані <strong>журнали подій (Logs)</strong> є дискретними, упорядкованими за часом текстовими записами із метаданими, що фіксують події, системні помилки, операції введення-виведення та контекст викликів програмних модулів. Сучасні стандарти вимагають серіалізації журналів у структурований формат JSON:</p>
+<div class="arithmatex">\[L = \langle \text{timestamp}, \text{severity\_level}, \text{source\_component}, \text{payload\_json}, \text{trace\_context} \rangle\]</div>
+<p>Централізований збір і обробка логів у хмарних сховищах (<strong>CloudWatch Logs</strong>, <strong>Azure Log Analytics Workspace</strong>) дозволяє проводити складний аналітичний пошук за допомогою спеціалізованих декларативних мов (Kusto Query Language — KQL, CloudWatch Insights).</p>
+<p>Особливою категорією системних журналів є журнали аудиту дій адміністративного рівня (<strong>AWS CloudTrail</strong>, <strong>Azure Activity Log</strong>). Вони фіксують не внутрішні події застосунку, а кожен виклик хмарного API на рівні площини управління (<strong>Control Plane</strong>). </p>
+<p>Запис аудиту обов'язково містить інформацію про автентифікованого суб'єкта, використаний сертифікат, вихідну IP-адресу, назву методу, параметри тіла запиту, відповідь системи та точний час виконання. Це гарантує повну юридичну невідмовність дій та формує доказову базу при розслідуванні інцидентів безпеки.</p>
+<p>Розподілене наскрізне <strong>трасування (Distributed Tracing)</strong> вирішує проблему аналізу складних мікросервісних та бессерверних графів виконання, де один клієнтський запит декомпонується на десятки асинхронних викликів між слабозв'язаними службами. Траса являє собою орієнтований ациклічний граф (<strong>Directed Acyclic Graph, DAG</strong>), вершинами якого є спани (<strong>Spans</strong>), а ребрами — причинно-наслідкові зв'язки між викликами:</p>
+<div class="arithmatex">\[\mathcal{G}_{\text{trace}} = (\mathcal{V}_{\text{spans}}, \mathcal{E}_{\text{causal}})\]</div>
+<p>Кожен спан інкапсулює унікальний ідентифікатор траси (<code>TraceID</code>), власний ідентифікатор (<code>SpanID</code>), посилання на батьківський спан (<code>ParentSpanID</code>), часовий інтервал виконання операції <span class="arithmatex">\(\Delta t = t_{\text{end}} - t_{\text{start}}\)</span>, назву методу, статус помилки та набір контекстних атрибутів. Стандартизована інтеграція трейсингу здійснюється через відкритий фреймворк <strong>OpenTelemetry (OTel)</strong>, де контекст розподіленої транзакції транслюється крізь мережеві протоколи за допомогою стандартних специфікацій W3C Trace Context через HTTP-заголовки <code>traceparent</code> та <code>tracestate</code>.</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph ClientLayer ["Клієнтський рівень"]
+        Client["Клієнтський браузер / IoT Термінал"]
+    end
+
+    subgraph APILayer ["Шар балансування та API"]
+        APIGW["API Gateway / Вхідний шлюз
+        [Генерація TraceID: 4bf92f3577b34da6]"]
+    end
+
+    subgraph ServicesLayer ["Мікросервісна топологія обробки"]
+        AuthSvc["Сервіс автентифікації
+        [SpanID: 00f067aa0ba902b7]"]
+        OrderSvc["Сервіс обробки замовлень
+        [SpanID: 5fb397be34746a3f]"]
+        DBSvc["Кластер бази даних
+        [SpanID: a2894a7db41f3570]"]
+    end
+
+    Client --&gt;|HTTP POST /order| APIGW
+    APIGW --&gt;|W3C traceparent inject| AuthSvc
+    APIGW --&gt;|W3C traceparent inject| OrderSvc
+    OrderSvc --&gt;|Драйвер зв'язку з БД| DBSvc</code></pre>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> Під час пікового навантаження на систему електронної комерції середній час відповіді сервісу (Mean Latency) становив нормативні 120 мс, проте 1% користувачів стикався із затримками понад 8 секунд (аномалія P99 Tail Latency). Завдяки впровадженню OpenTelemetry та аналізу розподілених спанів в AWS X-Ray інженери виявили, що затримку спричиняла операція конкурентного блокування рядків у реляційній базі даних, яка виникала лише за одночасного списання товарів із нульовим залишком на складі.</p>
+</blockquote>
+<hr />
+<h3 id="14-z-">1.4. Статистичні алгоритми виявлення інфраструктурних аномалій у режимі реального часу з використанням динамічних коридорів сезонності та аналізу Z-оцінки</h3>
+<p>Класичний моніторинг із використанням статичних порогів спрацювання тривог (<strong>Static Thresholds</strong>) демонструє високий рівень помилкових спрацьовувань (<strong>False Positives</strong>) або пропусків інцидентів у хмарних середовищах із вираженими добовими чи тижневими циклами навантаження. Застосування фіксованого ліміту утилізації CPU у 80% може бути критично запізнілим у період нічного мінімуму (коли навантаження не повинно перевищувати 15%) і водночас викликати хибну паніку під час прогнозованого денного піка. </p>
+<p>Сучасні системи спостережуваності (<strong>CloudWatch Anomaly Detection</strong>, <strong>Azure Monitor Dynamic Thresholds</strong>) базуються на апараті математичної статистики та моделях машинного навчання для автоматичного формування <strong>динамічних коридорів значень</strong>.</p>
+<p>В основі алгоритмів детекції відхилень лежить декомпозиція часового ряду метрики <span class="arithmatex">\(x(t)\)</span> на регулярний базовий тренд, сезонну гармонійну компоненту та випадковий залишковий шум:</p>
+<div class="arithmatex">\[x(t) = T(t) + S(t) + e(t)\]</div>
+<p>де <span class="arithmatex">\(T(t)\)</span> описує низькочастотну неперервну динаміку довготривалого зростання чи спадання системи, <span class="arithmatex">\(S(t)\)</span> є періодичною функцією із добовим періодом <span class="arithmatex">\(P_d = 24\,\text{год}\)</span> та тижневим періодом <span class="arithmatex">\(P_w = 168\,\text{год}\)</span>, а <span class="arithmatex">\(e(t)\)</span> є випадковою стаціонарною величиною із математичним сподіванням <span class="arithmatex">\(E[e(t)] = 0\)</span>.</p>
+<p>Для оперативної оцінки аномальності поведінки сигналу в потоковому режимі застосовується розрахунок <strong>модифікованої Z-оцінки (Z-score)</strong> на основі ковзного вікна або експоненційно зваженого ковзного середнього (<strong>Exponentially Weighted Moving Average, EWMA</strong>). Базове середнє значення <span class="arithmatex">\(\mu(t)\)</span> та дисперсія <span class="arithmatex">\(\sigma^2(t)\)</span> оновлюються на кожному кроці спостереження відповідно до рівня вагового коефіцієнта згладжування <span class="arithmatex">\(\alpha \in (0, 1)\)</span>:</p>
+<div class="arithmatex">\[\mu(t) = \alpha \cdot x(t) + (1 - \alpha) \cdot \mu(t-1)\]</div>
+<div class="arithmatex">\[\sigma^2(t) = \beta \cdot (x(t) - \mu(t))^2 + (1 - \beta) \cdot \sigma^2(t-1)\]</div>
+<p>де <span class="arithmatex">\(\beta\)</span> є коефіцієнтом дисконтування для дисперсії. Значення стандартизованої Z-оцінки для поточного вимірювання <span class="arithmatex">\(x(t)\)</span> формується як:</p>
+<div class="arithmatex">\[Z(t) = \frac{x(t) - \mu(t)}{\sigma(t)}\]</div>
+<p>Тригер тривоги (<strong>Alarm Trigger</strong>) активується за умови, коли абсолютна величина <span class="arithmatex">\(Z(t)\)</span> перевищує критичний довірчий поріг протягом заздалегідь визначеної кількості циклів оцінки <span class="arithmatex">\(M\)</span> із загальної кількості перевірених точок <span class="arithmatex">\(N\)</span> (правило оцінки <span class="arithmatex">\(M\)</span>-of-<span class="arithmatex">\(N\)</span>):</p>
+<div class="arithmatex">\[|Z(t)| &gt; \gamma_{\text{threshold}}\]</div>
+<p>Типовим інженерним стандартом є вибір <span class="arithmatex">\(\gamma_{\text{threshold}} = 3\)</span>, що відповідно до правила трьох сигм для нормального розподілу ймовірностей вказує на випадкову подію із математичною ймовірністю виникнення менше 0,27%, однозначно сигналізуючи про системний збій або кібератаку.</p>
+<p>Оцінка якості роботи замкненого контуру спостережуваності та систем автоматичного реагування базується на математичному зв'язку метрик надійності. Коефіцієнт експлуатаційної готовності системи <span class="arithmatex">\(A_{\text{total}}\)</span> визначається залежністю:</p>
+<div class="arithmatex">\[A_{\text{total}} = \frac{\text{MTBF}}{\text{MTBF} + \text{MTTD} + \text{MTTR}}\]</div>
+<p>де <span class="arithmatex">\(\text{MTBF}\)</span> (<strong>Mean Time Between Failures</strong>) позначає середнє статистичне напрацювання між відмовами компонентів, <span class="arithmatex">\(\text{MTTD}\)</span> (<strong>Mean Time to Detect</strong>) — середній час, необхідний алгоритмам телеметрії для виявлення аномалії, а <span class="arithmatex">\(\text{MTTR}\)</span> (<strong>Mean Time to Repair</strong>) — середній час усунення наслідків збою. </p>
+<p>Якщо виявлення інциденту вимагає ручного аналізу неструктурованих файлів журналів, значення <span class="arithmatex">\(\text{MTTD}\)</span> зростає до десятків хвилин, що унеможливлює досягнення рівня доступності чотирьох дев'яток (<span class="arithmatex">\(99{,}99\%\)</span>, де допустимий сумарний річний простій становить не більше 52 хвилин). Впровадження автоматизованої детекції аномалій у поєднанні з бессерверними механізмами автоматичного виправлення (<strong>Auto-remediation</strong>) скорочує <span class="arithmatex">\(\text{MTTD}\)</span> до частоти дискретизації метрик, а <span class="arithmatex">\(\text{MTTR}\)</span> — до часу запуску замінного контейнера чи перезавантаження віртуальної машини.</p>
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Під час різкого спалаху вхідного навантаження автоматично спрацював статичний алерт системи моніторингу через зростання черги запитів до бази даних, що призвело до аварійного масштабування додаткових робочих вузлів обчислювального кластера. Проте через три хвилини нові вузли були знову видалені автоматичним масштабуванням, після чого цикл повторився чотири рази поспіль (ефект флапінгу). Який інженерний механізм необхідно імплементувати у математичну логіку алертингу для усунення цього явища?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: Впровадження механізму гістерезису та періодів стабілізації (Cooldown / Warm-up timers).</strong></p>
+<ol>
+<li>
+<p>Логічне обґрунтування: Ефект розгойдування системи (Flapping) виникає внаслідок відсутності затримки між зміною агрегованих показників і часом виходу нових вузлів на номінальну продуктивність (ініціалізація гостьової ОС, прогрів кешу застосунку). Для усунення цієї проблеми в алгоритми контролерів масштабування вводять часовий гістерезис: різницю між порогом збільшення потужності (Scale-Out Threshold) і порогом скорочення (Scale-In Threshold), а також конфігурують таймери блокування повторних дій (<strong>Cooldown Period</strong>), які забороняють будь-які повторні коригування пулу вузлів до завершення стабілізації щойно введених інстансів.</p>
+</li>
+<li>
+<p>Аналіз дистракторів: Збільшення граничного порогу утилізації без урахування гістерезису призведе лише до зміщення робочої точки, але не усуне коливального характеру процесу. Перехід на оцінку виключно середнього арифметичного значення метрики замість медіани чи перцентилів лише замаскує пікові навантаження та погіршить показник MTTD, підвищуючи ризик відмови системи за високих навантажень.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h3 id="_4">Вказівки для самостійного осмислення</h3>
+<ol>
+<li>
+<p>Проаналізуйте архітектурну модель вашого поточного навчального або дослідницького програмного проєкту та складіть матрицю розподілу відповідальності за безпеку компонентів для сценаріїв його гіпотетичного розгортання на віртуальних машинах AWS EC2 (модель IaaS) і в бессерверному середовищі AWS Lambda під управлінням API Gateway (модель FaaS).</p>
+</li>
+<li>
+<p>Складіть математичну модель розрахунку щорічного сумарного простою системи у хвилинах для рівнів доступності <span class="arithmatex">\(99{,}9\%\)</span>, <span class="arithmatex">\(99{,}99\%\)</span> та <span class="arithmatex">\(99{,}999\%\)</span>, після чого визначте критично допустиме значення середнього часу відновлення (<span class="arithmatex">\(\text{MTTR}\)</span>) за умови, що середній час між збоями (<span class="arithmatex">\(\text{MTBF}\)</span>) становить 720 годин, а час детекції аномалії (<span class="arithmatex">\(\text{MTTD}\)</span>) зведений до нуля.</p>
+</li>
+<li>
+<p>Дослідіть специфікацію стандарту консорціуму W3C Trace Context і формалізуйте структуру текстового формату поля <code>traceparent</code>, розібравши побітове призначення полів версії протоколу, ідентифікатора траси, ідентифікатора батьківського спану та бітових прапорців трасування.</p>
+</li>
+</ol>
+<h2 id="2-disaster-recovery_1">2. Методологія та аналіз граничних умов. Інженерія високої доступності, стратегії Disaster Recovery та розподілена аналітика даних</h2>
+<h3 id="21-bcdr-rto-rpo-mtbf-mttr">2.1. Формалізовані критерії надійності: аналітична оптимізація цільової функції витрат BCDR у залежності від метрик RTO, RPO, MTBF та MTTR</h3>
+<p>Проєктування надійних розподілених хмарних систем спирається на методологію <strong>забезпечення безперервності бізнесу та аварійного відновлення (Business Continuity and Disaster Recovery, BCDR)</strong>. Головне інженерне протиріччя цієї методології полягає у необхідності досягнення компромісу між сукупною вартістю володіння інфраструктурою та фінансовими втратами від простою сервісів і деградації цілісності даних.</p>
+<p>Для кількісної формалізації цього балансу використовуються фундаментальні часові метрики:</p>
+<ul>
+<li>
+<p><strong>Цільова точка відновлення (Recovery Point Objective, RPO).</strong> Визначає максимально допустимий обсяг втрати даних у часовому вимірі, зумовлений латентністю синхронізації або частотою створення резервних копій.</p>
+</li>
+<li>
+<p><strong>Цільовий час відновлення (Recovery Time Objective, RTO).</strong> Регламентує максимально допустиму тривалість перебування системи у неробочому стані від моменту реєстрації аварії до повного відновлення обслуговування користувацьких запитів.</p>
+</li>
+</ul>
+<p>Зв'язок між операційними характеристиками системи та метриками BCDR встановлюється через показники безвідмовності: середній час безвідмовної роботи (<strong>Mean Time Between Failures, MTBF</strong>) визначає частоту виникнення інцидентів, середній час виявлення інциденту (<strong>Mean Time to Detect, MTTD</strong>) характеризує якість контуру спостережуваності, а середній час відновлення (<strong>Mean Time to Repair, MTTR</strong>) безпосередньо обмежує мінімально досяжне значення <span class="arithmatex">\(RTO\)</span>, оскільки <span class="arithmatex">\(RTO \ge MTTD + MTTR\)</span>.</p>
+<p>Аналітична оптимізація витрат базується на мінімізації сукупної функції витрат на аварійне відновлення <span class="arithmatex">\(C_{\text{total}}\)</span>, що враховує витрати на утримання надлишкової інфраструктури <span class="arithmatex">\(C_{\text{infra}}\)</span> та математичне сподівання прямих і непрямих збитків від інцидентів <span class="arithmatex">\(C_{\text{loss}}\)</span>. Процес виведення оптимальних параметрів <span class="arithmatex">\(RTO^*\)</span> та <span class="arithmatex">\(RPO^*\)</span> формалізується наступною послідовністю дій:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 1 (Формулювання цільової функції витрат):} &amp; \quad C_{\text{total}}(RTO, RPO) = C_{\text{infra}}(RTO, RPO) + C_{\text{loss}}(RTO, RPO) \\
+\text{Крок 2 (Декомпозиція інфраструктурних витрат):} &amp; \quad C_{\text{infra}}(RTO, RPO) = \frac{\alpha}{(RTO)^\gamma} + \frac{\beta}{(RPO)^\delta} + C_{\text{base}} \\
+\text{Крок 3 (Моделювання імовірнісних втрат від збоїв):} &amp; \quad C_{\text{loss}}(RTO, RPO) = \frac{T_{\text{op}}}{MTBF} \cdot \left( RTO \cdot K_{\text{down}} + RPO \cdot K_{\text{data}} \right) \\
+\text{Крок 4 (Умови екстремуму першого порядку):} &amp; \quad \frac{\partial C_{\text{total}}}{\partial RTO} = 0, \quad \frac{\partial C_{\text{total}}}{\partial RPO} = 0
+\end{aligned}
+\]</div>
+<p>У наведеній системі рівнянь <span class="arithmatex">\(C_{\text{base}}\)</span> позначає базові витрати на функціонування основної виробничої інфраструктури, коефіцієнти <span class="arithmatex">\(\alpha\)</span> та <span class="arithmatex">\(\beta\)</span> є емпіричними масштабуючими факторами вартості обчислювальних засобів і каналів реплікації, показники <span class="arithmatex">\(\gamma, \delta \ge 1\)</span> задають експоненційне зростання складності інфраструктури при наближенні часових параметрів до нуля, <span class="arithmatex">\(T_{\text{op}}\)</span> відображає розрахунковий період експлуатації (наприклад, один календарний рік, тобто 8760 годин), параметр <span class="arithmatex">\(\lambda = \frac{1}{MTBF}\)</span> задає інтенсивність потоку відмов, <span class="arithmatex">\(K_{\text{down}}\)</span> визначає погодинні фінансові збитки підприємства від повного простою цифрового сервісу, а <span class="arithmatex">\(K_{\text{data}}\)</span> представляє вартість відновлення або юридичних штрафів за одиницю часу безповоротно втрачених транзакційних даних.</p>
+<p>Диференціювання цільової функції за відповідними змінними дозволяє отримати аналітичні вирази для оптимальних значень метрик стійкості:</p>
+<div class="arithmatex">\[RTO^* = \left( \frac{\alpha \cdot \gamma \cdot MTBF}{T_{\text{op}} \cdot K_{\text{down}}} \right)^{\frac{1}{\gamma + 1}}, \quad RPO^* = \left( \frac{\beta \cdot \delta \cdot MTBF}{T_{\text{op}} \cdot K_{\text{data}}} \right)^{\frac{1}{\delta + 1}}\]</div>
+<p>Отримані співвідношення строго доводять, що чим вища вартість простою <span class="arithmatex">\(K_{\text{down}}\)</span> та ціна втрати даних <span class="arithmatex">\(K_{\text{data}}\)</span>, тим меншими мають бути цільові параметри, що вимагає переходу до більш капіталомістких архітектурних рішень.</p>
+<p><strong>Граничні умови моделі оптимізації.</strong> Запропонована аналітична модель втрачає релевантність за наближення параметрів до граничних значень. При прагненні <span class="arithmatex">\(RTO \to 0\)</span> та <span class="arithmatex">\(RPO \to 0\)</span> витрати <span class="arithmatex">\(C_{\text{infra}}\)</span> прямують до нескінченності внаслідок фізичних обмежень швидкості світла в оптичних лініях зв'язку та необхідності застосування складних трифазних протоколів розподіленого консенсусу. </p>
+<p>Крім того, модель припускає незалежність потоку аварійних подій і статичність величини <span class="arithmatex">\(K_{\text{data}}\)</span>. У реальних умовах кібератак типу Ransomware (програм-вимагачів) висока швидкість синхронної реплікації з <span class="arithmatex">\(RPO \approx 0\)</span> призводить до миттєвого зараження резервного майданчика, перетворюючи нульову точку відновлення на фактор катастрофічного тиражування пошкоджених даних замість забезпечення відмовостійкості.</p>
+<hr />
+<h3 id="22-backup-and-restore-pilot-light-warm-standby-multi-region-active-active">2.2. Архітектурні патерни аварійного відновлення (Backup and Restore, Pilot Light, Warm Standby, Multi-Region Active-Active) та механізми асинхронної і синхронної реплікації сховищ даних</h3>
+<p>Вибір інженерного патерну аварійного відновлення визначає топологію розподілу обчислювальних потужностей між основним (<strong>Primary Region</strong>) та вторинним резервним (<strong>Secondary Region</strong>) регіонами хмари. Індустріальна практика класифікує стратегії Disaster Recovery на чотири дискретні рівні:</p>
+<p>Стратегія <strong>Backup and Restore</strong> передбачає регулярний експорт даних і знімків віртуальних блочних накопичувачів у географічно розподілене об'єктне сховище без розгортання обчислювальних потужностей у резервному регіоні. Це забезпечує мінімальну вартість експлуатації, проте гарантує <span class="arithmatex">\(RTO\)</span> на рівні від кількох годин до діб, оскільки вимагає повного розгортання топології за допомогою інструментів інфраструктури як коду (<strong>Infrastructure as Code, IaC</strong>) після виникнення інциденту.</p>
+<p>Патерн <strong>Pilot Light</strong> підтримує у вторинному регіоні мінімальний постійно діючий набір критичних інфраструктурних компонентів, головним із яких є сервер бази даних, на який здійснюється постійна асинхронна реплікація інформації. Сервери застосунків і балансувальники навантаження не споживають обчислювальних ресурсів і перебувають у формі збережених шаблонів конфігурацій чи знімків дисків. При аварії оркестратор запускає віртуальні машини, що скорочує <span class="arithmatex">\(RTO\)</span> до десятків хвилин за умови <span class="arithmatex">\(RPO\)</span> у межах кількох хвилин.</p>
+<p>Архітектура <strong>Warm Standby</strong> являє собою функціонально повну, але апаратно зменшену копію робочої системи (наприклад, 20–30% від проектної потужності), розгорнуту в резервному регіоні. Вона постійно обробляє фоновий тестовий трафік, а в разі катастрофи глобальний DNS-маршрутизатор перемикає клієнтські потоки, тоді як група автоматичного масштабування нарощує кількість інстансів до повної потужності, забезпечуючи <span class="arithmatex">\(RTO \le 5\,\text{хв}\)</span>.</p>
+<p>Найвищим ступенем стійкості є патерн <strong>Multi-Region Active-Active</strong>, за якого повномасштабні інфраструктури функціонують паралельно у кількох регіонах, одночасно обслуговуючи робочі навантаження. Розподіл трафіку забезпечується географічними або латентнісними політиками маршрутизації Anycast DNS. Обидва кластери здійснюють взаємну двосторонню реплікацію даних, що зводить <span class="arithmatex">\(RTO\)</span> практично до нуля, а <span class="arithmatex">\(RPO\)</span> — до затримок міжрегіональних ліній зв'язку.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant Client as Клієнтський пристрій (Client)
+    participant DNS as Глобальний роутер (Route 53 / Anycast)
+    participant Primary as Основний регіон (Compute + DB)
+    participant Secondary as Резервний регіон (Pilot Light / Standby)
+    participant Health as Агент моніторингу працездатності
+
+    Client-&gt;&gt;DNS: Запит на з'єднання api.system.com
+    DNS-&gt;&gt;Client: Маршрутизація на Primary Region IP
+    Client-&gt;&gt;Primary: Робочий транзакційний трафік
+    Primary-&gt;&gt;Secondary: Асинхронна реплікація стану БД (CDC / WAL-логи)
+
+    Note over Primary: Аварія: руйнування зв'язку в Primary Region
+    Health-&gt;&gt;Primary: Періодична перевірка доступності (Healthcheck probe)
+    Primary--xHealth: Відсутність відповіді (Connection Timeout)
+    Health-&gt;&gt;DNS: Фіксація стану Unhealthy для Primary Region
+
+    DNS-&gt;&gt;Secondary: Автоматичне перемикання (Failover routing)
+    Note over Secondary: Запуск скриптів підняття робочих інстансів
+    Secondary-&gt;&gt;Secondary: Підвищення ролі репліки БД до Primary Master
+
+    Client-&gt;&gt;DNS: Повторний запит IP-адреси сервісу
+    DNS-&gt;&gt;Client: Маршрутизація на Secondary Region IP
+    Client-&gt;&gt;Secondary: Відновлений транзакційний трафік (RTO завершено)</code></pre>
+<blockquote>
+<p><strong>ВАЖЛИВО:</strong> Під час автоматизованого аварійного перемикання баз даних у патерні Multi-Region обов'язково має бути реалізований механізм ізоляції компонентів (<strong>Fencing</strong>), що запобігає стану розриву свідомості (<strong>Split-Brain</strong>). Якщо вузол в основному регіоні відновив локальну працездатність, але втратив зв'язок із резервним регіоном, він повинен бути примусово переведений у режим «тільки для читання», інакше паралельний запис у два незалежні майданчики призведе до фатального конфлікту несумісності версій даних.</p>
+</blockquote>
+<hr />
+<h3 id="23-data-lake-aws-athena-google-bigquery">2.3. Алгоритмічні засади безсерверних аналітичних рушіїв над Data Lake (AWS Athena, Google BigQuery) та оптимізація фінансових витрат через використання бінарних стовпчикових форматів зберігання даних</h3>
+<p>Збирання телеметрії великого масштабу обумовлює перехід від традиційних монолітних сховищ до архітектури <strong>озера даних (Data Lake)</strong> на базі об'єктних сховищ (Amazon S3, Google Cloud Storage, Azure Data Lake Storage). Аналітична обробка терабайтних і петабайтних масивів неструктурованої або напівструктурованої інформації в озерах даних виконується за допомогою безсерверних інтерактивних рушіїв запитів, таких як <strong>AWS Athena</strong> (яка базується на розподіленому рушії Trino/Presto) та <strong>Google BigQuery</strong> (архітектура Dremel).</p>
+<p>Принциповою особливістю економічної моделі безсерверної аналітики є тарифікація, що розраховується пропорційно фізичному обсягу даних, зчитаних із дисків сховища під час виконання SQL-запиту (типовий тариф становить 5 доларів США за кожен просканований терабайт). Застосування вихідних текстових форматів (JSON або CSV) вимагає повного лінійного зчитування всього масиву навіть у тому випадку, коли користувача цікавить лише одна колонка з сотні наявних, що призводить до невиправданих фінансових витрат.</p>
+<p>Математична та інженерна оптимізація досягається конвертацією сирих даних у бінарні стовпчикові формати (<strong>Apache Parquet</strong>, <strong>Apache ORC</strong>). Обсяг зчитаних даних <span class="arithmatex">\(V_{\text{scanned}}\)</span> при використанні стовпчикових структур формалізується рівнянням:</p>
+<div class="arithmatex">\[V_{\text{scanned}} = \sum_{c \in \mathcal{C}_{\text{query}}} \sum_{p \in \mathcal{P}_{\text{filtered}}} S(c, p) \cdot (1 - R_{\text{comp}}(c))\]</div>
+<p>де <span class="arithmatex">\(\mathcal{C}_{\text{query}}\)</span> позначає підмножину стовпчиків, явно зазначених у блоці <code>SELECT</code> та умовах <code>WHERE</code>, <span class="arithmatex">\(\mathcal{P}_{\text{filtered}}\)</span> — підмножину розділів даних (<strong>Partitions</strong>), відібраних після відсікання метаданих, <span class="arithmatex">\(S(c, p)\)</span> — нескоригований обсяг стовпчика <span class="arithmatex">\(c\)</span> у розділі <span class="arithmatex">\(p\)</span>, а <span class="arithmatex">\(R_{\text{comp}}(c) \in [0, 1)\)</span> — коефіцієнт стиснення даних конкретного типу (за використання алгоритмів Snappy, GZIP або ZSTD).</p>
+<p>Ефективність стовпчикового підходу базується на трьох взаємопов'язаних алгоритмічних механізмах:</p>
+<ol>
+<li>
+<p>Проєкційне відсікання колонок усуває необхідність звернення до нерелевантних для даного запиту полів структури даних.</p>
+</li>
+<li>
+<p>Логічне секціонування за директоріями сховища (наприклад, за шаблоном <code>/year=YYYY/month=MM/day=DD/</code>) дозволяє планувальнику запитів ігнорувати терабайти інформації, що виходять за межі часового діапазону вибірки.</p>
+</li>
+<li>
+<p>Читання вбудованих у файл статистичних блоків метаданих (мінімальні та максимальні значення на рівні груп рядків або Row Groups) забезпечує пропуск блоків даних (<strong>Predicate Pushdown</strong>), значення в яких гарантовано не задовольняють фільтрам запиту.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> При міграції аналітичного конвеєра системи збору логів інтернет-банкінгу з щоденним обсягом генерації 12 ТБ сирого JSON у формат Apache Parquet зі стисненням Snappy фізичний обсяг сховища скоротився до 1,4 ТБ. Одночасно середньодобові витрати на виконання аналітичних розслідувань у сервісі AWS Athena знизилися з 450 доларів США до 9,20 долара за рахунок вибіркового зчитування лише цільових полів <code>transaction_id</code> та <code>error_code</code>.</p>
+</blockquote>
+<hr />
+<h3 id="24-mlops-data-drift-psi">2.4. Методологія MLOps: детекція концептуального зсуву даних (Data Drift) у промислових моделях машинного навчання за індексом стабільності популяції (PSI) та контури автоматичного перенавчання</h3>
+<p>Інтеграція модулів штучного інтелекту в інфраструктуру вимагає застосування методології <strong>машинного навчання для операційної діяльності (Machine Learning Operations, MLOps)</strong>. Після успішного розгортання моделі у промислове середовище (<strong>Production Inference Endpoint</strong>) її статистична точність неминуче деградує з часом під впливом змін у зовнішньому середовищі, що призводить до виникнення <strong>дрейфу даних (Data Drift)</strong> або <strong>дрейфу концепції (Concept Drift)</strong>.</p>
+<p>Методологічним інструментом кількісної фіксації розбіжності між розподілом вхідних ознак навчального датасету та даними реального виробничого потоку є <strong>індекс стабільності популяції (Population Stability Index, PSI)</strong>. </p>
+<p>Процес оцінки індексу PSI для неперервної числової ознаки передбачає виконання таких послідовних етапів:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 1 (Дискретизація):} &amp; \quad \text{Розбиття базової вибірки на } B \text{ квантильних бінів (зазвичай } B = 10 \text{)} \\
+\text{Крок 2 (Розрахунок часток):} &amp; \quad P_i = \frac{n_{\text{base}}(i)}{N_{\text{base}}}, \quad Q_i = \frac{n_{\text{prod}}(i)}{N_{\text{prod}}}, \quad i \in [1, B] \\
+\text{Крок 3 (Обчислення індексу):} &amp; \quad PSI = \sum_{i=1}^{B} (Q_i - P_i) \cdot \ln\left(\frac{Q_i}{P_i}\right)
+\end{aligned}
+\]</div>
+<p>де <span class="arithmatex">\(P_i\)</span> — теоретична частка спостережень <span class="arithmatex">\(i\)</span>-го інтервалу в навчальній (базовій) вибірці, <span class="arithmatex">\(Q_i\)</span> — емпірична частка спостережень того ж інтервалу, зафіксована у реальному потоці виробничої телеметрії за контрольний проміжок часу, <span class="arithmatex">\(n_{\text{base}}(i)\)</span> та <span class="arithmatex">\(n_{\text{prod}}(i)\)</span> — абсолютна кількість елементів у біні, а <span class="arithmatex">\(N_{\text{base}}\)</span> і <span class="arithmatex">\(N_{\text{prod}}\)</span> — загальні обсяги відповідних вибірок.</p>
+<p>Інтерпретація отриманого числового значення <span class="arithmatex">\(PSI\)</span> підпорядковується жорсткій інженерній шкалі ухвалення рішень:</p>
+<ul>
+<li>
+<p>Значення <span class="arithmatex">\(PSI &lt; 0{,}10\)</span> свідчить про стабільність розподілу, що не вимагає втручання в експлуатацію моделі.</p>
+</li>
+<li>
+<p>Діапазон <span class="arithmatex">\(0{,}10 \le PSI \le 0{,}25\)</span> фіксує помірний дрейф даних, за якого система надсилає попереджувальне сповіщення інженерам і вносить модель до черги планового перенавчання.</p>
+</li>
+<li>
+<p>Значення <span class="arithmatex">\(PSI &gt; 0{,}25\)</span> вказує на критичну деградацію характеристик розподілу, що автоматично ініціює контур безперервного тренування (<strong>Continuous Training, CT</strong>) із використанням оновленого вікна даних або перемикає обслуговування запитів на безпечну евристичну заглушку (Fallback Rule).</p>
+</li>
+</ul>
+<p><em>Таблиця 7.2 — Порівняльна матриця архітектурних рішень Disaster Recovery та аналітики даних</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Архітектурний підхід</th>
+<th style="text-align: left;">Базовий механізм синхронізації</th>
+<th style="text-align: left;">Складність впровадження</th>
+<th style="text-align: left;">Критичні ризики / Обмеження</th>
+<th style="text-align: left;">Приклад з реальної практики</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Backup &amp; Restore</strong></td>
+<td style="text-align: left;">Періодичний снапшотний бекап дисків і БД</td>
+<td style="text-align: left;">Низька</td>
+<td style="text-align: left;">Неприпустимо високі втрати транзакцій (<span class="arithmatex">\(RPO &gt; 12\,\text{год}\)</span>)</td>
+<td style="text-align: left;">Системи документообігу та внутрішні корпоративні архіви</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pilot Light</strong></td>
+<td style="text-align: left;">Асинхронна безперервна реплікація БД</td>
+<td style="text-align: left;">Середня</td>
+<td style="text-align: left;">Залежність від працездатності IaC-шаблонів під час запуску</td>
+<td style="text-align: left;">Веб-портали реєстрації заявок клієнтів із піковим денним циклом</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Warm Standby</strong></td>
+<td style="text-align: left;">Постійний дубльований міні-кластер + CDC</td>
+<td style="text-align: left;">Висока</td>
+<td style="text-align: left;">Ризик неконтрольованої перезавантаженості під час пікового напливу</td>
+<td style="text-align: left;">Транзакційні сервіси платіжних систем регіонального рівня</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Active-Active Multi-Region</strong></td>
+<td style="text-align: left;">Двостороння реплікація з вирішенням колізій</td>
+<td style="text-align: left;">Критично висока</td>
+<td style="text-align: left;">Фізична затримка передачі світла в оптоволокні, ризик розриву узгодженості</td>
+<td style="text-align: left;">Глобальні системи бронювання авіаквитків та фінтех-процесинг</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data Lake + Presto / Athena</strong></td>
+<td style="text-align: left;">Пряме сканування S3 Parquet за схемою On-Read</td>
+<td style="text-align: left;">Середня</td>
+<td style="text-align: left;">Непередбачуваний час відгуку для складних аналітичних запитів</td>
+<td style="text-align: left;">Аудит системних логів кібербезпеки та телеметрії IoT-пристроїв</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="25-cap">2.5. Критичні бар'єри та граничні обмеження: мережева латентність передачі даних між віддаленими дата-центрами, теорема CAP і дилема узгодженості станів розподілених баз даних при розривах каналів зв'язку</h3>
+<p>При проєктуванні географічно розподілених хмарних систем інженери стикаються з фундаментальними фізичними та алгоритмічними обмеженнями, які неможливо подолати виключно нарощуванням апаратних ресурсів. Основним фізичним бар'єром є кінцева швидкість поширення електромагнітної хвилі в оптичному волокні, яка становить приблизно <span class="arithmatex">\(v \approx 200\,000\,\text{км/с}\)</span> (що еквівалентно затримці близько 5 мікросекунд на кожен кілометр траси). </p>
+<p>При трансконтинентальних відстанях між дата-центрами (наприклад, між Франкфуртом та Сінгапуром, де фізична довжина магістралі перевищує 10 000 км) мінімальний теоретичний час проходження пакету в обидва боки (<strong>Round-Trip Time, RTT</strong>) не може бути меншим за 100 мс без урахування комутаційних затримок маршрутизаторів.</p>
+<p>Це фізичне обмеження прямо диктує поведінку розподілених систем збереження даних у рамках <strong>теореми CAP (Brewer's CAP Theorem)</strong> та її сучасного розширення <strong>PACELC</strong>. Відповідно до теореми CAP, у будь-якій асинхронній мережевій системі за умови виникнення мережевого розриву (<strong>Partition tolerance, P</strong>) архітектор змушений обирати виключно між двома взаємовиключними гарантіями:</p>
+<div class="arithmatex">\[\text{CAP-Constraint:} \quad \mathcal{P}_{\text{split}} \implies (\text{Consistency} \oplus \text{Availability})\]</div>
+<p>Система, орієнтована на строгу узгодженість (<strong>Consistency, CP</strong>), при втраті зв'язку між регіонами відхиляє будь-які операції запису на ізольованому майданчику, жертвуючи доступністю для запобігання десинхронізації даних. Натомість система, орієнтована на доступність (<strong>Availability, AP</strong>), продовжує приймати локальні записи, жертвуючи актуальністю даних і допускаючи тимчасову розбіжність станів (<strong>Eventual Consistency</strong>).</p>
+<p>Модель PACELC поглиблює цей аналіз, стверджуючи, що навіть за відсутності мережевих збоїв (Else) існує постійний компроміс між затримкою відгуку (<strong>Latency, L</strong>) та узгодженістю (<strong>Consistency, C</strong>). Якщо система вимагає синхронного підтвердження запису від трьох регіонів для гарантії стійкості, мінімальний час фіксації транзакції буде обмежений затримкою найповільнішого каналу зв'язку.</p>
+<p>У системах класу AP вирішення конфліктів конкурентного запису під час десинхронізації вимагає використання специфічних математичних технік:</p>
+<ol>
+<li>
+<p>Алгоритм вибору переможця за останнім записом (<strong>Last-Write-Wins, LWW</strong>) є вразливим до зсуву фізичних кварцових годинників на серверах (<strong>Clock Skew</strong>), що може призводити до безповоротного видалення свіжіших транзакцій.</p>
+</li>
+<li>
+<p>Векторні годинники (<strong>Vector Clocks</strong>) фіксують частковий причинно-наслідковий порядок операцій, але вимагають перенесення логіки вирішення конфліктів на рівень клієнтського коду.</p>
+</li>
+<li>
+<p>Конфліктно-вільні репліковані типи даних (<strong>Conflict-free Replicated Data Types, CRDT</strong>) забезпечують автоматичне математичне злиття паралельних оновлень завдяки властивостям комутативності, асоціативності та ідемпотентності функцій об'єднання станів.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Розподілена система обробки фінансових мікротранзакцій розгорнута в конфігурації Multi-Region Active-Active між дата-центрами у Варшаві та Дубліні з одночасним прийманням операцій запису в обох регіонах. Для збереження даних використано базу даних із моделлю узгодженості Last-Write-Wins (LWW) на базі протоколу NTP. Під час раптового пошкодження підводного магістрального оптоволоконного кабелю зв'язок між регіонами було перервано на 45 секунд, протягом яких клієнти продовжували успішно змінювати баланси рахунків на обох локаціях. До яких системних наслідків це призведе після відновлення зв'язку і яким чином архітектурно усунути загрозу десинхронізації фінансового балансу?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Аналітичний розв'язок інженерного кейсу:</strong></p>
+<ol>
+<li>
+<p><strong>Ідентифікація проблеми:</strong> Оскільки обидва вузли продовжували приймати операції запису під час розриву зв'язку (поведінка системи класу AP), виникла ситуація множинних паралельних змін однакових сутностей без координації. Після відновлення каналу зв'язку алгоритм LWW почне порівнювати часові мітки операцій. Через наявність зсуву апаратних годинників (Clock Skew) та неідеальної точності протоколу NTP (похибка синхронізації може сягати десятків мілісекунд) транзакції з пізнішим реальним часом здійснення можуть бути перезаписані старішими транзакціями, якщо їхня локальна часова мітка виявиться більшою. Це призведе до безповоротної втрати грошових операцій і спотворення балансу рахунків (Silent Data Loss).</p>
+</li>
+<li>
+<p><strong>Архітектурне усунення загрози:</strong></p>
+</li>
+<li>
+<p>Перехід на строго консистентну модель консенсусу (CP-система за теоремою CAP): прив'язка облікового запису користувача до одного конкретного мастер-регіону (Home Region routing), де всі операції запису по конкретному балансу централізовано виконуються виключно в одній точці за допомогою атомарних транзакцій ACID.</p>
+</li>
+<li>
+<p>Заміна алгоритму LWW на математичні моделі CRDT (зокрема, PN-Counter для операцій поповнення/списання балансу), де операції накопичуються у вигляді неколізійних дельт (+/-) і гарантовано сходяться до однакового результату незалежно від порядку доставки пакетів.</p>
+</li>
+<li>
+<p>Використання спеціалізованих синхронізаційних сервісів на базі атомних годинників і супутникових систем GPS (наприклад, Google TrueTime API у хмарі Spanner), що надають детерміновану оцінку невизначеності часу <span class="arithmatex">\(\epsilon\)</span>, гарантуючи строгий глобальний порядок транзакцій без використання ненадійного NTP.</p>
+</li>
+</ol>
+</details>
+<h2 id="3_1">3. Практичний індустріальний / фаховий кейс. Проєктування відмовостійкої архітектури критичної інформаційної системи</h2>
+<h3 id="31-iot-smartgrid">3.1. Комплексний фаховий кейс. Проєктування відмовостійкої інфраструктури системи обробки телеметрії IoT-мережі розумного енергокомплексу SmartGrid</h3>
+<h4 id="_5">Постановка задачі / ситуації</h4>
+<p>Національний оператор розподілу електроенергії впроваджує автоматизовану систему моніторингу та балансування регіональної енергомережі класу SmartGrid. До єдиного контуру підключено 250 000 інтелектуальних приладів обліку (Smart Meters) та датчиків підстанцій, які безперервно передають телеметрію параметрів струму, напруги, фазового зсуву та споживаної потужності. </p>
+<p>Система розгортається у хмарному середовищі, де критично важливими вимогами є забезпечення суворого контролю доступу за моделлю нульової довіри (Zero-Trust), виявлення аварійних сплесків навантаження в реальному часі, довготривале зберігання та аналітика історичних показників, а також забезпечення стійкості до катастрофічних збоїв інфраструктури на рівні регіонів.</p>
+<p><em>Таблиця 7.3 — Вхідні техніко-економічні та операційні параметри системи SmartGrid</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Параметр системи</th>
+<th style="text-align: left;">Одиниця виміру</th>
+<th style="text-align: left;">Числове значення</th>
+<th style="text-align: left;">Інженерне та бізнесове призначення</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Кількість підключених сенсорів (<span class="arithmatex">\(N_{\text{dev}}\)</span>)</strong></td>
+<td style="text-align: left;">од.</td>
+<td style="text-align: left;"><span class="arithmatex">\(250\,000\)</span></td>
+<td style="text-align: left;">Загальний парк розподілених IoT-пристроїв</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Частота відправки пакетів (<span class="arithmatex">\(f_{\text{packet}}\)</span>)</strong></td>
+<td style="text-align: left;">Гц</td>
+<td style="text-align: left;"><span class="arithmatex">\(0{,}2\)</span></td>
+<td style="text-align: left;">Один транзакційний пакет кожні 5 секунд</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Сумарний потік повідомлень (<span class="arithmatex">\(I_{\text{msg}}\)</span>)</strong></td>
+<td style="text-align: left;">подій/с</td>
+<td style="text-align: left;"><span class="arithmatex">\(50\,000\)</span></td>
+<td style="text-align: left;">Навантаження на сервіс прийому телеметрії</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Розмір одного пакета телеметрії (<span class="arithmatex">\(S_{\text{raw}}\)</span>)</strong></td>
+<td style="text-align: left;">Байт</td>
+<td style="text-align: left;"><span class="arithmatex">\(512\)</span></td>
+<td style="text-align: left;">Обсяг вихідного повідомлення у форматі JSON</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Добовий обсяг сирої телеметрії (<span class="arithmatex">\(V_{\text{day}}\)</span>)</strong></td>
+<td style="text-align: left;">ТБ/добу</td>
+<td style="text-align: left;"><span class="arithmatex">\(2{,}21\)</span></td>
+<td style="text-align: left;">Фізичний вхідний трафік у сховище</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Середнє напрацювання на відмову (<span class="arithmatex">\(MTBF\)</span>)</strong></td>
+<td style="text-align: left;">годин</td>
+<td style="text-align: left;"><span class="arithmatex">\(4\,380\)</span></td>
+<td style="text-align: left;">Статистична частота аварій (один збій на пів року)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Фінансові збитки від простою (<span class="arithmatex">\(K_{\text{down}}\)</span>)</strong></td>
+<td style="text-align: left;">дол. США / год</td>
+<td style="text-align: left;"><span class="arithmatex">\(45\,000\)</span></td>
+<td style="text-align: left;">Прямі штрафи від регулятора за порушення балансу мережі</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ціна втрати даних телеметрії (<span class="arithmatex">\(K_{\text{data}}\)</span>)</strong></td>
+<td style="text-align: left;">дол. США / год</td>
+<td style="text-align: left;"><span class="arithmatex">\(120\,000\)</span></td>
+<td style="text-align: left;">Збитки від неможливості білінгу та аварійного контролю</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Річний бюджет на BCDR (<span class="arithmatex">\(B_{\text{annual}}\)</span>)</strong></td>
+<td style="text-align: left;">дол. США / рік</td>
+<td style="text-align: left;"><span class="arithmatex">\(180\,000\)</span></td>
+<td style="text-align: left;">Граничний ліміт витрат на резервну інфраструктуру</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>flowchart TD
+    subgraph EdgeLayer ["Польовий рівень SmartGrid"]
+        Sensors["250 000 IoT-лічильників / RTU-контролери"]
+    end
+
+    subgraph PrimaryRegion ["Основний регіон: Frankfurt (eu-central-1)"]
+        IoTCore["AWS IoT Core: Взаємна TLS mTLS автентифікація"]
+        Kinesis["Amazon Kinesis Data Streams: Буферизація потоку"]
+        ProcessLambda["AWS Lambda: Парсинг та валідація телеметрії"]
+        HotDB[("Amazon DynamoDB: Оперативні стани приладів")]
+        S3Bucket[("Amazon S3 Data Lake: Зберігання в Apache Parquet")]
+        AthenaEngine["Amazon Athena: Аналітичний SQL-рушій"]
+        SageMaker["SageMaker Model Monitor: Контроль Data Drift (PSI)"]
+    end
+
+    subgraph SecondaryRegion ["Резервний регіон: Ireland (eu-west-1)"]
+        S3Replica[("Amazon S3: Крос-регіональна реплікація (CRR)")]
+        DynamoReplica[("DynamoDB Global Tables: Резервні стани")]
+        PilotCompute["Мінімальний контур управління (IaC / Warm Core)"]
+    end
+
+    Sensors --&gt;|mTLS + X.509 + SigV4| IoTCore
+    IoTCore --&gt; Kinesis
+    Kinesis --&gt; ProcessLambda
+    ProcessLambda --&gt; HotDB
+    ProcessLambda --&gt; S3Bucket
+    S3Bucket --&gt; AthenaEngine
+    S3Bucket --&gt; SageMaker
+    HotDB -.-&gt;|Глобальна реплікація| DynamoReplica
+    S3Bucket -.-&gt;|CRR асинхронна реплікація| S3Replica
+    S3Replica -.-&gt; PilotCompute</code></pre>
+<h4 id="_6">Покроковий аналіз та розв'язок</h4>
+<h5 id="1-rto-rpo">Крок 1. Аналітичний розрахунок оптимальних метрик стійкості RTO та RPO</h5>
+<p>Для визначення економічно виправданих параметрів стійкості системи скористаємося раніше виведеною математичною моделлю оптимізації цільової функції витрат BCDR. Вихідні емпіричні коефіцієнти складності інфраструктури для даного класу систем складають <span class="arithmatex">\(\alpha = 15\,000\)</span>, <span class="arithmatex">\(\beta = 8\,000\)</span>, а показники еластичності становлять <span class="arithmatex">\(\gamma = 1\)</span> та <span class="arithmatex">\(\delta = 1\)</span>. Період розрахунку становить один календарний рік (<span class="arithmatex">\(T_{\text{op}} = 8760\,\text{год}\)</span>).</p>
+<p>Підставимо числові значення параметрів системи у виведені оптимізаційні рівняння:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 1.1 (Розрахунок оптимального RTO):} &amp; \quad RTO^* = \sqrt{\frac{\alpha \cdot \gamma \cdot MTBF}{T_{\text{op}} \cdot K_{\text{down}}}} = \sqrt{\frac{15\,000 \cdot 1 \cdot 4\,380}{8\,760 \cdot 45\,000}} = \sqrt{\frac{65\,700\,000}{394\,200\,000}} \approx 0{,}408\,\text{год} \approx 24{,}5\,\text{хв} \\
+\text{Крок 1.2 (Розрахунок оптимального RPO):} &amp; \quad RPO^* = \sqrt{\frac{\beta \cdot \delta \cdot MTBF}{T_{\text{op}} \cdot K_{\text{data}}}} = \sqrt{\frac{8\,000 \cdot 1 \cdot 4\,380}{8\,760 \cdot 120\,000}} = \sqrt{\frac{35\,040\,000}{1\,051\,200\,000}} \approx 0{,}182\,\text{год} \approx 10{,}9\,\text{хв}
+\end{aligned}
+\]</div>
+<p>Розрахункові показники вказують, що для мінімізації загальних втрат бізнесу інфраструктура аварійного відновлення повинна гарантувати відновлення працездатності сервісу менш ніж за 25 хвилин із втратою не більше 11 хвилин журналу телеметрії.</p>
+<h5 id="2">Крок 2. Синтез архітектурної стратегії аварійного відновлення</h5>
+<p>Отримані значення <span class="arithmatex">\(RTO^* \approx 24{,}5\,\text{хв}\)</span> та <span class="arithmatex">\(RPO^* \approx 10{,}9\,\text{хв}\)</span> однозначно виключають використання базової стратегії Backup and Restore, яка дає мінімальний <span class="arithmatex">\(RTO \ge 6\,\text{год}\)</span>. Водночас впровадження патерну Multi-Region Active-Active вимагало б річних інфраструктурних витрат на рівні 260 000 доларів, що істотно перевищує встановлений бюджет <span class="arithmatex">\(B_{\text{annual}} = 180\,000\,\text{дол}\)</span>.</p>
+<p>Таким чином, оптимальним інженерним рішенням є реалізація гібридного патерну <strong>Pilot Light</strong> із наступною конфігурацією:</p>
+<ol>
+<li>
+<p>Бази даних та об'єктні сховища реплікуються у вторинний регіон у безперервному режимі: таблиці Amazon DynamoDB налаштовуються як Global Tables із субсекундною реплікацією (<span class="arithmatex">\(RPO &lt; 1\,\text{с}\)</span>), а кошики Amazon S3 використовують міжрегіональну реплікацію Cross-Region Replication (<span class="arithmatex">\(RPO \le 10\,\text{хв}\)</span>).</p>
+</li>
+<li>
+<p>Обчислювальний шар прийому телеметрії у резервному регіоні перебуває в неактивному стані у вигляді збережених Terraform-модулів та скомпільованих контейнерних образів у Amazon ECR.</p>
+</li>
+<li>
+<p>У разі аварії автоматизований скрипт на базі AWS CloudFormation розгортає обчислювальні конвеєри за 12 хвилин, що сумарно із часом перемикання DNS Route 53 (5 хвилин на базі Health Check) забезпечує підсумковий показник <span class="arithmatex">\(RTO = 17\,\text{хв} &lt; RTO^*\)</span>.</p>
+</li>
+</ol>
+<h5 id="3_2">Крок 3. Оптимізація витрат на безсерверний аналітичний конвеєр</h5>
+<p>Розрахуємо добові та місячні фінансові витрати на виконання аналітичних розслідувань у сховищі телеметрії за допомогою безсерверного рушія AWS Athena. Повний добовий обсяг нестисненої телеметрії становить:</p>
+<div class="arithmatex">\[V_{\text{day}} = \frac{50\,000\,\text{подій/с} \cdot 512\,\text{Байт} \cdot 86\,400\,\text{с}}{10^{12}} \approx 2{,}21\,\text{ТБ/добу}\]</div>
+<p>При використанні сирого формату JSON для щоденного аналітичного запиту, що перевіряє сплески напруги за останні 30 днів (<span class="arithmatex">\(V_{30\text{d}} = 66{,}3\,\text{ТБ}\)</span>), витрати на один запуск становитимуть:</p>
+<div class="arithmatex">\[C_{\text{query}}(\text{JSON}) = 66{,}3\,\text{ТБ} \cdot 5\,\text{дол./ТБ} = 331{,}50\,\text{дол. США за запит}\]</div>
+<p>Конвертація потоку телеметрії в стовпчиковий формат Apache Parquet зі стисненням Snappy зменшує сукупний обсяг на 80% завдяки використанню алгоритмів Run-Length Encoding та словникового кодування: <span class="arithmatex">\(V_{\text{day\_parquet}} = 2{,}21 \cdot (1 - 0{,}80) = 0{,}442\,\text{ТБ/добу}\)</span>. При виконанні запиту до структури Parquet зчитуються виключно 2 цільові колонки (<code>voltage</code>, <code>timestamp</code>) із 16 наявних у схемі (коефіцієнт проєкції <span class="arithmatex">\(K_{\text{proj}} = 2/16 = 0{,}125\)</span>), а партиціонування за часом відсікає 90% нерелевантних блоків:</p>
+<div class="arithmatex">\[V_{\text{scanned}}(\text{Parquet}) = 66{,}3\,\text{ТБ} \cdot 0{,}20 \cdot 0{,}125 \cdot 0{,}10 \approx 0{,}166\,\text{ТБ}\]</div>
+<div class="arithmatex">\[C_{\text{query}}(\text{Parquet}) = 0{,}166\,\text{ТБ} \cdot 5\,\text{дол./ТБ} \approx 0{,}83\,\text{дол. США за запит}\]</div>
+<p>Застосування стовпчикового формату забезпечує скорочення аналітичних витрат майже в 400 разів, що гарантує збереження сукупних операційних витрат на рівні 25 доларів на місяць замість 9 945 доларів.</p>
+<h5 id="4-data-drift">Крок 4. Розрахунок показника зсуву даних (Data Drift) для прогнозної моделі споживання</h5>
+<p>Для детекції деградації нейромережевої моделі короткострокового прогнозування навантаження на підстанції було розраховано показник <span class="arithmatex">\(PSI\)</span> за показником активної потужності. Вибірка реальної телеметрії за тиждень порівнювалася з навчальною базою даних. Розбиття на <span class="arithmatex">\(B=4\)</span> інтервали напруги наведено у розрахунковому блоці:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Бін 1 } [0\text{–}5\,\text{кВт}]: &amp; \quad P_1 = 0{,}40, \quad Q_1 = 0{,}25 \implies (0{,}25 - 0{,}40) \cdot \ln(0{,}25 / 0{,}40) = -0{,}15 \cdot (-0{,}470) = 0{,}0705 \\
+\text{Бін 2 } [5\text{–}10\,\text{кВт}]: &amp; \quad P_2 = 0{,}30, \quad Q_2 = 0{,}25 \implies (0{,}25 - 0{,}30) \cdot \ln(0{,}25 / 0{,}30) = -0{,}05 \cdot (-0{,}182) = 0{,}0091 \\
+\text{Бін 3 } [10\text{–}15\,\text{кВт}]: &amp; \quad P_3 = 0{,}20, \quad Q_3 = 0{,}30 \implies (0{,}30 - 0{,}20) \cdot \ln(0{,}30 / 0{,}20) = 0{,}10 \cdot 0{,}405 = 0{,}0405 \\
+\text{Бін 4 } [&gt;15\,\text{кВт}]: &amp; \quad P_4 = 0{,}10, \quad Q_4 = 0{,}20 \implies (0{,}20 - 0{,}10) \cdot \ln(0{,}20 / 0{,}10) = 0{,}10 \cdot 0{,}693 = 0{,}0693
+\end{aligned}
+\]</div>
+<p>Сумарний індекс стабільності популяції для досліджуваної ознаки:</p>
+<div class="arithmatex">\[PSI = 0{,}0705 + 0{,}0091 + 0{,}0405 + 0{,}0693 = 0{,}1894\]</div>
+<p>Отримане значення <span class="arithmatex">\(PSI = 0{,}1894\)</span> потрапляє в зону помірного дрейфу (<span class="arithmatex">\(0{,}10 \le PSI \le 0{,}25\)</span>), що не вимагає екстреного зняття моделі з експлуатації, проте автоматично генерує заявку в контур SageMaker Pipelines на донавчання моделі з додаванням телеметрії останнього календарного місяця.</p>
+<h4 id="_7">Інтерпретація результатів та альтернативні сценарії</h4>
+<p>Проведене моделювання демонструє повну відповідність спроєктованої архітектури встановленим граничним лімітам: фактичний час відновлення <span class="arithmatex">\(RTO = 17\,\text{хв}\)</span> та втрата даних <span class="arithmatex">\(RPO &lt; 1\,\text{хв}\)</span> надійно вписуються у розраховані економічні оптимуми, а річні витрати на підтримку схеми Pilot Light (реплікація сховищ та резервування адрес) складають близько 38 400 доларів, що забезпечує значний запас відносно виділеного бюджету у 180 000 доларів.</p>
+<p>Розглянемо альтернативний граничний сценарій: що змінилося б у рішенні, якби об'єкт належав до першої категорії надійності енергопостачання (наприклад, система керування живленням ядерного реактора чи критичної медичної інфраструктури), де вартість години простою зростає до <span class="arithmatex">\(K_{\text{down}} = 2\,500\,000\,\text{дол. США}\)</span>, а втрата даних абсолютно неприпустима (<span class="arithmatex">\(K_{\text{data}} \to \infty\)</span>)?</p>
+<ol>
+<li>
+<p>Оптимальні параметри за формулою прямували б до нуля: <span class="arithmatex">\(RTO^* \to 0\)</span>, <span class="arithmatex">\(RPO^* \to 0\)</span>, що робить стратегію Pilot Light технологічно неприйнятною через неприпустимість 17-хвилинного простою.</p>
+</li>
+<li>
+<p>Проєкт вимагав би обов'язкового переходу на стратегію Multi-Region Active-Active із синхронним консенсусним підтвердженням транзакцій.</p>
+</li>
+<li>
+<p>Відмова від асинхронної реплікації на користь синхронної спричинила б деградацію продуктивності запису через затримку сигналу в оптичній магістралі, обмеживши максимальну частоту реєстрації подій від сенсорів.</p>
+</li>
+<li>
+<p>Сукупний бюджет підтримки інфраструктури подвоївся б, але повністю виправдав би себе з точки зору мінімізації катастрофічних ризиків.</p>
+</li>
+</ol>
+<hr />
+<h3 id="32">3.2. Зведена довідкова система лекції</h3>
+<p><em>Таблиця 7.4 — Фундаментальний термінологічно-концептуальний базис дисципліни</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термін / Концепція</th>
+<th style="text-align: left;">Формалізація / Сутність</th>
+<th style="text-align: left;">Реальний кейс застосування</th>
+<th style="text-align: left;">Основне обмеження / Ризик</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Shared Responsibility Model</strong></td>
+<td style="text-align: left;">Розподіл зон відповідальності: <span class="arithmatex">\(\mathcal{S} = \mathcal{S}_{\text{CSP}} \cup \mathcal{S}_{\text{Cust}}\)</span></td>
+<td style="text-align: left;">Аудит відповідності PCI DSS при виборі сервісів AWS Fargate проти EC2</td>
+<td style="text-align: left;">Помилкове припущення споживача про те, що провайдер автоматично захищає його дані в моделі IaaS</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Zero-Trust Architecture (ZTA)</strong></td>
+<td style="text-align: left;">Відмова від довіри: оцінка динамічної функції <span class="arithmatex">\(\mathcal{T}(s, a, r, \mathbf{c}) \ge \theta_{\text{risk}}\)</span></td>
+<td style="text-align: left;">Захист API мікросервісів за допомогою взаємної аутентифікації mTLS та перевірки токенів JWT</td>
+<td style="text-align: left;">Зростання обчислювальних накладних витрат на безперервну перевірку сертифікатів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Attribute-Based Access Control (ABAC)</strong></td>
+<td style="text-align: left;">Булеве зіставлення множин тегів суб'єкта та об'єкта через предикат <span class="arithmatex">\(\text{Eval}(p, \text{req})\)</span></td>
+<td style="text-align: left;">Динамічне надання прав інженерам на інстанси, де тег <code>Project</code> збігається з атрибутом користувача</td>
+<td style="text-align: left;">Складність налагодження при перетині десятків глобальних умовних правил</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Security Token Service (STS)</strong></td>
+<td style="text-align: left;">Генерація ефемерних креденшалів: <span class="arithmatex">\(\langle \text{AccessKey}, \text{SecretKey}, \text{Token} \rangle\)</span> із заданим TTL</td>
+<td style="text-align: left;">Отримання тимчасового доступу до приватного S3-кошика бессерверною функцією AWS Lambda</td>
+<td style="text-align: left;">Блокування роботи застосунків у разі вичерпання лімітів API на генерацію токенів (Throttling)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Distributed Tracing (OpenTelemetry)</strong></td>
+<td style="text-align: left;">Наскрізний причинно-наслідковий орієнтований ациклічний граф спанів <span class="arithmatex">\(\mathcal{G} = (\mathcal{V}, \mathcal{E})\)</span></td>
+<td style="text-align: left;">Локалізація вузьких місць у ланцюжку між шлюзом API, мікросервісом білінгу та базою даних</td>
+<td style="text-align: left;">Високі накладні витрати на передачу та збереження телеметрії при 100% семплюванні запитів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Z-score Anomaly Detection</strong></td>
+<td style="text-align: left;">Статистична оцінка відхилення сигналу від базової лінії: <span class="arithmatex">\(Z(t) = \frac{x(t) - \mu(t)}{\sigma(t)}\)</span></td>
+<td style="text-align: left;">Автоматичне виявлення DDoS-атак за аномальним сплеском кількості HTTP-запитів 4xx/5xx</td>
+<td style="text-align: left;">Хибні спрацьовування за умови різкої легітимної зміни тренду (наприклад, початок акції Black Friday)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Recovery Point Objective (RPO)</strong></td>
+<td style="text-align: left;">Максимально допустимий часовий проміжок безповоротної втрати даних при збої</td>
+<td style="text-align: left;">Налаштування інтервалу синхронізації журналів транзакцій WAL для репліки PostgreSQL</td>
+<td style="text-align: left;">Обмежений пропускною здатністю мережі між основним і резервним майданчиками</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Recovery Time Objective (RTO)</strong></td>
+<td style="text-align: left;">Максимально допустима тривалість простою інфраструктури до відновлення</td>
+<td style="text-align: left;">Розрахунок часу на розгортання образів контейнерів за допомогою автоматизованих сценаріїв IaC</td>
+<td style="text-align: left;">Обмежується часом ініціалізації апаратних вузлів та прогріву кеш-пам'яті сервісів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Population Stability Index (PSI)</strong></td>
+<td style="text-align: left;">Кількісна міра розбіжності розподілів: <span class="arithmatex">\(PSI = \sum (Q_i - P_i) \cdot \ln(Q_i / P_i)\)</span></td>
+<td style="text-align: left;">Моніторинг зміщення поведінкових профілів користувачів у системі антифрод-аналітики</td>
+<td style="text-align: left;">Чутливість до вибору ширини та кількості інтервалів квантування даних (бінів)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CAP / PACELC Theorem</strong></td>
+<td style="text-align: left;">Неможливість одночасного забезпечення C, A та P: <span class="arithmatex">\(\mathcal{P}_{\text{split}} \implies (\text{C} \oplus \text{A})\)</span></td>
+<td style="text-align: left;">Вибір між базами даних Amazon DynamoDB (AP) та AWS Aurora Multi-Master (CP)</td>
+<td style="text-align: left;">Помилка вибору LWW-консенсусу в системах AP призводить до перезапису актуальних фінансових даних</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="33">3.3. Контрольні питання та завдання</h3>
+<h4 id="_8">Прикладні тестові завдання</h4>
+<ol>
+<li>
+<p>Інженер з кібербезпеки виявив, що обліковий запис сервісної служби має прикріплену політику IAM Policy з інструкцією <code>Effect: Allow, Action: s3:GetObject, Resource: *</code>. Одночасно на рівні організації AWS Organizations підключено політику сервісного контролю (Service Control Policy, SCP), яка містить правило <code>Effect: Deny, Action: s3:*, Resource: *</code>, до якого додано блок умови <code>Condition: {"StringNotEquals": {"aws:PrincipalTag/Department": "SecOps"}}</code>. Обліковий запис сервісної служби не має тегу <code>Department</code>. Яким буде результат виконання запиту на читання об'єкта <code>s3:GetObject</code> цим сервісом?</p>
+</li>
+<li>
+<p>A. Доступ буде надано, оскільки локальна політика IAM має вищий пріоритет над політиками рівня організації SCP.</p>
+</li>
+<li>
+<p>B. Доступ буде заблоковано, оскільки явне заперечення в SCP має абсолютний пріоритет над будь-яким явним дозволом.</p>
+</li>
+<li>
+<p>C. Доступ буде надано, якщо запит надсилається через захищену точку підключення VPC Endpoint.</p>
+</li>
+<li>
+<p>D. Запит поверне код помилки 301 Moved Permanently замість коду помилки авторизації 403 Forbidden.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p>Логічне обґрунтування: Механізм авторизації AWS обчислює дерево дозволів за принципом найсуворішого обмеження. Політики SCP задають максимальну межу повноважень (Guardrails) для облікових записів в організації. Оскільки сервісний акаунт не має необхідного тегу <code>Department: SecOps</code>, умова <code>Condition</code> оцінюється як істинна, активуючи блок <code>Effect: Deny</code>. Відповідно до булевої моделі оцінки політик, будь-яке явне заперечення (<code>Explicit Deny</code>) безапеляційно блокує транзакцію незалежно від наявності дозволу в локальній політиці IAM.</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+</li>
+<li>
+<p>Варіант A є грубою архітектурною помилкою, оскільки SCP стоїть ієрархічно вище локальних IAM-політик і нівелює будь-які локальні дозволи.</p>
+</li>
+<li>
+<p>Варіант C некоректний, оскільки тип мережевого шлюзу VPC Endpoint не скасовує дію правил політики контролю доступу організації SCP.</p>
+</li>
+<li>
+<p>Варіант D описує помилку некоректної DNS-маршрутизації об'єкта, тоді як відмова в авторизації завжди повертає статус 403 Access Denied.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>Під час аварійного тестування відмовостійкості системи класу Warm Standby основна база даних вийшла з ладу. Резервна база даних у вторинному регіоні відставала на <span class="arithmatex">\(\Delta t = 45\,\text{секунд}\)</span> через затримку асинхронної реплікації журналу транзакцій. Інженери ініціювали процес підвищення ролі репліки до повноцінного мастера (Failover) через 2 хвилини після збою, а повне перемикання трафіку клієнтів завершилося через 6 хвилин від моменту аварії. Якими є фактичні значення метрик RTO та RPO для цього інциденту?</p>
+</li>
+<li>
+<p>A. <span class="arithmatex">\(RTO = 45\,\text{секунд}, \quad RPO = 6\,\text{хвилин}\)</span>.</p>
+</li>
+<li>
+<p>B. <span class="arithmatex">\(RTO = 8\,\text{хвилин}, \quad RPO = 45\,\text{секунд}\)</span>.</p>
+</li>
+<li>
+<p>C. <span class="arithmatex">\(RTO = 6\,\text{хвилин}, \quad RPO = 45\,\text{секунд}\)</span>.</p>
+</li>
+<li>
+<p>D. <span class="arithmatex">\(RTO = 2\,\text{хвилини}, \quad RPO = 0\,\text{секунд}\)</span>.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: C.</strong></p>
+<ol>
+<li>
+<p>Логічне обґрунтування: Метрика RPO вимірює часовий обсяг втрачених даних, який точно дорівнює затримці реплікації між основним і вторинним майданчиками на момент збою, тобто <span class="arithmatex">\(\Delta t = 45\,\text{секунд}\)</span>. Метрика RTO вимірює повний проміжок часу від моменту виникнення аварії до моменту, коли система відновила обслуговування клієнтського навантаження у вторинному регіоні, що за умовою склало рівно 6 хвилин.</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+</li>
+<li>
+<p>Варіант A плутає місцями визначення понять цільового часу відновлення (RTO) та точки відновлення даних (RPO).</p>
+</li>
+<li>
+<p>Варіант B помилково додає 2 хвилини прийняття рішення до загального часу простою в 6 хвилин, хоча ці 2 хвилини вже входять у загальний інтервал перемикання.</p>
+</li>
+<li>
+<p>Варіант D враховує лише час до початку ручних дій інженерів, ігноруючи тривалість DNS-перемикання та фіксуючи неможливу нульову втрату даних при асинхронній реплікації.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>Для прискорення виконання аналітичних запитів до 100 ТБ сирих логів у форматі JSON інженер вирішив перевести дані у формат Apache Parquet без зміни структури каталогів. Запити виконують фільтрацію за конкретним календарним днем <code>event_date = '2023-10-15'</code> та сканують 2 колонки з 50. Однак час виконання запитів в AWS Athena скоротився лише на 30% замість очікуваних 95%. У чому полягає першопричина низької ефективності оптимізації?</p>
+</li>
+<li>
+<p>A. Відсутнє стиснення алгоритмом GZIP у метаданих Parquet.</p>
+</li>
+<li>
+<p>B. Дані не були секціоновані (partitioned) за атрибутом дати на рівні структури папок сховища S3.</p>
+</li>
+<li>
+<p>C. Рушій Athena не підтримує виконання операцій Predicate Pushdown над файлами Parquet.</p>
+</li>
+<li>
+<p>D. Формат Parquet призначений виключно для потокової обробки в пам'яті і не дає переваг на дискових сховищах.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p>Логічне обґрунтування: Стовпчиковий формат Parquet ефективно мінімізує зчитування за рахунок проекції колонок (зчитуються лише 2 колонки з 50, що дало скорочення на 30%). Проте за відсутності фізичного партиціонування каталогу за датою (<code>/year=2023/month=10/day=15/</code>) рушій Athena був змушений завантажити та просканувати заголовки метаданих усіх файлів за всі роки для пошуку потрібного дня, що знівелювало виграш від оптимізації та створило величезні накладні витрати на дисковий ввід-вивід.</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+</li>
+<li>
+<p>Варіант A не є коректним, оскільки Parquet стандартно використовує високопродуктивний алгоритм Snappy, що забезпечує значно швидшу декомпресію, ніж важкий GZIP.</p>
+</li>
+<li>
+<p>Варіант C прямо суперечить технічній специфікації: Presto/Trino (основа Athena) оптимізовані саме під предикатне відсікання блоків метаданих Parquet.</p>
+</li>
+<li>
+<p>Варіант D є хибним твердженням, оскільки Parquet є дисковим форматом зберігання, на відміну від внутрішньопам'ятних форматів на кшталт Apache Arrow.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>Система моніторингу зафіксувала значення індексу стабільності популяції <span class="arithmatex">\(PSI = 0{,}31\)</span> для ключової числової ознаки розрахунку ризику аварії високовольтної лінії електропередач. Модель розгорнута на кінцевій точці SageMaker Inference. Яка автоматизована дія інфраструктури MLOps є коректною відповідно до регламенту експлуатації критичних систем?</p>
+</li>
+<li>
+<p>A. Продовження інференсу без змін із повторною перевіркою через 30 днів.</p>
+</li>
+<li>
+<p>B. Негайне збільшення кількості реплік контейнера з моделлю через Auto Scaling.</p>
+</li>
+<li>
+<p>C. Тимчасове перемикання трафіку на резервне детерміноване правило безпеки та активація конвеєра термінового перенавчання моделі.</p>
+</li>
+<li>
+<p>D. Примусове обнулення статистичних бінів у навчальному датасеті.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: C.</strong></p>
+<ol>
+<li>
+<p>Логічне обґрунтування: Значення <span class="arithmatex">\(PSI &gt; 0{,}25\)</span> свідчить про значний зсув розподілу даних (Significant Data Drift). У критичних кіберфізичних системах це означає, що поточні умови роботи кардинально відрізняються від навчальних, і модель видає непередбачувані або хибні результати. Регламент безпеки вимагає ізолювати скомпрометований алгоритм, перемкнути управління на надійні базові фізичні правила (Fallback Rules) та ініціювати конвеєр автоматичного перенавчання (Retraining Pipeline).</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+</li>
+<li>
+<p>Варіант A призведе до експлуатації неадекватної моделі, що загрожує аварією в реальній енергосистемі через пропуск критичних аномалій.</p>
+</li>
+<li>
+<p>Варіант B масштабує обчислювальні інстанси, що ніяк не вирішує проблему алгоритмічної деградації точності математичної моделі.</p>
+</li>
+<li>
+<p>Варіант D є абсурдним з погляду науки про дані, оскільки спотворює еталонну базу порівняння замість усунення першопричини розбіжності.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h4 id="_9">Завдання для самостійної роботи</h4>
+<h5 id="_10">Постановка задачі</h5>
+<p>Міжнародний консорціум медичних центрів розгортає систему телемедицини та моніторингу пацієнтів у реальному часі CardioCloud. Система збирає кардіограми з носимих холтер-моніторів через мобільні застосунки пацієнтів. </p>
+<p>Інфраструктура повинна відповідати суворим вимогам медичної таємниці (HIPAA, GDPR), гарантувати безперебійну роботу для 50 000 пацієнтів у критичному стані, відхиляти будь-які спроби неавторизованого читання діагностичних карт за відсутності активного лікувального сеансу та забезпечувати відновлення функцій аналізу серцевого ритму при відмові дата-центру не більше ніж за 3 хвилини з нульовою втратою поточних даних кардіограм.</p>
+<h5 id="_11">Завдання для виконання</h5>
+<ol>
+<li>
+<p>Спроєктуйте архітектурну матрицю контролю доступу на базі моделі ABAC, де рішення про читання медичних даних приймається виключно за умови збігу динамічних атрибутів лікаря, пацієнта та наявності активного медичного призначення у базі даних.</p>
+</li>
+<li>
+<p>Розрахуйте сукупну надійність ланцюжка обробки сигналів і виберіть відповідну стратегію аварійного відновлення між двома віддаленими регіонами для задоволення критеріїв цільового часу відновлення до трьох хвилин та нульової втрати даних.</p>
+</li>
+<li>
+<p>Розробіть схему безперервного моніторингу затримки доставки екстрених пакетів аритмії на основі ковзної Z-оцінки та налаштуйте параметри періоду стабілізації для виключення хибних сповіщень чергових кардіологів.</p>
+</li>
+<li>
+<p>Сформулюйте архітектурну специфікацію озера медичних даних на базі об'єктного сховища та обґрунтуйте параметри стиснення, партиціонування і схеми вивантаження кардіограм для проведення щомісячних аналітичних досліджень ефективності терапії.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

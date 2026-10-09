@@ -1,0 +1,2873 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../lk2/">
+      
+      
+        <link rel="next" href="../lk4/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lk1/" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lb/lb1/" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектура хмарних мережних абстракцій та моделей даних
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерія безпеки, маршрутизації та продуктивності розподіленого збереження
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування мережевої та дискової інфраструктури хмарного бекенду
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектура хмарних мережних абстракцій та моделей даних
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Архітектура хмарних мережних абстракцій та моделей даних">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-sdn-vxlan-geneve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Принципи програмно-конфігурованих мереж (SDN) та оверлейна інкапсуляція за протоколами VXLAN і Geneve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-virtual-private-cloud-aws-vpc-virtual-network-azure-vnet-cidr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Концепція ізольованого хмарного сегмента: архітектура Virtual Private Cloud (AWS VPC) та Virtual Network (Azure VNet), розподіл зон доступності та розрахунок адресних просторів CIDR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-ebs-managed-disks-efs-azure-files-s3-blob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Таксономія та структурні особливості хмарних сховищ: порівняльний аналіз блокових (EBS / Managed Disks), файлових (EFS / Azure Files) та об'єктних (S3 / Blob) моделей
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-dbaas-acid-nosql-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Парадигми організації хмарних баз даних: реляційні сервіси DBaaS із підтримкою транзакцій ACID проти розподілених NoSQL-сховищ моделі BASE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерія безпеки, маршрутизації та продуктивності розподіленого збереження
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Інженерія безпеки, маршрутизації та продуктивності розподіленого збереження">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-stateful-security-groups-vnic-stateless-network-acl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Багаторівнева фільтрація трафіку: алгоритмічні відмінності між stateful-інспекцією Security Groups на рівні vNIC та stateless-фільтрацією Network ACL на межі підмережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-internet-gateway-nat-gateway-ipsec-vpn-direct-connect-expressroute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Організація зовнішньої та гібридної зв'язності: механізми шлюзів Internet Gateway і NAT Gateway, порівняльний аналіз тунелів IPsec VPN та виділених ліній Direct Connect / ExpressRoute
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-lrs-zrs-grs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Механізми забезпечення довговічності даних: стратегії реплікації LRS, ZRS, GRS та автоматизація керування життєвим циклом об'єктів за температурними класами зберігання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-nosql-partition-key-sort-key-etag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Методологія оптимізації транзакцій NoSQL: проектування складених первинних ключів (Partition Key, Sort Key) та алгоритми оптимістичного блокування на основі ETag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-cap-hot-partitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Критичні бар'єри та граничні умови: ліміти пропускної здатності віртуальних інтерфейсів, вплив мережевого джитера на чутливі до затримок системи, компроміси теореми CAP та проблема утворення «гарячих партицій» (Hot Partitions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування мережевої та дискової інфраструктури хмарного бекенду
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Проєктування мережевої та дискової інфраструктури хмарного бекенду">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-aws-vpc-direct-connect-s3-dynamodb-100-000-iot-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Розгортання відмовостійкої трирівневої інфраструктури AWS VPC із резервованим гібридним каналом Direct Connect, сховищем S3 та базою даних DynamoDB для збирання та аналізу потокової телеметрії 100 000 промислових IoT-контролерів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Розгортання відмовостійкої трирівневої інфраструктури AWS VPC із резервованим гібридним каналом Direct Connect, сховищем S3 та базою даних DynamoDB для збирання та аналізу потокової телеметрії 100 000 промислових IoT-контролерів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cidr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок адресного простору CIDR та конфігурація підмереж
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Розрахунок пропускної здатності каналів та конфігурація гібридного з'єднання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-nosql-wcurcu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Розрахунок продуктивності бази даних NoSQL (WCU/RCU) та схема партиціонування
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-s3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Оцінка життєвого циклу та вартості сховища S3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектура хмарних мережних абстракцій та моделей даних
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерія безпеки, маршрутизації та продуктивності розподіленого збереження
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування мережевої та дискової інфраструктури хмарного бекенду
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектура хмарних мережних абстракцій та моделей даних
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Архітектура хмарних мережних абстракцій та моделей даних">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-sdn-vxlan-geneve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Принципи програмно-конфігурованих мереж (SDN) та оверлейна інкапсуляція за протоколами VXLAN і Geneve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-virtual-private-cloud-aws-vpc-virtual-network-azure-vnet-cidr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Концепція ізольованого хмарного сегмента: архітектура Virtual Private Cloud (AWS VPC) та Virtual Network (Azure VNet), розподіл зон доступності та розрахунок адресних просторів CIDR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-ebs-managed-disks-efs-azure-files-s3-blob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Таксономія та структурні особливості хмарних сховищ: порівняльний аналіз блокових (EBS / Managed Disks), файлових (EFS / Azure Files) та об'єктних (S3 / Blob) моделей
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-dbaas-acid-nosql-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Парадигми організації хмарних баз даних: реляційні сервіси DBaaS із підтримкою транзакцій ACID проти розподілених NoSQL-сховищ моделі BASE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Інженерія безпеки, маршрутизації та продуктивності розподіленого збереження
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Інженерія безпеки, маршрутизації та продуктивності розподіленого збереження">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-stateful-security-groups-vnic-stateless-network-acl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Багаторівнева фільтрація трафіку: алгоритмічні відмінності між stateful-інспекцією Security Groups на рівні vNIC та stateless-фільтрацією Network ACL на межі підмережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-internet-gateway-nat-gateway-ipsec-vpn-direct-connect-expressroute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Організація зовнішньої та гібридної зв'язності: механізми шлюзів Internet Gateway і NAT Gateway, порівняльний аналіз тунелів IPsec VPN та виділених ліній Direct Connect / ExpressRoute
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-lrs-zrs-grs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Механізми забезпечення довговічності даних: стратегії реплікації LRS, ZRS, GRS та автоматизація керування життєвим циклом об'єктів за температурними класами зберігання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-nosql-partition-key-sort-key-etag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Методологія оптимізації транзакцій NoSQL: проектування складених первинних ключів (Partition Key, Sort Key) та алгоритми оптимістичного блокування на основі ETag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-cap-hot-partitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Критичні бар'єри та граничні умови: ліміти пропускної здатності віртуальних інтерфейсів, вплив мережевого джитера на чутливі до затримок системи, компроміси теореми CAP та проблема утворення «гарячих партицій» (Hot Partitions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування мережевої та дискової інфраструктури хмарного бекенду
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Проєктування мережевої та дискової інфраструктури хмарного бекенду">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-aws-vpc-direct-connect-s3-dynamodb-100-000-iot-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Розгортання відмовостійкої трирівневої інфраструктури AWS VPC із резервованим гібридним каналом Direct Connect, сховищем S3 та базою даних DynamoDB для збирання та аналізу потокової телеметрії 100 000 промислових IoT-контролерів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Розгортання відмовостійкої трирівневої інфраструктури AWS VPC із резервованим гібридним каналом Direct Connect, сховищем S3 та базою даних DynamoDB для збирання та аналізу потокової телеметрії 100 000 промислових IoT-контролерів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cidr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок адресного простору CIDR та конфігурація підмереж
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Розрахунок пропускної здатності каналів та конфігурація гібридного з'єднання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-nosql-wcurcu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Розрахунок продуктивності бази даних NoSQL (WCU/RCU) та схема партиціонування
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-s3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Оцінка життєвого циклу та вартості сховища S3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="3-">Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних</h1>
+<h2 id="_1">Мета лекції</h2>
+<p>Формування у майбутніх інженерів комп'ютерних систем поглиблених теоретичних знань і практичних компетентностей щодо проектування, розгортання та оптимізації віртуальних мережевих інфраструктур і гетерогенних сховищ даних у публічних та гібридних хмарних середовищах. Навчальний матеріал фокусується на апаратно-програмній реалізації сучасних концепцій Software-Defined Networking, аналізі механізмів оверлейної інкапсуляції пакетів, детермінованому розрахунку простору IP-адресації та конфігуруванні багаторівневих систем захисту трафіку. Особлива увага приділяється інженерним компромісам між блоковими, файловими й об'єктними моделями зберігання, а також вибору СУБД для високонавантажених розподілених кіберфізичних комплексів з урахуванням апаратних обмежень пропускної здатності, мережевих затримок і вимог теореми CAP.</p>
+<h2 id="_2">Очікувані результати навчання</h2>
+<ol>
+<li>
+<p><strong>Знання та розуміння.</strong> Студенти повинні засвоїти базові принципи функціонування програмно-конфігурованих мереж, архітектуру віртуальних приватних хмар (VPC/VNet), математичні засади безкласової адресації CIDR, а також внутрішню організацію блокових, файлових, об'єктних сховищ і систем керування базами даних класів ACID і BASE.</p>
+</li>
+<li>
+<p><strong>Застосування.</strong> Студенти набудуть навичок практичного проектування топологій публічних і приватних підмереж, розрахунку адресних просторів із врахуванням службового резервування платформ, конфігурування таблиць маршрутизації, налаштування шлюзів IGW і NAT, а також визначення параметрів продуктивності дискових томів і структур партиціонування NoSQL-таблиць.</p>
+</li>
+<li>
+<p><strong>Аналіз.</strong> Студенти зможуть критично зіставляти функціонування механізмів мережевої фільтрації з фіксацією стану (Security Groups) та без збереження стану (Network ACL), аналізувати детермінованість затримок і пропускну здатність каналів Site-to-Site VPN проти виділених оптичних магістралей Direct Connect / ExpressRoute, а також диференціювати поведінку сховищ під час реплікації даних.</p>
+</li>
+<li>
+<p><strong>Оцінювання та синтез.</strong> Студенти оволодіють методологією виявлення критичних вузьких місць у віртуальних мережевих трактах, мінімізації ризиків утворення «гарячих партицій» у розподілених сховищах телеметрії та синтезу стійких до відмов георозподілених архітектур зберігання з оптимізацією вартості життєвого циклу інформації.</p>
+</li>
+</ol>
+<hr />
+<h2 id="_3">Детальний покроковий план лекції</h2>
+<h3 id="1-">1. Теоретико-концептуальний базис. Архітектура хмарних мережних абстракцій та моделей даних</h3>
+<ul>
+<li>
+<p>1.1. Принципи програмно-конфігурованих мереж (SDN), розділення площин Control Plane та Data Plane, механізми оверлейної інкапсуляції кадрів за протоколами VXLAN і Geneve.</p>
+</li>
+<li>
+<p>1.2. Концепція ізольованого хмарного сегмента: архітектура Virtual Private Cloud (AWS VPC) та Virtual Network (Azure VNet), розподіл зон доступності та розрахунок адресних просторів CIDR.</p>
+</li>
+<li>
+<p>1.3. Таксономія та структурні особливості хмарних сховищ: порівняльний аналіз блокових (EBS / Managed Disks), файлових (EFS / Azure Files) та об'єктних (S3 / Blob) моделей.</p>
+</li>
+<li>
+<p>1.4. Парадигми організації хмарних баз даних: реляційні сервіси DBaaS із підтримкою транзакцій ACID проти розподілених NoSQL-сховищ моделі BASE.</p>
+</li>
+</ul>
+<h3 id="2">2. Методологія та аналіз граничних умов. Інженерія безпеки, маршрутизації та продуктивності розподіленого збереження</h3>
+<ul>
+<li>
+<p>2.1. Багаторівнева фільтрація трафіку: алгоритмічні відмінності між stateful-інспекцією Security Groups на рівні vNIC та stateless-фільтрацією Network ACL на межі підмережі.</p>
+</li>
+<li>
+<p>2.2. Організація зовнішньої та гібридної зв'язності: механізми шлюзів Internet Gateway і NAT Gateway, порівняльний аналіз тунелів IPsec VPN та виділених ліній Direct Connect / ExpressRoute.</p>
+</li>
+<li>
+<p>2.3. Механізми забезпечення довговічності даних: стратегії реплікації LRS, ZRS, GRS та автоматизація керування життєвим циклом об'єктів за температурними класами зберігання.</p>
+</li>
+<li>
+<p>2.4. Методологія оптимізації транзакцій NoSQL: проектування складених первинних ключів (Partition Key, Sort Key) та алгоритми оптимістичного блокування на основі ETag.</p>
+</li>
+<li>
+<p>2.5. Критичні бар'єри та граничні умови: ліміти пропускної здатності віртуальних інтерфейсів, вплив мережевого джитера на чутливі до затримок системи, компроміси теореми CAP та проблема утворення «гарячих партицій» (Hot Partitions).</p>
+</li>
+</ul>
+<h3 id="3">3. Практичний індустріальний / фаховий кейс. Проєктування мережевої та дискової інфраструктури хмарного бекенду</h3>
+<p><strong>Тема наскрізної задачі.</strong> «Розгортання захищеної трирівневої інфраструктури AWS VPC із резервованим гібридним каналом Direct Connect, холодним об'єктним сховищем S3 та базою даних DynamoDB для збирання та аналізу потокової телеметрії 100 000 промислових IoT-контролерів».</p>
+<h2 id="1-_1">1. Теоретико-концептуальний базис. Архітектура хмарних мережних абстракцій та моделей даних</h2>
+<h3 id="11-sdn-vxlan-geneve">1.1. Принципи програмно-конфігурованих мереж (SDN) та оверлейна інкапсуляція за протоколами VXLAN і Geneve</h3>
+<p>Фундаментом функціонування сучасних дата-центрів виступає концепція <strong>програмно-конфігурованих мереж (Software-Defined Networking, SDN)</strong>, яка подолала архітектурну скутість традиційного телекомунікаційного обладнання. У класичній мережевій інфраструктурі логіка прийняття рішень щодо маршрутизації та безпосереднє пересилання пакетів апаратно об'єднані всередині одного шасі комутатора чи маршрутизатора. Парадигма SDN здійснює декомпозицію цієї системи, жорстко відокремлюючи <strong>площину керування (Control Plane)</strong> від <strong>площини передавання даних (Data Plane / Forwarding Plane)</strong>. </p>
+<p>Площина передавання реалізується на базі високошвидкісних спеціалізованих інтегральних схем (<strong>Application-Specific Integrated Circuit, ASIC</strong>) або мережевих процесорів (<strong>Network Processor, NP</strong>), чиє завдання полягає виключно в апаратному комутуванні кадрів і пакетів за заздалегідь завантаженими таблицями потоків. Натомість площина керування виноситься на централізований логічний контролер, який формує глобальний топологічний огляд усієї інфраструктури, аналізує завантаженість каналів у реальному часі та транслює правила комутації до апаратних пристроїв через стандартизовані протоколи взаємодії, такі як OpenFlow або сучасніші інтерфейси Open vSwitch Database Management Protocol (OVSDB).</p>
+<p>Історично ізоляція обчислювальних середовищ у локальних мережах здійснювалася за допомогою стандарту IEEE 802.1Q (VLAN), проте в контексті великомасштабних мультиорендних хмарних дата-центрів цей підхід продемонстрував нездоланні обмеження. Дванадцятибітне поле ідентифікатора віртуальної мережі (VLAN ID) обмежує кількість ізольованих доменів широкомовлення величиною <span class="arithmatex">\(2^{12} = 4096\)</span>, що є критично малим для провайдерів, які обслуговують сотні тисяч незалежних орендарів. Крім того, протокол зв'язувального дерева (Spanning Tree Protocol, STP), необхідний для запобігання комутаційним петлям у мережах VLAN, штучно блокує резервні фізичні лінії, що унеможливлює повноцінне використання пропускної здатності сучасних фабрик дата-центрів із топологією Leaf-Spine (Clos-мережі).</p>
+<p>Вирішенням зазначених проблем стало впровадження <strong>оверлейних мереж (Overlay Networks)</strong>, побудованих поверх фізичної транспортної мережі (<strong>Underlay Network</strong>). Фізичний рівень Underlay функціонує виключно як високонадійна масштабована L3-мережа з маршрутизацією на основі протоколів BGP або OSPF, що підтримує балансування навантаження між усіма лінками за механізмом Equal-Cost Multi-Path (ECMP). Оверлейний рівень інкапсулює вихідний канальний кадр L2 або пакет L3 віртуальної машини в стандартний транспортний UDP-пакет базової мережі, створюючи ілюзію прямого зв'язку на канальному рівні між віддаленими віртуальними вузлами.</p>
+<p>Основним стандартом оверлейної віртуалізації є протокол <strong>VXLAN (Virtual Extensible LAN)</strong>, стандартизований RFC 7348. У структурі кадру VXLAN оригінальний Ethernet-кадр віртуальної машини інкапсулюється в зовнішній UDP-пакет із портом призначення за замовчуванням 4789. Заголовок VXLAN містить 24-бітний ідентифікатор віртуальної мережі (<strong>Virtual Network Identifier, VNI</strong>), що дозволяє теоретично масштабувати простір ізольованих сегментів до <span class="arithmatex">\(2^{24} \approx 16{,}7\)</span> мільйона підмереж. </p>
+<p>Розвиток оверлейних технологій спричинив появу протоколу <strong>Geneve (Generic Network Virtualization Encapsulation)</strong>, стандартизованого RFC 8926. На відміну від статичного заголовка VXLAN, заголовок Geneve використовує порт UDP 6081 та володіє динамічним форматом із підтримкою опцій TLV (Type-Length-Value). Це дозволяє передавати в заголовку довільні службові метадані площини керування, ідентифікатори політик безпеки для систем мікросегментації та діагностичні мітки вбудованої телеметрії (In-band Network Telemetry, INT) безпосередньо в процесі пересилання пакетів через віртуальні комутатори, такі як Open vSwitch (OVS).</p>
+<p>Застосування оверлейної інкапсуляції породжує проблему фрагментації пакетів через перевищення максимального розміру корисного навантаження кадру. Математична модель граничного розміру пакета всередині оверлейного тунелю <span class="arithmatex">\(MTU_{\text{inner}}\)</span> для запобігання фрагментації описується залежністю:</p>
+<div class="arithmatex">\[MTU_{\text{inner}} = MTU_{\text{underlay}} - (L_{\text{eth\_outer}} + L_{\text{ip\_outer}} + L_{\text{udp}} + L_{\text{encap}})\]</div>
+<p>де <span class="arithmatex">\(MTU_{\text{underlay}}\)</span> позначає максимальний розмір блоку передавання фізичної мережі дата-центру, <span class="arithmatex">\(L_{\text{eth\_outer}}\)</span> відповідає довжині зовнішнього заголовка Ethernet (14 байтів без урахування тегу 802.1Q), <span class="arithmatex">\(L_{\text{ip\_outer}}\)</span> дорівнює розміру зовнішнього заголовка IPv4 (20 байтів) або IPv6 (40 байтів), <span class="arithmatex">\(L_{\text{udp}}\)</span> становить довжину заголовка UDP (8 байтів), а <span class="arithmatex">\(L_{\text{encap}}\)</span> визначає довжину заголовка інкапсуляції (8 байтів для фіксованого VXLAN або від 8 до 260 байтів для Geneve із TLV-опціями).</p>
+<p>При стандартному значенні <span class="arithmatex">\(MTU_{\text{underlay}} = 1500\)</span> байтів мінімальний накладний оверлейний заголовок розміром 50 байтів обмежує розмір корисного кадру віртуальної машини до 1450 байтів. Якщо гостьова операційна система відправляє стандартний TCP-пакет розміром 1500 байтів, це спричиняє примусову L3-фрагментацію на мережевому адаптері хоста або відкидання пакета з надсиланням повідомлення ICMP «Destination Unreachable, Fragmentation Needed». З цієї причини на рівні фізичної мережі хмарних ЦОД обов'язково налаштовується підтримка надвеликих кадрів (<strong>Jumbo Frames</strong>) із значенням <span class="arithmatex">\(MTU_{\text{underlay}} \ge 9000\)</span> байтів.</p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У гіперконвергентних мережах Amazon Web Services апаратна декапсуляція оверлейних протоколів Geneve та VXLAN виконується не центральним процесором сервера, а спеціалізованими PCIe-картками-прискорювачами AWS Nitro Card, що забезпечує затримку пересилання між інстансами на рівні менше ніж 50 мікросекунд без втрати продуктивності процесорних ядер.</p>
+</blockquote>
+<hr />
+<h3 id="12-virtual-private-cloud-aws-vpc-virtual-network-azure-vnet-cidr">1.2. Концепція ізольованого хмарного сегмента: архітектура Virtual Private Cloud (AWS VPC) та Virtual Network (Azure VNet), розподіл зон доступності та розрахунок адресних просторів CIDR</h3>
+<p>Реалізація оверлейних мереж дозволяє надавати кожному користувачеві виділений віртуальний простір, ізольований на логічному рівні від інших клієнтів хмари. У термінології постачальників послуг IaaS цей простір позначається як <strong>Virtual Private Cloud (VPC)</strong> у платформі AWS або <strong>Virtual Network (VNet)</strong> у середовищі Microsoft Azure. З погляду системного проектування, VPC є віртуальною проекцією локального дата-центру з власним пулом IP-адрес, шлюзами доступу, таблицями маршрутизації та політиками міжмережевої взаємодії.</p>
+<p>Проектування ізольованого хмарного сегмента починається з виділення адресного блоку у форматі <strong>безкласової міждоменної адресації (Classless Inter-Domain Routing, CIDR)</strong> відповідно до RFC 1918. Зазвичай хмарні платформи підтримують довжину маски підмережі від <code>/16</code> (що надає 65 536 адрес) до <code>/28</code> (що надає 16 адрес). Архітектурно цей масив розбивається на функціональні підмережі, що закріплюються за різними фізичними <strong>зонами доступності (Availability Zones, AZ)</strong> для запобігання відмовам єдиної точки інфраструктури.</p>
+<p>Кількість корисних адрес <span class="arithmatex">\(N_{\text{usable}}\)</span>, доступних для призначення віртуальним мережевим інтерфейсам у підмережі з префіксом <span class="arithmatex">\(M\)</span>, визначається математичним виразом:</p>
+<div class="arithmatex">\[N_{\text{usable}} = 2^{(32 - M)} - N_{\text{reserved}}\]</div>
+<p>де показник <span class="arithmatex">\(M\)</span> позначає кількість фіксованих бітів мережевої маски, а величина <span class="arithmatex">\(N_{\text{reserved}}\)</span> відображає службове резервування адрес інфраструктурними компонентами конкретної хмарної платформи.</p>
+<p>Для інфраструктури AWS VPC величина <span class="arithmatex">\(N_{\text{reserved}} = 5\)</span>. Зокрема, у підмережі <code>10.0.1.0/24</code> адреса <code>10.0.1.0</code> ідентифікує номер мережі, адреса <code>10.0.1.1</code> резервується для віртуального маршрутизатора підмережі (Default Gateway), адреса <code>10.0.1.2</code> призначається системному рекурсивному DNS-серверу (Amazon Route 53 Resolver), адреса <code>10.0.1.3</code> резервується для майбутнього використання провайдером, а адреса <code>10.0.1.255</code> виконує роль широкомовної адреси. Для хмари Azure VNet резервується аналогічна кількість адрес (<span class="arithmatex">\(N_{\text{reserved}} = 5\)</span>), де три адреси закріплені за шлюзами та протокольними трансляторами.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Region ["Хмарний регіон (Cloud Region: eu-central-1)"]
+        subgraph VPC ["Віртуальна приватна хмара (VPC CIDR: 10.0.0.0/16)"]
+
+            subgraph AZ1 ["Зона доступності 1 (AZ-a)"]
+                PubSub1["Публічна підмережа 1&lt;br/&gt;10.0.1.0/24 (251 хост)&lt;br/&gt;Route: 0.0.0.0/0 -&gt; IGW"]
+                PrivSub1["Приватна підмережа 1&lt;br/&gt;10.0.10.0/24 (251 хост)&lt;br/&gt;Route: 0.0.0.0/0 -&gt; NAT-GW-1"]
+            end
+
+            subgraph AZ2 ["Зона доступності 2 (AZ-b)"]
+                PubSub2["Публічна підмережа 2&lt;br/&gt;10.0.2.0/24 (251 хост)&lt;br/&gt;Route: 0.0.0.0/0 -&gt; IGW"]
+                PrivSub2["Приватна підмережа 2&lt;br/&gt;10.0.20.0/24 (251 хост)&lt;br/&gt;Route: 0.0.0.0/0 -&gt; NAT-GW-2"]
+            end
+
+            IGW["Інтернет-шлюз (Internet Gateway)"]
+            NAT1["Шлюз NAT 1 (NAT-GW-1)"]
+            NAT2["Шлюз NAT 2 (NAT-GW-2)"]
+
+        end
+    end
+
+    ExtNet(("Глобальна мережа Інтернет")) &lt;===&gt; IGW
+    IGW &lt;===&gt; PubSub1
+    IGW &lt;===&gt; PubSub2
+
+    PubSub1 --- NAT1
+    PubSub2 --- NAT2
+
+    NAT1 ===&gt; PrivSub1
+    NAT2 ===&gt; PrivSub2</code></pre>
+<p>Залежно від шляхів проходження вихідного та вхідного трафіку, підмережі класифікуються на публічні та приватні. <strong>Публічна підмережа (Public Subnet)</strong> асоційована з таблицею маршрутизації, яка має прямий маршрут <code>0.0.0.0/0</code> на <strong>інтернет-шлюз (Internet Gateway, IGW)</strong>. Інтернет-шлюз — це повністю керований, горизонтально масштабований програмний компонент, який виконує трансляцію мережевих адрес «один-до-одного» (<strong>1:1 Static NAT</strong>) між внутрішніми приватними IP-адресами інстансів та асоційованими з ними публічними еластичними IP-адресами. </p>
+<p><strong>Приватна підмережа (Private Subnet)</strong> не має прямого зв'язку з IGW у своїй таблиці маршрутизації. Якщо інстансам у приватній підмережі необхідно вийти в зовнішню мережу (наприклад, для завантаження пакетів оновлення ядра або надсилання телеметрії в зовнішні API), трафік <code>0.0.0.0/0</code> перенаправляється на <strong>шлюз трансляції мережевих адрес (NAT Gateway)</strong>, розташований у публічній підмережі. Шлюз NAT діє за принципом Source NAT (SNAT) або трансляції портів (Port Address Translation, PAT), замінюючи внутрішню приватну адресу запиту своєю власною публічною IP-адресою та підтримуючи динамічну таблицю сесій трансляції. При цьому прямий вхідний трафік з Інтернету до інстансів приватної підмережі залишається фізично заблокованим.</p>
+<blockquote>
+<p><strong>ТИПОВА ПОМИЛКА:</strong> Призначення віртуальній машині публічної IP-адреси всередині приватної підмережі без зміни таблиці маршрутизації на IGW не відкриває доступ до Інтернету. Інтернет-шлюз опрацьовує трансляцію адрес лише для тих підмереж, таблиця маршрутизації яких явно визначає зв'язку <code>0.0.0.0/0 -&gt; igw-xxxx</code>. Без такого запису пакет буде відкинутий маршрутизатором підмережі, попри наявність призначеної публічної IP-адреси.</p>
+</blockquote>
+<hr />
+<h3 id="13-ebs-managed-disks-efs-azure-files-s3-blob">1.3. Таксономія та структурні особливості хмарних сховищ: порівняльний аналіз блокових (EBS / Managed Disks), файлових (EFS / Azure Files) та об'єктних (S3 / Blob) моделей</h3>
+<p>Збереження та обробка даних у хмарних середовищах спираються на три чітко диференційовані моделі зберігання: блокову, файлову та об'єктну. Кожна модель характеризується специфічним способом представлення даних, власними протоколами доступу та показниками латентності.</p>
+<p><strong>Блокове сховище (Block Storage)</strong> надає операційній системі інстансу послідовність «сирих» адресованих блоків фіксованого розміру, зазвичай через віртуальні адаптери NVMe або емульовані шини SCSI/VirtIO. Фізично блоки даних розташовуються на спеціалізованих серверах зберігання або дискових масивах мережі зберігання даних (SAN) і передаються до обчислювального вузла високошвидкісними мережевими протоколами iSCSI або Fibre Channel over Ethernet (FCoE). </p>
+<p>Гостьова операційна система сприймає такий диск як локальний накопичувач, створює таблицю розділів (MBR або GPT) і монтує стандартну файлову систему (наприклад, ext4, XFS у Linux або NTFS у Windows). Блокові сховища (AWS EBS, Azure Managed Disks) забезпечують мінімальну затримку доступу на рівні субмілісекунд і підходять для роботи журналів транзакцій високопродуктивних реляційних баз даних, випадкових операцій вводу-виводу та інсталяції завантажувальних томів операційної системи.</p>
+<p><strong>Файлове сховище (File Storage)</strong> функціонує на вищому рівні абстракції, представляючи дані у вигляді структурованого дерева каталогів і файлів. Взаємодія з файловими системами (AWS EFS, Azure Files) здійснюється через мережеві протоколи прикладного рівня: Network File System (<strong>NFS версій 4.0/4.1</strong>) для Unix-подібних платформ та Server Message Block (<strong>SMB версій 3.0/3.1.1</strong>) для середовищ Windows. </p>
+<p>Головною перевагою файлових сховищ над блоковими є підтримка паралельного спільного доступу (<strong>Concurrent Multi-Attach</strong>): тисячі розподілених обчислювальних інстансів можуть одночасно монтувати спільну файлову систему з дотриманням семантики блокування файлів стандарту POSIX. Проте через необхідність передавання та узгодження метаданих через мережу затримка доступу у файлових сховищах зростає до 3–10 мілісекунд.</p>
+<p><strong>Об'єктне сховище (Object Storage)</strong> повністю відмовляється від концепції ієрархічних файлових шляхів і адресації дискових блоків. Дані організуються у пласкому адресному просторі у формі дискретних двійкових об'єктів, що зберігаються всередині логічних сутностей верхнього рівня — бакетів (<strong>Buckets</strong>) або контейнерів (<strong>Containers</strong>). Кожен об'єкт ідентифікується унікальним рядковим ключем і складається з трьох невіддільних частин: безпосереднього корисного навантаження (двійкового масиву розміром від нуля байтів до кількох терабайтів), незмінного набору системних метаданих (розмір, хеш MD5/SHA256, MIME-тип) та довільних метаданих користувача у форматі «ключ-значення».</p>
+<p>Взаємодія з об'єктним сховищем позбавлена операцій часткової модифікації файлу і спирається виключно на семантику протоколу <strong>HTTP/HTTPS відповідно до архітектурного стилю REST</strong>:</p>
+<ul>
+<li>
+<p>Метод <code>PUT</code> виконує атомарний запис повного об'єкта або його фрагмента при багаточастинному завантаженні (Multipart Upload).</p>
+</li>
+<li>
+<p>Метод <code>GET</code> повертає тіло об'єкта повністю або його окремий зріз за допомогою HTTP-заголовка <code>Range</code>.</p>
+</li>
+<li>
+<p>Метод <code>HEAD</code> повертає виключно метадані об'єкта без вивантаження корисного вмісту через мережу.</p>
+</li>
+<li>
+<p>Метод <code>DELETE</code> здійснює видалення об'єкта або розміщує маркер видалення (Delete Marker) при увімкненому версіонуванні.</p>
+</li>
+</ul>
+<p>Для забезпечення високої надійності в об'єктних сховищах застосовується не традиційне дискове дзеркалювання RAID, а алгоритми корекції помилок — <strong>надлишкове кодування (Erasure Coding)</strong> на базі кодів Ріда-Соломона <span class="arithmatex">\(RS(k, m)\)</span>. Вихідний двійковий об'єкт фрагментується на <span class="arithmatex">\(k\)</span> інформаційних блоків, на основі яких формується <span class="arithmatex">\(m\)</span> блоків парності. Усі <span class="arithmatex">\(k+m\)</span> фрагментів записуються на різні незалежні сервери та стійки в різних дата-центрах регіону. Об'єкт залишається доступним для повного математичного відновлення за умови збереження будь-яких <span class="arithmatex">\(k\)</span> фрагментів, дозволяючи системі безперешкодно витримувати одночасну відмову <span class="arithmatex">\(m\)</span> вузлів зберігання.</p>
+<p>Завдяки цьому показнику ймовірність втрати даних (<strong>Durability</strong>) у системах масштабу Amazon S3 досягає <span class="arithmatex">\(99{,}999999999\%\)</span> («одинадцять дев'яток»). Математично річна ймовірність втрати окремо взятого об'єкта <span class="arithmatex">\(P_{\text{loss}}\)</span> описується як:</p>
+<div class="arithmatex">\[P_{\text{loss}} = 1 - 0{,}99999999999 = 10^{-11}\]</div>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; HotTier: Створення об'єкта (Запис PUT)
+
+    state HotTier {
+        [*] --&gt; S3_Standard
+        S3_Standard: Швидкий доступ, висока вартість зберігання
+    }
+
+    HotTier --&gt; CoolTier: 30 днів без частих звернень (Lifecycle Rule)
+
+    state CoolTier {
+        S3_Standard_IA: Низька вартість GB/місяць, платне зчитування
+    }
+
+    CoolTier --&gt; ArchiveTier: 90 днів неактивності (Lifecycle Rule)
+
+    state ArchiveTier {
+        S3_Glacier_Flexible: Офлайн-архів, розморожування 3-5 годин
+    }
+
+    ArchiveTier --&gt; DeepArchive: 365 днів неактивності (Lifecycle Rule)
+
+    state DeepArchive {
+        S3_Glacier_Deep: Ультрадешеве збереження, розморожування 12-48 годин
+    }
+
+    DeepArchive --&gt; [*]: Перманентне видалення через 7 років</code></pre>
+<p>Для мінімізації фінансових витрат в об'єктних системах впроваджено класифікацію за <strong>рівнями зберігання (Storage Tiers)</strong>: гарячий рівень (Hot / S3 Standard) для даних з постійним доступом, холодний рівень (Cool / Standard-IA) для рідко запитуваних даних зі штрафом за читання, та архівний рівень (Archive / S3 Glacier / Deep Archive), де носії повністю вимкнені з постійної адресації, а час вилучення даних триває від кількох хвилин до десятків годин.</p>
+<p><em>Таблиця 1.1 — Порівняльний аналіз архітектурних підходів до організації хмарних сховищ</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Критерій порівняння</th>
+<th style="text-align: left;">Блокове сховище (EBS, Managed Disks)</th>
+<th style="text-align: left;">Файлове сховище (EFS, Azure Files)</th>
+<th style="text-align: left;">Об'єктне сховище (S3, Azure Blob)</th>
+<th style="text-align: left;">Приклад з реальної практики</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Базова одиниця адресації</strong></td>
+<td style="text-align: left;">Фіксований сектор / блок диска (4 КБ)</td>
+<td style="text-align: left;">Файл та директорія в дереві POSIX</td>
+<td style="text-align: left;">Неструктурований об'єкт із метаданими</td>
+<td style="text-align: left;">Монтування системного диска <code>/dev/xvda</code> для Linux OS</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Мережевий протокол</strong></td>
+<td style="text-align: left;">NVMe-oF, iSCSI, Fibre Channel</td>
+<td style="text-align: left;">NFSv4.1, SMB 3.1.1</td>
+<td style="text-align: left;">REST HTTP/HTTPS (GET, PUT, DELETE)</td>
+<td style="text-align: left;">Обмін файлами конфігурацій між вузлами в Kubernetes через NFS</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Латентність операцій</strong></td>
+<td style="text-align: left;">Субмілісекундна (менше 1 мс)</td>
+<td style="text-align: left;">Низька / середня (3–10 мс)</td>
+<td style="text-align: left;">Висока (20–100 мс до першого байта)</td>
+<td style="text-align: left;">Запис журналів випереджального запису WAL у PostgreSQL на блоковий том</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Масштабованість клієнтів</strong></td>
+<td style="text-align: left;">Одиночне підключення до однієї ВМ</td>
+<td style="text-align: left;">Одночасне спільне підключення тисяч ВМ</td>
+<td style="text-align: left;">Необмежена кількість паралельних HTTP-клієнтів</td>
+<td style="text-align: left;">Збереження сирих відеозаписів із дорожніх камер спостереження в S3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Економічна модель</strong></td>
+<td style="text-align: left;">Оплата за весь зарезервований обсяг</td>
+<td style="text-align: left;">Оплата за фактично зайнятий обсяг</td>
+<td style="text-align: left;">Оплата за фактичний обсяг та кількість запитів</td>
+<td style="text-align: left;">Довгостроковий архів логів аудиту безпеки в Glacier Deep Archive</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="14-dbaas-acid-nosql-base">1.4. Парадигми організації хмарних баз даних: реляційні сервіси DBaaS із підтримкою транзакцій ACID проти розподілених NoSQL-сховищ моделі BASE</h3>
+<p>Управління даними на прикладному рівні хмарної архітектури здійснюється через дві фундаментальні парадигми: реляційні системи керування базами даних, що функціонують за принципом <strong>ACID</strong>, та розподілені NoSQL-сховища, побудовані за моделлю <strong>BASE</strong>.</p>
+<p>Хмарні реляційні бази даних надаються у формі керованих сервісів (<strong>Database as a Service, DBaaS</strong>), таких як AWS RDS або Azure SQL Database. Архітектурною основою цих систем залишається реляційна алгебра з суворою фіксованою схемою таблиць і забезпеченням чотирьох постулатів ACID:</p>
+<ul>
+<li>
+<p><strong>Атомарність (Atomicity):</strong> Транзакція фіксується в системі або повністю, або відкочується без будь-яких проміжних змін.</p>
+</li>
+<li>
+<p><strong>Узгодженість (Consistency):</strong> Усі інваріанти цілісності (зовнішні ключі, унікальні обмеження) зберігаються після завершення транзакції.</p>
+</li>
+<li>
+<p><strong>Ізольованість (Isolation):</strong> Паралельно виконувані транзакції не повинні читати проміжні стани одна одної згідно з обраним рівнем ізоляції (Read Committed, Repeatable Read, Serializable).</p>
+</li>
+<li>
+<p><strong>Довговічність (Durability):</strong> Після підтвердження транзакції дані гарантовано зберігаються на енергонезалежному сховищі навіть у разі раптового знеструмлення обчислювального сервера.</p>
+</li>
+</ul>
+<p>Традиційні реляційні СУБД масштабуються переважно вертикально (<strong>Scale-Up</strong>) шляхом збільшення кількості процесорних ядер та обсягу оперативної пам'яті фізичного сервера, що створює граничну межу зростання. Хмарно-нативні рушії (наприклад, <strong>Amazon Aurora</strong>) долають ці обмеження завдяки відділенню процесорного ядра СУБД від рівня зберігання: операції запису надсилають через мережу лише записи логів змін (<strong>Redo Logs</strong>) безпосередньо до розподіленого сховища, яке паралельно дублює їх у 6 копіях у трьох зонах доступності.</p>
+<p>Проте для масштабних розподілених систем збереження телеметрії з мільйонами подій на секунду модель ACID виявляється надмірно витратною через необхідність синхронних міжвузлових блокувань. У цьому сегменті домінують системи класу <strong>NoSQL (Not Only SQL)</strong>, архітектура яких підпорядкована <strong>теоремі CAP</strong> Еріка Брюера.</p>
+<p>Теорема CAP доводить, що розподілена асинхронна система зберігання здатна одночасно гарантувати не більше двох із трьох системних властивостей:</p>
+<ul>
+<li>
+<p><strong>Узгодженість (Consistency, C):</strong> Усі вузли кластера повертають однаковий, найсвіжіший стан даних у будь-який момент часу.</p>
+</li>
+<li>
+<p><strong>Доступність (Availability, A):</strong> Кожен безвідмовний вузол завжди відповідає на запит на читання чи запис без помилки, проте без гарантії надання найновіших даних.</p>
+</li>
+<li>
+<p><strong>Стійкість до розбиття (Partition Tolerance, P):</strong> Здатність системи функціонувати за умов втрати зв'язку між довільними сегментами мережі дата-центру.</p>
+</li>
+</ul>
+<p>Оскільки в реальних мережах передавання даних виникнення мережевих затримок і розривів є фізично неминучим (властивість P є безумовною), розподілені NoSQL-бази даних (AWS DynamoDB, Azure Cosmos DB, Apache Cassandra) обирають компроміс AP і спираються на парадигму <strong>BASE</strong>:</p>
+<ul>
+<li>
+<p><strong>Базова доступність (Basically Available):</strong> Система гарантує доступність на рівні кластера, допускаючи тимчасову недоступність окремих партицій.</p>
+</li>
+<li>
+<p><strong>Гнучкий стан (Soft-state):</strong> Стан даних у вузлах може змінюватися з часом навіть за відсутності нових операцій запису через поширення реплікації.</p>
+</li>
+<li>
+<p><strong>Узгодженість у кінцевому підсумку (Eventual Consistency):</strong> Усі репліки гарантовано прийдуть до ідентичного стану через певний період часу після завершення потоку записів за відсутності нових модифікацій.</p>
+</li>
+</ul>
+<p>Масштабування NoSQL систем здійснюється горизонтально (<strong>Scale-Out</strong>) за допомогою техніки <strong>узгодженого партиціонування (Sharding)</strong>. Кожен запис структуризується за складеним первинним ключем:</p>
+<div class="arithmatex">\[PrimaryKey = \{PK, SK\}\]</div>
+<p>де <span class="arithmatex">\(PK\)</span> є <strong>ключем партиціонування (Partition Key / Hash Key)</strong>, а <span class="arithmatex">\(SK\)</span> позначає <strong>ключ сортування (Sort Key / Range Key)</strong>.</p>
+<p>Значення <span class="arithmatex">\(PK\)</span> обробляється детермінованою криптографічною хеш-функцією <span class="arithmatex">\(H(PK)\)</span> (наприклад, MD5 або MurmurHash3). Отримане 128-бітне число визначає конкретний фізичний сервер у кластері, на який маршрутизується запис. Ключ <span class="arithmatex">\(SK\)</span> організовує фізичне впорядкування елементів на диску всередині виділеної партиції за алгоритмом B-дерева або LSM-дерева (Log-Structured Merge-tree), дозволяючи здійснювати швидкі вибірки діапазонів даних за часовими мітками.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph ClientLayer ["Клієнтський рівень"]
+        Client["Клієнтський процес / IoT Ingestion Engine"]
+    end
+
+    subgraph StorageRouter ["Маршрутизатор запитів NoSQL"]
+        HashFunc["Обчислення хешу: H = Murmur3(PartitionKey) mod N"]
+    end
+
+    subgraph ClusterPartitions ["Партиції сховища даних"]
+        Part1["Фізичний вузол 1&lt;br/&gt;Діапазон хешів: 0x0000 - 0x5555&lt;br/&gt;Записи: Device_A, Device_D"]
+        Part2["Фізичний вузол 2&lt;br/&gt;Діапазон хешів: 0x5556 - 0xAAAA&lt;br/&gt;Записи: Device_B, Device_E"]
+        Part3["Фізичний вузол 3&lt;br/&gt;Діапазон хешів: 0xAAAB - 0xFFFF&lt;br/&gt;Записи: Device_C, Device_F"]
+    end
+
+    Client --&gt;|Запис сутності: PK='Device_A', SK='2026-08-29'| StorageRouter
+    StorageRouter --&gt; HashFunc
+    HashFunc --&gt;|Маршрутизація за хеш-кільцем| Part1
+    HashFunc -.-&gt; Part2
+    HashFunc -.-&gt; Part3</code></pre>
+<p>Управління багатокористувацькими модифікаціями без встановлення важких блокувань таблиць у сховищах типу AWS DynamoDB та Azure Table реалізується через <strong>оптимістичне блокування (Optimistic Concurrency Control)</strong>. База даних зберігає системну версію запису — тег сутності <strong>ETag</strong> (хеш поточного стану). При читанні клієнт отримує значення <code>ETag</code>, а під час виконання операції оновлення передає його в умовному виразі. Якщо інший паралельний потік встиг змінити запис раніше, значення <code>ETag</code> на сервері оновлюється, сервер відхиляє запізнілий запит помилкою порушення умов (HTTP 412 Precondition Failed), і клієнтський застосунок змушений повторити зчитування перед новою спробою запису.</p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У глобальній платіжній системі Stripe критичні дані про баланси користувачів зберігаються в синхронно реплікованому кластері PostgreSQL для забезпечення гарантій ACID, тоді як журнали авторизацій та потоки подій інтенсивного фрод-моніторингу маршрутизуються до розподіленого сховища DynamoDB для досягнення необмеженого горизонтального масштабування.</p>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Чому використання поточного системного часу (Timestamp) як єдиного ключа партиціонування (Partition Key) у базі даних NoSQL є катастрофічною архітектурною помилкою для систем збирання телеметрії високої інтенсивності?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: Це спричиняє утворення «гарячої партиції» (Hot Partition) та блокує паралелізм кластера.</strong></p>
+<ol>
+<li>
+<p>Якщо як Partition Key обрано виключно часову мітку (Timestamp), усі поточні пакети телеметрії від тисяч одночасно працюючих сенсорів генеруватимуть однакове або дуже близьке значення хешу <span class="arithmatex">\(H(PK)\)</span>. Внаслідок цього весь масив вхідних операцій запису в певний квант часу буде скеруватися виключно на один фізичний сервер кластера, що обслуговує цей діапазон хеш-кільця, перевантажуючи його мережевий інтерфейс та ліміти дискового вводу-виводу (WCU). Водночас решта 99% серверів кластера простоюватимуть.</p>
+</li>
+<li>
+<p>Аналіз дистракторів (чому інші міркування є хибними на практиці):</p>
+</li>
+<li>
+<p>Припущення, що база даних автоматично нормалізує ключі для рознесення навантаження, є хибним, оскільки алгоритм розподіленого шардингу суворо підпорядковується математичному значенню хешу від Partition Key і не має права змінювати місце призначення даних.</p>
+</li>
+<li>
+<p>Ідея про те, що монотонне зростання мітки часу спрощує побудову індексів B-дерева, справедлива лише для локальної СУБД на одному диску, проте в розподіленому сховищі вона повністю нівелює переваги горизонтального масштабування.</p>
+</li>
+<li>
+<p>Правильним підходом є використання складеного ключа: ідентифікатор пристрою (<code>DeviceID</code>) як Partition Key для рівномірного розсіювання потоків між вузлами через хешування, а часова мітка (<code>Timestamp</code>) — як Sort Key для впорядкованого зберігання історії всередині кожної ізольованої партиції.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h3 id="_4">Вказівки для самостійного осмислення</h3>
+<ol>
+<li>
+<p>Розрахуйте ефективний розмір блоку передавання даних <span class="arithmatex">\(MTU_{\text{inner}}\)</span> для віртуальної машини, що взаємодіє через протокол Geneve із трьома опціями TLV сумарним обсягом 32 байти, якщо фізична мережа комутації дата-центру налаштована на стандартне значення MTU 1500 байтів.</p>
+</li>
+<li>
+<p>Складіть схему адресного простору приватного сегмента AWS VPC для розподілу на чотири підмережі (дві публічні підмережі під балансувальники навантаження та дві приватні підмережі під кластер баз даних) у двох зонах доступності, обравши мінімально достатній CIDR-блок, якщо в кожній підмережі одночасно має функціонувати до 50 активних мережевих інтерфейсів.</p>
+</li>
+<li>
+<p>Проаналізуйте наслідки використання моделі консистентності Eventual Consistency для системи керування промисловими роботизованими маніпуляторами в умовах асинхронної реплікації даних між регіонами та визначте межі допустимої затримки синхронізації станів за теоремою CAP.</p>
+</li>
+</ol>
+<h2 id="2_1">2. Методологія та аналіз граничних умов. Інженерія безпеки, маршрутизації та продуктивності розподіленого збереження</h2>
+<h3 id="21-stateful-security-groups-vnic-stateless-network-acl">2.1. Багаторівнева фільтрація трафіку: алгоритмічні відмінності між stateful-інспекцією Security Groups на рівні vNIC та stateless-фільтрацією Network ACL на межі підмережі</h3>
+<p>Побудова захищеного середовища у віртуальних приватних хмарах вимагає комплексного поєднання двох незалежних рівнів фільтрації пакетів, які функціонують на базі діаметрально протилежних алгоритмічних принципів. На рівні віртуального мережевого адаптера інстансу (<strong>vNIC / ENI</strong>) безпека реалізується за допомогою груп безпеки (<strong>Security Groups, SG</strong>), тоді як на межі підмережі діють мережеві списки контролю доступу (<strong>Network Access Control Lists, NACL</strong>).</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    actor Client as Зовнішній клієнт (Інтернет)
+    participant SubnetBorder as Межа підмережі (Stateless Network ACL)
+    participant Hypervisor as Гіпервізор / vNIC (Stateful Security Group)
+    participant Instance as Віртуальна машина (Застосунок)
+
+    Note over Client,Instance: Фаза 1. Вхідний запит Ingress (TCP SYN на порт 443)
+    Client-&gt;&gt;SubnetBorder: IP-пакет (Src: 198.51.100.15:52431 -&gt; Dst: 10.0.1.10:443)
+    Note over SubnetBorder: Послідовна перевірка правил Ingress (від 1 до 32766).&lt;br/&gt;Правило 100 дозволяє TCP 443. Пакет пропущено.
+    SubnetBorder-&gt;&gt;Hypervisor: Кадр надходить до віртуального комутатора хоста
+    Note over Hypervisor: Перевірка Ingress-правил Security Group.&lt;br/&gt;Порт 443 дозволено. Створення запису в таблиці conntrack:&lt;br/&gt;[TCP 198.51.100.15:52431 &lt;-&gt; 10.0.1.10:443, ESTABLISHED]
+    Hypervisor-&gt;&gt;Instance: Пакет передано в сокет процесу ОС
+
+    Note over Instance,Client: Фаза 2. Зворотна відповідь Egress (TCP SYN-ACK)
+    Instance-&gt;&gt;Hypervisor: Відповідь (Src: 10.0.1.10:443 -&gt; Dst: 198.51.100.15:52431)
+    Note over Hypervisor: Stateful-перевірка: знайдено активний сеанс у conntrack.&lt;br/&gt;Egress-правила Security Group ІГНОРУЮТЬСЯ, відповідь дозволено.
+    Hypervisor-&gt;&gt;SubnetBorder: Пакет спрямовано до межі підмережі
+    Note over SubnetBorder: Stateless-перевірка: інспекція вихідних правил Egress.&lt;br/&gt;Вимагається явний дозвіл діапазону ефемерних портів (1024-65535).&lt;br/&gt;Якщо порт 52431 дозволено — пакет виходить в Інтернет.
+    SubnetBorder-&gt;&gt;Client: Доставка пакета клієнту</code></pre>
+<p>Архітектурна сутність груп безпеки спирається на інспекцію потоків із фіксацією стану (<strong>Stateful filtering</strong>). В основі цієї моделі лежить підсистема відстеження з'єднань (<strong>Connection Tracking, conntrack</strong>), інтегрована безпосередньо у віртуальний комутатор гіпервізора (наприклад, Open vSwitch або платформу AWS Nitro). Коли вхідний пакет відповідає дозволеному правилу Ingress, conntrack ініціалізує у пам'яті кортеж із п'яти параметрів:</p>
+<div class="arithmatex">\[\mathcal{T}_{\text{conn}} = \langle IP_{\text{src}}, Port_{\text{src}}, IP_{\text{dst}}, Port_{\text{dst}}, \text{Protocol} \rangle\]</div>
+<p>де <span class="arithmatex">\(IP_{\text{src}}\)</span> та <span class="arithmatex">\(Port_{\text{src}}\)</span> визначають мережеву адресу та порт відправника, <span class="arithmatex">\(IP_{\text{dst}}\)</span> і <span class="arithmatex">\(Port_{\text{dst}}\)</span> позначають реквізити вузла призначення, а <span class="arithmatex">\(\text{Protocol}\)</span> ідентифікує транспортний протокол стека TCP/IP.</p>
+<p>Оскільки стан з'єднання зберігається, будь-який зворотний пакет, що належить до цього ж кортежу, верифікується як валідний компонент активної сесії і пропускається гіпервізором на рівні ядра без повторного сканування вихідних фільтрів. Усі правила в Security Groups оцінюються одночасно як єдиний логічний масив дозволів, де за відсутності збігу застосовується безумовне неявне відкидання (Implicit Deny).</p>
+<p>На противагу групам безпеки, мережеві списки контролю доступу функціонують без збереження стану (<strong>Stateless filtering</strong>), працюючи на віртуальних маршрутизаторах підмереж через таблиці асоціативної пам'яті з потрійним вибором (<strong>Ternary Content-Addressable Memory, TCAM</strong>). Кожен вхідний чи вихідний пакет аналізується індивідуально за фіксованим списком нумерованих правил у діапазоні від 1 до 32766. Обробка ведеться від найменшого номера правила до першого збігу, після чого виконання списку припиняється.</p>
+<p>Головна методологічна проблема взаємодії stateless- та stateful-рівнів полягає в обслуговуванні зворотного трафіку для клієнтських підключень. Під час встановлення з'єднання з клієнтом операційні системи виділяють тимчасові сокети з діапазону <strong>ефемерних портів (Ephemeral Ports)</strong>. Для стека Linux за стандартом IANA цей інтервал становить <code>32768–60999</code>, а для систем Microsoft Windows — <code>49152–65535</code>. Оскільки Network ACL не зберігає стан первинного вхідного запиту, вихідні правила підмережі (Outbound Rules) зобов'язані містити явну інструкцію дозволу для трафіку на весь діапазон портів <code>1024–65535</code>. Відсутність такого правила призводить до повної втрати зв'язку: сервер обробить запит, проте кадр відповіді буде відкинуто на межі підмережі останнім системним правилом <code>* Deny All</code>.</p>
+<blockquote>
+<p><strong>ВАЖЛИВО:</strong> Правила груп безпеки діють виключно на рівні окремих мережевих інтерфейсів, але не запобігають атакам із підміною IP-адрес чи скануванню простору підмережі сусідніми скомпрометованими віртуальними машинами. Захист від широкомовного флуду, міжпідмережевої передачі заборонених протоколів та блокування цільових діапазонів публічних IP-адрес має обов'язково делегуватися спискам Network ACL за рахунок пріоритетних правил явного заборонення (Deny).</p>
+</blockquote>
+<hr />
+<h3 id="22-internet-gateway-nat-gateway-ipsec-vpn-direct-connect-expressroute">2.2. Організація зовнішньої та гібридної зв'язності: механізми шлюзів Internet Gateway і NAT Gateway, порівняльний аналіз тунелів IPsec VPN та виділених ліній Direct Connect / ExpressRoute</h3>
+<p>Забезпечення зовнішніх комунікацій ізольованої віртуальної хмари здійснюється через два базові типи перетворення мережевих адрес. <strong>Інтернет-шлюз (Internet Gateway, IGW)</strong> реалізує розподілену функцію трансляції адрес «один-до-одного» (<strong>1:1 Static NAT</strong>). IGW не створює апаратного звуження трафіку: коли інстансу призначається еластична публічна IP-адреса, площина керування SDN оновлює правила трансляції на фізичному хості, де виконується гіпервізор. Маршрутизація пакета на шлюз <code>0.0.0.0/0 -&gt; igw-xxxx</code> сигналізує віртуальному комутатору про необхідність виставити зовнішню публічну адресу в поле джерела перед інкапсуляцією кадру у фізичну фабрику ЦОД.</p>
+<p>На противагу IGW, шлюз <strong>NAT Gateway</strong> являє собою високодоступний керований сервіс, який встановлюється виключно в публічній підмережі для обслуговування прихованих ресурсів. Він реалізує механізм динамічного перетворення мережевих адрес і портів (<strong>Source NAT / Port Address Translation, PAT</strong>). </p>
+<p>Кожен вихідний TCP- або UDP-сеанс від тисяч приватних інстансів зіставляється з виділеною статичною публічною IP-адресою шлюзу та унікальним номером порту з діапазону 1024–65535. Пропускна здатність одного екземпляра NAT Gateway автоматично масштабується від базових 5 Гбіт/с до 100 Гбіт/с. Проте критичним архітектурним обмеженням є його зональна ізоляція: NAT Gateway є точкою відмови конкретної зони доступності (AZ). Для збереження відмовостійкості всієї системи топологія вимагає розгортання окремого шлюзу NAT у кожній публічній підмережі відповідної AZ з індивідуальною прив'язкою приватних таблиць маршрутизації.</p>
+<p>Інженерія гібридних каналів між корпоративним дата-центром (On-Premises) та хмарним сегментом спирається на вибір між шифрованими тунелями та прямими фізичними підключеннями. Формалізований розрахунок загальної доступності гібридного вузла <span class="arithmatex">\(A_{\text{hybrid}}\)</span> при дублюванні оптичного підключення резервним тунелем описується теоремою множення ймовірностей для взаємно незалежних систем:</p>
+<div class="arithmatex">\[A_{\text{hybrid}} = 1 - (1 - A_{\text{dedicated}}) \cdot (1 - A_{\text{vpn}})\]</div>
+<p>де <span class="arithmatex">\(A_{\text{dedicated}}\)</span> становить коефіцієнт експлуатаційної готовності виділеної лінії (<span class="arithmatex">\(A \approx 0{,}999\)</span>, що еквівалентно 8,76 години простою на рік), а <span class="arithmatex">\(A_{\text{vpn}}\)</span> позначає готовність резервного VPN-з'єднання поверх публічного Інтернету (<span class="arithmatex">\(A \approx 0{,}99\)</span>, що допускає понад 87 годин сукупної недоступності на рік). За умови коректної конфігурації протоколу eBGP сукупна відмовостійкість досягає <span class="arithmatex">\(A_{\text{hybrid}} \approx 0{,}99999\)</span>.</p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> При побудові фінансової біржової інфраструктури розгортання каналу AWS Direct Connect із затримкою до 3 мілісекунд супроводжується налаштуванням BGP-атрибутів <code>AS-Path Prepending</code> та <code>Local Preference</code>. Це гарантує, що резервний канал IPsec VPN активовується маршрутизаторами лише у разі фізичного обриву оптоволоконного введення, унеможливлюючи асиметричну маршрутизацію пакетів котирувань.</p>
+</blockquote>
+<hr />
+<h3 id="23-lrs-zrs-grs">2.3. Механізми забезпечення довговічності даних: стратегії реплікації LRS, ZRS, GRS та автоматизація керування життєвим циклом об'єктів за температурними класами зберігання</h3>
+<p>Довговічність (<strong>Durability</strong>) хмарного зберігання характеризує стійкість системи до незворотної втрати інформації внаслідок виходу з ладу апаратних компонентів. На відміну від доступності (<strong>Availability</strong>), яка вимірює частку часу, протягом якого сховище відповідає на запити, довговічність оцінює цілісність бітових масивів на часових інтервалах у роки.</p>
+<p>У сучасних хмарних платформах рівень надійності визначається вибором <strong>стратегії надлишкової реплікації</strong>:</p>
+<ul>
+<li>
+<p>Локально-надлишкове сховище (<strong>Locally Redundant Storage, LRS</strong>) синхронно здійснює трикратний запис даних на незалежні дискові масиви всередині одного дата-центру. LRS нівелює поломки контролерів дисків і блоків живлення серверних стійок, але є вразливим до глобальних аварій об'єкта (пожежа, затоплення, знеструмлення підстанції).</p>
+</li>
+<li>
+<p>Зонально-надлишкове сховище (<strong>Zone-Redundant Storage, ZRS</strong>) транслює операцію запису синхронно крізь три географічно відокремлені зони доступності в межах одного регіону, використовуючи алгоритми консенсусу (Raft або Paxos). Підтвердження клієнту повертається лише тоді, коли дані зафіксовані щонайменше у двох AZ.</p>
+</li>
+<li>
+<p>Гео-надлишкове сховище (<strong>Geo-Redundant Storage, GRS</strong>) поєднує синхронну трикратну фіксацію LRS в основному регіоні з фоновою асинхронною передачею даних до парного географічного регіону на відстань понад 400 км. Дана модель допускає ненульовий показник втрати даних (<strong>Recovery Point Objective, RPO &gt; 0</strong>) у разі катастрофічного знищення первинного регіону до завершення асинхронної реплікації.</p>
+</li>
+<li>
+<p>Гео-надлишкове сховище з прямим зчитуванням (<strong>Read-Access Geo-Redundant Storage, RA-GRS</strong>) дублює інфраструктуру GRS, але надає постійно активну вторинну точку доступу (Secondary Endpoint) для операцій читання, забезпечуючи мінімальний час відновлення сервісу (<strong>Recovery Time Objective, RTO</strong>).</p>
+</li>
+</ul>
+<p>Оптимізація сукупної вартості зберігання масивів телеметрії досягається застосуванням правил життєвого циклу (<strong>Lifecycle Rules</strong>), які автоматично змінюють температурний клас об'єктів у часі. Економічна функція загальних щомісячних витрат на збереження та обробку масиву даних обсягом <span class="arithmatex">\(V_{\text{total}}\)</span> формулюється у вигляді суми компонент:</p>
+<div class="arithmatex">\[C_{\text{total}} = \sum_{k \in \mathcal{K}} \left[ V_k \cdot P_{\text{cap}, k} + N_{\text{put}, k} \cdot P_{\text{put}, k} + N_{\text{get}, k} \cdot P_{\text{get}, k} + V_{\text{ret}, k} \cdot P_{\text{ret}, k} + V_{\text{pen}, k} \cdot P_{\text{pen}, k} \right]\]</div>
+<p>де <span class="arithmatex">\(\mathcal{K} = \{\text{Hot}, \text{Cool}, \text{Archive}, \text{DeepArchive}\}\)</span> визначає множину класів сховища, <span class="arithmatex">\(V_k\)</span> позначає середньомісячний обсяг у терабайтах, <span class="arithmatex">\(P_{\text{cap}, k}\)</span> відображає базовий тариф за гігабайт на місяць, <span class="arithmatex">\(N_{\text{put}, k}\)</span> і <span class="arithmatex">\(N_{\text{get}, k}\)</span> відповідають кількості викликів запису та читання, <span class="arithmatex">\(V_{\text{ret}, k}\)</span> позначає обсяг відновлених із холодного стану даних, а змінні <span class="arithmatex">\(V_{\text{pen}, k}\)</span> та <span class="arithmatex">\(P_{\text{pen}, k}\)</span> розраховують штрафи за передчасне видалення або модифікацію об'єктів до завершення обов'язкового періоду зберігання (наприклад, 30 діб для Cool, 90 діб для Archive та 180 діб для Deep Archive).</p>
+<hr />
+<h3 id="24-nosql-partition-key-sort-key-etag">2.4. Методологія оптимізації транзакцій NoSQL: проектування складених первинних ключів (Partition Key, Sort Key) та алгоритми оптимістичного блокування на основі ETag</h3>
+<p>Організація високонавантажених структур у розподілених сховищах типу «ключ-значення» (AWS DynamoDB, Azure Cosmos DB, Azure Table) вимагає суворого проектування схеми партиціонування для збереження детермінованого часу відгуку в межах кількох мілісекунд. Ключовим елементом моделі виступає складений первинний ключ, де <strong>Partition Key (PK)</strong> керує геометрією шардингу кластера, а <strong>Sort Key (SK)</strong> відповідає за локальну індексацію даних на фізичному вузлі.</p>
+<p>Алгоритмічний процес виконання операцій у таких сховищах описується послідовністю дій:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 1 (Хешування адреси):} &amp; \quad h = \text{MurmurHash3}(PK) \pmod{2^{128}} \\
+\text{Крок 2 (Локалізація партиції):} &amp; \quad \text{NodeID} = \operatorname{LookupPartitionRing}(h) \\
+\text{Крок 3 (Індексний пошук):} &amp; \quad \text{DiskBlock} = \operatorname{BTreeSeek}(SK) \quad \text{всередині вузла NodeID} \\
+\text{Крок 4 (Умовний запис OCC):} &amp; \quad \text{WriteIf}(ETag_{\text{current}} == ETag_{\text{request}})
+\end{aligned}
+\]</div>
+<p>Поетапний аналіз наведеної формалізації демонструє, що на першому кроці криптографічно стійкий хеш-алгоритм рівномірно відображає значення ключа партиціонування на адресне кільце розміром <span class="arithmatex">\(2^{128}\)</span>. На другому кроці внутрішній маршрутизатор платформи визначає ідентифікатор фізичного вузла, закріпленого за відповідним діапазоном. На третьому кроці локальне сховище партиції здійснює бінарний пошук у структурі B-дерева або LSM-дерева за ключем сортування для виконання діапазонних вибірок типу <code>BETWEEN</code> без сканування всієї таблиці.</p>
+<p>На четвертому кроці реалізується протокол <strong>оптимістичного блокування (Optimistic Concurrency Control, OCC)</strong>. Замість блокування всього рядка чи сторінки пам'яті клієнт зчитує сутність разом із системним атрибутом версії — тегом <code>ETag</code>. Під час відправлення модифікованих даних операція запису супроводжується умовою валідації. Якщо паралельний клієнт вніс зміни в проміжку між читанням і записом, значення <code>ETag</code> на сервері змінюється, викликаючи відхилення операції з кодом стану HTTP 412 (Precondition Failed), що спонукає клієнта перезавантажити актуальний стан без перезапису чужих транзакцій.</p>
+<hr />
+<h3 id="25-cap-hot-partitions">2.5. Критичні бар'єри та граничні умови: ліміти пропускної здатності віртуальних інтерфейсів, вплив мережевого джитера на чутливі до затримок системи, компроміси теореми CAP та проблема утворення «гарячих партицій» (Hot Partitions)</h3>
+<p>Теоретичні переваги хмарних абстракцій стикаються з фундаментальними апаратно-технічними обмеженнями, які змушують системних інженерів відмовлятися від стандартних рішень у висококритичних сценаріях. </p>
+<p>Першим критичним бар'єром виступають ліміти обробки пакетів на секунду (<strong>Packets Per Second, PPS</strong>) віртуальними мережевими інтерфейсами інстансів. Незалежно від задекларованої пропускної здатності каналу (наприклад, 10 чи 25 Гбіт/с), віртуальний мережевий драйвер обмежується продуктивністю ядра операційної системи хоста щодо обробки черг переривань. </p>
+<p>Якщо потік телеметрії від тисяч сенсорів транслюється короткими TCP-пакетами розміром по 64 байти, віртуальний інтерфейс вичерпає допустимий ліміт переривань (зазвичай 1–1,5 мільйона PPS) ще до того, як смуга пропускання буде утилізована навіть на 10%. Це спричиняє утворення черг буферизації сокетів, лавиноподібне зростання відкидання пакетів (RX Drop) та затримку обробки подій у реальному часі.</p>
+<p>Другим критичним бар'єром є явище мережевого тремтіння (<strong>Jitter</strong>) — варіативності часу затримки проходження пакетів через віртуалізовану оверлейну фабрику. Для кіберфізичних систем керування (наприклад, промислових контролерів PLC або автономних транспортних засобів), де період циклу опитування становить менше 1–2 мілісекунд, публічна хмара непридатна як контур керування в реальному часі. </p>
+<p>Фізична затримка передавання світла в оптоволокні становить приблизно 5 мікросекунд на кілометр, що за відстані між промисловим цехом і найближчим хмарним регіоном у 400 км формує базовий показник затримки в обидва кінці:</p>
+<div class="arithmatex">\[RTT_{\text{prop}} \ge 2 \cdot 400 \cdot 5 \cdot 10^{-6} = 4 \text{ мс}\]</div>
+<p>До цього значення додаються непередбачувані затримки планувальника процесорних квантів гіпервізора, черги віртуального комутатора та джитер маршрутизації в публічному Інтернеті, що може розширювати пікову затримку до 50–100 мілісекунд, унеможливлюючи реалізацію твердого реального часу (Hard Real-Time).</p>
+<p>Третім бар'єром є архітектурне обмеження горизонтального масштабування NoSQL-таблиць через проблему <strong>«гарячих партицій» (Hot Partitions)</strong>. Кожна фізична партиція у таких системах, як AWS DynamoDB, має жорсткий апаратний ліміт продуктивності, що становить 1000 одиниць запису (WCU) або 3000 одиниць читання (RCU), і не може зберігати понад 10 ГБ даних. </p>
+<p>Якщо додаток некоректно використовує статичний ключ партиціонування (наприклад, фіксовану назву сенсорного хаба <code>PK = "FactoryHub_1"</code>), увесь вхідний потік операцій скерується на один вузол кластера. Навіть якщо сумарний ліміт бази даних попередньо замовлено на рівні 100 000 WCU, система блокуватиме запис помилкою <code>ProvisionedThroughputExceededException</code>, оскільки окрема фізична партиція вичерпає власні ресурси, поки 99% інфраструктури кластера залишаються ненавантаженими.</p>
+<p><em>Таблиця 2.1 — Порівняльний аналіз архітектурних технологій мереж та систем зберігання за граничними умовами</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Архітектурна технологія</th>
+<th style="text-align: left;">Механізм функціонування</th>
+<th style="text-align: left;">Складність впровадження</th>
+<th style="text-align: left;">Критичні ризики / Обмеження</th>
+<th style="text-align: left;">Галузеве застосування</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Оверлейні тунелі VXLAN / Geneve</strong></td>
+<td style="text-align: left;">L2-over-UDP інкапсуляція з 24-бітним ідентифікатором VNI</td>
+<td style="text-align: left;">Низька (керована інфраструктурою провайдера)</td>
+<td style="text-align: left;">Зменшення корисного MTU на 50–54 байти; ризик фрагментації пакетів без Jumbo Frames</td>
+<td style="text-align: left;">Мультиорендна ізоляція обчислювальних сегментів дата-центру</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Site-to-Site IPsec VPN</strong></td>
+<td style="text-align: left;">Шифроване з'єднання поверх Інтернету за протоколами IKEv2 / ESP</td>
+<td style="text-align: left;">Середня (потребує налаштування криптографічних ключів)</td>
+<td style="text-align: left;">Залежність від публічного Інтернету, недетермінований джитер, ліміт пропускної здатності 1,25 Гбіт/с на тунель</td>
+<td style="text-align: left;">Бюджетні гібридні з'єднання, резервні канали для Direct Connect</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AWS Direct Connect / Azure ExpressRoute</strong></td>
+<td style="text-align: left;">Виділений фізичний L2/L3 крос-коннект через 802.1Q VLAN та BGP</td>
+<td style="text-align: left;">Висока (вимагає угоди з провайдером colocation та тривалого монтажу)</td>
+<td style="text-align: left;">Висока вартість апаратного порту; відсутність шифрування за замовчуванням (потрібен MACsec)</td>
+<td style="text-align: left;">Банківські транзакційні системи, медичні та енергетичні комплекси</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Блокові диски Provisioned IOPS (io2)</strong></td>
+<td style="text-align: left;">Виділений віртуалізований том SAN із гарантованою частотою операцій</td>
+<td style="text-align: left;">Низька (конфігурація через консоль або IaC)</td>
+<td style="text-align: left;">Прив'язка до однієї зони доступності; висока питома вартість гігабайта і кожного IOPS</td>
+<td style="text-align: left;">Системні журнали транзакцій реляційних СУБД (WAL, Redo Log)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Розподілений NoSQL (DynamoDB / Cosmos DB)</strong></td>
+<td style="text-align: left;">Автоматичне партиціювання даних через узгоджене хешування ключів</td>
+<td style="text-align: left;">Висока (вимагає нестандартного Single-Table дизайну та розрахунку ключів)</td>
+<td style="text-align: left;">Утворення Hot Partitions при некоректному виборі PK; обмеження розміру одного елемента до 400 КБ</td>
+<td style="text-align: left;">Масштабовані потоки телеметрії, аналіз дій користувачів</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Під час пікового навантаження система обробки телеметрії, розгорнута в AWS VPC, втратила можливість записувати дані в приватний кластер PostgreSQL. Адміністратор спробував екстрено вивантажити аварійні дампи пам'яті через сервери-обробники в публічній підмережі, але з'єднання було заблоковане. </p>
+<p>Параметри інфраструктури: приватна підмережа містить інстанси застосунку, публічна підмережа містить NAT Gateway, таблиця маршрутизації приватної підмережі має запис <code>0.0.0.0/0 -&gt; nat-xxxx</code>. Вхідні правила Security Group інстансів дозволяють порт 5432, вихідні правила дозволяють <code>0.0.0.0/0 ALL</code>. Правила Network ACL підмережі бази даних мають конфігурацію:
+* Inbound Rule 100: TCP 5432 from 10.0.0.0/16 Allow.
+* Inbound Rule <em>: All traffic Deny.
+* Outbound Rule 100: TCP 5432 to 10.0.0.0/16 Allow.
+* Outbound Rule </em>: All traffic Deny.</p>
+<p>У чому полягає системна помилка конфігурації Network ACL, яка заблокувала відповіді бази даних застосункам, і чому Security Group не змогла нівелювати цю проблему?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: Блокування трафіку на рівні Outbound Network ACL через відсутність правила для ефемерних портів.</strong></p>
+<ol>
+<li><strong>Аналітичне обґрунтування.</strong> Застосунки ініціюють вхідне підключення до бази даних із використанням довільного динамічного ефемерного порту клієнтської ОС (наприклад, <code>TCP 49832</code>) на стандартний цільовий порт PostgreSQL <code>TCP 5432</code>. Пакет успішно проходить Inbound Network ACL за правилом 100, а також дозволяється групою безпеки інстансу. База даних генерує пакет відповіді: джерело <code>TCP 5432</code>, призначення <code>TCP 49832</code>.</li>
+</ol>
+<p>Група безпеки інстансу (Stateful) автоматично пропускає цю відповідь завдяки таблиці conntrack. Проте далі пакет потрапляє на перевірку Outbound Network ACL (Stateless). Правило 100 дозволяє вихідний трафік <em>лише</em> у випадку, якщо портом <em>призначення</em> є 5432 (що характерно для клієнта, але не для сервера). Оскільки порт призначення пакета відповіді становить 49832 (ефемерний порт), пакет не підпадає під дію правила 100 і негайно відкидається системним термінальним правилом <code>* Deny All</code>.</p>
+<ol>
+<li>
+<p><strong>Аналіз хибних дій та виправлення.</strong> </p>
+</li>
+<li>
+<p>Покладання на механізм Stateful Security Group у цій конфігурації є помилковим, оскільки захисні бар'єри розташовані послідовно: успішне проходження Security Group не скасовує обов'язкової stateless-перевірки фільтрів на рівні межі підмережі (NACL).</p>
+</li>
+<li>
+<p>Для виправлення аварійної ситуації необхідно додати до Outbound Network ACL підмережі бази даних правило <code>Rule 110: TCP 1024-65535 to 10.0.0.0/16 Allow</code>, що дозволить відправлення пакетів відповідей на клієнтські ефемерні порти застосунків.</p>
+</li>
+</ol>
+</details>
+<h2 id="3_1">3. Практичний індустріальний / фаховий кейс. Проєктування мережевої та дискової інфраструктури хмарного бекенду</h2>
+<h3 id="31-aws-vpc-direct-connect-s3-dynamodb-100-000-iot-">3.1. Комплексний фаховий кейс. Розгортання відмовостійкої трирівневої інфраструктури AWS VPC із резервованим гібридним каналом Direct Connect, сховищем S3 та базою даних DynamoDB для збирання та аналізу потокової телеметрії 100 000 промислових IoT-контролерів</h3>
+<h4 id="_5">Постановка задачі / ситуації</h4>
+<p>Міжнародний виробничий холдинг здійснює модернізацію телеметричної платформи для моніторингу роботи 100 000 промислових контролерів (Programmable Logic Controller, PLC), встановлених на виробничих лініях трьох географічно віддалених заводських комплексів. Кожен контролер кожні 10 секунд генерує та надсилає структуроване повідомлення зі станом технологічного процесу, показниками вібрації, температури та енергоспоживання. Загальна система повинна гарантувати безперервне приймання даних, ізоляцію обчислювальних потужностей від публічного Інтернету, надійне збереження історії за 7 років для аудиту та підтримку аналітичних запитів у реальному часі без деградації часу відгуку.</p>
+<p>Для забезпечення детермінованої затримки передачі даних між локальними цехами та хмарним бекендом необхідно спроєктувати гібридну мережеву інфраструктуру з автоматичним перемиканням на резервні канали у разі аварії, розрахувати адресний простір, налаштувати політику шардингу бази даних та оптимізувати вартість тривалого зберігання сирої телеметрії.</p>
+<p>Параметри та вимоги до проектованої системи систематизовано в таблиці вхідних інженерних обмежень.</p>
+<p><em>Таблиця 3.1 — Вхідні інженерно-технічні параметри системи збирання телеметрії</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Параметр системи</th>
+<th style="text-align: left;">Числове значення</th>
+<th style="text-align: left;">Інженерне обґрунтування та обмеження</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Кількість джерел даних (<span class="arithmatex">\(N_{\text{dev}}\)</span>)</strong></td>
+<td style="text-align: left;">100 000 пристроїв</td>
+<td style="text-align: left;">Одночасно активні промислові контролери</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Частота надсилання (<span class="arithmatex">\(f_{\text{send}}\)</span>)</strong></td>
+<td style="text-align: left;">0,1 Гц (раз на 10 с)</td>
+<td style="text-align: left;">Регламент періодичного опитування сенсорних контурів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Розмір пакета телеметрії (<span class="arithmatex">\(S_{\text{pack}}\)</span>)</strong></td>
+<td style="text-align: left;">512 байтів (0,5 КБ)</td>
+<td style="text-align: left;">JSON-серіалізований стан датчиків із цифровим підписом</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Сумарний потік подій (<span class="arithmatex">\(R_{\text{events}}\)</span>)</strong></td>
+<td style="text-align: left;">10 000 записів/с</td>
+<td style="text-align: left;">Пікове навантаження на систему збирання (Ingestion)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Допустимий мережевий RTT (<span class="arithmatex">\(T_{\text{max}}\)</span>)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(\le 10\)</span> мс</td>
+<td style="text-align: left;">Ліміт часу доставки даних до хмарного брокера повідомлень</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Довговічність зберігання (Durability)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(\ge 99{,}999999999\%\)</span></td>
+<td style="text-align: left;">Вимога стандарту збереження критичної індустріальної інформації</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Термін зберігання телеметрії</strong></td>
+<td style="text-align: left;">7 років (2555 діб)</td>
+<td style="text-align: left;">Регуляторний аудит параметрів надійності обладнання</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Цільовий SLA доступності сервісу</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(\ge 99{,}99\%\)</span></td>
+<td style="text-align: left;">Максимальний сукупний час простою не більше 52 хвилин на рік</td>
+</tr>
+</tbody>
+</table>
+<p>Архітектурне рішення задачі передбачає побудову ізольованої віртуальної приватної хмари з трирівневою топологією, яка охоплює публічні підмережі шлюзів, приватні підмережі мікросервісів та ізольовані підмережі даних у трьох зонах доступності.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Enterprise ["Локальна заводська інфраструктура (3 фабрики)"]
+        Sensors["100 000 контролерів PLC"]
+        EdgeRouter["Локальний маршрутизатор (Edge BGP Router)"]
+    end
+
+    subgraph HybridTransport ["Гібридний транспортний рівень"]
+        DirectConnect["AWS Direct Connect (1 Gbps Dedicated Link)"]
+        IPsecTunnel["Site-to-Site IPsec VPN (Резервний тунель)"]
+    end
+
+    subgraph AWS_Cloud ["AWS Region: eu-central-1 (VPC 10.100.0.0/16)"]
+        VGW["Virtual Private Gateway (BGP Failover)"]
+
+        subgraph PublicSubnets ["Публічний рівень (3 AZs: 10.100.1.0/24 - 10.100.3.0/24)"]
+            ALB["Network Load Balancer (NLB Target)"]
+            NAT["AWS NAT Gateways (По 1 на кожну AZ)"]
+        end
+
+        subgraph PrivateAppSubnets ["Приватний рівень застосунків (3 AZs: 10.100.16.0/20 - 10.100.48.0/20)"]
+            AppCluster["Контейнери обробки потоку (Amazon EKS)"]
+        end
+
+        subgraph StorageLayer ["Рівень даних та постійного збереження"]
+            DynamoDB[("Amazon DynamoDB&lt;br/&gt;PK: DeviceID, SK: Timestamp&lt;br/&gt;10 000 WCU")]
+            S3[("Amazon S3 Bucket&lt;br/&gt;Hot -&gt; Standard-IA -&gt; Glacier Deep Archive")]
+        end
+    end
+
+    Sensors ===&gt; EdgeRouter
+    EdgeRouter ===&gt;|Основний канал: низька затримка| DirectConnect
+    EdgeRouter -.-&gt;|Резервний канал: шифрований Інтернет| IPsecTunnel
+    DirectConnect ===&gt; VGW
+    IPsecTunnel -.-&gt; VGW
+    VGW ===&gt; ALB
+    ALB ===&gt; AppCluster
+    AppCluster ===&gt;|Запис гарячих часових рядів| DynamoDB
+    AppCluster ===&gt;|Акумульований батч-експорт логів| S3
+    AppCluster -.-&gt;|Вихідні запити оновлення через SNAT| NAT</code></pre>
+<h4 id="_6">Покроковий аналіз та розв'язок</h4>
+<h5 id="1-cidr">Крок 1. Розрахунок адресного простору CIDR та конфігурація підмереж</h5>
+<p>Для забезпечення вимог високої доступності інфраструктура розгортається у трьох зонах доступності (<code>eu-central-1a</code>, <code>eu-central-1b</code>, <code>eu-central-1c</code>). Базовий діапазон VPC обирається як <code>10.100.0.0/16</code>, що надає сумарно 65 536 адрес.</p>
+<p>Необхідно розрахувати розмір блоків для трьох типів підмереж у кожній AZ:</p>
+<ol>
+<li>
+<p>Публічні підмережі під шлюзи NAT та мережеві балансувальники навантаження NLB вимагають невеликої кількості адрес, тому призначається маска <code>/24</code> (256 адрес, з яких 251 корисна): <code>10.100.1.0/24</code>, <code>10.100.2.0/24</code>, <code>10.100.3.0/24</code>.</p>
+</li>
+<li>
+<p>Приватні підмережі рівня обчислень для вузлів контейнерного кластера EKS вимагають значного запасу адрес у зв'язку з тим, що кожен контейнерний под отримує індивідуальну IP-адресу з пулу VPC через плагін AWS CNI. Призначається маска <code>/20</code> (4096 адрес, 4091 корисна на AZ): <code>10.100.16.0/20</code>, <code>10.100.32.0/20</code>, <code>10.100.48.0/20</code>.</p>
+</li>
+<li>
+<p>Приватні підмережі сховищ та кінцевих точок VPC Endpoints ізолюються в діапазонах з маскою <code>/24</code>: <code>10.100.4.0/24</code>, <code>10.100.5.0/24</code>, <code>10.100.6.0/24</code>.</p>
+</li>
+</ol>
+<p>Розрахунок доступного пулу корисних адрес для однієї приватної підмережі обчислень демонструє виконання системних вимог платформи:</p>
+<div class="arithmatex">\[N_{\text{usable}} = 2^{(32 - 20)} - 5 = 4096 - 5 = 4091 \text{ IP-адрес}\]</div>
+<h5 id="2_2">Крок 2. Розрахунок пропускної здатності каналів та конфігурація гібридного з'єднання</h5>
+<p>Сумарна пропускна здатність мережевого каналу, необхідна для транспортування телеметрії, розраховується на основі добутку інтенсивності запитів на обсяг одного повідомлення.</p>
+<p>Розрахунок здійснюється за залежністю:</p>
+<div class="arithmatex">\[BW_{\text{payload}} = R_{\text{events}} \cdot S_{\text{pack}} = 10\,000 \text{ с}^{-1} \cdot 512 \text{ байтів} = 5\,120\,000 \text{ байтів/с} \approx 40{,}96 \text{ Мбіт/с}\]</div>
+<p>З урахуванням накладних витрат мережевого стека (заголовки Ethernet, IP, TCP, TLS сумарно додають близько 74 байтів на пакет) реальне навантаження на канал становить:</p>
+<div class="arithmatex">\[BW_{\text{actual}} = 10\,000 \cdot (512 + 74) \cdot 8 = 46{,}88 \text{ Мбіт/с}\]</div>
+<p>Виділений канал AWS Direct Connect з базовою пропускною здатністю 1 Гбіт/с задовольняє цю вимогу з більш ніж 20-кратним запасом на пікові викиди трафіку та інші види виробничих комунікацій. Як резервний канал конфігурується тунель Site-to-Site IPsec VPN з двома паралельними тунелями до Virtual Private Gateway (VGW).</p>
+<p>Для забезпечення безшовного перемикання на BGP-маршрутизаторі підприємства встановлюються метрики:</p>
+<ul>
+<li>
+<p>На сесії BGP через Direct Connect оголошується атрибут <code>Local Preference = 200</code>.</p>
+</li>
+<li>
+<p>На сесії BGP через IPsec VPN оголошується атрибут <code>Local Preference = 100</code>, а також застосовується додавання номерів автономних систем (<code>AS-Path Prepending</code>) для штучного подовження маршруту в бік Інтернету.</p>
+</li>
+</ul>
+<h5 id="3-nosql-wcurcu">Крок 3. Розрахунок продуктивності бази даних NoSQL (WCU/RCU) та схема партиціонування</h5>
+<p>Оскільки розмір кожного пакета телеметрії становить 512 байтів, він повністю вміщується в один квант одиниці ємності запису (Write Capacity Unit, WCU), який розрахований на елементи розміром до 1 КБ.</p>
+<p>Необхідна виділена ємність запису для таблиці DynamoDB обчислюється як:</p>
+<div class="arithmatex">\[WCU_{\text{req}} = R_{\text{events}} \cdot \left\lceil \frac{S_{\text{pack}}}{1 \text{ КБ}} \right\rceil = 10\,000 \cdot \left\lceil \frac{0{,}5 \text{ КБ}}{1 \text{ КБ}} \right\rceil = 10\,000 \text{ WCU}\]</div>
+<p>Схема таблиці формується за принципом усунення «гарячих партицій»:</p>
+<ul>
+<li>
+<p><strong>Partition Key (PK):</strong> Строковий ідентифікатор контролера <code>DeviceID</code> (наприклад, <code>PLC_HEX_00A4F</code>). Це значення рівномірно розподіляє навантаження між сотнями фізичних партицій через внутрішнє хешування.</p>
+</li>
+<li>
+<p><strong>Sort Key (SK):</strong> Числовий Unix Timestamp мілісекундної точності <code>Timestamp</code> (наприклад, <code>1772352000124</code>).</p>
+</li>
+</ul>
+<p>Граничний бар'єр однієї партиції DynamoDB становить 1000 WCU. Оскільки кожен пристрій генерує лише 0,1 запису за секунду, навантаження на один конкретний Partition Key становить <span class="arithmatex">\(0{,}1 \text{ WCU} \ll 1000 \text{ WCU}\)</span>, що повністю нівелює ризик тротлінгу записів окремих датчиків.</p>
+<h5 id="4-s3">Крок 4. Оцінка життєвого циклу та вартості сховища S3</h5>
+<p>Мікросервіси обробки щохвилини агрегують збережені в базі дані, формують стиснені пакети формату Apache Parquet обсягом 50 МБ і завантажують їх в об'єктне сховище Amazon S3 для тривалого зберігання. </p>
+<p>Добовий обсяг сирої інформації, що надходить до сховища, розраховується за формулою:</p>
+<div class="arithmatex">\[V_{\text{day}} = BW_{\text{payload}} \cdot 86\,400 \text{ с} = 5{,}12 \text{ МБ/с} \cdot 86\,400 \text{ с} \approx 442\,368 \text{ МБ} \approx 442{,}4 \text{ ГБ/добу}\]</div>
+<p>За 30 діб обсяг збережених даних становить <span class="arithmatex">\(V_{\text{month}} \approx 13{,}27\)</span> ТБ. Правило життєвого циклу S3 Lifecycle Rule конфігурується таким чином:</p>
+<ol>
+<li>
+<p>Перші 30 діб дані перебувають у класі <strong>S3 Standard</strong> (тариф $0,023/ГБ).</p>
+</li>
+<li>
+<p>На 31-й день об'єкти автоматично мігрують у <strong>S3 Standard-Infrequent Access</strong> (тариф $0,0125/ГБ).</p>
+</li>
+<li>
+<p>На 90-й день дані архівуються у <strong>S3 Glacier Deep Archive</strong> (тариф $0,00099/ГБ).</p>
+</li>
+<li>
+<p>Після завершення 2555 діб (7 років) дані перманентно видаляються.</p>
+</li>
+</ol>
+<p>Розрахунок щомісячної вартості зберігання масиву одного річного накопичення (близько 160 ТБ) безпосередньо в S3 Standard проти оптимізованої схеми Glacier Deep Archive демонструє колосальну економію:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Вартість у S3 Standard:} &amp; \quad C_{\text{std}} = 160\,000 \text{ ГБ} \cdot 0{,}023 \text{ \$/ГБ} = 3\,680 \text{ \$/місяць} \\
+\text{Вартість у Deep Archive:} &amp; \quad C_{\text{deep}} = 160\,000 \text{ ГБ} \cdot 0{,}00099 \text{ \$/ГБ} = 158{,}40 \text{ \$/місяць}
+\end{aligned}
+\]</div>
+<p>Економічний ефект становить зниження витрат на збереження історичних даних на <span class="arithmatex">\(95{,}7\%\)</span>.</p>
+<h4 id="_7">Інтерпретація результатів та альтернативні сценарії</h4>
+<p>Розроблена інфраструктура забезпечує масштабоване збирання 10 000 подій на секунду з гарантією ізоляції на мережевому рівні та стійкістю до виходу з ладу будь-якої із зон доступності чи фізичного оптичного кабелю. Використання NoSQL бази даних DynamoDB забезпечує фіксовану затримку читання й запису на рівні 4–7 мс для оперативних диспетчерських панелей, тоді як каскадне архівування в S3 мінімізує вартість збереження петабайтних архівів телеметрії.</p>
+<p>У разі зміни вихідних умов архітектурні рішення зазнають таких трансформацій:</p>
+<ol>
+<li>
+<p>Якщо частота надсилання телеметрії зросте у 100 разів (до 10 Гц на пристрій для завдань вібромоніторингу турбін у реальному часі), потік подій досягне 1 000 000 записів на секунду, а пропускна здатність перевищить 4 Гбіт/с. У цьому сценарії прямий запис у DynamoDB стане економічно нерентабельним (вимагатиме 1 000 000 WCU). Рішення має бути модифіковане шляхом впровадження буферного шару потокової обробки на базі Apache Kafka (AWS MSK) або AWS Kinesis Data Streams із попередньою агрегацією патернів на рівні заводських Edge-серверів.</p>
+</li>
+<li>
+<p>Якщо виникне вимога щодо реалізації замкненого контуру зворотного зв'язку (Hard Real-Time керування засувками аварійного зупинення з часом відгуку менше ніж 1 мс), хмарна архітектура повністю втратить релевантність через фізичне обмеження швидкості поширення світла в оптоволокні (<span class="arithmatex">\(RTT \ge 4\)</span> мс). У цьому разі контур керування переноситься локально на програмовані логічні контролери з використанням рішень класу AWS Outposts або автономних Edge-комп'ютерів, а до хмари передаватиметься виключно повільна аналітична інформація.</p>
+</li>
+</ol>
+<hr />
+<h3 id="32">3.2. Зведена довідкова система лекції</h3>
+<p>Нижче наведено структуровану матрицю ключових понять, моделей та технологій, розглянутих у межах теми, яка відображає взаємозв'язок теоретичних положень із практикою проектування хмарних систем.</p>
+<p><em>Таблиця 3.2 — Зведена довідкова система мережевих та дискових технологій хмари</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термін / Концепція</th>
+<th style="text-align: left;">Формалізація / Сутність</th>
+<th style="text-align: left;">Реальний кейс застосування</th>
+<th style="text-align: left;">Основне обмеження / Ризик</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Програмно-конфігурована мережа (SDN)</strong></td>
+<td style="text-align: left;">Архітектурне розділення Control Plane та Data Plane з централізованим керуванням</td>
+<td style="text-align: left;">Віртуалізація фабрики дата-центру на базі Open vSwitch або AWS Nitro</td>
+<td style="text-align: left;">Ризик відмови контролера площини керування, що паралізує оновлення топології</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Протокол інкапсуляції VXLAN</strong></td>
+<td style="text-align: left;">L2-over-UDP інкапсуляція з 24-бітним полем Virtual Network Identifier (VNI)</td>
+<td style="text-align: left;">Створення до 16,7 млн ізольованих віртуальних сегментів поверх спільного L3 Underlay</td>
+<td style="text-align: left;">Додатковий накладний заголовок у 50 байтів, що вимагає впровадження Jumbo Frames</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Virtual Private Cloud (VPC)</strong></td>
+<td style="text-align: left;">Логічно ізольований адресний простір стандарту RFC 1918 всередині публічної хмари</td>
+<td style="text-align: left;">Розгортання багаторівневих захищених середовищ для корпоративних систем</td>
+<td style="text-align: left;">Неможливість зміни або перекриття базового CIDR-блоку після його закріплення за ресурсами</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Шлюз NAT Gateway</strong></td>
+<td style="text-align: left;">Керований сервіс трансляції Source IP/Port (PAT) для інстансів із приватної підмережі</td>
+<td style="text-align: left;">Завантаження оновлень безпеки Linux ОС у прихованих інстансах баз даних</td>
+<td style="text-align: left;">Однозональна прив'язка; відмова зони доступності вимикає зв'язок без резервування</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Security Group</strong></td>
+<td style="text-align: left;">Віртуальний Stateful міжмережевий екран на рівні віртуального адаптера vNIC</td>
+<td style="text-align: left;">Автоматичне пропускання зворотного трафіку веб-сервера без відкриття портів відповідей</td>
+<td style="text-align: left;">Ліміти на кількість правил (зазвичай до 60 правил на одну групу безпеки)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Network ACL</strong></td>
+<td style="text-align: left;">Мережевий фільтр пакетів Stateless на периметрі підмережі з нумерованими правилами</td>
+<td style="text-align: left;">Блокування діапазонів IP-адрес ботнетів та запобігання міжпідмережевим скануванням</td>
+<td style="text-align: left;">Необхідність відкриття широкого діапазону ефемерних портів (1024–65535) для зворотного трафіку</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AWS Direct Connect</strong></td>
+<td style="text-align: left;">Виділене фізичне оптичне з'єднання на базі 802.1Q VLAN та протоколу eBGP</td>
+<td style="text-align: left;">Прямий доступ банківських транзакційних процесингів до хмарного сховища</td>
+<td style="text-align: left;">Тривалий термін монтажу каналу (тижні/місяці) та відсутність шифрування за замовчуванням</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Блокове сховище (EBS)</strong></td>
+<td style="text-align: left;">Надання тому як неструктурованого набору дискових секторів через віртуальну шину</td>
+<td style="text-align: left;">Розміщення активних баз даних PostgreSQL з гарантованим рівнем Provisioned IOPS</td>
+<td style="text-align: left;">Обмеження монтування до одного обчислювального вузла в межах однієї зони доступності</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Об'єктне сховище (S3)</strong></td>
+<td style="text-align: left;">Плаский простір неструктурованих даних, доступний через REST API (HTTP PUT/GET)</td>
+<td style="text-align: left;">Довгостроковий архів телеметрії з використанням надлишкового кодування Ріда-Соломона</td>
+<td style="text-align: left;">Висока латентність доступу (20–100 мс) та неможливість часткової модифікації файлу</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Парадигма BASE (NoSQL)</strong></td>
+<td style="text-align: left;">Basically Available, Soft-state, Eventual consistency для масштабованого зберігання</td>
+<td style="text-align: left;">Обробка потоків часових рядів IoT за допомогою складених ключів у DynamoDB</td>
+<td style="text-align: left;">Відсутність повноцінних міжтабличних транзакцій та ризик читання застарілих даних</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="33">3.3. Контрольні питання та завдання</h3>
+<h4 id="_8">Прикладні тестові завдання</h4>
+<ol>
+<li>
+<p>Архітектор хмарних рішень розгортає систему телеметрії в AWS VPC. Веб-застосунок, розміщений у приватній підмережі (<code>10.0.10.0/24</code>), повинен надсилати повідомлення на зовнішній поштовий шлюз в Інтернеті через SMTP (порт 25). Таблиця маршрутизації приватної підмережі спрямовує трафік <code>0.0.0.0/0</code> через NAT Gateway, розміщений у публічній підмережі. Мережевий ACL приватної підмережі містить правила:</p>
+</li>
+<li>
+<p>Inbound: Rule 100: TCP 1024–65535 from 0.0.0.0/0 Allow; Rule * Deny.</p>
+</li>
+<li>
+<p>Outbound: Rule 100: TCP 25 to 0.0.0.0/0 Allow; Rule * Deny.
+Однак клієнтський застосунок фіксує помилку вичерпання часу очікування підключення (Connection Timeout). Що є першопричиною цієї проблеми?
+A. У групі безпеки інстансу не дозволено вихідний трафік на ефемерні порти.
+B. Провайдер AWS блокує вихідний трафік на порт TCP 25 для всіх інстансів за замовчуванням для боротьби зі спамом.
+C. Правило Inbound Network ACL не містить дозволу для порту TCP 25.
+D. Шлюз NAT Gateway не підтримує маршрутизацію пакетів на порти, відмінні від HTTP/HTTPS.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Аналітичне обґрунтування.</strong> Компанія Amazon Web Services (як і більшість провідних публічних хмарних провайдерів) на рівні базової платформи за замовчуванням блокує весь вихідний трафік на порт TCP 25 (SMTP) для всіх віртуальних машин EC2 та шлюзів NAT Gateway з метою протидії спам-розсиланням. Навіть за умови абсолютно коректного налаштування маршрутизації, Security Groups та Network ACL, підключення завершуватиметься за таймаутом безпосередньо на фізичній межі мережі провайдера. Для активації порту 25 системний інженер зобов'язаний подати офіційний запит до технічної підтримки хмари з обґрунтуванням бізнес-необхідності або використовувати захищені порти подання пошти (TCP 587 або 465), або спеціалізований поштовий релей (AWS SES).</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A хибний, оскільки групи безпеки (Security Groups) функціонують у режимі Stateful: відповідь на вихідний запит пропускається автоматично без необхідності конфігурації вхідних чи вихідних правил для ефемерних портів.</p>
+</li>
+<li>
+<p>Варіант C хибний, тому що для клієнтського інстансу порт 25 є цільовим портом відправлення (Outbound), а вхідна відповідь від зовнішнього сервера надходить на ефемерний порт клієнта, який у наведеному правилі Inbound Rule 100 явно дозволений.</p>
+</li>
+<li>
+<p>Варіант D хибний, оскільки сервіс AWS NAT Gateway функціонує на транспортному рівні (L4) і прозоро маршрутизує будь-який коректний трафік протоколів TCP, UDP та ICMP незалежно від номера порту призначення.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>Промисловий хаб збирає показники з 50 000 датчиків і записує їх у таблицю Amazon DynamoDB. Як Partition Key обрано назву моделі датчика (<code>ModelID</code>), а як Sort Key — часову мітку (<code>Timestamp</code>). У системі встановлено 30 000 датчиків моделі «Sensor-Type-A» та по 5 000 датчиків чотирьох інших моделей. Під час синхронного зняття показників кожні 15 секунд база даних генерує помилки <code>ProvisionedThroughputExceededException</code>, попри те, що загальна замовлена ємність запису таблиці використовується лише на 40%. Який архітектурний захід вирішить проблему найефективніше?
+A. Перехід на використання реляційної СУБД Aurora PostgreSQL.
+B. Впровадження техніки рандомізованого додавання солі (Write Sharding / Suffix Salting) до ключа партиціонування.
+C. Збільшення виділеної ємності читання (RCU) для таблиці втричі.
+D. Заміна ключа сортування на випадковий числовий хеш.</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Аналітичне обґрунтування.</strong> Проблема викликана виникненням «гарячої партиції» (Hot Partition). Модель «Sensor-Type-A» охоплює 60% усіх датчиків. Оскільки як Partition Key обрано назву моделі, всі записи від цих 30 000 сенсорів отримують однаковий хеш і спрямовуються на одну фізичну партицію кластера. Жодна окрема фізична партиція DynamoDB не здатна обробити понад 1000 WCU на секунду. Коли 30 000 датчиків синхронно записують дані, навантаження перевищує фізичний ліміт партиції, викликаючи тротлінг, навіть якщо загальний ліміт таблиці має значний резерв. Розв'язком є додавання випадкового числового суфікса («солі») до Partition Key, наприклад: <code>PK = ModelID + "_" + random(1, N)</code>. Це штучно розбиває єдиний масив даних на <span class="arithmatex">\(N\)</span> незалежних партицій, розподіляючи навантаження паралельно.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A хибний, оскільки перехід на класичну реляційну СУБД під час високої частоти дрібних записів лише погіршить продуктивність через високу вартість транзакційних блокувань рядків і таблиць.</p>
+</li>
+<li>
+<p>Варіант C хибний, тому що помилка виникає під час операції запису (<code>ProvisionedThroughputExceededException</code> за квотою WCU), і регулювання ємності читання (RCU) жодним чином не впливає на процес збереження даних.</p>
+</li>
+<li>
+<p>Варіант D хибний, оскільки ключ сортування (Sort Key) керує порядком розміщення даних <em>всередині</em> вже обраної партиції і не впливає на алгоритм маршрутизації між фізичними вузлами кластера.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>Корпоративна система логування зберігає щодня 2 000 000 JSON-файлів розміром 2 КБ кожен у бакеті Amazon S3 Standard. Для економії коштів інженер налаштував правило життєвого циклу, яке на наступний день після створення переміщує всі об'єкти в рівень S3 Glacier Instant Retrieval. Наприкінці місяця рахунок за хмарне сховище зріс майже втричі замість очікуваного зниження. Який фактор спричинив фінансові перевитрати?
+A. Помилка конфігурації шифрування, через яку сервер AWS виконував подвійну оплату операцій TLS.
+B. Плата за виклики API переходів (Lifecycle Transition Requests) та мінімальний обліковий розмір об'єкта в рівні Glacier.
+C. Додаткова оплата за міжрегіональну реплікацію даних за замовчуванням.
+D. Штрафні санкції платформи за перевищення ліміту відкритих бакетів.</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Аналітичне обґрунтування.</strong> У класах сховищ S3 Glacier (зокрема Instant Retrieval та Flexible) діють два критичні правила тарифікації: по-перше, мінімальний розмір тарифікованого об'єкта становить 128 КБ. Якщо файл має розмір лише 2 КБ, клієнт все одно сплачує вартість зберігання за 128 КБ (переплата у 64 рази). По-друге, операція зміни класу зберігання (Lifecycle Transition Request) оплачується як окремий виклик API (наприклад, $0,03 за 1000 запитів). Для 2 000 000 дрібних файлів щодня (60 млн операцій на місяць) плата лише за сам факт виконання транзиту перевищує сотні доларів, що багаторазово перекриває економію на базовому тарифі гігабайта. Для дрібних файлів перед переміщенням у Glacier обов'язково має виконуватися попередня конкатенація або архівування у великі пакети розміром понад 10–50 МБ.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A хибний, оскільки стандартне шифрування S3 (SSE-S3) надається провайдером безкоштовно і не тарифікує окремо криптографічні операції.</p>
+</li>
+<li>
+<p>Варіант C хибний, тому що зміна класу зберігання за життєвим циклом відбувається в межах того самого бакета і регіону і не ініціює транскордонну реплікацію.</p>
+</li>
+<li>
+<p>Варіант D хибний, оскільки кількість бакетів у цьому сценарії залишається незмінною, а ліміти на бакети є м'якими квотами облікового запису і не передбачають автоматичних фінансових штрафів.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>Мережевий інженер налаштував з'єднання між локальним сервером і віртуальною машиною в хмарі через тунель Site-to-Site IPsec VPN. Фізичний мережевий адаптер локального сервера налаштований на роботу зі стандартним <span class="arithmatex">\(MTU = 1500\)</span> байтів. Сервер успішно пінгує хмарний інстанс через утиліту <code>ping</code> (ICMP), проте при спробі вивантажити дамп бази даних через утиліту <code>scp</code> або REST API передача даних зависає одразу після фази рукостискання TCP. Що є причиною збою та як його усунути?
+A. Несумісність версій протоколу SSH між операційними системами.
+B. Відсутність маршруту за замовчуванням у таблиці маршрутизації віртуального комутатора.
+C. Перевищення розміру кадру через оверхед заголовків IPsec та блокування повідомлень Path MTU Discovery (PMTUD).
+D. Блокування з'єднання списком Network ACL через відсутність дозволу протоколу UDP.</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: C.</strong></p>
+<ol>
+<li>
+<p><strong>Аналітичне обґрунтування.</strong> Протоколи інкапсуляції IPsec (ESP-заголовок, вектор ініціалізації IV, поле аутентифікації ICV та зовнішній IP-заголовок) додають до 50–70 байтів службових даних до кожного пакета. Якщо вихідний кадр має максимальний розмір <span class="arithmatex">\(MTU = 1500\)</span> байтів, після шифрування його розмір перевищує ліміт фізичного каналу провайдера (<span class="arithmatex">\(1500 + 60 = 1560\)</span> байтів). Якщо на проміжних маршрутизаторах заборонено надсилання ICMP-повідомлень типу 3 коду 4 («Fragmentation Needed»), механізм Path MTU Discovery (PMTUD) перестає працювати, перетворюючи мережу на «чорну діру MTU» (Black Hole). Дрібні пакети рукостискання TCP SYN проходять успішно, але перший великий пакет даних розміром 1500 байтів безповоротно відкидається. Проблема усувається налаштуванням примусового коригування максимального розміру сегмента на маршрутизаторі: <code>TCP MSS Clamping</code> до значення 1360–1400 байтів або зниженням MTU на адаптері до 1420 байтів.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A хибний, оскільки успішне проходження фази авторизації та TCP-рукостискання доводить повну сумісність прикладного програмного забезпечення на обох кінцях з'єднання.</p>
+</li>
+<li>
+<p>Варіант B хибний, адже утиліта <code>ping</code> демонструє наявність робочого маршруту в обидва боки між підмережами.</p>
+</li>
+<li>
+<p>Варіант D хибний, тому що трафік SSH та SCP функціонує суворо поверх протоколу TCP (порт 22), і правила для протоколу UDP не мають відношення до передавання файлів у цій сесії.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h4 id="_9">Завдання для самостійної роботи</h4>
+<h5 id="_10">Постановка задачі</h5>
+<p>Логістичний оператор розгортає систему диспетчеризації для парку з 10 000 автономних складських мобільних роботів (Automated Guided Vehicles, AGV). Роботи підключені через приватну бездротову мережу 5G Standalone до локального шлюзу підприємства, звідки телеметрія передається до регіону AWS. Кожен робот генерує повідомлення розміром 256 байтів з частотою 1 Гц (раз на секунду). </p>
+<p>У періоди пікових навантажень (активне сортування вантажів) системні диспетчери виконують до 200 аналітичних вибірок на секунду для виявлення відхилень маршрутів окремих машин. </p>
+<p>Необхідно спроєктувати мережевий контур підключення, розрахувати пропускну здатність каналів, визначити структуру первинного ключа для таблиці DynamoDB, розрахувати параметри WCU/RCU, оцінити витрати на збереження річного архіву в S3 з використанням батчингу та обґрунтувати конфігурацію правил міжмережевого захисту.</p>
+<h5 id="_11">Завдання для виконання</h5>
+<ol>
+<li>
+<p>Скласти формалізований розрахунок адресного простору підмереж VPC для розміщення балансувальників, робочих нод кластера Kubernetes та шлюзів бази даних у двох зонах доступності з урахуванням мінімізації перевитрат адресного простору.</p>
+</li>
+<li>
+<p>Розрахувати необхідну пропускну здатність виділеного каналу передавання даних і параметри виділеної ємності WCU та RCU для бази даних DynamoDB з урахуванням вимог щодо забезпечення сильно узгодженого читання (Strongly Consistent Read).</p>
+</li>
+<li>
+<p>Розробити структуру таблиці DynamoDB із зазначенням схеми формування Partition Key та Sort Key, запропонувавши технічне рішення для усунення ризику утворення гарячих партицій за умови нерівномірного навантаження на окремі групи роботів.</p>
+</li>
+<li>
+<p>Описати покрокову конфігурацію правил фільтрації Ingress та Egress для Security Groups та Network ACL, яка гарантує захист кластера від зовнішнього неавторизованого сканування та забезпечує коректне проходження відповідей на ефемерні порти.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

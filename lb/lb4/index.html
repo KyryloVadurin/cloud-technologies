@@ -1,0 +1,2383 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../lb3/">
+      
+      
+        <link rel="next" href="../lb5/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#no-4-nosql-python-sdk-scan-query" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lk/lk1/" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lb1/" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Підготовка середовища та розгортання проєкту (Крок 0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Підготовка середовища та розгортання проєкту (Крок 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Перевірка інструментів та створення робочої директорії
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Налаштування конфігураційного профілю AWS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Порядок виконання роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Порядок виконання роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Індивідуальні завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Покроковий алгоритм та розв'язок еталонного прикладу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Покроковий алгоритм та розв&#39;язок еталонного прикладу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-configdynamodb_schemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Створення файлу конфігурації схеми config/dynamodb_schema.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-nosql-scriptsdynamodb_managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Реалізація модуля взаємодії з NoSQL СУБД scripts/dynamodb_manager.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scriptstelemetry_benchmarkpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Модуль генерації синтетичних часових рядів та бенчмаркінгу scripts/telemetry_benchmark.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-run_lab4py" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Головний оркестратор виконання лабораторної роботи run_lab4.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Запуск, тестування та перевірка результатів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Запуск, тестування та перевірка результатів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Аналіз отриманих результатів бенчмаркінгу
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Вимоги до змісту звіту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Контрольні запитання для захисту роботи
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Підготовка середовища та розгортання проєкту (Крок 0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Підготовка середовища та розгортання проєкту (Крок 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Перевірка інструментів та створення робочої директорії
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Налаштування конфігураційного профілю AWS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Порядок виконання роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Порядок виконання роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Індивідуальні завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Покроковий алгоритм та розв'язок еталонного прикладу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Покроковий алгоритм та розв&#39;язок еталонного прикладу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-configdynamodb_schemajson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Створення файлу конфігурації схеми config/dynamodb_schema.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-nosql-scriptsdynamodb_managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Реалізація модуля взаємодії з NoSQL СУБД scripts/dynamodb_manager.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scriptstelemetry_benchmarkpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Модуль генерації синтетичних часових рядів та бенчмаркінгу scripts/telemetry_benchmark.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-run_lab4py" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Головний оркестратор виконання лабораторної роботи run_lab4.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Запуск, тестування та перевірка результатів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Запуск, тестування та перевірка результатів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Аналіз отриманих результатів бенчмаркінгу
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Вимоги до змісту звіту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Контрольні запитання для захисту роботи
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="no-4-nosql-python-sdk-scan-query">Лабораторна робота № 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query</h1>
+<p><strong>Мета:</strong> Дослідження архітектурних засад та моделей організації даних у хмарних нереляційних СУБД класу «ключ-значення» та документно-орієнтованих сховищах, опанування методів проєктування схем таблиць для збереження часових рядів телеметрії кіберфізичних систем, реалізація композитних первинних ключів (Partition Key та Sort Key) для уникнення аномалій «гарячих партицій», конфігурування вторинних глобальних індексів (Global Secondary Indexes, GSI), впровадження механізмів оптимістичного блокування транзакцій (Conditional Writes) та проведення експериментального порівняльного аналізу часової складності й споживання обчислювальних ресурсів операцій вибірки <code>Scan</code> та <code>Query</code> за допомогою Python SDK Boto3.</p>
+<p><strong>Стек технологій та інструменти:</strong></p>
+<ul>
+<li>
+<p><strong>Мова програмування та середовище розробки:</strong> Python 3.10+ (CPython), ізольоване віртуальне оточення <code>venv</code>.</p>
+</li>
+<li>
+<p><strong>Платформа та хмарні бібліотеки:</strong> Amazon Web Services (AWS DynamoDB), бібліотеки <code>boto3</code> (v1.34+), <code>botocore</code> (v1.34+), <code>tabulate</code> (v0.9+).</p>
+</li>
+<li>
+<p><strong>Інструменти діагностики та моделювання:</strong> AWS CLI v2, середовище візуального проєктування схем NoSQL Workbench for DynamoDB, інтегроване середовище розробки Visual Studio Code / PyCharm.</p>
+</li>
+</ul>
+<hr />
+<h2 id="1">1 Теоретичні відомості</h2>
+<p>Традиційні реляційні системи керування базами даних (RDBMS), що базуються на суворій схемі нормалізації та гарантіях транзакційної цілісності ACID, стикаються із системними обмеженнями під час обробки масивних потоків телеметрії від кіберфізичних систем. Сенсорні мережі, промислові контролери та автономні роботизовані комплекси генерують безперервні часові ряди вимірювань, для яких характерна висока частота операцій запису, змінна структура корисного навантаження та відсутність потреби у складних багатотабличних об'єднаннях (<code>JOIN</code>). </p>
+<p>Хмарні нереляційні бази даних класу NoSQL, яскравим представником яких є <strong>Amazon DynamoDB</strong> (а також Azure Cosmos DB і Azure Table Storage), оптимізовані для горизонтального масштабування та гарантують детерміновану затримку виконання операцій на рівні одиниць мілісекунд незалежно від загального обсягу збережених даних.</p>
+<p>Архітектура DynamoDB базується на розподіленому зберіганні даних на твердотільних накопичувачах NVMe SSD у межах багатьох фізичних серверів (партицій), що дублюються у трьох зонах доступності. Кожен елемент даних (<strong>Item</strong>) являє собою набір типізованих атрибутів (<strong>Attributes</strong>) і може мати довільну динамічну схему обсягом до 400 КБ.</p>
+<p><pre class="mermaid"><code>flowchart TD
+    subgraph ClientLayer ["Клієнтський рівень (Python Boto3 SDK)"]
+        Req[Запит на запис / читання: DeviceID='DEV-01', Timestamp=1724950000]
+    end
+
+    subgraph RequestRouter ["Керуючий рівень маршрутизації (Request Router)"]
+        HashFunc["Обчислення хеш-функції MD5:
+        Hash(PartitionKey) mod N_partitions"]
+    end
+
+    subgraph PartitionCluster ["Розподілений кластер сховища (Storage Partitions)"]
+        subgraph Partition1 ["Партиція 1 (Hash Range: 0000 - 3FFF)"]
+            BTree1[B-Tree індекс за SortKey&lt;br/&gt;DEV-01: T1, T2, T3]
+            SSD1[(NVMe SSD: Первинні репліки)]
+        end
+
+        subgraph Partition2 ["Партиція 2 (Hash Range: 4000 - 7FFF)"]
+            BTree2[B-Tree індекс за SortKey&lt;br/&gt;DEV-02: T1, T2]
+            SSD2[(NVMe SSD: Первинні репліки)]
+        end
+
+        subgraph Partition3 ["Партиція 3 (Hash Range: 8000 - FFFF)"]
+            BTree3[B-Tree індекс за SortKey&lt;br/&gt;DEV-03: T1, T2, T3, T4]
+            SSD3[(NVMe SSD: Первинні репліки)]
+        end
+    end
+
+    Req ===&gt; HashFunc
+    HashFunc ===&gt;|Пряме перенаправлення за хешем| Partition1
+    BTree1 --- SSD1
+    BTree2 --- SSD2
+    BTree3 --- SSD3</code></pre>
+<em>Рисунок 1.1 — Внутрішня архітектура маршрутизації запитів та партиціювання даних у хмарній NoSQL СУБД</em></p>
+<p>Управління фізичним розміщенням інформації здійснюється за допомогою <strong>первинного ключа (Primary Key)</strong>, який може бути простим або складеним (композитним):</p>
+<ol>
+<li>
+<p><strong>Ключ партиціонування (Partition Key / Hash Key).</strong> Значення цього атрибута обробляється внутрішньою криптографічною хеш-функцією системи, результат якої строго визначає фізичну партицію для збереження елемента. Усі записи з однаковим Partition Key фізично розміщуються на одному вузлі сховища. Некоректний вибір ключа партиціонування призводить до виникнення явища <strong>«гарячих партицій» (Hot Partitions)</strong>, коли один сервер перевантажується запитами від одного популярного пристрою, тоді як інші вузли простоюють. Для кіберфізичних комплексів як Partition Key обирають унікальний ідентифікатор пристрою (<code>DeviceID</code>) або синтетичний композитний хеш (<code>TenantID#DeviceID</code>).</p>
+</li>
+<li>
+<p><strong>Ключ сортування (Sort Key / Range Key).</strong> Визначає фізичний порядок розташування записів усередині партиції у вигляді B-дерева. Використання часової мітки (<code>Timestamp</code>) як Sort Key дозволяє ефективно моделювати часові ряди, забезпечуючи виконання діапазонних вибірок (<code>BETWEEN</code>, <code>&gt;</code>, <code>&lt;</code>) без перебору всіх даних таблиці.</p>
+</li>
+</ol>
+<p>Для забезпечення можливості альтернативного швидкого пошуку за атрибутами, які не входять до складу основного первинного ключа, застосовуються <strong>вторинні індекси (Secondary Indexes)</strong>:</p>
+<ul>
+<li>
+<p><strong>Локальний вторинний індекс (Local Secondary Index, LSI).</strong> Використовує той самий Partition Key, що й базова таблиця, але інший Sort Key. LSI створюється виключно в момент ініціалізації таблиці, ділить спільну дискову квоту партиції (до 10 ГБ на один Partition Key) та підтримує строго узгоджене читання.</p>
+</li>
+<li>
+<p><strong>Глобальний вторинний індекс (Global Secondary Index, GSI).</strong> Може мати повністю відмінний Partition Key та Sort Key від базової таблиці. GSI може додаватися та модифікуватися на будь-якому етапі життєвого циклу таблиці, функціонує як незалежне сховище з власним виділеним бюджетом пропускної здатності та оновлюється асинхронно (<strong>Eventual Consistency</strong>).</p>
+</li>
+</ul>
+<p><pre class="mermaid"><code>flowchart TD
+    subgraph QueryOp ["Операція вибірки за індексом (Query Operation)"]
+        Q_Start[Запит: DeviceID='DEV-01' AND Timestamp &gt;= T1] --&gt; Q_Hash[Хешування PartitionKey]
+        Q_Hash --&gt; Q_Direct[Прямий перехід до цільової партиції]
+        Q_Direct --&gt; Q_BTree[Швидкий логарифмічний пошук у B-дереві SortKey]
+        Q_BTree --&gt; Q_Res[Зчитування рівно K цільових елементів]
+        Note_Q[Часова складність: O log N + K&lt;br/&gt;Споживання ресурсів: Мінімальне]
+    end
+
+    subgraph ScanOp ["Операція повного сканування (Scan Operation)"]
+        S_Start[Запит: Фільтр status='WARNING'] --&gt; S_All[Послідовне опитування ВСІХ партицій]
+        S_All --&gt; S_Read[Зчитування 100% елементів таблиці з SSD]
+        S_Read --&gt; S_Filter[Клієнтська або серверна фільтрація в пам'яті]
+        S_Filter --&gt; S_Res[Повернення відфільтрованої вибірки]
+        Note_S[Часова складність: O N_total&lt;br/&gt;Споживання ресурсів: Максимальне]
+    end</code></pre>
+<em>Рисунок 1.2 — Порівняння алгоритмічних конвеєрів виконання операцій Query та Scan</em></p>
+<p>Фундаментальною відмінністю в архітектурі доступу є вибір між операціями <strong>Query</strong> та <strong>Scan</strong>:</p>
+<p>Операція <strong>Query</strong> виконує спрямований пошук даних виключно за точним значенням Partition Key та опціональними умовами діапазону Sort Key. Оскільки адреса партиції обчислюється миттєво через хеш, а пошук всередині партиції спирається на індексне B-дерево, час виконання <span class="arithmatex">\(T_{\text{Query}}\)</span> та споживання ресурсів залежать виключно від кількості знайдених елементів <span class="arithmatex">\(K_{\text{matched}}\)</span>, а не від загального розміру таблиці:</p>
+<div class="arithmatex">\[T_{\text{Query}} \approx t_{\text{net}} + \log_B(N_{\text{partition}}) \cdot \tau_{\text{index}} + K_{\text{matched}} \cdot \tau_{\text{read}}\]</div>
+<p>де <span class="arithmatex">\(t_{\text{net}}\)</span> — мережева затримка, <span class="arithmatex">\(B\)</span> — порядок галуження B-дерева індексу, <span class="arithmatex">\(N_{\text{partition}}\)</span> — кількість записів у межах цільового Partition Key, <span class="arithmatex">\(\tau_{\text{index}}\)</span> — час обходу вузла дерева, <span class="arithmatex">\(\tau_{\text{read}}\)</span> — час зчитування одного елемента з пам'яті/диска.</p>
+<p>Операція <strong>Scan</strong> виконує повний перебір усіх фізичних партицій таблиці, зчитуючи кожен елемент у пам'ять блоками по 1 МБ із подальшим застосуванням фільтрів (<strong>Filter Expressions</strong>). Часова складність <span class="arithmatex">\(T_{\text{Scan}}\)</span> та кількість списаних одиниць читання прямо пропорційні загальній кількості записів у всій таблиці <span class="arithmatex">\(N_{\text{total}}\)</span>:</p>
+<div class="arithmatex">\[T_{\text{Scan}} \approx t_{\text{net}} + \sum_{p=1}^{P_{\text{total}}} \left( N_p \cdot \tau_{\text{disk\_read}} \right)\]</div>
+<p>де <span class="arithmatex">\(P_{\text{total}}\)</span> — загальна кількість фізичних партицій таблиці, <span class="arithmatex">\(N_p\)</span> — кількість елементів у <span class="arithmatex">\(p\)</span>-й партиції. Застосування <code>Scan</code> у промислових системах призводить до миттєвого вичерпання виділених лімітів пропускної здатності та різкого зростання фінансових витрат.</p>
+<p>Управління ресурсами в DynamoDB здійснюється за двома моделями продуктивності:</p>
+<ul>
+<li>
+<p><strong>Зарезервована пропускна здатність (Provisioned Capacity Mode).</strong> Інженер фіксує гарантовану кількість одиниць зчитування (<strong>Read Capacity Units, RCU</strong>) та запису (<strong>Write Capacity Units, WCU</strong>). Одна одиниця WCU забезпечує один запис розміром до 1 КБ за секунду. Одна одиниця RCU забезпечує одне строго узгоджене читання (<strong>Strongly Consistent Read</strong>) або два узгоджених у кінцевому підсумку читання (<strong>Eventually Consistent Reads</strong>) розміром до 4 КБ за секунду.</p>
+</li>
+<li>
+<p><strong>Пропускна здатність на вимогу (On-Demand Capacity Mode).</strong> Автоматична тарифікація за кожен мільйон фактично виконаних операцій читання та запису, що є оптимальним для систем із непередбачуваним навантаженням.</p>
+</li>
+</ul>
+<p>Для запобігання втраті даних при одночасній модифікації спільних записів різними мікросервісами застосовується механізм <strong>умовного запису (Conditional Writes)</strong>. Операція модифікації (<code>UpdateItem</code> / <code>PutItem</code>) виконується успішно лише за умови істинності логічного виразу перевірки поточної версії або наявності атрибутів (наприклад, <code>attribute_exists(DeviceID) AND version = :expected_version</code>), реалізуючи патерн оптимістичного блокування без блокування всієї таблиці.</p>
+<p><em>Таблиця 1.1 — Порівняльний аналіз моделей доступу та операцій вибірки NoSQL СУБД</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Параметр порівняння</th>
+<th style="text-align: left;">Одиничний запит (<code>GetItem</code>)</th>
+<th style="text-align: left;">Запит за індексом (<code>Query</code>)</th>
+<th style="text-align: left;">Повне сканування (<code>Scan</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Необхідні параметри</strong></td>
+<td style="text-align: left;">Повний первинний ключ (Partition + Sort)</td>
+<td style="text-align: left;">Точний Partition Key (+ діапазон Sort Key)</td>
+<td style="text-align: left;">Будь-які атрибути або без параметрів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Алгоритмічна складність</strong></td>
+<td style="text-align: left;">Константна: <span class="arithmatex">\(\mathcal{O}(1)\)</span></td>
+<td style="text-align: left;">Логарифмічна: <span class="arithmatex">\(\mathcal{O}(\log N + K)\)</span></td>
+<td style="text-align: left;">Лінійна: <span class="arithmatex">\(\mathcal{O}(N_{\text{total}})\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ефективність використання RCU</strong></td>
+<td style="text-align: left;">Максимальна (1 RCU на 4 КБ цільового елемента)</td>
+<td style="text-align: left;">Висока (RCU списуються лише за знайдені дані)</td>
+<td style="text-align: left;">Критично низька (RCU списуються за ВСІ дані таблиці)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Вплив на продуктивність</strong></td>
+<td style="text-align: left;">Відсутній (ізольована мілісекундна операція)</td>
+<td style="text-align: left;">Локалізований у межах однієї партиції</td>
+<td style="text-align: left;">Високий ризик дроселювання (Throttling) всієї СУБД</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Сфера застосування в КФС</strong></td>
+<td style="text-align: left;">Отримання поточного статусу датчика</td>
+<td style="text-align: left;">Вибірка історії телеметрії пристрою за добу</td>
+<td style="text-align: left;">Повна пакетна міграція, аналітичний експорт</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-0">2 Підготовка середовища та розгортання проєкту (Крок 0)</h2>
+<p>Перед початком виконання практичної частини лабораторної роботи необхідно ініціалізувати робоче середовище, створити структуру каталогів проєкту, налаштувати віртуальне оточення мови Python, встановити необхідні бібліотеки та перевірити доступність хмарного сервісу DynamoDB.</p>
+<h3 id="21">2.1 Перевірка інструментів та створення робочої директорії</h3>
+<p>Відкрийте емулятор терміналу та перевірте версії встановленого системного програмного забезпечення:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span>--version
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pip3<span class="w"> </span>--version
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>aws<span class="w"> </span>--version
+</span></code></pre></div>
+<p>Створіть робочу ієрархію каталогів лабораторної роботи та активуйте віртуальне середовище:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/cloud_labs/lab4_dynamodb_integration
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>~/cloud_labs/lab4_dynamodb_integration
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</span></code></pre></div>
+<p>Сформуйте файлову структуру проєкту відповідно до наведеної схеми:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>lab4_dynamodb_integration/
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── config/
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│   └── dynamodb_schema.json     # Специфікація схеми таблиці, ключів та індексів GSI
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├── scripts/
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│   ├── __init__.py
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│   ├── dynamodb_manager.py      # Модуль керування життєвим циклом таблиць, CRUD та GSI
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│   └── telemetry_benchmark.py   # Модуль масової генерації даних та бенчмаркінгу Scan vs Query
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>├── output/
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>│   ├── benchmark_report.json    # Детальні результати вимірювання затримок та RCU
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>│   └── query_samples.json       # Приклади отриманих телеметричних вибірок
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>├── requirements.txt             # Специфікація бібліотек Python
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>└── run_lab4.py                  # Головний виконуваний модуль оркестрації
+</span></code></pre></div>
+<p>Створіть файл <code>requirements.txt</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>boto3&gt;=1.34.0
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>botocore&gt;=1.34.0
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>tabulate&gt;=0.9.0
+</span></code></pre></div>
+<p>Виконайте інсталяцію бібліотек:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span></code></pre></div>
+<h3 id="22-aws">2.2 Налаштування конфігураційного профілю AWS</h3>
+<p>Перевірте коректність облікових даних за допомогою виклику служби STS:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aws<span class="w"> </span>sts<span class="w"> </span>get-caller-identity
+</span></code></pre></div>
+<p>Встановіть робочий регіон розгортання:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>default.region<span class="w"> </span><span class="s2">"eu-central-1"</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>default.output_format<span class="w"> </span><span class="s2">"json"</span>
+</span></code></pre></div>
+<hr />
+<h2 id="3">3 Порядок виконання роботи</h2>
+<h3 id="31">3.1 Індивідуальні завдання</h3>
+<p>Здобувач вищої освіти обирає варіант індивідуального завдання відповідно до свого номера в академічному журналі групи. Необхідно спроєктувати структуру таблиці DynamoDB, розгорнути вторинний індекс GSI, згенерувати синтетичний масив часових рядів телеметрії, реалізувати умовне оновлення та провести бенчмаркінг продуктивності згідно з параметрами, наведеними в таблиці 3.1.</p>
+<p><em>Таблиця 3.1 — Індивідуальні параметри проєктування та дослідження NoSQL сховища</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Варіант</th>
+<th style="text-align: left;">Префікс таблиці</th>
+<th style="text-align: left;">Ключ партиціонування (PK)</th>
+<th style="text-align: left;">Ключ сортування (SK)</th>
+<th style="text-align: left;">Атрибути вторинного індексу GSI</th>
+<th style="text-align: left;">Специфікація фізичних параметрів телеметрії</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: left;"><code>cps-turbine-metrics</code></td>
+<td style="text-align: left;"><code>TurbineID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>LocationZone</code>, SK: <code>VibrationRMS</code></td>
+<td style="text-align: left;">Вібрація (RMS, g), температура підшипника (°C)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: left;"><code>cps-grid-inverters</code></td>
+<td style="text-align: left;"><code>InverterID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>StatusMode</code>, SK: <code>ActivePowerKW</code></td>
+<td style="text-align: left;">Активна потужність (кВт), напруга фази (В), ККД (%)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: left;"><code>cps-robot-arms</code></td>
+<td style="text-align: left;"><code>RobotID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>OperationalState</code>, SK: <code>JointTorqueNm</code></td>
+<td style="text-align: left;">Момент зчленування (Н·м), кутова швидкість (рад/с)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: left;"><code>cps-pipeline-pressure</code></td>
+<td style="text-align: left;"><code>PipeSegmentID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>PressureZone</code>, SK: <code>FlowRateM3h</code></td>
+<td style="text-align: left;">Тиск газу (МПа), об'ємна витрата (м³/год), витік</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: left;"><code>cps-medical-vital</code></td>
+<td style="text-align: left;"><code>PatientID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>WardID</code>, SK: <code>HeartRateBpm</code></td>
+<td style="text-align: left;">Пульс (уд/хв), сатурація SpO2 (%), тиск (мм рт. ст.)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: left;"><code>cps-drone-telemetry</code></td>
+<td style="text-align: left;"><code>UAV_ID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>MissionPhase</code>, SK: <code>AltitudeMeters</code></td>
+<td style="text-align: left;">Висота польоту (м), заряд батареї (%), крен, тангаж</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: left;"><code>cps-smart-greenhouse</code></td>
+<td style="text-align: left;"><code>ZoneID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>CropType</code>, SK: <code>SoilMoisturePct</code></td>
+<td style="text-align: left;">Вологість ґрунту (%), CO2 (ppm), освітленість (лк)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: left;"><code>cps-traffic-radar</code></td>
+<td style="text-align: left;"><code>SensorID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>RoadSector</code>, SK: <code>VehicleSpeedKmh</code></td>
+<td style="text-align: left;">Швидкість авто (км/год), тип ТЗ, довжина черги</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: left;"><code>cps-cnc-spindle</code></td>
+<td style="text-align: left;"><code>MachineID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>ToolType</code>, SK: <code>SpindleLoadPct</code></td>
+<td style="text-align: left;">Навантаження шпинделя (%), знос фрези (%), струм</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>10</strong></td>
+<td style="text-align: left;"><code>cps-seismic-network</code></td>
+<td style="text-align: left;"><code>StationID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>RegionCode</code>, SK: <code>MagnitudeScale</code></td>
+<td style="text-align: left;">Амплітуда коливань (мкм/с), магнітуда, частота (Гц)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>11</strong></td>
+<td style="text-align: left;"><code>cps-boiler-thermal</code></td>
+<td style="text-align: left;"><code>BoilerID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>FacilityUnit</code>, SK: <code>SteamTempC</code></td>
+<td style="text-align: left;">Температура пари (°C), рівень води (мм), тиск</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>12</strong></td>
+<td style="text-align: left;"><code>cps-battery-bms</code></td>
+<td style="text-align: left;"><code>PackID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>CellHealth</code>, SK: <code>StateOfChargePct</code></td>
+<td style="text-align: left;">Рівень заряду SoC (%), напруга комірок (В), струм</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>13</strong></td>
+<td style="text-align: left;"><code>cps-conveyor-speed</code></td>
+<td style="text-align: left;"><code>LineID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>WorkshopID</code>, SK: <code>BeltSpeedMs</code></td>
+<td style="text-align: left;">Швидкість стрічки (м/с), вага вантажу (кг/м), затор</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>14</strong></td>
+<td style="text-align: left;"><code>cps-water-treatment</code></td>
+<td style="text-align: left;"><code>TankID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>PurificationStage</code>, SK: <code>TurbidityNTU</code></td>
+<td style="text-align: left;">Каламутність (NTU), кислотність pH, вміст хлору</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>15</strong></td>
+<td style="text-align: left;"><code>cps-air-quality</code></td>
+<td style="text-align: left;"><code>StationCode</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>CityDistrict</code>, SK: <code>PM25_PPM</code></td>
+<td style="text-align: left;">Концентрація PM2.5, PM10 (мкг/м³), NO2, озон</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>16</strong></td>
+<td style="text-align: left;"><code>cps-wind-generator</code></td>
+<td style="text-align: left;"><code>TowerID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>WindPark</code>, SK: <code>RotorSpeedRpm</code></td>
+<td style="text-align: left;">Швидкість вітру (м/с), оберти ротора (об/хв), потужність</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>17</strong></td>
+<td style="text-align: left;"><code>cps-chemical-reactor</code></td>
+<td style="text-align: left;"><code>ReactorID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>BatchCode</code>, SK: <code>ReactionTempC</code></td>
+<td style="text-align: left;">Температура суміші (°C), тиск (бар), швидкість мішалки</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>18</strong></td>
+<td style="text-align: left;"><code>cps-mining-excavator</code></td>
+<td style="text-align: left;"><code>VehicleID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>QuarrySector</code>, SK: <code>HydraulicPressureBar</code></td>
+<td style="text-align: left;">Гідравлічний тиск (бар), температура оливи, мотогодини</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>19</strong></td>
+<td style="text-align: left;"><code>cps-hvac-commercial</code></td>
+<td style="text-align: left;"><code>ChillerID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>BuildingID</code>, SK: <code>CoolingLoadKw</code></td>
+<td style="text-align: left;">Холодопродуктивність (кВт), перепад тиску фреону</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>20</strong></td>
+<td style="text-align: left;"><code>cps-agv-warehouse</code></td>
+<td style="text-align: left;"><code>AGV_ID</code> (String)</td>
+<td style="text-align: left;"><code>Timestamp</code> (Number)</td>
+<td style="text-align: left;">PK: <code>WarehouseAisle</code>, SK: <code>BatteryVoltageV</code></td>
+<td style="text-align: left;">Координати X/Y, напруга АКБ (В), статус лідара</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="32">3.2 Покроковий алгоритм та розв'язок еталонного прикладу</h3>
+<p>У цьому підрозділі наведено повний еталонний розв'язок задачі зі створення та оптимізації NoSQL таблиці <code>cps-reference-telemetry</code>, побудови індексу GSI, налаштування моделі Pay-per-Request, генерації 1000 записів телеметрії та порівняльного бенчмаркінгу операцій <code>Scan</code> та <code>Query</code>.</p>
+<h4 id="1-configdynamodb_schemajson">Крок 1. Створення файлу конфігурації схеми <code>config/dynamodb_schema.json</code></h4>
+<p>Створіть конфігураційний файл, що формалізує первинні ключі та структуру вторинного індексу:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eu-central-1"</span><span class="p">,</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">"table_name_prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cps-reference-telemetry"</span><span class="p">,</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">"billing_mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAY_PER_REQUEST"</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">"primary_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">"partition_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DeviceID"</span><span class="p">,</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"S"</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="nt">"sort_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Timestamp"</span><span class="p">,</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">  </span><span class="nt">"global_secondary_index"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">    </span><span class="nt">"index_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GSI_SensorType_Timestamp"</span><span class="p">,</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="nt">"partition_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SensorType"</span><span class="p">,</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"S"</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">    </span><span class="nt">"sort_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Timestamp"</span><span class="p">,</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">    </span><span class="nt">"projection_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="p">}</span>
+</span></code></pre></div>
+<h4 id="2-nosql-scriptsdynamodb_managerpy">Крок 2. Реалізація модуля взаємодії з NoSQL СУБД <code>scripts/dynamodb_manager.py</code></h4>
+<p>Створіть модуль, який реалізує клас <code>DynamoDBManager</code> для виконання адміністративних дій, пакетного запису, атомарних умовних оновлень та операцій вибірки:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientError</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="k">class</span><span class="w"> </span><span class="nc">DynamoDBManager</span><span class="p">:</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="sd">"""Модуль програмного керування таблицями DynamoDB, індексами GSI та операціями CRUD."""</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"region"</span><span class="p">,</span> <span class="s2">"eu-central-1"</span><span class="p">)</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dynamodb_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">"dynamodb"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dynamodb_resource</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">"dynamodb"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>        <span class="n">unique_suffix</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())[:</span><span class="mi">8</span><span class="p">]</span>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'table_name_prefix'</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">unique_suffix</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">create_table_with_gsi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">        </span><span class="sd">"""Створення таблиці з композитним первинним ключем та глобальним вторинним індексом."""</span>
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>        <span class="n">pk_cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"primary_key"</span><span class="p">]</span>
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a>        <span class="n">gsi_cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"global_secondary_index"</span><span class="p">]</span>
+</span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>
+</span><span id="__span-8-30"><a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення таблиці DynamoDB '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2">' у режимі </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'billing_mode'</span><span class="p">]</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-8-31"><a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>
+</span><span id="__span-8-32"><a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a>        <span class="n">attribute_definitions</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-8-33"><a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>            <span class="p">{</span><span class="s2">"AttributeName"</span><span class="p">:</span> <span class="n">pk_cfg</span><span class="p">[</span><span class="s2">"partition_key"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">"AttributeType"</span><span class="p">:</span> <span class="n">pk_cfg</span><span class="p">[</span><span class="s2">"partition_key"</span><span class="p">][</span><span class="s2">"type"</span><span class="p">]},</span>
+</span><span id="__span-8-34"><a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a>            <span class="p">{</span><span class="s2">"AttributeName"</span><span class="p">:</span> <span class="n">pk_cfg</span><span class="p">[</span><span class="s2">"sort_key"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">"AttributeType"</span><span class="p">:</span> <span class="n">pk_cfg</span><span class="p">[</span><span class="s2">"sort_key"</span><span class="p">][</span><span class="s2">"type"</span><span class="p">]},</span>
+</span><span id="__span-8-35"><a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a>            <span class="p">{</span><span class="s2">"AttributeName"</span><span class="p">:</span> <span class="n">gsi_cfg</span><span class="p">[</span><span class="s2">"partition_key"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">"AttributeType"</span><span class="p">:</span> <span class="n">gsi_cfg</span><span class="p">[</span><span class="s2">"partition_key"</span><span class="p">][</span><span class="s2">"type"</span><span class="p">]}</span>
+</span><span id="__span-8-36"><a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>        <span class="p">]</span>
+</span><span id="__span-8-37"><a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>
+</span><span id="__span-8-38"><a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a>        <span class="n">key_schema</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-8-39"><a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a>            <span class="p">{</span><span class="s2">"AttributeName"</span><span class="p">:</span> <span class="n">pk_cfg</span><span class="p">[</span><span class="s2">"partition_key"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">"KeyType"</span><span class="p">:</span> <span class="s2">"HASH"</span><span class="p">},</span>
+</span><span id="__span-8-40"><a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a>            <span class="p">{</span><span class="s2">"AttributeName"</span><span class="p">:</span> <span class="n">pk_cfg</span><span class="p">[</span><span class="s2">"sort_key"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">"KeyType"</span><span class="p">:</span> <span class="s2">"RANGE"</span><span class="p">}</span>
+</span><span id="__span-8-41"><a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a>        <span class="p">]</span>
+</span><span id="__span-8-42"><a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a>
+</span><span id="__span-8-43"><a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a>        <span class="n">gsi_spec</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-8-44"><a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a>            <span class="p">{</span>
+</span><span id="__span-8-45"><a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a>                <span class="s2">"IndexName"</span><span class="p">:</span> <span class="n">gsi_cfg</span><span class="p">[</span><span class="s2">"index_name"</span><span class="p">],</span>
+</span><span id="__span-8-46"><a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a>                <span class="s2">"KeySchema"</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-8-47"><a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a>                    <span class="p">{</span><span class="s2">"AttributeName"</span><span class="p">:</span> <span class="n">gsi_cfg</span><span class="p">[</span><span class="s2">"partition_key"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">"KeyType"</span><span class="p">:</span> <span class="s2">"HASH"</span><span class="p">},</span>
+</span><span id="__span-8-48"><a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a>                    <span class="p">{</span><span class="s2">"AttributeName"</span><span class="p">:</span> <span class="n">gsi_cfg</span><span class="p">[</span><span class="s2">"sort_key"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">"KeyType"</span><span class="p">:</span> <span class="s2">"RANGE"</span><span class="p">}</span>
+</span><span id="__span-8-49"><a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a>                <span class="p">],</span>
+</span><span id="__span-8-50"><a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a>                <span class="s2">"Projection"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"ProjectionType"</span><span class="p">:</span> <span class="n">gsi_cfg</span><span class="p">[</span><span class="s2">"projection_type"</span><span class="p">]}</span>
+</span><span id="__span-8-51"><a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a>            <span class="p">}</span>
+</span><span id="__span-8-52"><a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a>        <span class="p">]</span>
+</span><span id="__span-8-53"><a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a>
+</span><span id="__span-8-54"><a id="__codelineno-8-54" name="__codelineno-8-54" href="#__codelineno-8-54"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-8-55"><a id="__codelineno-8-55" name="__codelineno-8-55" href="#__codelineno-8-55"></a>            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamodb_client</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span>
+</span><span id="__span-8-56"><a id="__codelineno-8-56" name="__codelineno-8-56" href="#__codelineno-8-56"></a>                <span class="n">TableName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span>
+</span><span id="__span-8-57"><a id="__codelineno-8-57" name="__codelineno-8-57" href="#__codelineno-8-57"></a>                <span class="n">AttributeDefinitions</span><span class="o">=</span><span class="n">attribute_definitions</span><span class="p">,</span>
+</span><span id="__span-8-58"><a id="__codelineno-8-58" name="__codelineno-8-58" href="#__codelineno-8-58"></a>                <span class="n">KeySchema</span><span class="o">=</span><span class="n">key_schema</span><span class="p">,</span>
+</span><span id="__span-8-59"><a id="__codelineno-8-59" name="__codelineno-8-59" href="#__codelineno-8-59"></a>                <span class="n">GlobalSecondaryIndexes</span><span class="o">=</span><span class="n">gsi_spec</span><span class="p">,</span>
+</span><span id="__span-8-60"><a id="__codelineno-8-60" name="__codelineno-8-60" href="#__codelineno-8-60"></a>                <span class="n">BillingMode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"billing_mode"</span><span class="p">]</span>
+</span><span id="__span-8-61"><a id="__codelineno-8-61" name="__codelineno-8-61" href="#__codelineno-8-61"></a>            <span class="p">)</span>
+</span><span id="__span-8-62"><a id="__codelineno-8-62" name="__codelineno-8-62" href="#__codelineno-8-62"></a>
+</span><span id="__span-8-63"><a id="__codelineno-8-63" name="__codelineno-8-63" href="#__codelineno-8-63"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Очікування переходу таблиці </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> у стан 'ACTIVE'..."</span><span class="p">)</span>
+</span><span id="__span-8-64"><a id="__codelineno-8-64" name="__codelineno-8-64" href="#__codelineno-8-64"></a>            <span class="n">waiter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamodb_client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s2">"table_exists"</span><span class="p">)</span>
+</span><span id="__span-8-65"><a id="__codelineno-8-65" name="__codelineno-8-65" href="#__codelineno-8-65"></a>            <span class="n">waiter</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">TableName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="p">)</span>
+</span><span id="__span-8-66"><a id="__codelineno-8-66" name="__codelineno-8-66" href="#__codelineno-8-66"></a>
+</span><span id="__span-8-67"><a id="__codelineno-8-67" name="__codelineno-8-67" href="#__codelineno-8-67"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamodb_resource</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="p">)</span>
+</span><span id="__span-8-68"><a id="__codelineno-8-68" name="__codelineno-8-68" href="#__codelineno-8-68"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Таблиця '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2">' успішно створена та активна."</span><span class="p">)</span>
+</span><span id="__span-8-69"><a id="__codelineno-8-69" name="__codelineno-8-69" href="#__codelineno-8-69"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_name</span>
+</span><span id="__span-8-70"><a id="__codelineno-8-70" name="__codelineno-8-70" href="#__codelineno-8-70"></a>
+</span><span id="__span-8-71"><a id="__codelineno-8-71" name="__codelineno-8-71" href="#__codelineno-8-71"></a>        <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-8-72"><a id="__codelineno-8-72" name="__codelineno-8-72" href="#__codelineno-8-72"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[ERROR] Помилка створення таблиці DynamoDB: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-73"><a id="__codelineno-8-73" name="__codelineno-8-73" href="#__codelineno-8-73"></a>            <span class="k">raise</span> <span class="n">e</span>
+</span><span id="__span-8-74"><a id="__codelineno-8-74" name="__codelineno-8-74" href="#__codelineno-8-74"></a>
+</span><span id="__span-8-75"><a id="__codelineno-8-75" name="__codelineno-8-75" href="#__codelineno-8-75"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">batch_write_telemetry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-8-76"><a id="__codelineno-8-76" name="__codelineno-8-76" href="#__codelineno-8-76"></a><span class="w">        </span><span class="sd">"""Високопродуктивний пакетний запис масиву елементів за допомогою BatchWriter."""</span>
+</span><span id="__span-8-77"><a id="__codelineno-8-77" name="__codelineno-8-77" href="#__codelineno-8-77"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">:</span>
+</span><span id="__span-8-78"><a id="__codelineno-8-78" name="__codelineno-8-78" href="#__codelineno-8-78"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamodb_resource</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="p">)</span>
+</span><span id="__span-8-79"><a id="__codelineno-8-79" name="__codelineno-8-79" href="#__codelineno-8-79"></a>
+</span><span id="__span-8-80"><a id="__codelineno-8-80" name="__codelineno-8-80" href="#__codelineno-8-80"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Пакетне завантаження </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="si">}</span><span class="s2"> елементів телеметрії..."</span><span class="p">)</span>
+</span><span id="__span-8-81"><a id="__codelineno-8-81" name="__codelineno-8-81" href="#__codelineno-8-81"></a>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+</span><span id="__span-8-82"><a id="__codelineno-8-82" name="__codelineno-8-82" href="#__codelineno-8-82"></a>
+</span><span id="__span-8-83"><a id="__codelineno-8-83" name="__codelineno-8-83" href="#__codelineno-8-83"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">batch_writer</span><span class="p">()</span> <span class="k">as</span> <span class="n">batch</span><span class="p">:</span>
+</span><span id="__span-8-84"><a id="__codelineno-8-84" name="__codelineno-8-84" href="#__codelineno-8-84"></a>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+</span><span id="__span-8-85"><a id="__codelineno-8-85" name="__codelineno-8-85" href="#__codelineno-8-85"></a>                <span class="n">batch</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span><span class="n">Item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+</span><span id="__span-8-86"><a id="__codelineno-8-86" name="__codelineno-8-86" href="#__codelineno-8-86"></a>
+</span><span id="__span-8-87"><a id="__codelineno-8-87" name="__codelineno-8-87" href="#__codelineno-8-87"></a>        <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+</span><span id="__span-8-88"><a id="__codelineno-8-88" name="__codelineno-8-88" href="#__codelineno-8-88"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Завантажено </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="si">}</span><span class="s2"> елементів за </span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> с."</span><span class="p">)</span>
+</span><span id="__span-8-89"><a id="__codelineno-8-89" name="__codelineno-8-89" href="#__codelineno-8-89"></a>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</span><span id="__span-8-90"><a id="__codelineno-8-90" name="__codelineno-8-90" href="#__codelineno-8-90"></a>
+</span><span id="__span-8-91"><a id="__codelineno-8-91" name="__codelineno-8-91" href="#__codelineno-8-91"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">execute_conditional_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">new_status</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_version</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="__span-8-92"><a id="__codelineno-8-92" name="__codelineno-8-92" href="#__codelineno-8-92"></a><span class="w">        </span><span class="sd">"""Виконання оптимістичного блокування за допомогою умовного виразу (Conditional Writes)."""</span>
+</span><span id="__span-8-93"><a id="__codelineno-8-93" name="__codelineno-8-93" href="#__codelineno-8-93"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Спроба умовного оновлення запису (</span><span class="si">{</span><span class="n">device_id</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">) для версії </span><span class="si">{</span><span class="n">expected_version</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-8-94"><a id="__codelineno-8-94" name="__codelineno-8-94" href="#__codelineno-8-94"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-8-95"><a id="__codelineno-8-95" name="__codelineno-8-95" href="#__codelineno-8-95"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">update_item</span><span class="p">(</span>
+</span><span id="__span-8-96"><a id="__codelineno-8-96" name="__codelineno-8-96" href="#__codelineno-8-96"></a>                <span class="n">Key</span><span class="o">=</span><span class="p">{</span><span class="s2">"DeviceID"</span><span class="p">:</span> <span class="n">device_id</span><span class="p">,</span> <span class="s2">"Timestamp"</span><span class="p">:</span> <span class="n">timestamp</span><span class="p">},</span>
+</span><span id="__span-8-97"><a id="__codelineno-8-97" name="__codelineno-8-97" href="#__codelineno-8-97"></a>                <span class="n">UpdateExpression</span><span class="o">=</span><span class="s2">"SET SystemStatus = :status, Version = Version + :inc"</span><span class="p">,</span>
+</span><span id="__span-8-98"><a id="__codelineno-8-98" name="__codelineno-8-98" href="#__codelineno-8-98"></a>                <span class="n">ConditionExpression</span><span class="o">=</span><span class="s2">"attribute_exists(DeviceID) AND Version = :ver"</span><span class="p">,</span>
+</span><span id="__span-8-99"><a id="__codelineno-8-99" name="__codelineno-8-99" href="#__codelineno-8-99"></a>                <span class="n">ExpressionAttributeValues</span><span class="o">=</span><span class="p">{</span>
+</span><span id="__span-8-100"><a id="__codelineno-8-100" name="__codelineno-8-100" href="#__codelineno-8-100"></a>                    <span class="s2">":status"</span><span class="p">:</span> <span class="n">new_status</span><span class="p">,</span>
+</span><span id="__span-8-101"><a id="__codelineno-8-101" name="__codelineno-8-101" href="#__codelineno-8-101"></a>                    <span class="s2">":inc"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-8-102"><a id="__codelineno-8-102" name="__codelineno-8-102" href="#__codelineno-8-102"></a>                    <span class="s2">":ver"</span><span class="p">:</span> <span class="n">expected_version</span>
+</span><span id="__span-8-103"><a id="__codelineno-8-103" name="__codelineno-8-103" href="#__codelineno-8-103"></a>                <span class="p">},</span>
+</span><span id="__span-8-104"><a id="__codelineno-8-104" name="__codelineno-8-104" href="#__codelineno-8-104"></a>                <span class="n">ReturnValues</span><span class="o">=</span><span class="s2">"UPDATED_NEW"</span>
+</span><span id="__span-8-105"><a id="__codelineno-8-105" name="__codelineno-8-105" href="#__codelineno-8-105"></a>            <span class="p">)</span>
+</span><span id="__span-8-106"><a id="__codelineno-8-106" name="__codelineno-8-106" href="#__codelineno-8-106"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Умовне оновлення успішно виконано (нова версія: </span><span class="si">{</span><span class="n">expected_version</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">)."</span><span class="p">)</span>
+</span><span id="__span-8-107"><a id="__codelineno-8-107" name="__codelineno-8-107" href="#__codelineno-8-107"></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="__span-8-108"><a id="__codelineno-8-108" name="__codelineno-8-108" href="#__codelineno-8-108"></a>        <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-8-109"><a id="__codelineno-8-109" name="__codelineno-8-109" href="#__codelineno-8-109"></a>            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">response</span><span class="p">[</span><span class="s2">"Error"</span><span class="p">][</span><span class="s2">"Code"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ConditionalCheckFailedException"</span><span class="p">:</span>
+</span><span id="__span-8-110"><a id="__codelineno-8-110" name="__codelineno-8-110" href="#__codelineno-8-110"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[WARN] Конфлікт версій! Спрацювало оптимістичне блокування: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-111"><a id="__codelineno-8-111" name="__codelineno-8-111" href="#__codelineno-8-111"></a>                <span class="k">return</span> <span class="kc">False</span>
+</span><span id="__span-8-112"><a id="__codelineno-8-112" name="__codelineno-8-112" href="#__codelineno-8-112"></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-8-113"><a id="__codelineno-8-113" name="__codelineno-8-113" href="#__codelineno-8-113"></a>                <span class="k">raise</span> <span class="n">e</span>
+</span><span id="__span-8-114"><a id="__codelineno-8-114" name="__codelineno-8-114" href="#__codelineno-8-114"></a>
+</span><span id="__span-8-115"><a id="__codelineno-8-115" name="__codelineno-8-115" href="#__codelineno-8-115"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">query_telemetry_by_device_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span id="__span-8-116"><a id="__codelineno-8-116" name="__codelineno-8-116" href="#__codelineno-8-116"></a><span class="w">        </span><span class="sd">"""Виконання спрямованого запиту Query за Partition Key та діапазоном Sort Key."""</span>
+</span><span id="__span-8-117"><a id="__codelineno-8-117" name="__codelineno-8-117" href="#__codelineno-8-117"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">boto3.dynamodb.conditions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Key</span>
+</span><span id="__span-8-118"><a id="__codelineno-8-118" name="__codelineno-8-118" href="#__codelineno-8-118"></a>
+</span><span id="__span-8-119"><a id="__codelineno-8-119" name="__codelineno-8-119" href="#__codelineno-8-119"></a>        <span class="n">start_ts</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+</span><span id="__span-8-120"><a id="__codelineno-8-120" name="__codelineno-8-120" href="#__codelineno-8-120"></a>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+</span><span id="__span-8-121"><a id="__codelineno-8-121" name="__codelineno-8-121" href="#__codelineno-8-121"></a>            <span class="n">KeyConditionExpression</span><span class="o">=</span><span class="n">Key</span><span class="p">(</span><span class="s2">"DeviceID"</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">device_id</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Key</span><span class="p">(</span><span class="s2">"Timestamp"</span><span class="p">)</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">),</span>
+</span><span id="__span-8-122"><a id="__codelineno-8-122" name="__codelineno-8-122" href="#__codelineno-8-122"></a>            <span class="n">ReturnConsumedCapacity</span><span class="o">=</span><span class="s2">"TOTAL"</span>
+</span><span id="__span-8-123"><a id="__codelineno-8-123" name="__codelineno-8-123" href="#__codelineno-8-123"></a>        <span class="p">)</span>
+</span><span id="__span-8-124"><a id="__codelineno-8-124" name="__codelineno-8-124" href="#__codelineno-8-124"></a>        <span class="n">duration_ms</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_ts</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1000.0</span>
+</span><span id="__span-8-125"><a id="__codelineno-8-125" name="__codelineno-8-125" href="#__codelineno-8-125"></a>
+</span><span id="__span-8-126"><a id="__codelineno-8-126" name="__codelineno-8-126" href="#__codelineno-8-126"></a>        <span class="k">return</span> <span class="p">{</span>
+</span><span id="__span-8-127"><a id="__codelineno-8-127" name="__codelineno-8-127" href="#__codelineno-8-127"></a>            <span class="s2">"Operation"</span><span class="p">:</span> <span class="s2">"Query (Primary Key)"</span><span class="p">,</span>
+</span><span id="__span-8-128"><a id="__codelineno-8-128" name="__codelineno-8-128" href="#__codelineno-8-128"></a>            <span class="s2">"ItemsCount"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Count"</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span><span id="__span-8-129"><a id="__codelineno-8-129" name="__codelineno-8-129" href="#__codelineno-8-129"></a>            <span class="s2">"ScannedCount"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ScannedCount"</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span><span id="__span-8-130"><a id="__codelineno-8-130" name="__codelineno-8-130" href="#__codelineno-8-130"></a>            <span class="s2">"ExecutionTimeMs"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">duration_ms</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+</span><span id="__span-8-131"><a id="__codelineno-8-131" name="__codelineno-8-131" href="#__codelineno-8-131"></a>            <span class="s2">"ConsumedCapacityUnits"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ConsumedCapacity"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"CapacityUnits"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+</span><span id="__span-8-132"><a id="__codelineno-8-132" name="__codelineno-8-132" href="#__codelineno-8-132"></a>            <span class="s2">"Items"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Items"</span><span class="p">,</span> <span class="p">[])</span>
+</span><span id="__span-8-133"><a id="__codelineno-8-133" name="__codelineno-8-133" href="#__codelineno-8-133"></a>        <span class="p">}</span>
+</span><span id="__span-8-134"><a id="__codelineno-8-134" name="__codelineno-8-134" href="#__codelineno-8-134"></a>
+</span><span id="__span-8-135"><a id="__codelineno-8-135" name="__codelineno-8-135" href="#__codelineno-8-135"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">scan_telemetry_by_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_status</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span id="__span-8-136"><a id="__codelineno-8-136" name="__codelineno-8-136" href="#__codelineno-8-136"></a><span class="w">        </span><span class="sd">"""Виконання повного сканування таблиці Scan із застосуванням фільтра."""</span>
+</span><span id="__span-8-137"><a id="__codelineno-8-137" name="__codelineno-8-137" href="#__codelineno-8-137"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">boto3.dynamodb.conditions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Attr</span>
+</span><span id="__span-8-138"><a id="__codelineno-8-138" name="__codelineno-8-138" href="#__codelineno-8-138"></a>
+</span><span id="__span-8-139"><a id="__codelineno-8-139" name="__codelineno-8-139" href="#__codelineno-8-139"></a>        <span class="n">start_ts</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+</span><span id="__span-8-140"><a id="__codelineno-8-140" name="__codelineno-8-140" href="#__codelineno-8-140"></a>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span>
+</span><span id="__span-8-141"><a id="__codelineno-8-141" name="__codelineno-8-141" href="#__codelineno-8-141"></a>            <span class="n">FilterExpression</span><span class="o">=</span><span class="n">Attr</span><span class="p">(</span><span class="s2">"SystemStatus"</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">target_status</span><span class="p">),</span>
+</span><span id="__span-8-142"><a id="__codelineno-8-142" name="__codelineno-8-142" href="#__codelineno-8-142"></a>            <span class="n">ReturnConsumedCapacity</span><span class="o">=</span><span class="s2">"TOTAL"</span>
+</span><span id="__span-8-143"><a id="__codelineno-8-143" name="__codelineno-8-143" href="#__codelineno-8-143"></a>        <span class="p">)</span>
+</span><span id="__span-8-144"><a id="__codelineno-8-144" name="__codelineno-8-144" href="#__codelineno-8-144"></a>        <span class="n">duration_ms</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_ts</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1000.0</span>
+</span><span id="__span-8-145"><a id="__codelineno-8-145" name="__codelineno-8-145" href="#__codelineno-8-145"></a>
+</span><span id="__span-8-146"><a id="__codelineno-8-146" name="__codelineno-8-146" href="#__codelineno-8-146"></a>        <span class="k">return</span> <span class="p">{</span>
+</span><span id="__span-8-147"><a id="__codelineno-8-147" name="__codelineno-8-147" href="#__codelineno-8-147"></a>            <span class="s2">"Operation"</span><span class="p">:</span> <span class="s2">"Scan (Full Table Scan)"</span><span class="p">,</span>
+</span><span id="__span-8-148"><a id="__codelineno-8-148" name="__codelineno-8-148" href="#__codelineno-8-148"></a>            <span class="s2">"ItemsCount"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Count"</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span><span id="__span-8-149"><a id="__codelineno-8-149" name="__codelineno-8-149" href="#__codelineno-8-149"></a>            <span class="s2">"ScannedCount"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ScannedCount"</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span><span id="__span-8-150"><a id="__codelineno-8-150" name="__codelineno-8-150" href="#__codelineno-8-150"></a>            <span class="s2">"ExecutionTimeMs"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">duration_ms</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+</span><span id="__span-8-151"><a id="__codelineno-8-151" name="__codelineno-8-151" href="#__codelineno-8-151"></a>            <span class="s2">"ConsumedCapacityUnits"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ConsumedCapacity"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"CapacityUnits"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+</span><span id="__span-8-152"><a id="__codelineno-8-152" name="__codelineno-8-152" href="#__codelineno-8-152"></a>            <span class="s2">"Items"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Items"</span><span class="p">,</span> <span class="p">[])</span>
+</span><span id="__span-8-153"><a id="__codelineno-8-153" name="__codelineno-8-153" href="#__codelineno-8-153"></a>        <span class="p">}</span>
+</span><span id="__span-8-154"><a id="__codelineno-8-154" name="__codelineno-8-154" href="#__codelineno-8-154"></a>
+</span><span id="__span-8-155"><a id="__codelineno-8-155" name="__codelineno-8-155" href="#__codelineno-8-155"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">delete_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-8-156"><a id="__codelineno-8-156" name="__codelineno-8-156" href="#__codelineno-8-156"></a><span class="w">        </span><span class="sd">"""Знищення таблиці після завершення тестування."""</span>
+</span><span id="__span-8-157"><a id="__codelineno-8-157" name="__codelineno-8-157" href="#__codelineno-8-157"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Знищення таблиці '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2">'..."</span><span class="p">)</span>
+</span><span id="__span-8-158"><a id="__codelineno-8-158" name="__codelineno-8-158" href="#__codelineno-8-158"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</span><span id="__span-8-159"><a id="__codelineno-8-159" name="__codelineno-8-159" href="#__codelineno-8-159"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">wait_until_not_exists</span><span class="p">()</span>
+</span><span id="__span-8-160"><a id="__codelineno-8-160" name="__codelineno-8-160" href="#__codelineno-8-160"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Таблицю </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> успішно видалено."</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="3-scriptstelemetry_benchmarkpy">Крок 3. Модуль генерації синтетичних часових рядів та бенчмаркінгу <code>scripts/telemetry_benchmark.py</code></h4>
+<p>Створіть модуль, що генерує 1000 записів телеметрії для багатьох пристроїв і проводить порівняльний бенчмаркінг:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="k">class</span><span class="w"> </span><span class="nc">TelemetryBenchmarkRunner</span><span class="p">:</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="sd">"""Генератор синтетичних часових рядів телеметрії та модуль порівняльного бенчмаркінгу."""</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="nd">@staticmethod</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">generate_synthetic_telemetry</span><span class="p">(</span><span class="n">num_devices</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">readings_per_device</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">        </span><span class="sd">"""Генерація вибірки часових рядів із плаваючою комою у форматі Decimal для DynamoDB."""</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>        <span class="n">dataset</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>        <span class="n">base_timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="o">-</span> <span class="mi">86400</span>  <span class="c1"># Початок вимірювань: 24 години тому</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>        <span class="n">sensor_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Vibration-A1"</span><span class="p">,</span> <span class="s2">"Thermal-T2"</span><span class="p">,</span> <span class="s2">"Pressure-P3"</span><span class="p">,</span> <span class="s2">"Acoustic-AC"</span><span class="p">]</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>        <span class="n">locations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Zone-North"</span><span class="p">,</span> <span class="s2">"Zone-South"</span><span class="p">,</span> <span class="s2">"Zone-East"</span><span class="p">,</span> <span class="s2">"Zone-West"</span><span class="p">]</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>        <span class="k">for</span> <span class="n">dev_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_devices</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>            <span class="n">device_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"CPS-TURBINE-NODE-</span><span class="si">{</span><span class="n">dev_idx</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>            <span class="n">sensor_type</span> <span class="o">=</span> <span class="n">sensor_types</span><span class="p">[</span><span class="n">dev_idx</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">sensor_types</span><span class="p">)]</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>            <span class="n">location</span> <span class="o">=</span> <span class="n">locations</span><span class="p">[</span><span class="n">dev_idx</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">locations</span><span class="p">)]</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>            <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">readings_per_device</span><span class="p">):</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>                <span class="n">current_time</span> <span class="o">=</span> <span class="n">base_timestamp</span> <span class="o">+</span> <span class="p">(</span><span class="n">seq</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>  <span class="c1"># Крок 1 хвилина</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>                <span class="n">vibration_val</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">),</span> <span class="mi">4</span><span class="p">)))</span>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>                <span class="n">temperature_val</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">42.0</span><span class="p">,</span> <span class="mf">88.5</span><span class="p">),</span> <span class="mi">2</span><span class="p">)))</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>                <span class="n">pressure_val</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">5.8</span><span class="p">),</span> <span class="mi">3</span><span class="p">)))</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>                <span class="c1"># 5% записів позначаються як аварійні для тестування фільтрації</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>                <span class="n">status</span> <span class="o">=</span> <span class="s2">"CRITICAL_ALERT"</span> <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.05</span> <span class="k">else</span> <span class="s2">"NORMAL"</span>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>                <span class="n">item</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a>                    <span class="s2">"DeviceID"</span><span class="p">:</span> <span class="n">device_id</span><span class="p">,</span>
+</span><span id="__span-9-36"><a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a>                    <span class="s2">"Timestamp"</span><span class="p">:</span> <span class="n">current_time</span><span class="p">,</span>
+</span><span id="__span-9-37"><a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a>                    <span class="s2">"SensorType"</span><span class="p">:</span> <span class="n">sensor_type</span><span class="p">,</span>
+</span><span id="__span-9-38"><a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a>                    <span class="s2">"LocationZone"</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+</span><span id="__span-9-39"><a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a>                    <span class="s2">"SequenceNumber"</span><span class="p">:</span> <span class="n">seq</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-9-40"><a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>                    <span class="s2">"Version"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-9-41"><a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a>                    <span class="s2">"Metrics"</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-9-42"><a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a>                        <span class="s2">"VibrationRMS"</span><span class="p">:</span> <span class="n">vibration_val</span><span class="p">,</span>
+</span><span id="__span-9-43"><a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a>                        <span class="s2">"BearingTempC"</span><span class="p">:</span> <span class="n">temperature_val</span><span class="p">,</span>
+</span><span id="__span-9-44"><a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a>                        <span class="s2">"PressureBar"</span><span class="p">:</span> <span class="n">pressure_val</span>
+</span><span id="__span-9-45"><a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a>                    <span class="p">},</span>
+</span><span id="__span-9-46"><a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a>                    <span class="s2">"SystemStatus"</span><span class="p">:</span> <span class="n">status</span>
+</span><span id="__span-9-47"><a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a>                <span class="p">}</span>
+</span><span id="__span-9-48"><a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a>                <span class="n">dataset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="__span-9-49"><a id="__codelineno-9-49" name="__codelineno-9-49" href="#__codelineno-9-49"></a>
+</span><span id="__span-9-50"><a id="__codelineno-9-50" name="__codelineno-9-50" href="#__codelineno-9-50"></a>        <span class="k">return</span> <span class="n">dataset</span>
+</span></code></pre></div>
+<h4 id="4-run_lab4py">Крок 4. Головний оркестратор виконання лабораторної роботи <code>run_lab4.py</code></h4>
+<p>Створіть виконуваний файл верхнього рівня:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scripts.dynamodb_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">DynamoDBManager</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scripts.telemetry_benchmark</span><span class="w"> </span><span class="kn">import</span> <span class="n">TelemetryBenchmarkRunner</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"================================================================="</span><span class="p">)</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"   ПРОЄКТУВАННЯ ТА БЕНЧМАРКІНГ ХМАРНОЇ NoSQL СУБД (DYNAMODB)    "</span><span class="p">)</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"=================================================================</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>    <span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"config"</span><span class="p">,</span> <span class="s2">"dynamodb_schema.json"</span><span class="p">)</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>    <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">"output"</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>    <span class="n">report_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">"benchmark_report.json"</span><span class="p">)</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>    <span class="n">samples_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">"query_samples.json"</span><span class="p">)</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>    <span class="c1"># 1. Створення таблиці та індексів</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    <span class="n">manager</span> <span class="o">=</span> <span class="n">DynamoDBManager</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="n">config_path</span><span class="p">)</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>    <span class="n">table_name</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">create_table_with_gsi</span><span class="p">()</span>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>    <span class="c1"># 2. Генерація та завантаження 1000 елементів</span>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Генерація та завантаження тестового масиву телеметрії ---"</span><span class="p">)</span>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>    <span class="n">telemetry_data</span> <span class="o">=</span> <span class="n">TelemetryBenchmarkRunner</span><span class="o">.</span><span class="n">generate_synthetic_telemetry</span><span class="p">(</span>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>        <span class="n">num_devices</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">readings_per_device</span><span class="o">=</span><span class="mi">100</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>    <span class="p">)</span>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>    <span class="n">manager</span><span class="o">.</span><span class="n">batch_write_telemetry</span><span class="p">(</span><span class="n">telemetry_data</span><span class="p">)</span>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>    <span class="c1"># 3. Демонстрація оптимістичного блокування (Conditional Writes)</span>
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Демонстрація механізму Conditional Writes (Оптимістичне блокування) ---"</span><span class="p">)</span>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>    <span class="n">test_device</span> <span class="o">=</span> <span class="s2">"CPS-TURBINE-NODE-01"</span>
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>    <span class="n">test_ts</span> <span class="o">=</span> <span class="n">telemetry_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"Timestamp"</span><span class="p">]</span>
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>    <span class="c1"># Успішне оновлення при коректній версії 1</span>
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>    <span class="n">success_update</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">execute_conditional_update</span><span class="p">(</span>
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>        <span class="n">device_id</span><span class="o">=</span><span class="n">test_device</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="n">test_ts</span><span class="p">,</span> <span class="n">new_status</span><span class="o">=</span><span class="s2">"MAINTENANCE_REQUIRED"</span><span class="p">,</span> <span class="n">expected_version</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>    <span class="p">)</span>
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>    <span class="c1"># Невдала спроба оновлення із застарілою версією 1 (оскільки версія вже стала 2)</span>
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>    <span class="n">failed_update</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">execute_conditional_update</span><span class="p">(</span>
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>        <span class="n">device_id</span><span class="o">=</span><span class="n">test_device</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="n">test_ts</span><span class="p">,</span> <span class="n">new_status</span><span class="o">=</span><span class="s2">"MALICIOUS_OVERWRITE"</span><span class="p">,</span> <span class="n">expected_version</span><span class="o">=</span><span class="mi">1</span>
+</span><span id="__span-10-44"><a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>    <span class="p">)</span>
+</span><span id="__span-10-45"><a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>
+</span><span id="__span-10-46"><a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>    <span class="c1"># 4. Бенчмаркінг: Порівняльний аналіз Query проти Scan</span>
+</span><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Проведення порівняльного бенчмаркінгу операцій Query та Scan ---"</span><span class="p">)</span>
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a>    <span class="c1"># Параметри вибірки: останні 30 хвилин для пристрою CPS-TURBINE-NODE-02</span>
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>    <span class="n">target_dev</span> <span class="o">=</span> <span class="s2">"CPS-TURBINE-NODE-02"</span>
+</span><span id="__span-10-51"><a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>    <span class="n">latest_ts</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">"Timestamp"</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">telemetry_data</span> <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">"DeviceID"</span><span class="p">]</span> <span class="o">==</span> <span class="n">target_dev</span><span class="p">)</span>
+</span><span id="__span-10-52"><a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a>    <span class="n">start_ts</span> <span class="o">=</span> <span class="n">latest_ts</span> <span class="o">-</span> <span class="p">(</span><span class="mi">30</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="c1"># 30 хвилин тому</span>
+</span><span id="__span-10-53"><a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a>
+</span><span id="__span-10-54"><a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a>    <span class="c1"># Виконання Query</span>
+</span><span id="__span-10-55"><a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a>    <span class="n">query_result</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">query_telemetry_by_device_range</span><span class="p">(</span>
+</span><span id="__span-10-56"><a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a>        <span class="n">device_id</span><span class="o">=</span><span class="n">target_dev</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="n">start_ts</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="n">latest_ts</span>
+</span><span id="__span-10-57"><a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a>    <span class="p">)</span>
+</span><span id="__span-10-58"><a id="__codelineno-10-58" name="__codelineno-10-58" href="#__codelineno-10-58"></a>
+</span><span id="__span-10-59"><a id="__codelineno-10-59" name="__codelineno-10-59" href="#__codelineno-10-59"></a>    <span class="c1"># Виконання Scan</span>
+</span><span id="__span-10-60"><a id="__codelineno-10-60" name="__codelineno-10-60" href="#__codelineno-10-60"></a>    <span class="n">scan_result</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">scan_telemetry_by_status</span><span class="p">(</span><span class="n">target_status</span><span class="o">=</span><span class="s2">"CRITICAL_ALERT"</span><span class="p">)</span>
+</span><span id="__span-10-61"><a id="__codelineno-10-61" name="__codelineno-10-61" href="#__codelineno-10-61"></a>
+</span><span id="__span-10-62"><a id="__codelineno-10-62" name="__codelineno-10-62" href="#__codelineno-10-62"></a>    <span class="c1"># 5. Виведення зведеної таблиці результатів</span>
+</span><span id="__span-10-63"><a id="__codelineno-10-63" name="__codelineno-10-63" href="#__codelineno-10-63"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">================================================================="</span><span class="p">)</span>
+</span><span id="__span-10-64"><a id="__codelineno-10-64" name="__codelineno-10-64" href="#__codelineno-10-64"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"           ПОРІВНЯЛЬНИЙ АНАЛІЗ ПРОДУКТИВНОСТІ SCAN VS QUERY      "</span><span class="p">)</span>
+</span><span id="__span-10-65"><a id="__codelineno-10-65" name="__codelineno-10-65" href="#__codelineno-10-65"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"================================================================="</span><span class="p">)</span>
+</span><span id="__span-10-66"><a id="__codelineno-10-66" name="__codelineno-10-66" href="#__codelineno-10-66"></a>
+</span><span id="__span-10-67"><a id="__codelineno-10-67" name="__codelineno-10-67" href="#__codelineno-10-67"></a>    <span class="n">benchmark_summary</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-10-68"><a id="__codelineno-10-68" name="__codelineno-10-68" href="#__codelineno-10-68"></a>        <span class="p">[</span>
+</span><span id="__span-10-69"><a id="__codelineno-10-69" name="__codelineno-10-69" href="#__codelineno-10-69"></a>            <span class="n">query_result</span><span class="p">[</span><span class="s2">"Operation"</span><span class="p">],</span>
+</span><span id="__span-10-70"><a id="__codelineno-10-70" name="__codelineno-10-70" href="#__codelineno-10-70"></a>            <span class="n">query_result</span><span class="p">[</span><span class="s2">"ItemsCount"</span><span class="p">],</span>
+</span><span id="__span-10-71"><a id="__codelineno-10-71" name="__codelineno-10-71" href="#__codelineno-10-71"></a>            <span class="n">query_result</span><span class="p">[</span><span class="s2">"ScannedCount"</span><span class="p">],</span>
+</span><span id="__span-10-72"><a id="__codelineno-10-72" name="__codelineno-10-72" href="#__codelineno-10-72"></a>            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">query_result</span><span class="p">[</span><span class="s1">'ExecutionTimeMs'</span><span class="p">]</span><span class="si">}</span><span class="s2"> мс"</span><span class="p">,</span>
+</span><span id="__span-10-73"><a id="__codelineno-10-73" name="__codelineno-10-73" href="#__codelineno-10-73"></a>            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">query_result</span><span class="p">[</span><span class="s1">'ConsumedCapacityUnits'</span><span class="p">]</span><span class="si">}</span><span class="s2"> RCU"</span>
+</span><span id="__span-10-74"><a id="__codelineno-10-74" name="__codelineno-10-74" href="#__codelineno-10-74"></a>        <span class="p">],</span>
+</span><span id="__span-10-75"><a id="__codelineno-10-75" name="__codelineno-10-75" href="#__codelineno-10-75"></a>        <span class="p">[</span>
+</span><span id="__span-10-76"><a id="__codelineno-10-76" name="__codelineno-10-76" href="#__codelineno-10-76"></a>            <span class="n">scan_result</span><span class="p">[</span><span class="s2">"Operation"</span><span class="p">],</span>
+</span><span id="__span-10-77"><a id="__codelineno-10-77" name="__codelineno-10-77" href="#__codelineno-10-77"></a>            <span class="n">scan_result</span><span class="p">[</span><span class="s2">"ItemsCount"</span><span class="p">],</span>
+</span><span id="__span-10-78"><a id="__codelineno-10-78" name="__codelineno-10-78" href="#__codelineno-10-78"></a>            <span class="n">scan_result</span><span class="p">[</span><span class="s2">"ScannedCount"</span><span class="p">],</span>
+</span><span id="__span-10-79"><a id="__codelineno-10-79" name="__codelineno-10-79" href="#__codelineno-10-79"></a>            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scan_result</span><span class="p">[</span><span class="s1">'ExecutionTimeMs'</span><span class="p">]</span><span class="si">}</span><span class="s2"> мс"</span><span class="p">,</span>
+</span><span id="__span-10-80"><a id="__codelineno-10-80" name="__codelineno-10-80" href="#__codelineno-10-80"></a>            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scan_result</span><span class="p">[</span><span class="s1">'ConsumedCapacityUnits'</span><span class="p">]</span><span class="si">}</span><span class="s2"> RCU"</span>
+</span><span id="__span-10-81"><a id="__codelineno-10-81" name="__codelineno-10-81" href="#__codelineno-10-81"></a>        <span class="p">]</span>
+</span><span id="__span-10-82"><a id="__codelineno-10-82" name="__codelineno-10-82" href="#__codelineno-10-82"></a>    <span class="p">]</span>
+</span><span id="__span-10-83"><a id="__codelineno-10-83" name="__codelineno-10-83" href="#__codelineno-10-83"></a>
+</span><span id="__span-10-84"><a id="__codelineno-10-84" name="__codelineno-10-84" href="#__codelineno-10-84"></a>    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-10-85"><a id="__codelineno-10-85" name="__codelineno-10-85" href="#__codelineno-10-85"></a>        <span class="s2">"Тип операції"</span><span class="p">,</span>
+</span><span id="__span-10-86"><a id="__codelineno-10-86" name="__codelineno-10-86" href="#__codelineno-10-86"></a>        <span class="s2">"Отримано записів (Count)"</span><span class="p">,</span>
+</span><span id="__span-10-87"><a id="__codelineno-10-87" name="__codelineno-10-87" href="#__codelineno-10-87"></a>        <span class="s2">"Проскановано (ScannedCount)"</span><span class="p">,</span>
+</span><span id="__span-10-88"><a id="__codelineno-10-88" name="__codelineno-10-88" href="#__codelineno-10-88"></a>        <span class="s2">"Час виконання (Latency)"</span><span class="p">,</span>
+</span><span id="__span-10-89"><a id="__codelineno-10-89" name="__codelineno-10-89" href="#__codelineno-10-89"></a>        <span class="s2">"Витрачено потужності (RCU)"</span>
+</span><span id="__span-10-90"><a id="__codelineno-10-90" name="__codelineno-10-90" href="#__codelineno-10-90"></a>    <span class="p">]</span>
+</span><span id="__span-10-91"><a id="__codelineno-10-91" name="__codelineno-10-91" href="#__codelineno-10-91"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">benchmark_summary</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">"fancy_grid"</span><span class="p">))</span>
+</span><span id="__span-10-92"><a id="__codelineno-10-92" name="__codelineno-10-92" href="#__codelineno-10-92"></a>
+</span><span id="__span-10-93"><a id="__codelineno-10-93" name="__codelineno-10-93" href="#__codelineno-10-93"></a>    <span class="c1"># Збереження звітів</span>
+</span><span id="__span-10-94"><a id="__codelineno-10-94" name="__codelineno-10-94" href="#__codelineno-10-94"></a>    <span class="n">benchmark_payload</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-10-95"><a id="__codelineno-10-95" name="__codelineno-10-95" href="#__codelineno-10-95"></a>        <span class="s2">"TableName"</span><span class="p">:</span> <span class="n">table_name</span><span class="p">,</span>
+</span><span id="__span-10-96"><a id="__codelineno-10-96" name="__codelineno-10-96" href="#__codelineno-10-96"></a>        <span class="s2">"TotalRecords"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">telemetry_data</span><span class="p">),</span>
+</span><span id="__span-10-97"><a id="__codelineno-10-97" name="__codelineno-10-97" href="#__codelineno-10-97"></a>        <span class="s2">"QueryMetrics"</span><span class="p">:</span> <span class="n">query_result</span><span class="p">,</span>
+</span><span id="__span-10-98"><a id="__codelineno-10-98" name="__codelineno-10-98" href="#__codelineno-10-98"></a>        <span class="s2">"ScanMetrics"</span><span class="p">:</span> <span class="n">scan_result</span><span class="p">,</span>
+</span><span id="__span-10-99"><a id="__codelineno-10-99" name="__codelineno-10-99" href="#__codelineno-10-99"></a>        <span class="s2">"ConditionalWriteResults"</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-10-100"><a id="__codelineno-10-100" name="__codelineno-10-100" href="#__codelineno-10-100"></a>            <span class="s2">"InitialUpdateSuccess"</span><span class="p">:</span> <span class="n">success_update</span><span class="p">,</span>
+</span><span id="__span-10-101"><a id="__codelineno-10-101" name="__codelineno-10-101" href="#__codelineno-10-101"></a>            <span class="s2">"ConflictPrevented"</span><span class="p">:</span> <span class="ow">not</span> <span class="n">failed_update</span>
+</span><span id="__span-10-102"><a id="__codelineno-10-102" name="__codelineno-10-102" href="#__codelineno-10-102"></a>        <span class="p">}</span>
+</span><span id="__span-10-103"><a id="__codelineno-10-103" name="__codelineno-10-103" href="#__codelineno-10-103"></a>    <span class="p">}</span>
+</span><span id="__span-10-104"><a id="__codelineno-10-104" name="__codelineno-10-104" href="#__codelineno-10-104"></a>
+</span><span id="__span-10-105"><a id="__codelineno-10-105" name="__codelineno-10-105" href="#__codelineno-10-105"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">report_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-10-106"><a id="__codelineno-10-106" name="__codelineno-10-106" href="#__codelineno-10-106"></a>        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">benchmark_payload</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+</span><span id="__span-10-107"><a id="__codelineno-10-107" name="__codelineno-10-107" href="#__codelineno-10-107"></a>
+</span><span id="__span-10-108"><a id="__codelineno-10-108" name="__codelineno-10-108" href="#__codelineno-10-108"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">samples_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-10-109"><a id="__codelineno-10-109" name="__codelineno-10-109" href="#__codelineno-10-109"></a>        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">query_result</span><span class="p">[</span><span class="s2">"Items"</span><span class="p">][:</span><span class="mi">3</span><span class="p">],</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+</span><span id="__span-10-110"><a id="__codelineno-10-110" name="__codelineno-10-110" href="#__codelineno-10-110"></a>
+</span><span id="__span-10-111"><a id="__codelineno-10-111" name="__codelineno-10-111" href="#__codelineno-10-111"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">[INFO] Звіти збережено у: </span><span class="si">{</span><span class="n">output_dir</span><span class="si">}</span><span class="s2">/"</span><span class="p">)</span>
+</span><span id="__span-10-112"><a id="__codelineno-10-112" name="__codelineno-10-112" href="#__codelineno-10-112"></a>
+</span><span id="__span-10-113"><a id="__codelineno-10-113" name="__codelineno-10-113" href="#__codelineno-10-113"></a>    <span class="c1"># 6. Очищення ресурсів (опціонально за коментарем)</span>
+</span><span id="__span-10-114"><a id="__codelineno-10-114" name="__codelineno-10-114" href="#__codelineno-10-114"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Завершення лабораторної роботи та очищення ресурсів ---"</span><span class="p">)</span>
+</span><span id="__span-10-115"><a id="__codelineno-10-115" name="__codelineno-10-115" href="#__codelineno-10-115"></a>    <span class="n">manager</span><span class="o">.</span><span class="n">delete_table</span><span class="p">()</span>
+</span><span id="__span-10-116"><a id="__codelineno-10-116" name="__codelineno-10-116" href="#__codelineno-10-116"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"[SUCCESS] Лабораторну роботу успішно завершено."</span><span class="p">)</span>
+</span><span id="__span-10-117"><a id="__codelineno-10-117" name="__codelineno-10-117" href="#__codelineno-10-117"></a>
+</span><span id="__span-10-118"><a id="__codelineno-10-118" name="__codelineno-10-118" href="#__codelineno-10-118"></a>
+</span><span id="__span-10-119"><a id="__codelineno-10-119" name="__codelineno-10-119" href="#__codelineno-10-119"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+</span><span id="__span-10-120"><a id="__codelineno-10-120" name="__codelineno-10-120" href="#__codelineno-10-120"></a>    <span class="n">main</span><span class="p">()</span>
+</span></code></pre></div>
+<hr />
+<h3 id="33">3.3 Запуск, тестування та перевірка результатів</h3>
+<p>Для виконання розробленого програмного коду запустіть головний виконуваний скрипт у терміналі:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>python3<span class="w"> </span>run_lab4.py
+</span></code></pre></div>
+<p>Після створення інфраструктури, завантаження вибірки та виконання тестових сценаріїв консоль відображає детальний звіт:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>=================================================================
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>   ПРОЄКТУВАННЯ ТА БЕНЧМАРКІНГ ХМАРНОЇ NoSQL СУБД (DYNAMODB)    
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>=================================================================
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>[INFO] Створення таблиці DynamoDB 'cps-reference-telemetry-7c4a1b89' у режимі PAY_PER_REQUEST...
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>[INFO] Очікування переходу таблиці cps-reference-telemetry-7c4a1b89 у стан 'ACTIVE'...
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>[SUCCESS] Таблиця 'cps-reference-telemetry-7c4a1b89' успішно створена та активна.
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>--- Генерація та завантаження тестового масиву телеметрії ---
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>[INFO] Пакетне завантаження 1000 елементів телеметрії...
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>[SUCCESS] Завантажено 1000 елементів за 1.482 с.
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>--- Демонстрація механізму Conditional Writes (Оптимістичне блокування) ---
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>[INFO] Спроба умовного оновлення запису (CPS-TURBINE-NODE-01, 1724863600) для версії 1...
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>[SUCCESS] Умовне оновлення успішно виконано (нова версія: 2).
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>[INFO] Спроба умовного оновлення запису (CPS-TURBINE-NODE-01, 1724863600) для версії 1...
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>[WARN] Конфлікт версій! Спрацювало оптимістичне блокування: An error occurred (ConditionalCheckFailedException) when calling the UpdateItem operation: The conditional request failed
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>--- Проведення порівняльного бенчмаркінгу операцій Query та Scan ---
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>=================================================================
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>           ПОРІВНЯЛЬНИЙ АНАЛІЗ ПРОДУКТИВНОСТІ SCAN VS QUERY      
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>=================================================================
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>╒═════════════════════════════╤══════════════════════════╤═════════════════════════════╤═════════════════════════╤══════════════════════════════╕
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>│ Тип операції                │   Отримано записів (Count) │   Проскановано (ScannedCount) │ Час виконання (Latency) │ Витрачено потужності (RCU)   │
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>╞═════════════════════════════╪══════════════════════════╪═════════════════════════════╪═════════════════════════╪══════════════════════════════╡
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>│ Query (Primary Key)         │                       31 │                          31 │ 12.415 мс               │ 0.5 RCU                      │
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>│ Scan (Full Table Scan)      │                       48 │                        1000 │ 98.632 мс               │ 16.0 RCU                     │
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>╘═════════════════════════════╧══════════════════════════╧═════════════════════════════╧═════════════════════════╧══════════════════════════════╛
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a>
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a>[INFO] Звіти збережено у: output/
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a>
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a>--- Завершення лабораторної роботи та очищення ресурсів ---
+</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a>[INFO] Знищення таблиці 'cps-reference-telemetry-7c4a1b89'...
+</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a>[SUCCESS] Таблицю cps-reference-telemetry-7c4a1b89 успішно видалено.
+</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a>[SUCCESS] Лабораторну роботу успішно завершено.
+</span></code></pre></div>
+<h4 id="_1">Аналіз отриманих результатів бенчмаркінгу</h4>
+<ol>
+<li>
+<p><strong>Аналіз операції <code>Query</code>:</strong> Для вибірки телеметрії за 30-хвилинний інтервал для вузла <code>CPS-TURBINE-NODE-02</code> рушій DynamoDB виконав прямий перехід до партиції за хешем <code>DeviceID</code> та логарифмічний обхід B-дерева за діапазоном <code>Timestamp</code>. Значення показника <code>ScannedCount</code> (31) строго дорівнює значенню <code>Count</code> (31). Час виконання склав лише 12.4 мс, а споживання склало лише 0.5 RCU (завдяки узгодженості Eventual Consistency для вибірки обсягом до 4 КБ).</p>
+</li>
+<li>
+<p><strong>Аналіз операції <code>Scan</code>:</strong> Для фільтрації записів зі статусом <code>CRITICAL_ALERT</code> системі довелося просканувати абсолютно всі 1000 записів таблиці (<code>ScannedCount = 1000</code>), що призвело до зростання латентності у 8 разів (до 98.6 мс) та перевитрати пропускної здатності у 32 рази (списано 16.0 RCU), підтверджуючи неприпустимість використання <code>Scan</code> у високочастотних контурах керування кіберфізичних систем.</p>
+</li>
+</ol>
+<hr />
+<h2 id="4">4. Вимоги до змісту звіту</h2>
+<p>Звіт з лабораторної роботи оформлюється у форматі PDF відповідно до стандартів вищої школи та повинен містити такі обов'язкові структурні елементи:</p>
+<ol>
+<li>
+<p><strong>Титульна сторінка</strong> із зазначенням університету, факультету, кафедри, дисципліни, номера лабораторної роботи, теми, академічної групи, ПІБ здобувача та номера індивідуального варіанта.</p>
+</li>
+<li>
+<p><strong>Мета роботи, короткі теоретичні положення та індивідуальне завдання</strong> згідно з таблицею 3.1.</p>
+</li>
+<li>
+<p><strong>Розрахункова частина:</strong> математичний розрахунок необхідної кількості одиниць WCU та RCU для забезпечення потоку телеметрії обраного кіберфізичного пристрою за формулами теоретичного розділу.</p>
+</li>
+<li>
+<p><strong>Схема даних та індексів</strong>, що містить опис типів атрибутів, вибір PartitionKey/SortKey та конфігурацію Global Secondary Index.</p>
+</li>
+<li>
+<p><strong>Повний вихідний текст програмних модулів</strong> (<code>dynamodb_schema.json</code>, <code>dynamodb_manager.py</code>, <code>telemetry_benchmark.py</code>, <code>run_lab4.py</code>) із детальними авторськими коментарями.</p>
+</li>
+<li>
+<p><strong>Скріншоти консолі та графіки</strong>, які ілюструють створення таблиці, блокування при конфлікті версій умовного запису та порівняльну таблицю продуктивності <code>Scan</code> проти <code>Query</code>.</p>
+</li>
+<li>
+<p><strong>Висновки</strong>, де наведено аналітичну оцінку ефективності використання вторинних індексів, обґрунтування вибору цінової моделі (Provisioned vs On-Demand) та підсумки досягнення мети роботи.</p>
+</li>
+</ol>
+<hr />
+<h2 id="5">5. Контрольні запитання для захисту роботи</h2>
+<ol>
+<li>
+<p>Поясніть концептуальну різницю між ключем партиціонування (Partition Key) та ключем сортування (Sort Key) у NoSQL базі даних AWS DynamoDB. Як вибір Partition Key впливає на фізичне розміщення даних на вузлах сховища?</p>
+</li>
+<li>
+<p>Що являє собою проблема «гарячих партицій» (Hot Partitions) у хмарних сховищах часових рядів, які негативні наслідки вона спричиняє для продуктивності та якими архітектурними прийомами (наприклад, додаванням суфікса солі) вона усувається?</p>
+</li>
+<li>
+<p>У чому полягає принципова відмінність між локальними вторинними індексами (LSI) та глобальними вторинними індексами (GSI) за критеріями вибору ключів, обмеження розміру партиції та моделі узгодженості даних?</p>
+</li>
+<li>
+<p>Розкрийте алгоритмічні відмінності між операціями <code>Query</code> та <code>Scan</code> у DynamoDB. За якими математичними залежностями оцінюється часова складність та кількість списаних одиниць пропускної здатності (RCU) для кожної з цих операцій?</p>
+</li>
+<li>
+<p>Поясніть принцип функціонування механізму умовних записів (Conditional Writes). Як використання версійних атрибутів у виразі <code>ConditionExpression</code> реалізує патерн оптимістичного блокування транзакцій у розподіленому середовищі?</p>
+</li>
+<li>
+<p>За якими математичними формулами розраховується кількість необхідних одиниць ємності запису (WCU) та читання (RCU)? У чому полягає різниця між моделями Strong Consistency та Eventual Consistency при тарифікації RCU?</p>
+</li>
+<li>
+<p>Зіставте моделі тарифікації Provisioned Capacity Mode та On-Demand Capacity Mode. За яких профілів навантаження кіберфізичної системи модель On-Demand є економічно вигіднішою за Provisioned?</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

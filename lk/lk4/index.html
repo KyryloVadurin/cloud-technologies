@@ -1,0 +1,2837 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../lk3/">
+      
+      
+        <link rel="next" href="../lk5/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lk1/" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lb/lb1/" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектурні моделі міжкомпонентної взаємодії та формалізація надійності розподілених систем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Проектування черг повідомлень, семантика доставки та амортизація навантаження кіберфізичних систем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проектування асинхронного контуру обробки телеметрії розподіленої енергомережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектурні моделі міжкомпонентної взаємодії та формалізація надійності розподілених систем
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Архітектурні моделі міжкомпонентної взаємодії та формалізація надійності розподілених систем">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Просторова, часова та синхронізаційна зв'язність компонентів у парадигмах взаємодії
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Механізми каскадних відмов, лавиноподібного вичерпання пулів з'єднань і деградації систем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Математична формалізація надійності та доступності систем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Еволюція механізмів зв'язку: від низькорівневих сокетів до персистентних брокерів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Проектування черг повідомлень, семантика доставки та амортизація навантаження кіберфізичних систем
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Проектування черг повідомлень, семантика доставки та амортизація навантаження кіберфізичних систем">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Життєвий цикл повідомлення, семантики доставки та алгоритми дедуплікації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-mmk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Математичне моделювання таймауту видимості та оцінка завантаження за моделлю \(M/M/k\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-dead-letter-queues-dlq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Архітектура ізоляції збійних завдань за допомогою Dead-Letter Queues (DLQ)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-fan-out-cloudevents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Патерн Fan-out, декларативна фільтрація та стандарт CloudEvents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-base-cap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Граничні умови та критичні бар'єри моделі BASE і теореми CAP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5. Граничні умови та критичні бар&#39;єри моделі BASE і теореми CAP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Аналіз граничних умов та бар'єрів теорії на практиці
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-smart-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проектування асинхронної шини інгестії телеметрії для промислової енергомережі Smart Grid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Проектування асинхронної шини інгестії телеметрії для промислової енергомережі Smart Grid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-50-000-smart-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Розробка відмовостійкої хмарної шини буферизації та селективної маршрутизації телеметричних потоків 50 000 підстанцій Smart Grid в умовах аварійного шторму повідомлень
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Розробка відмовостійкої хмарної шини буферизації та селективної маршрутизації телеметричних потоків 50 000 підстанцій Smart Grid в умовах аварійного шторму повідомлень">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок динаміки накопичення та максимального обсягу буфера черги
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Розрахунок часу повного розвантаження буфера (дренажу)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Розрахунок обчислювальної потужності воркерів та параметрів черги
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fan-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Розрахунок параметрів підсистеми розгалуження Fan-out
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектурні моделі міжкомпонентної взаємодії та формалізація надійності розподілених систем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Проектування черг повідомлень, семантика доставки та амортизація навантаження кіберфізичних систем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проектування асинхронного контуру обробки телеметрії розподіленої енергомережі
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектурні моделі міжкомпонентної взаємодії та формалізація надійності розподілених систем
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Архітектурні моделі міжкомпонентної взаємодії та формалізація надійності розподілених систем">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Просторова, часова та синхронізаційна зв'язність компонентів у парадигмах взаємодії
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Механізми каскадних відмов, лавиноподібного вичерпання пулів з'єднань і деградації систем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Математична формалізація надійності та доступності систем
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Еволюція механізмів зв'язку: від низькорівневих сокетів до персистентних брокерів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Проектування черг повідомлень, семантика доставки та амортизація навантаження кіберфізичних систем
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Проектування черг повідомлень, семантика доставки та амортизація навантаження кіберфізичних систем">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Життєвий цикл повідомлення, семантики доставки та алгоритми дедуплікації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-mmk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Математичне моделювання таймауту видимості та оцінка завантаження за моделлю \(M/M/k\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-dead-letter-queues-dlq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Архітектура ізоляції збійних завдань за допомогою Dead-Letter Queues (DLQ)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-fan-out-cloudevents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Патерн Fan-out, декларативна фільтрація та стандарт CloudEvents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-base-cap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Граничні умови та критичні бар'єри моделі BASE і теореми CAP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5. Граничні умови та критичні бар&#39;єри моделі BASE і теореми CAP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Аналіз граничних умов та бар'єрів теорії на практиці
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-smart-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проектування асинхронної шини інгестії телеметрії для промислової енергомережі Smart Grid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Проектування асинхронної шини інгестії телеметрії для промислової енергомережі Smart Grid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-50-000-smart-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Розробка відмовостійкої хмарної шини буферизації та селективної маршрутизації телеметричних потоків 50 000 підстанцій Smart Grid в умовах аварійного шторму повідомлень
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Розробка відмовостійкої хмарної шини буферизації та селективної маршрутизації телеметричних потоків 50 000 підстанцій Smart Grid в умовах аварійного шторму повідомлень">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок динаміки накопичення та максимального обсягу буфера черги
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Розрахунок часу повного розвантаження буфера (дренажу)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Розрахунок обчислювальної потужності воркерів та параметрів черги
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fan-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Розрахунок параметрів підсистеми розгалуження Fan-out
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="4">Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери</h1>
+<h2 id="_1">Мета лекції</h2>
+<p>Формування у майбутніх інженерів комп'ютерних систем поглиблених теоретичних знань і прикладних інженерних компетентностей щодо проектування, декомпозиції та оптимізації високопродуктивних асинхронних комунікаційних середовищ на базі керованих черг повідомлень і брокерів подій. Навчальний матеріал спрямований на системне опанування методів усунення просторової, часової та синхронізаційної зв'язності мікросервісних компонентів, математичного моделювання процесів згладжування імпульсних сплесків трафіку телеметрії в кіберфізичних комплексах, розрахунку часових параметрів обробки з гарантіями стійкості до відмов, а також практичного переходу від синхронних транзакційних парадигм ACID до моделей узгодженості в кінцевому підсумку BASE у розподілених хмарних інфраструктурах.</p>
+<h2 id="_2">Очікувані результати навчання</h2>
+<ol>
+<li>
+<p><strong>Знання та розуміння.</strong> Здобувачі вищої освіти повинні засвоїти фундаментальні концепції організації асинхронного інформаційного обміну, розуміти природу просторової, часової та синхронізаційної декомпозиції компонентів у порівнянні з синхронними протоколами виклику процедур, а також володіти математичним апаратом розрахунку надійності послідовних блокуючих ланцюгів і паралельних буферизованих контурів розподілених систем.</p>
+</li>
+<li>
+<p><strong>Застосування.</strong> Студенти повинні вміти розраховувати оптимальну тривалість таймауту видимості повідомлень, налаштовувати параметри дедуплікації в чергах FIFO, конфігурувати політики переспрямування до черг недоставлених повідомлень і складати декларативні JSON-фільтри атрибутів для патерну масового розгалуження подій у хмарних платформах AWS та Microsoft Azure.</p>
+</li>
+<li>
+<p><strong>Аналіз.</strong> Слухачі мають навчитися досліджувати динаміку накопичення черги під час імпульсних навантажень за допомогою інтегральних моделей та апарату теорії масового обслуговування, виявляти критичні умови блокування обробників «отруйними повідомленнями», а також діагностувати ризики каскадних збоїв і вичерпання пулів з'єднань у гетерогенних мережевих топологіях.</p>
+</li>
+<li>
+<p><strong>Оцінювання та синтез.</strong> Майбутні інженери повинні критично оцінювати межі застосовності моделей узгодженості даних ACID та BASE з огляду на теорему CAP Еріка Брюера, обґрунтовувати вибір між семантиками доставки при проектуванні високонавантажених сервісів, а також синтезувати стійкі до відмов архітектурні рішення для буферизації та первинної агрегації високочастотної телеметрії кіберфізичних систем.</p>
+</li>
+</ol>
+<hr />
+<h2 id="_3">Детальний покроковий план лекції</h2>
+<h3 id="1-">1. Теоретико-концептуальний базис. Архітектурні моделі міжкомпонентної взаємодії та формалізація надійності розподілених систем</h3>
+<ul>
+<li>
+<p>1.1. Просторова, часова та синхронізаційна зв'язність компонентів у парадигмах синхронної взаємодії (REST поверх HTTP/1.1-2, gRPC на базі Protocol Buffers) та асинхронного обміну повідомленнями.</p>
+</li>
+<li>
+<p>1.2. Механізми виникнення каскадних відмов, лавиноподібного вичерпання пулів з'єднань і деградації пропускної здатності в розподілених сервіс-орієнтованих середовищах.</p>
+</li>
+<li>
+<p>1.3. Математична формалізація доступності послідовного синхронного ланцюга сервісів проти асинхронного контуру з еластичним буфером.</p>
+</li>
+<li>
+<p>1.4. Еволюція механізмів обчислювального зв'язку від низькорівневих сокетів і RPC до брокерів проміжного програмного забезпечення з гарантіями персистентності.</p>
+</li>
+</ul>
+<h3 id="2">2. Методологія та аналіз граничних умов. Проектування черг повідомлень, семантика доставки та амортизація навантаження кіберфізичних систем</h3>
+<ul>
+<li>
+<p>2.1. Життєвий цикл повідомлення, порівняння семантик At-least-once та FIFO, математичні механізми дедуплікації на основі часових вікон та забезпечення ідемпотентності споживачів.</p>
+</li>
+<li>
+<p>2.2. Формалізація та розрахунок мінімально безпечного таймауту видимості (Visibility Timeout), маркерів доступу та оцінка коефіцієнта завантаження системи за моделлю Кендалла <span class="arithmatex">\(M/M/k\)</span>.</p>
+</li>
+<li>
+<p>2.3. Архітектура ізоляції збійних завдань за допомогою Dead-Letter Queues (DLQ), аналіз причин виникнення «отруйних повідомлень» та метрики моніторингу черг.</p>
+</li>
+<li>
+<p>2.4. Патерн масового розгалуження Fan-out, декларативна фільтрація повідомлень за метаданими в AWS SNS та Azure Service Bus Topics, інтеграція з реактивними шинами стандарту CloudEvents.</p>
+</li>
+<li>
+<p>2.5. Критичні бар'єри та граничні умови теореми CAP: затримки конвергенції розподіленого стану в моделі BASE (Eventual Consistency) як альтернатива блокуючим протоколам двохфазної фіксації транзакцій ACID.</p>
+</li>
+</ul>
+<h3 id="3">3. Практичний індустріальний / фаховий кейс. Проектування асинхронного контуру обробки телеметрії розподіленої енергомережі</h3>
+<p><strong>Тема наскрізної задачі.</strong> «Розробка відмовостійкої хмарної шини буферизації та селективної маршрутизації телеметричних потоків 50 000 підстанцій Smart Grid в умовах аварійного шторму повідомлень»</p>
+<h2 id="1-_1">1. Теоретико-концептуальний базис. Архітектурні моделі міжкомпонентної взаємодії та формалізація надійності розподілених систем</h2>
+<h3 id="11">1.1. Просторова, часова та синхронізаційна зв'язність компонентів у парадигмах взаємодії</h3>
+<p>Проєктування розподілених систем та високонавантажених обчислювальних комплексів базується на вирішенні фундаментальної інженерної задачі: організації інформаційного зв'язку між незалежними функціональними вузлами. У сучасній комп'ютерній інженерії виділяють дві полярні парадигми міжкомпонентного обміну: синхронну, що функціонує за моделлю «запит–відповідь», та асинхронну, побудовану на посередництві черг або подійних шин даних. Оцінка ефективності кожної моделі вимагає декомпозиції зв'язності компонентів на три ортогональні виміри: просторовий, часовий та синхронізаційний.</p>
+<p>У межах синхронної парадигми взаємодії програмний клієнт генерує пряме звернення до сервера за протоколами <strong>REST (Representational State Transfer)</strong> поверх HTTP/1.1 або HTTP/2, чи за допомогою бінарного фреймворку <strong>gRPC</strong>, що спирається на серіалізацію Protocol Buffers і мультиплексування потоків у межах однієї TCP-сесії. Така організація накладає жорсткі системні обмеження. <strong>Просторова зв'язність</strong> вимагає від клієнтського вузла точного володіння мережевою топологією: IP-адресою, портом або канонічним DNS-іменем цільового сервісу. Навіть за умови використання динамічних реєстрів і балансувальників навантаження клієнт спрямовує трафік на конкретну віртуальну точку входу. <strong>Часова зв'язність</strong> диктує необхідність одночасного перебування відправника та отримувача в активному працездатному стані, оскільки тимчасовий збій або перезавантаження сервера призводить до аварійного завершення транзакції. <strong>Синхронізаційна зв'язність</strong> призводить до блокування виклику: потік операційної системи або віртуальний потік середовища виконання переходить у режим очікування системного переривання вводу-виводу, утримуючи контекст, дескриптор сокета та виділену оперативну пам'ять стека.</p>
+<p>На противагу цьому, асинхронний інформаційний обмін через проміжне програмне забезпечення (<strong>Message-Oriented Middleware</strong>) розриває всі три типи залежностей. <strong>Виробник повідомлення</strong> лише фіксує пакет у локальному або віддаленому буфері брокера, не знаючи про кількість, мережеві координати та поточний стан кінцевих споживачів. Повна просторова ізоляція досягається абстракцією каналу або топіка. Часова ізоляція забезпечує функціонування системи в умовах, коли споживач офлайн: повідомлення зберігається в персистентному сховищі черги до моменту відновлення працездатності обробника. Синхронізаційна автономність гарантує, що клієнтський потік повертається до пулу виконання негайно після отримання мережевого підтвердження про запис пакета в буфер черги, не очікуючи виконання трудомісткої бізнес-логіки.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph SynchronousModel [Синхронна блокуюча взаємодія]
+        A[Клієнтський сервіс] --&gt;|HTTP POST / gRPC Call| B[Шлюз API]
+        B --&gt;|Блокуючий запит| C[Сервіс обробки транзакцій]
+        C --&gt;|Синхронний I/O| D[(Реляційна СУБД)]
+    end
+
+    subgraph AsynchronousModel [Асинхронна брокерна взаємодія]
+        E[Клієнтський вузол] --&gt;|Асинхронний Publish| F[Брокер повідомлень / Топік]
+        F -.-&gt;|Персистентний лог| G[(Буфер дискового сховища)]
+        F --&gt;|Pull / Push подій| H[Пул воркерів 1]
+        F --&gt;|Pull / Push подій| I[Пул воркерів 2]
+    end</code></pre>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> Архітектурний перехід потокового сервісу Netflix від синхронних каскадних викликів REST до реактивної взаємодії через брокери подій дозволив скоротити споживання пам'яті фронтенд-серверами на сорок відсотків завдяки ліквідації сотень тисяч заблокованих потоків введення-виведення, які раніше простоювали в очікуванні відповідей від глибинних сервісів рекомендацій.</p>
+</blockquote>
+<hr />
+<h3 id="12">1.2. Механізми каскадних відмов, лавиноподібного вичерпання пулів з'єднань і деградації систем</h3>
+<p>Найбільш руйнівним наслідком жорсткої зв'язності в розподілених сервіс-орієнтованих архітектурах є виникнення <strong>каскадних відмов (Cascading Failures)</strong>. Розподілена система, побудована виключно на синхронних викликах, володіє характеристиками послідовного ланцюга: деградація продуктивності або відмова одного глибинного компонента лавиноподібно паралізує всю ієрархію сервісів, що викликають його.</p>
+<p>Механіка розвитку системного колапсу розгортається наступним чином. Якщо сервіс нижнього рівня стикається з блокуванням таблиць бази даних або надмірним навантаженням на процесор, час його відповіді зростає від умовних десяти мілісекунд до десятків секунд. Сервіси вищого рівня, звертаючись до нього синхронно, не отримують швидкої відповіді та змушені утримувати відкритими вихідні TCP-з'єднання. Оскільки кількість потоків у пулі обробки веб-сервера обмежена апаратними можливостями системи, настає <strong>вичерпання пулу потоків (Thread Pool Starvation)</strong>. Коли всі потоки блокуються на викликах до завислого сервісу, веб-сервер припиняє обробляти навіть ті запити, які ніяк не пов'язані зі збійним модулем. </p>
+<p>Далі проблема виходить на мережевий рівень. Буфери сокетів операційної системи переповнюються, черга незавершених з'єднань стека TCP (параметр <code>backlog</code>) заповнюється повністю, і ядро операційної системи починає скидати вхідні пакети SYN або відповідати пакетами TCP RST. Клієнтські застосунки, отримуючи помилки таймауту, автоматично активують механізми повторних спроб (<strong>Retries</strong>). Без використання експоненційного відступу та випадкової затримки лавина повторних запитів створює так званий шторм запитів (<strong>Retry Storm</strong>), який остаточно добиває напівживий сервіс, не дозволяючи йому відновити нормальне функціонування навіть після зниження фонового навантаження.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; Штатний_режим
+    Штатний_режим --&gt; Затримка_базового_сервісу: Ріст латентності I/O
+    Затримка_базового_сервісу --&gt; Вичерпання_пулу_потоків: Блокування синхронних викликів
+    Вичерпання_пулу_потоків --&gt; Переповнення_черги_сокетів: TCP backlog saturation
+    Переповнення_черги_сокетів --&gt; Шторм_повторних_запитів: Неконтрольований Retry клієнтів
+    Шторм_повторних_запитів --&gt; Повний_колапс_системи: Мережева відмова всіх вузлів
+    Повний_колапс_системи --&gt; [*]</code></pre>
+<blockquote>
+<p><strong>ТИПОВА ПОМИЛКА:</strong> Поширена інженерна помилка полягає у переконанні, що встановлення агресивних коротких таймаутів на рівні HTTP-клієнта повністю захищає систему від каскадного краху. На практиці, якщо клієнти при виникненні таймауту негайно і синхронно надсилають повторний запит, сумарне навантаження на систему лише подвоюється, перетворюючи локальну затримку на повномасштабну розподілену атаку на власну інфраструктуру.</p>
+</blockquote>
+<hr />
+<h3 id="13">1.3. Математична формалізація надійності та доступності систем</h3>
+<p>Для кількісної оцінки стійкості розподіленої архітектури в комп'ютерній інженерії застосовується теорія надійності та аналіз доступності. Нехай розподілена система складається з <span class="arithmatex">\(n\)</span> взаємозалежних функціональних сервісів. Доступність окремого <span class="arithmatex">\(i\)</span>-го вузла <span class="arithmatex">\(A_i\)</span> визначається через середній час безвідмовної роботи (<strong>Mean Time Between Failures, MTBF</strong>) та середній час відновлення (<strong>Mean Time To Repair, MTTR</strong>):</p>
+<div class="arithmatex">\[A_i = \frac{\text{MTBF}_i}{\text{MTBF}_i + \text{MTTR}_i}\]</div>
+<p>У синхронній послідовній архітектурі, де виконання операції вимагає успішної та одночасної відповіді від кожного з <span class="arithmatex">\(n\)</span> компонентів у ланцюгу, збій хоча б одного вузла призводить до загальної відмови транзакції. Відповідно, результуюча доступність синхронного ланцюга обчислюється як добуток індивідуальних доступностей:</p>
+<div class="arithmatex">\[A_{\text{sync}} = \prod_{i=1}^{n} A_i\]</div>
+<p>Якщо розглянути синхронну систему з п'яти мікросервісів (<span class="arithmatex">\(n = 5\)</span>), кожен з яких має високий показник доступності три дев'ятки (<span class="arithmatex">\(A_i = 0{,}999\)</span>, що допускає близько 8,7 години простою на рік), то підсумкова доступність ланцюга складе:</p>
+<div class="arithmatex">\[A_{\text{sync}} = 0{,}999^5 \approx 0{,}995\]</div>
+<p>Зниження доступності до показника <span class="arithmatex">\(0{,}995\)</span> еквівалентне збільшенню сукупного часу відмови системи до 43,8 години на рік, що демонструє катастрофічне падіння надійності зі зростанням глибини синхронного виклику.</p>
+<p>В асинхронній архітектурі взаємодія розривається за допомогою розподіленої черги або брокера, надійність якого забезпечується надлишковим кластером зі власною доступністю <span class="arithmatex">\(A_{\text{broker}} \ge 0{,}9999\)</span>. Якщо обробку виконує горизонтально масштабований пул із <span class="arithmatex">\(m\)</span> незалежних воркерів, система залишається працездатною доти, доки функціонує брокер і хоча б один обробник. Доступність асинхронного контуру описується математичною моделлю паралельних систем:</p>
+<div class="arithmatex">\[A_{\text{async}} = A_{\text{broker}} \cdot \left( 1 - \prod_{j=1}^{m} (1 - A_{\text{worker}, j}) \right)\]</div>
+<p>За умови <span class="arithmatex">\(m = 3\)</span> воркерів з індивідуальною доступністю <span class="arithmatex">\(A_{\text{worker}} = 0{,}95\)</span> і доступності брокера <span class="arithmatex">\(A_{\text{broker}} = 0{,}9999\)</span>, сукупна доступність обчислювального контуру досягає:</p>
+<div class="arithmatex">\[A_{\text{async}} = 0{,}9999 \cdot \left( 1 - (1 - 0{,}95)^3 \right) = 0{,}9999 \cdot (1 - 0{,}000125) \approx 0{,}99977\]</div>
+<p>Окрім коефіцієнта доступності, критичним фактором синхронних ланцюгів є деградація затримок за квантилями вищих порядків (так звана проблема хвостової латентності — <strong>Tail Latency Amplification</strong>). Якщо час виконання операції окремим сервісом є випадковою величиною, то ймовірність того, що хоча б один із <span class="arithmatex">\(n\)</span> послідовних сервісів продемонструє затримку рівня дев'яносто дев'ятого перцентиля <span class="arithmatex">\(p = 0{,}01\)</span>, виражається формулою:</p>
+<div class="arithmatex">\[P(\text{latency} &gt; L_{99}) = 1 - (1 - p)^n\]</div>
+<p>При <span class="arithmatex">\(n = 50\)</span> послідовних або паралельно очікуваних синхронних викликах ймовірність затримки всієї транзакції на рівні найгіршого показника сягає:</p>
+<div class="arithmatex">\[P(\text{latency} &gt; L_{99}) = 1 - (1 - 0{,}01)^{50} = 1 - 0{,}605 = 0{,}395\]</div>
+<p>Таким чином, майже сорок відсотків усіх користувацьких запитів зазнаватимуть максимальних затримок, навіть якщо кожен окремий сервіс у 99% випадків працює ідеально швидко. В асинхронних системах з чергами буферизація повністю нівелює цей ефект для відправника, обмежуючи затримку клієнта виключно часом фіксації повідомлення в брокері.</p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У розподіленій транзакційній підсистемі Amazon DynamoDB операції реплікації метаданих були переведені з синхронного протоколу двофазної фіксації на асинхронну модель фіксації змін у внутрішньому черговому журналі, що знизило значення дев'яносто дев'ятого перцентиля затримки (p99) з 850 мілісекунд до стабільних 12 мілісекунд у пікові періоди навантаження.</p>
+</blockquote>
+<hr />
+<h3 id="14">1.4. Еволюція механізмів зв'язку: від низькорівневих сокетів до персистентних брокерів</h3>
+<p>Еволюція розподілених комп'ютерних систем відображає постійне зростання рівня абстракції комунікаційного шару та поступове зміщення акценту від передачі сирих байтових потоків до управління станами та подіями. </p>
+<p>Початковий етап розвитку базувався на <strong>сокетах Берклі (BSD Sockets)</strong>, що надавали низькорівневий інтерфейс до транспортних протоколів TCP і UDP. Робота на цьому рівні вимагала від системного інженера ручного управління життєвим циклом дескрипторів, фрагментацією пакетів, перетворенням порядку байтів (мережевий проти хостового), реалізації власних прикладних протоколів та самостійного кодування логіки відновлення розірваних сесій.</p>
+<p>Наступним кроком стала концепція <strong>віддаленого виклику процедур (Remote Procedure Call, RPC)</strong>, формалізована Бірреллом і Нельсоном у 1984 році. Метою RPC було створення повної ілюзії локального виклику функції: генерація клієнтських заглушок (<strong>Stubs</strong>) та серверних скелетів (<strong>Skeletons</strong>) дозволила автоматизувати маршалінг і демаршалінг параметрів. Проте RPC-підхід приховував фундаментальну відмінність між локальною пам'яттю та ненадійною мережею, що призводило до помилок у разі втрати пакетів або падіння сервера під час виконання віддаленої операції. </p>
+<p>Розвиток об'єктно-орієнтованого програмування зумовив появу компонентних моделей розподілених об'єктів — <strong>CORBA</strong>, <strong>DCOM</strong> та <strong>Java RMI</strong>. Вони надали можливість передавати за посиланням складні програмні екземпляри, але створили надзвичайно громіздку, платформозалежну інфраструктуру, критично чутливу до версійності та конфігурації мережевих екранів.</p>
+<p>На початку 2000-х років відбувся перехід до сервісно-орієнтованої архітектури (<strong>SOA</strong>) та протоколу <strong>SOAP</strong>, що використовував формалізовані описи <strong>WSDL</strong> та розмітку <strong>XML</strong> поверх HTTP. Незважаючи на стандартизацію корпоративних шин даних (<strong>Enterprise Service Bus, ESB</strong>), великі накладні витрати на парсинг XML-повідомлень змусили індустрію мігрувати до архітектурного стилю <strong>REST</strong> на базі нотації <strong>JSON</strong>, а в системах з критичними вимогами до затримок — до бінарного <strong>gRPC</strong>. Проте всі ці технології залишалися заручниками синхронної природи запиту-відповіді.</p>
+<p>Сучасний етап еволюції знаменується домінуванням систем обміну повідомленнями з гарантованою персистентністю (<strong>Message-Oriented Middleware</strong> та <strong>Distributed Commit Logs</strong>). Сучасні брокери (RabbitMQ, Apache Kafka, Apache Pulsar, хмарні сервіси AWS SQS, Azure Service Bus) не просто передають дані, а беруть на себе функції довготривалого збереження, гарантії семантики доставки, реплікації інформації між зонами доступності та захисту внутрішніх сервісів від неконтрольованих сплесків вхідного навантаження.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Парадигма взаємодії</th>
+<th style="text-align: left;">Протокольний базис та серіалізація</th>
+<th style="text-align: left;">Ступінь зв'язності компонентів</th>
+<th style="text-align: left;">Приклад з реальної практики</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Мережеві сокети (Raw Sockets)</strong></td>
+<td style="text-align: left;">Сирі TCP-потоки, дейтаграми UDP, бінарні структури C/C++</td>
+<td style="text-align: left;">Екстремально висока просторова, часова та структурна</td>
+<td style="text-align: left;">Промислові драйвери польових шин у SCADA-системах реального часу</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Класичний RPC (ONC RPC, DCE)</strong></td>
+<td style="text-align: left;">XDR, бінарне кодування, прив'язка до портів через Portmapper</td>
+<td style="text-align: left;">Висока просторова та часова, блокуючий клієнтський виклик</td>
+<td style="text-align: left;">Мережева файлова система NFSv3 для монтування сховищ у Linux</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Розподілені об'єкти (CORBA, RMI)</strong></td>
+<td style="text-align: left;">IIOP, JRMP, протоколи віддаленого управління життєвим циклом</td>
+<td style="text-align: left;">Критична часова та програмна залежність від середовища</td>
+<td style="text-align: left;">Старі банківські ядра обробки транзакцій початку 2000-х років</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Синхронні веб-сервіси (REST, gRPC)</strong></td>
+<td style="text-align: left;">Текстовий JSON по HTTP/1.1-2, Protocol Buffers по HTTP/2</td>
+<td style="text-align: left;">Просторова (через DNS), висока часова та синхронізаційна</td>
+<td style="text-align: left;">Внутрішня мікросервісна взаємодія сервісів авторизації та білінгу</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Черги повідомлень (Message Queues)</strong></td>
+<td style="text-align: left;">AMQP 0-9-1/1.0, STOMP, специфічні бінарні та REST API брокерів</td>
+<td style="text-align: left;">Повна відсутність просторової, часової та блокуючої зв'язності</td>
+<td style="text-align: left;">Асинхронне кодування відеоматеріалів на платформі YouTube</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Розподілені журнали подій (Event Streaming)</strong></td>
+<td style="text-align: left;">Спеціалізовані бінарні TCP-протоколи поверх апендного логу</td>
+<td style="text-align: left;">Абсолютна автономність, паралельне вичитування багатьма групами</td>
+<td style="text-align: left;">Обробка клікстріму та моніторинг фінансового фроду в реальному часі</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Чому впровадження пулу паралельних неблокуючих потоків (наприклад, архітектури на базі epoll або фреймворків Netty/Node.js) на клієнтському вузлі вирішує проблему синхронізаційної зв'язності, але виявляється повністю безсилим проти часової та просторової зв'язності при використанні синхронного REST-протоколу?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: Неблокуючий ввід-вивід вивільняє системні ресурси клієнта, але не усуває залежність від доступності та локації сервера.</strong></p>
+<ol>
+<li>
+<p>Архітектури на базі реакторів (epoll, kqueue) усувають виключно синхронізаційну зв'язність: клієнтський потік операційної системи не блокується в очікуванні відповіді, а повертається в цикл подій (Event Loop). Проте, якщо цільовий сервер у цей момент недоступний, вимкнений або зазнає перезавантаження, клієнтський виклик негайно завершується помилкою мережевого з'єднання (Connection Refused або Timeout). Це означає збереження абсолютної часової зв'язності: відправник не може успішно виконати дію, якщо одержувач не функціонує в той самий квант часу. Крім того, клієнт все одно зобов'язаний сформувати запит на конкретну мережеву адресу або доменне ім'я, зберігаючи жорстку просторову зв'язність, тоді як асинхронні брокери дозволяють публікувати повідомлення навіть тоді, коли споживач взагалі фізично відсутній у системі.</p>
+</li>
+<li>
+<p>Аналіз дистракторів: гіпотеза про те, що неблокуючий I/O гарантує збереження повідомлень, є хибною, оскільки протоколи HTTP/REST не мають вбудованого механізму персистентної проміжної фіксації на випадок збою мережі. Припущення, що використання пулів потоків усуває просторову прив'язку, також некоректне, оскільки маршрутизація запиту до кінцевої точки здійснюється незалежно від моделі конкурентності всередині клієнтського процесу.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h3 id="_4">Вказівки для самостійного осмислення</h3>
+<ol>
+<li>
+<p>Змоделюйте сценарій, за якого в мікросервісному ланцюгу з чотирьох вузлів третій компонент збільшує затримку обробки з двадцяти мілісекунд до двох секунд, та обчисліть критичний час до повного вичерпання пулу з двохсот з'єднань на першому (вхідному) шлюзі API за умови вхідного навантаження у сто запитів на секунду.</p>
+</li>
+<li>
+<p>Проаналізуйте інженерні компроміси між використанням gRPC з потоковою передачею даних та асинхронної черги повідомлень на базі протоколу AMQP при проєктуванні підсистеми збирання навігаційної телеметрії для безпілотного транспорту.</p>
+</li>
+<li>
+<p>Опишіть алгоритмічні кроки, які необхідно реалізувати на рівні клієнтського застосунку для запобігання виникненню шторму запитів при відновленні працездатності сервера після збою в умовах синхронної комунікації.</p>
+</li>
+</ol>
+<h2 id="2_1">2. Методологія та аналіз граничних умов. Проектування черг повідомлень, семантика доставки та амортизація навантаження кіберфізичних систем</h2>
+<h3 id="21">2.1. Життєвий цикл повідомлення, семантики доставки та алгоритми дедуплікації</h3>
+<p>Проєктування розподілених систем обробки потоків даних вимагає суворої формалізації станів, через які проходить дискретне повідомлення від моменту генерації виробником до його остаточної фіксації у сховищі споживача. Життєвий цикл повідомлення в черзі підпорядковується детермінованому кінцевому автомату, який переводить сутність зі стану очікування у стан блокування обробником, а далі — до безповоротного видалення або перенаправлення в ізолятор помилок.</p>
+<p>Ключовим методологічним вибором при конфігуруванні черги є вибір між стандартною моделлю з семантикою доставки <strong>«щонайменше один раз» (At-least-once)</strong> та чергами з суворим збереженням черговості <strong>FIFO (First-In, First-Out)</strong> із гарантією <strong>«рівно один раз» (Exactly-once)</strong> на рівні брокера. </p>
+<p>Стандартні розподілені черги максимізують пропускну здатність шляхом надлишкового тиражування метаданих та тіла повідомлення між незалежними вузлами кластера брокера. Внаслідок несинхронної реплікації видалення повідомлення з одного вузла може не встигнути розповсюдитися до моменту, коли інший вузол кластера повторно віддасть це саме повідомлення іншому обробнику під час паралельного опитування. Таким чином виникає явище дублювання даних.</p>
+<p>Черги класу FIFO забезпечують суворий хронологічний порядок обробки за рахунок прив'язки повідомлень до логічних груп за допомогою параметра <strong>Message Group ID</strong>. Усі повідомлення з однаковим ідентифікатором групи обробляються виключно послідовно одним воркером. Для запобігання дублюванню застосовується механізм аналізу унікального маркера <strong>Message Deduplication ID</strong> або розрахунку гешу вмісту за алгоритмом SHA-256. </p>
+<p>Брокер підтримує ковзне часове вікно дедуплікації, типова тривалість якого в хмарних платформах становить триста секунд. Якщо протягом цього інтервалу надходить пакет із раніше зафіксованим ідентифікатором, брокер повертає виробнику успішний статус запису, проте фізично ігнорує дублікат, не додаючи його до черги повторно.</p>
+<blockquote>
+<p><strong>ВАЖЛИВО:</strong> У масштабних розподілених кіберфізичних комплексах побудова абсолютної семантики «рівно один раз» (Exactly-once) виключно засобами мережевого брокера є недосяжною внаслідок нерозв'язності проблеми двох генералів в умовах ненадійного фізичного каналу зв'язку. Досягнення надійної обробки вимагає обов'язкової реалізації ідемпотентності на рівні кінцевого споживача, за якої багаторазове застосування операції <span class="arithmatex">\(f(x)\)</span> еквівалентне її одноразовому виконанню: <span class="arithmatex">\(f(f(x)) = f(x)\)</span>.</p>
+</blockquote>
+<p>Для практичної реалізації ідемпотентності споживачів у програмній інженерії застосовують розподілені сховища ключів зі швидким доступом, де фіксуються унікальні ідентифікатори оброблених транзакцій із визначеним часом життя (TTL), що перевищує максимальний час можливої затримки мережевого ретраю.</p>
+<hr />
+<h3 id="22-mmk">2.2. Математичне моделювання таймауту видимості та оцінка завантаження за моделлю <span class="arithmatex">\(M/M/k\)</span></h3>
+<p>Таймаут видимості (<strong>Visibility Timeout</strong>, <span class="arithmatex">\(T_{\text{vis}}\)</span>) є базовим механізмом запобігання конфліктам між паралельними споживачами у черзі. Після видачі повідомлення конкретному воркеру брокер робить його невидимим для решти пулу обробників на фіксований квант часу. </p>
+<p>Якщо <span class="arithmatex">\(T_{\text{vis}}\)</span> вибрано занадто малим, повідомлення стане видимим для інших воркерів ще до того, як перший завершить операцію, спричиняючи стан гонитви (<strong>Race Condition</strong>) та паралельну обробку одних і тих самих даних. </p>
+<p>Якщо <span class="arithmatex">\(T_{\text{vis}}\)</span> вибрано надмірно великим, то у випадку аварійного завершення воркера повідомлення залишатиметься заблокованим тривалий час, що призведе до неприпустимої деградації загальної затримки системи.</p>
+<p>Формалізація інженерного розрахунку мінімально безпечного таймауту видимості наведена нижче через послідовні кроки аналізу стохастичних параметрів обчислювального процесу:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 1 (Визначення математичного сподівання):} &amp; \quad \overline{t}_{\text{proc}} = \frac{1}{N} \sum_{i=1}^{N} t_{\text{proc}, i} \\
+\text{Крок 2 (Оцінка дисперсії та флуктуацій):} &amp; \quad \sigma_t = \sqrt{\frac{1}{N-1} \sum_{i=1}^{N} (t_{\text{proc}, i} - \overline{t}_{\text{proc}})^2} \\
+\text{Крок 3 (Врахування мережевих накладних витрат):} &amp; \quad t_{\text{net}} = 2 \cdot RTT_{\text{net}} + t_{\text{ack}} \\
+\text{Крок 4 (Фінальний розрахунок таймауту):} &amp; \quad T_{\text{vis\_min}} = \overline{t}_{\text{proc}} + 3\sigma_t + 2 \cdot RTT_{\text{net}} + \delta
+\end{aligned}
+\]</div>
+<p>де <span class="arithmatex">\(\overline{t}_{\text{proc}}\)</span> позначає середній час виконання бізнес-логіки обробником, <span class="arithmatex">\(\sigma_t\)</span> — середньоквадратичне відхилення часу обробки, <span class="arithmatex">\(RTT_{\text{net}}\)</span> — кругова мережева затримка (Round-Trip Time) між воркером та API брокера, <span class="arithmatex">\(t_{\text{ack}}\)</span> — час формування запиту на підтвердження, а <span class="arithmatex">\(\delta\)</span> — інженерний запас надійності на випадок збирання сміття середовищем виконання (Garbage Collection Pause).</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant P as Генератор телеметрії (Producer)
+    participant Q as Розподілена черга (Queue)
+    participant W1 as Воркер 1 (Worker Node 1)
+    participant W2 as Воркер 2 (Worker Node 2)
+    participant DLQ as Черга помилок (DLQ)
+
+    P-&gt;&gt;Q: SendMessage (Body, GroupID, DeduplicationID)
+    Q--&gt;&gt;P: Ack (MessageID, HTTP 200 OK)
+    W1-&gt;&gt;Q: ReceiveMessage (MaxNumberOfMessages=1)
+    Q--&gt;&gt;W1: Deliver (Body, ReceiptHandle_A, VisibilityTimeout=30s)
+    Note over Q: Повідомлення переходить у стан In-Flight
+    Note over W1: Воркер 1 зазнає аномального зависання I/O
+    Note over Q: Таймер 30 секунд вичерпано. Повідомлення знову стає видимим
+    W2-&gt;&gt;Q: ReceiveMessage (MaxNumberOfMessages=1)
+    Q--&gt;&gt;W2: Deliver (Body, ReceiptHandle_B, ReceiveCount=2)
+    Note over W2: Успішна валідація та обробка бізнес-логіки
+    W2-&gt;&gt;Q: DeleteMessage (ReceiptHandle_B)
+    Q--&gt;&gt;W2: Confirm Deletion
+    Note over Q: Повідомлення безповоротно видалено з системи</code></pre>
+<p>Для визначення кількості паралельних воркерів <span class="arithmatex">\(k\)</span>, необхідних для стабільного функціонування системи без нескінченного зростання залишку, застосовується аналітичний апарат теорії масового обслуговування у нотації Кендалла <span class="arithmatex">\(M/M/k\)</span>. Якщо вхідний потік повідомлень є пуассонівським з інтенсивністю <span class="arithmatex">\(\lambda\)</span>, а час обслуговування розподілений за експоненційним законом із параметром <span class="arithmatex">\(\mu\)</span>, то стаціонарний стан системи гарантується лише при виконанні умови ергодичності:</p>
+<div class="arithmatex">\[\rho = \frac{\lambda}{k \cdot \mu} \lt  1\]</div>
+<p>де <span class="arithmatex">\(\rho\)</span> — коефіцієнт завантаження системи масового обслуговування. За умови <span class="arithmatex">\(\rho \ge 1\)</span> математичне сподівання довжини черги прямує до нескінченності, спричиняючи вичерпання дискового простору брокера.</p>
+<p>Ймовірність простою всіх <span class="arithmatex">\(k\)</span> обробників <span class="arithmatex">\(P_0\)</span> обчислюється за формулою Ерланга:</p>
+<div class="arithmatex">\[P_0 = \left[ \sum_{n=0}^{k-1} \frac{(k\rho)^n}{n!} + \frac{(k\rho)^k}{k!(1-\rho)} \right]^{-1}\]</div>
+<p>Середня кількість повідомлень, які очікують у черзі <span class="arithmatex">\(L_q\)</span>, та середній час перебування повідомлення в очікуванні <span class="arithmatex">\(W_q\)</span> становлять:</p>
+<div class="arithmatex">\[L_q = \frac{P_0 \cdot (k\rho)^k \cdot \rho}{k! \cdot (1-\rho)^2}, \quad W_q = \frac{L_q}{\lambda}\]</div>
+<hr />
+<h3 id="23-dead-letter-queues-dlq">2.3. Архітектура ізоляції збійних завдань за допомогою Dead-Letter Queues (DLQ)</h3>
+<p>У гетерогенних розподілених системах існує категорія вхідних даних, яка викликає критичні помилки часу виконання (наприклад, некоректний бінарний формат, відсутність обов'язкових полів або спроба ділення на нуль). Повідомлення такого типу отримали назву <strong>«отруйні пігулки» (Poison Pills)</strong>. Якщо система не має спеціальних механізмів ізоляції, подібне повідомлення зчитується воркером, спричиняє падіння процесу або генерацію необробленого виключення, після чого після завершення таймауту видимості повертається назад у чергу. Цей цикл повторюється нескінченно, блокуючи ресурси обчислювального пулу.</p>
+<p>Для усунення цієї вразливості розгортається архітектурний патерн <strong>черги недоставлених повідомлень (Dead-Letter Queue, DLQ)</strong>, керований політикою повторних перенаправлень (<strong>Redrive Policy</strong>). </p>
+<p>Кожне повідомлення містить системний лічильник невдалих спроб доставки <code>ReceiveCount</code>. Коли значення цього лічильника перевищує наперед сконфігурований поріг <code>maxReceiveCount</code> (зазвичай від трьох до п'яти спроб), брокер в односторонньому порядку вилучає дане повідомлення з основного потоку та переміщує його до вторинної черги DLQ без повторної активації таймауту видимості.</p>
+<pre class="mermaid"><code>flowchart LR
+    Ingest[Вхідний потік повідомлень] --&gt; MainQ[Основна черга: Primary Queue]
+    MainQ --&gt;|Зчитування воркером| Worker[Пул обробників: Consumer Workers]
+    Worker --&gt;|Успішна обробка| Success[Підтвердження: DeleteMessage]
+    Worker -.-&gt;|Критичний збій обробки| Fail[Аварійне завершення без Delete]
+    Fail -.-&gt;|Спливає Visibility Timeout| MainQ
+    MainQ -- ReceiveCount &gt; maxReceiveCount --&gt; DLQ[(Dead-Letter Queue)]
+    DLQ --&gt; AlertSystem[Система сповіщення інженерів]
+    DLQ --&gt; Quarantine[Ручний аудит та реплейсмент]</code></pre>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У платіжному шлюзі корпорації Stripe використання політики ізоляції DLQ дозволило запобігти повному колапсу сервісу клірингу під час інциденту з пошкодженням заголовків банківських вебхуків, оскільки шістдесят тисяч некоректних запитів були миттєво відсічені від основного контуру та перенаправлені до карантинного сховища без деградації обробки легітимних платежів.</p>
+</blockquote>
+<p>Моніторинг стану черг вимагає постійного аналізу специфічних системних метрик:</p>
+<ul>
+<li>
+<p><strong>Кількість доступних повідомлень (<code>ApproximateNumberOfMessagesVisible</code>):</strong> відображає накопичення нерозподіленого навантаження в черзі та слугує тригером для горизонтального автоскейлінгу пулу воркерів.</p>
+</li>
+<li>
+<p><strong>Кількість повідомлень у процесі обробки (<code>ApproximateNumberOfMessagesNotVisible</code>):</strong> демонструє миттєвий обсяг завдань, що перебувають у фазі обчислення всередині вікна таймауту видимості.</p>
+</li>
+<li>
+<p><strong>Вік найстарішого повідомлення (<code>ApproximateAgeOfOldestMessage</code>):</strong> критична метрика відповідності угоді про рівень обслуговування (SLA), перевищення порогу якої сигналізує про виникнення затору або недостатню продуктивність споживачів.</p>
+</li>
+<li>
+<p><strong>Кількість переміщень у DLQ (<code>NumberOfMessagesSentToDeadLetterQueue</code>):</strong> аномальне зростання цієї величини вимагає негайного інженерного втручання для аналізу пошкоджених пакетів даних.</p>
+</li>
+</ul>
+<hr />
+<h3 id="24-fan-out-cloudevents">2.4. Патерн Fan-out, декларативна фільтрація та стандарт CloudEvents</h3>
+<p>Для реалізації топологій розгалуження «один-до-багатьох» застосовується патерн <strong>Fan-out</strong>, за якого повідомлення публікується в центральний обмінник або топік (<strong>Topic</strong>), а брокер самостійно реплікує його копії у підпорядковані черги незалежних підсистем. </p>
+<p>Проте сліпе клонування всього потоку подій призводить до екстремального перевитрачання пропускної здатності мережі та накопичення непотрібних даних у воркерів. Розв'язанням цієї проблеми є <strong>декларативна фільтрація повідомлень на стороні брокера (Subscription Filter Policies)</strong>.</p>
+<p>Фільтрація здійснюється без розпакування корисного навантаження (<strong>Payload</strong>) повідомлення, що критично важливо для збереження високої швидкодії брокера. Оцінка правил виконується виключно над метаданими — блоком користувацьких атрибутів повідомлення (<strong>Message Attributes</strong>). </p>
+<p>Декларативні фільтри в хмарних платформах AWS SNS та Azure Service Bus задаються у форматі JSON і підтримують широкий спектр операторів: точний збіг рядків, входження в множину, числові діапазони та префіксне зіставлення.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"telemetry_reading"</span><span class="p">],</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">"subsystem"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"power_distribution"</span><span class="p">,</span><span class="w"> </span><span class="s2">"substation_control"</span><span class="p">],</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">"metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">"voltage_kv"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"numeric"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"&gt;="</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w"> </span><span class="s2">"&lt;="</span><span class="p">,</span><span class="w"> </span><span class="mi">750</span><span class="p">]</span><span class="w"> </span><span class="p">}],</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"CRITICAL"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ALERT"</span><span class="p">]</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Виведення математичної залежності сумарної вихідної смуги пропускання брокера при використанні селективної фільтрації для <span class="arithmatex">\(M\)</span> топіків формалізується наступним алгоритмом:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 1 (Розрахунок чистого вхідного бітрейту):} &amp; \quad \Phi_{\text{in}} = \sum_{j=1}^{M} \lambda_j \cdot S_j \\
+\text{Крок 2 (Оцінка селективності підписок):} &amp; \quad \alpha_{j,i} = P(\text{Message}_j \models \text{Filter}_{j,i}) \\
+\text{Крок 3 (Формування сукупної смуги Fan-out):} &amp; \quad BW_{\text{fanout}} = \sum_{j=1}^{M} \left( \lambda_j \cdot S_j \cdot \sum_{i=1}^{K_j} \alpha_{j,i} \right)
+\end{aligned}
+\]</div>
+<p>де <span class="arithmatex">\(\lambda_j\)</span> — частота публікації вхідних подій у <span class="arithmatex">\(j\)</span>-му топіку, <span class="arithmatex">\(S_j\)</span> — середній розмір повідомлення разом із метаданими, <span class="arithmatex">\(K_j\)</span> — кількість підписок, асоційованих із топіком, а <span class="arithmatex">\(\alpha_{j,i}\)</span> — коефіцієнт вибірковості <span class="arithmatex">\(i\)</span>-ї підписки (<span class="arithmatex">\(0 \le \alpha_{j,i} \le 1\)</span>), що відображає ймовірність задоволення вхідного повідомлення заданому логічному предикату фільтрації.</p>
+<p>Для уніфікації структури подій у гетерогенних мультихмарних середовищах Консорціумом хмарних обчислень (<strong>CNCF</strong>) розроблено відкритий стандарт <strong>CloudEvents</strong>. Специфікація стандартизує обов'язковий набір контекстних атрибутів (<code>id</code>, <code>source</code>, <code>specversion</code>, <code>type</code>), що дозволяє маршрутизаторам на кшталт Azure Event Grid здійснювати уніфіковане декодування, трасування та маршрутизацію повідомлень незалежно від протоколу транспортування (HTTP, AMQP, MQTT).</p>
+<hr />
+<h3 id="25-base-cap">2.5. Граничні умови та критичні бар'єри моделі BASE і теореми CAP</h3>
+<p>Перехід від синхронних транзакцій реляційних баз даних до розподіленого асинхронного обміну повідомленнями кардинально змінює парадигму забезпечення цілісності інформації. Класична модель <strong>ACID (Atomicity, Consistency, Isolation, Durability)</strong> спирається на блокуючі протоколи розподіленої координації, насамперед на <strong>двофазну фіксацію (Two-Phase Commit, 2PC)</strong>. </p>
+<p>Проте, відповідно до фундаментальної <strong>теореми CAP Еріка Брюера</strong>, розподілена система в умовах неминучих мережевих розривів (<strong>Partition Tolerance, <span class="arithmatex">\(P\)</span></strong>) здатна гарантувати лише один із двох взаємовиключних показників: або абсолютну узгодженість даних (<strong>Consistency, <span class="arithmatex">\(C\)</span></strong>), або повну доступність системи для операцій читання та запису (<strong>Availability, <span class="arithmatex">\(A\)</span></strong>).</p>
+<p>Застосування моделі ACID у глобально розподілених хмарах вимагає вибору компромісу <span class="arithmatex">\(CP\)</span>, що призводить до блокування операцій запису у разі втрати зв'язку між дата-центрами. Більше того, протокол 2PC має серйозне обмеження: якщо координатор транзакції виходить з ладу після фази підготовки (<code>Prepare</code>), усі залучені ресурси залишаються у заблокованому стані, що є неприпустимим для безперервних процесів кіберфізичних систем.</p>
+<p>Асинхронні архітектури обирають вектор доступності <span class="arithmatex">\(AP\)</span> і базуються на філософії <strong>BASE</strong>:</p>
+<ul>
+<li>
+<p><strong>Базова доступність (Basically Available):</strong> система завжди повертає відповідь на запит, проте в разі аварії відповідь може містити застарілі дані або сигнал про прийняття завдання в проміжний буфер без миттєвої обробки.</p>
+</li>
+<li>
+<p><strong>Гнучкий стан (Soft State):</strong> стан даних у системі може дрейфувати та змінюватися з плином часу без зовнішніх дій користувача, оскільки повідомлення перебувають у процесі транзитної доставки через черги та репліки.</p>
+</li>
+<li>
+<p><strong>Узгодженість у кінцевому підсумку (Eventual Consistency):</strong> гарантується, що за умови відсутності нових змін стан усіх реплік через деякий інтервал часу збіжиться до абсолютно ідентичного значення.</p>
+</li>
+</ul>
+<h4 id="_5">Аналіз граничних умов та бар'єрів теорії на практиці</h4>
+<p>Модель узгодженості в кінцевому підсумку та аналітичні методи розрахунку черг мають жорсткі граничні умови застосовності, порушення яких призводить до фатальних помилок у промислових системах.</p>
+<p>По-перше, припущення моделі <span class="arithmatex">\(M/M/k\)</span> про пуассонівський характер вхідного потоку повністю руйнується під час масштабних техногенних аварій або збоїв в енергомережах. Замість некорельованих подій виникає скоординований шторм повідомлень, де розподіл часових інтервалів між пакетами описується важкохвостими розподілами Парето (самоподібний трафік). </p>
+<p>У цьому випадку формула коефіцієнта завантаження <span class="arithmatex">\(\rho = \frac{\lambda}{k\mu}\)</span> втрачає прогностичну здатність, дисперсія черги стає нескінченною, а затримка зростає стрибкоподібно, що призводить до повного переповнення виділеного дискового буфера <span class="arithmatex">\(Q_{\text{max}} &gt; \text{Capacity}_{\text{queue}}\)</span>.</p>
+<p>По-друге, граничною умовою моделі BASE є максимальний допустимий інтервал збіжності <span class="arithmatex">\(\Delta t_{\text{conv}}\)</span>. Якщо тривалість мережевої ізоляції перевищує час життя повідомлень у буфері (<code>MessageTTL</code>), брокер починає автоматично видаляти невичитані пакети або перекидати їх у DLQ. </p>
+<p>У цей момент система втрачає гарантію збереження цілісності: стан вузлів ніколи не збіжиться до єдиного інваріанта, виникає безповоротний розсинхрон даних, який вимагає ручного втручання адміністраторів або застосування складних компенсаційних транзакцій (патерн <strong>Saga</strong>).</p>
+<p>По-третє, у чергах FIFO ковзне вікно дедуплікації має суворе часове обмеження (наприклад, 5 хвилин для AWS SQS). Якщо внаслідок мережевого колапсу пакет-дублікат затримується в проміжних буферах маршрутизаторів на час, більший за тривалість вікна, він потрапляє до черги після очищення кешу хешів і буде прийнятий як унікальний, що призведе до повторного виконання неідемпотентної операції.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Характеристика / Критерій</th>
+<th style="text-align: left;">Стандартна черга (At-least-once)</th>
+<th style="text-align: left;">Черга FIFO (Exactly-once broker-level)</th>
+<th style="text-align: left;">Топік розгалуження (Pub/Sub Fan-out)</th>
+<th style="text-align: left;">Розподілений лог подій (Event Log)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Гарантія порядку доставки</strong></td>
+<td style="text-align: left;">Без гарантії (Best-effort ordering)</td>
+<td style="text-align: left;">Строге дотримання черговості за Message Group ID</td>
+<td style="text-align: left;">Залежить від типу кінцевої підписки</td>
+<td style="text-align: left;">Суворе збереження порядку в межах партиції</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Складність впровадження</strong></td>
+<td style="text-align: left;">Низька (мінімальні вимоги до коду)</td>
+<td style="text-align: left;">Середня (необхідність маркування груп та дедуплікації)</td>
+<td style="text-align: left;">Середня (розробка схем фільтрації метаданих)</td>
+<td style="text-align: left;">Висока (управління офсетами, партиціями, ребалансуванням)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Пропускна здатність</strong></td>
+<td style="text-align: left;">Практично необмежена (горизонтальне масштабування)</td>
+<td style="text-align: left;">Обмежена (до 300-3000 msg/s на групу з батчингом)</td>
+<td style="text-align: left;">Висока (обмежується смугою вихідних інтерфейсів)</td>
+<td style="text-align: left;">Екстремально висока (мільйони msg/s на брокер)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Критичні ризики / Обмеження</strong></td>
+<td style="text-align: left;">Поява дублікатів, обов'язкова ідемпотентність</td>
+<td style="text-align: left;">Обмеження вікна дедуплікації, блокування черги при збої одного повідомлення групи</td>
+<td style="text-align: left;">Відсутність довготривалого збереження без додаткових черг</td>
+<td style="text-align: left;">Складність масштабування споживачів понад кількість партицій</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Під час аварійного відключення силового трансформатора високовольтної підстанції 10 000 інтелектуальних лічильників одночасно надіслали телеметричні пакети аварії. Середній час штатної обробки одного повідомлення воркером становить <span class="arithmatex">\(\overline{t}_{\text{proc}} = 0{,}2\)</span> с, середньоквадратичне відхилення <span class="arithmatex">\(\sigma_t = 0{,}05\)</span> с, а кругова затримка мережі <span class="arithmatex">\(RTT_{\text{net}} = 15\)</span> мс. Яким має бути мінімальний безпечний таймаут видимості черги <span class="arithmatex">\(T_{\text{vis\_min}}\)</span>, і скільки паралельних воркерів необхідно розгорнути, щоб спорожнити чергу за час, що не перевищує 20 секунд, якщо додатковий запас часу <span class="arithmatex">\(\delta\)</span> встановлено на рівні 50 мс?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: Мінімальний таймаут видимості становить <span class="arithmatex">\(0{,}43\)</span> с, мінімально необхідна кількість активних паралельних воркерів дорівнює 100.</strong></p>
+<ol>
+<li>
+<p>Розрахунок мінімально безпечного таймауту видимості (<span class="arithmatex">\(T_{\text{vis\_min}}\)</span>):
+   Використовуємо інженерну формулу оцінки таймауту:
+   $<span class="arithmatex">\(T_{\text{vis\_min}} = \overline{t}_{\text{proc}} + 3\sigma_t + 2 \cdot RTT_{\text{net}} + \delta\)</span>$
+   Підставляємо вихідні дані:
+   $<span class="arithmatex">\(T_{\text{vis\_min}} = 0{,}2 + 3 \cdot 0{,}05 + 2 \cdot 0{,}015 + 0{,}05 = 0{,}2 + 0{,}15 + 0{,}03 + 0{,}05 = 0{,}43 \text{ с}\)</span>$
+   Отже, встановлення таймауту менше 430 мілісекунд призведе до ризику передчасного дублювання повідомлень пулом обробників.</p>
+</li>
+<li>
+<p>Розрахунок необхідної кількості обробників (<span class="arithmatex">\(k\)</span>):
+   Загальна кількість вхідних повідомлень <span class="arithmatex">\(Q = 10\,000\)</span>. Цільовий нормативний час дренажу черги <span class="arithmatex">\(T_{\text{drain}} = 20\)</span> с.
+   Необхідна сукупна продуктивність обробки системи:
+   $<span class="arithmatex">\(C_{\text{process}} = \frac{Q}{T_{\text{drain}}} = \frac{10\,000}{20} = 500 \text{ повідомлень/с}\)</span>$
+   Продуктивність одного воркера визначається середнім часом виконання завдання:
+   $<span class="arithmatex">\(\mu = \frac{1}{\overline{t}_{\text{proc}}} = \frac{1}{0{,}2} = 5 \text{ повідомлень/с}\)</span>$
+   Кількість необхідних паралельних воркерів обчислюється як:
+   $<span class="arithmatex">\(k = \frac{C_{\text{process}}}{\mu} = \frac{500}{5} = 100 \text{ воркерів}\)</span>$</p>
+</li>
+<li>
+<p>Аналіз граничних умов: якщо фактичний мережевий джиттер зросте і <span class="arithmatex">\(RTT\)</span> подвоїться або воркери почнуть відчувати блокування вводу-виводу при записі в базу даних (збільшення <span class="arithmatex">\(\overline{t}_{\text{proc}}\)</span>), час дренажу перевищить 20 секунд, що вимагатиме динамічного розширення пулу воркерів через механізми Horizontal Pod Autoscaler (HPA).</p>
+</li>
+</ol>
+</details>
+<hr />
+<h3 id="_6">Вказівки для самостійного осмислення</h3>
+<ol>
+<li>
+<p>Сформулюйте математичні умови, за яких використання черги FIFO з групуванням повідомлень стає неефективним через блокування незалежних транзакцій усередині однієї групи (ефект блокування початку черги — Head-of-Line Blocking).</p>
+</li>
+<li>
+<p>Запропонуйте архітектурну схему та структуру таблиці ідемпотентності на базі Redis або DynamoDB, яка гарантує коректну обробку фінансових транзакцій при використанні стандартної черги AWS SQS з семантикою At-least-once.</p>
+</li>
+<li>
+<p>Проаналізуйте наслідки використання занадто великого значення <code>maxReceiveCount</code> (наприклад, понад 50) для відмовостійкості системи та поясніть, чому це може призвести до лавиноподібного збільшення витрат на хмарну інфраструктуру.</p>
+</li>
+</ol>
+<h2 id="3-smart-grid">3. Практичний індустріальний / фаховий кейс. Проектування асинхронної шини інгестії телеметрії для промислової енергомережі Smart Grid</h2>
+<h3 id="31-50-000-smart-grid">3.1. Комплексний фаховий кейс. Розробка відмовостійкої хмарної шини буферизації та селективної маршрутизації телеметричних потоків 50 000 підстанцій Smart Grid в умовах аварійного шторму повідомлень</h3>
+<h4 id="_7">Постановка задачі / ситуації</h4>
+<p>У межах модернізації регіональної енергетичної системи оператор Smart Grid впроваджує хмарну систему моніторингу та протиаварійного керування. До інфраструктури підключено 50 000 інтелектуальних трансформаторних підстанцій та вузлів розподілу. У штатному режимі функціонування кожен об'єкт генерує один телеметричний пакет кожні 10 секунд (показники напруги, фазового кута, частоти струму, температури трансформаторного масла). Проте під час масштабних атмосферних збурень, грозових фронтів або системних коливань частоти в енергомережі спрацьовує аварійний протокол: усі підстанції одночасно переходять у режим високочастотної фіксації аномалій, надсилаючи по 5 повідомлень за секунду протягом 60 секунд (явище аварійного шторму повідомлень).</p>
+<p>Централізована реляційна база даних оперативного диспетчерського керування має жорстке фізичне обмеження швидкості безпечного запису транзакцій: перевищення порогу у 25 000 операцій за секунду призводить до блокування пулу з'єднань, деградації дискової підсистеми I/O та відмови системи. Крім того, оператор має дві групи критичних споживачів даних: автоматичний контур релейного захисту, який повинен отримувати виключно критичні сигнали тривоги (близько 5% від загального потоку) із затримкою не більше 1,5 секунди, та підсистему предиктивної аналітики, яка потребує повного масиву телеметрії для машинного навчання, але допускає затримку обробки до 15 хвилин. Необхідно спроєктувати асинхронну хмарну шину згладжування навантаження та селективної маршрутизації, розрахувати параметри буфера, визначити необхідну кількість воркерів та забезпечити надійність обробки без втрати жодного пакета даних.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Параметр системи</th>
+<th style="text-align: left;">Символьне позначення</th>
+<th style="text-align: left;">Числове значення</th>
+<th style="text-align: left;">Одиниця вимірювання</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Кількість контролерів підстанцій</td>
+<td style="text-align: left;"><span class="arithmatex">\(N_{\text{devices}}\)</span></td>
+<td style="text-align: left;">50 000</td>
+<td style="text-align: left;">вузлів</td>
+</tr>
+<tr>
+<td style="text-align: left;">Розмір одного пакета телеметрії</td>
+<td style="text-align: left;"><span class="arithmatex">\(S_{\text{msg}}\)</span></td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">КБ</td>
+</tr>
+<tr>
+<td style="text-align: left;">Період опитування в штатному режимі</td>
+<td style="text-align: left;"><span class="arithmatex">\(T_{\text{norm}}\)</span></td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">с</td>
+</tr>
+<tr>
+<td style="text-align: left;">Штатна інтенсивність потоку</td>
+<td style="text-align: left;"><span class="arithmatex">\(\lambda_{\text{norm}}\)</span></td>
+<td style="text-align: left;">5 000</td>
+<td style="text-align: left;">повідомлень/с</td>
+</tr>
+<tr>
+<td style="text-align: left;">Частота передачі в аварійному режимі</td>
+<td style="text-align: left;"><span class="arithmatex">\(f_{\text{spike}}\)</span></td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Гц (повідомлень/с)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Пікова інтенсивність шторму</td>
+<td style="text-align: left;"><span class="arithmatex">\(\lambda_{\text{spike}}\)</span></td>
+<td style="text-align: left;">250 000</td>
+<td style="text-align: left;">повідомлень/с</td>
+</tr>
+<tr>
+<td style="text-align: left;">Тривалість аварійного шторму</td>
+<td style="text-align: left;"><span class="arithmatex">\(T_{\text{spike}}\)</span></td>
+<td style="text-align: left;">60</td>
+<td style="text-align: left;">с</td>
+</tr>
+<tr>
+<td style="text-align: left;">Максимальна пропускна здатність СУБД</td>
+<td style="text-align: left;"><span class="arithmatex">\(C_{\text{db\_max}}\)</span></td>
+<td style="text-align: left;">25 000</td>
+<td style="text-align: left;">операцій/с</td>
+</tr>
+<tr>
+<td style="text-align: left;">Середній час обробки пакета воркером</td>
+<td style="text-align: left;"><span class="arithmatex">\(\overline{t}_{\text{proc}}\)</span></td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">мс</td>
+</tr>
+<tr>
+<td style="text-align: left;">Середньоквадратичне відхилення обробки</td>
+<td style="text-align: left;"><span class="arithmatex">\(\sigma_t\)</span></td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">мс</td>
+</tr>
+<tr>
+<td style="text-align: left;">Мережева кругова затримка</td>
+<td style="text-align: left;"><span class="arithmatex">\(RTT_{\text{net}}\)</span></td>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">мс</td>
+</tr>
+<tr>
+<td style="text-align: left;">Цільовий час повного дренажу черги</td>
+<td style="text-align: left;"><span class="arithmatex">\(T_{\text{target\_drain}}\)</span></td>
+<td style="text-align: left;">600</td>
+<td style="text-align: left;">с</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>flowchart TD
+    subgraph EdgeLayer [Рівень підстанцій Smart Grid]
+        Sensors[50 000 польових контролерів RTU]
+    end
+
+    subgraph IngestionLayer [Контур інгестії та первинної фільтрації]
+        Sensors ==&gt;|Піковий шторм 250k msg/s| IngestGateway[Шлюз API / Балансувальник]
+        IngestGateway ==&gt;|Публікація подій| Topic[Хмарний топік: AWS SNS / Azure Topics]
+    end
+
+    subgraph FanOutLayer [Селективний Fan-out та буферизація]
+        Topic --&gt;|Фільтр: status = CRITICAL 5%| FastQueue[Високопріоритетна черга FIFO]
+        Topic --&gt;|Без фільтра: всі телеметричні дані| MainBuffer[(Основний еластичний буфер SQS)]
+        Topic --&gt;|Прямий потік| S3Archive[(Хмарне сховище Data Lake / S3)]
+    end
+
+    subgraph ProcessingLayer [Пул горизонтально масштабованих воркерів]
+        FastQueue ==&gt;|Миттєва доставка &lt; 1.5s| FastWorkers[Релейний захист SCADA]
+        MainBuffer ==&gt;|Контрольована швидкість вичитування| WorkersPool[Пул воркерів інгестії телеметрії]
+        WorkersPool -.-&gt;|Помилка обробки &gt; 3 спроб| DLQ[(Dead-Letter Queue)]
+        WorkersPool ==&gt;|Стабільний потік &lt;= 25k msg/s| CentralDB[(Оперативна часова СУБД)]
+    end</code></pre>
+<h4 id="_8">Покроковий аналіз та розв'язок</h4>
+<h5 id="1">Крок 1. Розрахунок динаміки накопичення та максимального обсягу буфера черги</h5>
+<p>Під час аварійного сплеску інтенсивність генерації трафіку <span class="arithmatex">\(\lambda_{\text{spike}}\)</span> перевищує граничні можливості приймання бази даних <span class="arithmatex">\(C_{\text{db\_max}}\)</span>. Відповідно, надлишок повідомлень повинен безпечно демпфуватися в персистентному буфері черги. Динаміка зростання черги <span class="arithmatex">\(Q(t)\)</span> за інтервал дії шторму <span class="arithmatex">\(t \in [0, T_{\text{spike}}]\)</span> виражається інтегральним рівнянням:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 1.1 (Формулювання балансу):} &amp; \quad Q(T_{\text{spike}}) = \int_{0}^{T_{\text{spike}}} \left( \lambda_{\text{spike}} - C_{\text{db\_max}} \right) dt \\
+\text{Крок 1.2 (Підстановка числових значень):} &amp; \quad Q(60) = (250\,000 - 25\,000) \cdot 60 \\
+\text{Крок 1.3 (Розрахунок кількості повідомлень):} &amp; \quad Q(60) = 225\,000 \cdot 60 = 13\,500\,000 \text{ повідомлень}
+\end{aligned}
+\]</div>
+<p>Мінімальна місткість сховища хмарної черги в гігабайтах для запобігання втраті даних становить:</p>
+<div class="arithmatex">\[V_{\text{storage}} = \frac{13\,500\,000 \cdot 2 \text{ КБ}}{1024 \cdot 1024 \text{ КБ/ГБ}} \approx 25{,}75 \text{ ГБ}\]</div>
+<h5 id="2_2">Крок 2. Розрахунок часу повного розвантаження буфера (дренажу)</h5>
+<p>Після завершення шторму в момент <span class="arithmatex">\(t = 60\)</span> с інтенсивність вхідного потоку спадає до штатної величини <span class="arithmatex">\(\lambda_{\text{norm}} = 5\,000\)</span> повідомлень/с. Швидкість вичитування залишку обмежена порогом <span class="arithmatex">\(C_{\text{db\_max}} = 25\,000\)</span> операцій/с. Розрахуємо реальний час розвантаження <span class="arithmatex">\(T_{\text{drain}}\)</span> за умови збереження штатного навантаження:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 2.1 (Ефективна швидкість дренажу):} &amp; \quad \Delta C = C_{\text{db\_max}} - \lambda_{\text{norm}} = 25\,000 - 5\,000 = 20\,000 \text{ повідомлень/с} \\
+\text{Крок 2.2 (Розрахунок фактичного часу):} &amp; \quad T_{\text{drain}} = \frac{Q(T_{\text{spike}})}{\Delta C} = \frac{13\,500\,000}{20\,000} = 675 \text{ с}
+\end{aligned}
+\]</div>
+<p>Оскільки отриманий час <span class="arithmatex">\(T_{\text{drain}} = 675\)</span> с перевищує цільовий норматив оператора <span class="arithmatex">\(T_{\text{target\_drain}} = 600\)</span> с, необхідно збільшити ліміт приймання бази даних під час ліквідації наслідків шторму за рахунок динамічного масштабування СУБД. Розрахуємо необхідну швидкість обробки <span class="arithmatex">\(C_{\text{req}}\)</span>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 2.3 (Цільова продуктивність):} &amp; \quad C_{\text{req}} = \frac{Q(T_{\text{spike}})}{T_{\text{target\_drain}}} + \lambda_{\text{norm}} = \frac{13\,500\,000}{600} + 5\,000 = 22\,500 + 5\,000 = 27\,500 \text{ msg/s}
+\end{aligned}
+\]</div>
+<h5 id="3_1">Крок 3. Розрахунок обчислювальної потужності воркерів та параметрів черги</h5>
+<p>Для досягнення продуктивності <span class="arithmatex">\(C_{\text{req}} = 27\,500\)</span> повідомлень/с визначимо параметри пулу обробників. Продуктивність одного потоку обробника при <span class="arithmatex">\(\overline{t}_{\text{proc}} = 10\)</span> мс становить <span class="arithmatex">\(\mu = \frac{1}{0{,}01} = 100\)</span> повідомлень/с. Відповідно, мінімальна кількість активних паралельних потоків воркерів складає:</p>
+<div class="arithmatex">\[k = \frac{C_{\text{req}}}{\mu} = \frac{27\,500}{100} = 275 \text{ потоків виконання}\]</div>
+<p>Розрахуємо мінімально безпечний таймаут видимості <span class="arithmatex">\(T_{\text{vis\_min}}\)</span> для захисту від передчасних дублікатів при <span class="arithmatex">\(\delta = 20\)</span> мс:</p>
+<div class="arithmatex">\[T_{\text{vis\_min}} = \overline{t}_{\text{proc}} + 3\sigma_t + 2 \cdot RTT_{\text{net}} + \delta = 0{,}010 + 3(0{,}002) + 2(0{,}015) + 0{,}020 = 0{,}066 \text{ с (66 мс)}\]</div>
+<p>З урахуванням рекомендацій щодо стабільності систем призначаємо <span class="arithmatex">\(T_{\text{vis}} = 100\)</span> мс або налаштовуємо воркер на періодичне продовження таймауту.</p>
+<h5 id="4-fan-out">Крок 4. Розрахунок параметрів підсистеми розгалуження Fan-out</h5>
+<p>Високопріоритетний потік релейного захисту становить <span class="arithmatex">\(5\%\)</span> від пікового навантаження (<span class="arithmatex">\(\alpha_{\text{crit}} = 0{,}05\)</span>). Пропускна здатність каналу між топіком і високопріоритетною чергою релейного захисту складе:</p>
+<div class="arithmatex">\[BW_{\text{crit}} = \lambda_{\text{spike}} \cdot \alpha_{\text{crit}} \cdot S_{\text{msg}} = 250\,000 \cdot 0{,}05 \cdot 2 \text{ КБ} = 25\,000 \text{ КБ/с} \approx 24{,}41 \text{ МБ/с}\]</div>
+<h4 id="_9">Інтерпретація результатів та альтернативні сценарії</h4>
+<p>Розрахунки доводять, що пряма інтеграція сенсорів із базою даних за класичною синхронною схемою призвела б до десятикратного перевантаження СУБД у перші секунди аварії та гарантованого колапсу моніторингу. Впровадження асинхронного буфера обсягом <span class="arithmatex">\(25{,}75\)</span> ГБ успішно акумулює піковий удар, трансформуючи імпульс тривалістю 60 секунд у стабільний платоподібний процес обробки тривалістю 10 хвилин силами 275 потоків воркерів.</p>
+<p>Якби вхідні параметри задачі змінилися в бік збільшення розміру повідомлення до <span class="arithmatex">\(S_{\text{msg}} = 500\)</span> КБ (наприклад, у разі передачі повних осцилограм аварійного перехідного процесу), використання стандартних брокерів SQS стало б неможливим через обмеження максимального розміру пакета у 256 КБ. У такій ситуації архітектура потребувала б модифікації за патерном <strong>Claim-Check</strong>: контролер зберігає бінарний масив осцилограми безпосередньо в об'єктне сховище S3, а в чергу відправляє легковантажне повідомлення-покажчик розміром до 1 КБ із метаданими та посиланням на URI об'єкта.</p>
+<hr />
+<h3 id="32">3.2. Зведена довідкова система лекції</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термін / Концепція</th>
+<th style="text-align: left;">Формалізація / Сутність</th>
+<th style="text-align: left;">Реальний кейс застосування</th>
+<th style="text-align: left;">Основне обмеження / Ризик</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Синхронна взаємодія (REST/gRPC)</strong></td>
+<td style="text-align: left;">Модель блокуючого виклику за схемою «запит–відповідь» із просторовою та часовою прив'язкою</td>
+<td style="text-align: left;">Внутрішньосервісні запити аутентифікації користувачів у реальному часі</td>
+<td style="text-align: left;">Ризик каскадної деградації всієї системи при відмові одного компонента</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Черга повідомлень (Message Queue)</strong></td>
+<td style="text-align: left;">Асинхронний буфер зв'язку «точка–точка» з одноразовим вичитуванням повідомлення конкурентним воркером</td>
+<td style="text-align: left;">Демпфування замовлень інтернет-магазину в періоди пікових розпродажів</td>
+<td style="text-align: left;">Необхідність обробки дублікатів через семантику At-least-once</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Таймаут видимості (Visibility Timeout)</strong></td>
+<td style="text-align: left;">Часовий інтервал <span class="arithmatex">\(T_{\text{vis}}\)</span>, протягом якого вичитане повідомлення приховане від інших споживачів</td>
+<td style="text-align: left;">Захист від паралельного дублювання обробки банківських транзакцій</td>
+<td style="text-align: left;">Ризик повторної видачі завдання при зависанні воркера понад ліміт часу</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Черга помилок (Dead-Letter Queue, DLQ)</strong></td>
+<td style="text-align: left;">Вторинна ізолююча черга для накопичення повідомлень після перевищення ліміту <code>maxReceiveCount</code></td>
+<td style="text-align: left;">Карантинне збереження некоректно сформованих або пошкоджених JSON-пакетів</td>
+<td style="text-align: left;">Потребує постійного моніторингу та ручного регламенту виправлення даних</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Патерн Fan-out (Pub/Sub)</strong></td>
+<td style="text-align: left;">Тиражування повідомлення з одного топіка до множини підписаних черг за схемою «один-до-багатьох»</td>
+<td style="text-align: left;">Паралельна нотифікація підсистем логістики, складу та білінгу про замовлення</td>
+<td style="text-align: left;">Збільшення сумарної мережевої смуги пропускання кратно кількості підписок</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Декларативна фільтрація метаданих</strong></td>
+<td style="text-align: left;">Селекція подій брокером на основі JSON-предикатів над атрибутами без парсингу тіла</td>
+<td style="text-align: left;">Відсікання аварійних телеметричних сигналів від фонового потоку датчиків</td>
+<td style="text-align: left;">Необхідність строгої дисципліни заповнення користувацьких атрибутів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Модель узгодженості BASE</strong></td>
+<td style="text-align: left;">Парадигма розподілених систем: Basically Available, Soft state, Eventual consistency</td>
+<td style="text-align: left;">Реплікація даних глобально розподілених інтернет-каталогів (Amazon S3)</td>
+<td style="text-align: left;">Тимчасовий розсинхрон даних між географічно віддаленими регіонами</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ідемпотентність споживача</strong></td>
+<td style="text-align: left;">Математична властивість операції зберігати результат при повторному виконанні: <span class="arithmatex">\(f(f(x))=f(x)\)</span></td>
+<td style="text-align: left;">Обробка повторних вебхуків від платіжних систем Stripe або PayPal</td>
+<td style="text-align: left;">Вимагає ведення розподіленої таблиці дедуплікації в кеші або базі даних</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="33">3.3. Контрольні питання та завдання</h3>
+<h4 id="_10">Прикладні тестові завдання</h4>
+<ol>
+<li>
+<p>Під час пікового навантаження час виконання операції в сервісі зріс із 20 мс до 400 мс. Черга AWS SQS має сконфігурований параметр <code>VisibilityTimeout = 300 мс</code>. Які безпосередні наслідки для системи матиме така конфігурація?</p>
+</li>
+<li>
+<p>A. Брокер автоматично відхилить усі нові повідомлення з кодом HTTP 429.</p>
+</li>
+<li>
+<p>B. Повідомлення почнуть переміщатися до DLQ одразу після першого зчитування.</p>
+</li>
+<li>
+<p>C. Повідомлення ставатимуть видимими для інших воркерів до завершення обробки, викликаючи дублювання та гонитву процесів.</p>
+</li>
+<li>
+<p>D. Черга заблокує вичитування нових завдань до моменту звільнення першого воркера.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: C.</strong></p>
+<ol>
+<li>
+<p>Якщо тривалість виконання бізнес-логіки воркером (400 мс) перевищує встановлений таймаут видимості черги (300 мс), брокер вважає поточний обробник аварійно завершеним. Після закінчення 300 мс повідомлення знову стає доступним у черзі. Інший вільний воркер зчитує його і починає обробку паралельно з першим, який ще не завершив свій цикл і не надіслав запит на видалення. Це класичний стан гонитви, що веде до багаторазового паралельного виконання одного завдання.</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+</li>
+<li>
+<p>Варіант A хибний, оскільки помилка HTTP 429 генерується у разі перевищення квот API запису, а не через збільшення тривалості виконання у споживачів.</p>
+</li>
+<li>
+<p>Варіант B хибний, тому що переміщення до DLQ відбувається лише після вичерпання ліміту <code>maxReceiveCount</code> (зазвичай від 3 до 5 невдалих спроб), а не миттєво.</p>
+</li>
+<li>
+<p>Варіант D хибний, оскільки черги повідомлень оперують незалежними повідомленнями і не блокують паралельне вичитування інших доступних завдань.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>Проєктується система обробки телеметрії медичних кардіомоніторів. Вимоги: нульова втрата пакетів, висока швидкість запису, допустимість тимчасової затримки доставки до бази даних до 30 секунд. Яке архітектурне рішення є найбільш коректним?</p>
+</li>
+<li>
+<p>A. Синхронний виклик gRPC між монітором та базою даних із таймаутом у 30 секунд.</p>
+</li>
+<li>
+<p>B. Асинхронний запис у чергу повідомлень із семантикою At-least-once та пулом ідемпотентних воркерів.</p>
+</li>
+<li>
+<p>C. Пряме збереження у реляційну базу даних із протоколом двохфазної фіксації транзакцій.</p>
+</li>
+<li>
+<p>D. Використання черги без дискової персистентності в оперативній пам'яті для мінімізації затримок.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p>Асинхронна черга повідомлень із персистентним дисковим буфером та семантикою At-least-once гарантує, що жодне повідомлення не буде втрачено в разі мережевих затримок чи збоїв серверів. Допустимість затримки в 30 секунд ідеально відповідає моделі буферизації, а реалізація ідемпотентності на рівні воркерів усуває ризики, пов'язані з можливою появою дублікатів при повторній доставці.</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+</li>
+<li>
+<p>Варіант A хибний, оскільки тривале блокування синхронного gRPC-з'єднання на 30 секунд швидко вичерпає сокети та оперативну пам'ять монітора під час перевантаження мережі.</p>
+</li>
+<li>
+<p>Варіант C хибний, оскільки розподілені блокуючі транзакції 2PC мають низьку пропускну здатність і критично залежать від одночасної доступності всіх вузлів.</p>
+</li>
+<li>
+<p>Варіант D хибний, оскільки черга без дискової фіксації втратить дані пацієнтів у разі раптового перезавантаження сервера або збою електроживлення.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>В системі використовується черга AWS SQS FIFO. Вхідний потік становить 1500 повідомлень/с, проте всі повідомлення маркуються єдиним статичним ідентифікатором <code>MessageGroupId = "sensor_group_1"</code>. Що відбудеться з пропускною здатністю системи?</p>
+</li>
+<li>
+<p>A. Пропускна здатність залишиться на рівні 1500 повідомлень/с завдяки внутрішньому шардуванню.</p>
+</li>
+<li>
+<p>B. Повідомлення почнуть відкидатися брокером як дублікати.</p>
+</li>
+<li>
+<p>C. Пропускна здатність деградує до продуктивності одного воркера, оскільки всі повідомлення однієї групи обробляються суворо послідовно.</p>
+</li>
+<li>
+<p>D. Система автоматично конвертує чергу в стандартну чергу з високою пропускною здатністю.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: C.</strong></p>
+<ol>
+<li>
+<p>В інженерній моделі черг FIFO параметр <code>MessageGroupId</code> визначає межу паралелізму. Брокер гарантує суворе впорядкування в межах однієї групи, тому одночасно повідомлення з однаковим ідентифікатором може зчитувати лише один активний потік споживача. Призначення єдиного ідентифікатора для всього масиву повідомлень зводить нанівець переваги кластера обробників і штучно обмежує продуктивність системи швидкістю роботи одного воркера (Head-of-Line Blocking).</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+</li>
+<li>
+<p>Варіант A хибний, оскільки шардування черги FIFO відбувається виключно за унікальними значеннями <code>MessageGroupId</code>.</p>
+</li>
+<li>
+<p>Варіант B хибний, тому що дедуплікація контролюється параметром <code>MessageDeduplicationId</code>, а не ідентифікатором групи.</p>
+</li>
+<li>
+<p>Варіант D хибний, оскільки зміна типу черги в процесі функціонування не підтримується хмарними провайдерами на льоту без перестворення ресурсу.</p>
+</li>
+</ol>
+</details>
+<ol>
+<li>
+<p>Воркер отримує з черги повідомлення з дефектною структурою даних, яка викликає системне переривання <code>NullPointerException</code>. Які налаштування черги необхідні для того, щоб цей збій не зупинив обробку всієї черги?</p>
+</li>
+<li>
+<p>A. Збільшення значення <code>VisibilityTimeout</code> до максимального значення 12 годин.</p>
+</li>
+<li>
+<p>B. Встановлення <code>maxReceiveCount = 3</code> у політиці Redrive Policy з підключенням Dead-Letter Queue.</p>
+</li>
+<li>
+<p>C. Вимкнення таймаутів черги та перехід на протокол UDP.</p>
+</li>
+<li>
+<p>D. Збільшення розміру повідомлення у конфігурації брокера.</p>
+</li>
+</ol>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p>Некоректне повідомлення, що викликає аварійне завершення коду («отруйна пігулка»), буде повертатися в чергу після кожного збою. Налаштування політики Redrive Policy з порогом <code>maxReceiveCount = 3</code> гарантує, що після трьох невдалих спроб повідомлення буде автоматично ізольовано у чергу Dead-Letter Queue (DLQ), розблокувавши подальший конвеєр обробки для коректних завдань.</p>
+</li>
+<li>
+<p>Аналіз дистракторів:</p>
+</li>
+<li>
+<p>Варіант A хибний, оскільки збільшення таймауту лише відтермінує повторну аварію, але не усуне отруйне повідомлення з циклу.</p>
+</li>
+<li>
+<p>Варіант C хибний, тому що брокери черг не функціонують поверх ненадійного протоколу UDP, а відсутність таймаутів взагалі унеможливить повторну доставку.</p>
+</li>
+<li>
+<p>Варіант D хибний, оскільки розмір буфера ніяк не впливає на логічні помилки обробки нульових покажчиків у коді бізнес-логіки.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h4 id="_11">Завдання для самостійної роботи</h4>
+<h5 id="_12">Постановка задачі</h5>
+<p>Інженерна команда розробляє телеметричну платформу для глобального флоту з 20 000 автономних сільськогосподарських дронів. Кожен безпілотник під час виконання місії надсилає через супутниковий та стільниковий канал навігаційний пакет кожні 2 секунди. Пакет містить координати, рівень заряду акумулятора, статус сенсорів та критичний прапорець виявлення перешкоди. Необхідно спроєктувати асинхронну хмарну підсистему, яка забезпечує миттєву реакцію наземного диспетчера на критичні інциденти (не пізніше 500 мс) та накопичує просторово-часовий масив телеметрії для подальшої оптимізації маршрутів у сховищі Data Lake.</p>
+<h5 id="_13">Завдання для виконання</h5>
+<ol>
+<li>
+<p>Складіть розрахунковий баланс вхідного бітрейту від усього флоту дронів у штатному режимі та визначте мінімальну пропускну здатність вхідного мережевого шлюзу у мегабайтах за секунду за умови розміру одного пакета у 1,5 КБ.</p>
+</li>
+<li>
+<p>Опишіть конфігурацію топіка публікації та правила декларативної JSON-фільтрації атрибутів для розділення потоку на контур термінового реагування та контур довготривалої аналітики.</p>
+</li>
+<li>
+<p>Розрахуйте параметри надійності черги обробки навігаційних помилок, включаючи ліміт спроб доставки перед скиданням у карантинну чергу та мінімальний таймаут видимості з урахуванням затримок супутникового каналу зв'язку.</p>
+</li>
+<li>
+<p>Розробіть схему ведення журналу ідемпотентності на стороні сервісу збереження маршрутів, яка запобігає спотворенню просторових треків польотів у разі дублювання пакетів стільниковими вишками.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

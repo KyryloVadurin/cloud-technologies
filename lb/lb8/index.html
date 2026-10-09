@@ -1,0 +1,2446 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../lb7/">
+      
+      
+        <link rel="next" href="../lb9/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#no-8" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lk/lk1/" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lb1/" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Підготовка середовища та розгортання проєкту (Крок 0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Підготовка середовища та розгортання проєкту (Крок 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Перевірка інструментів та створення робочої директорії
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Налаштування конфігураційного профілю AWS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Порядок виконання роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Порядок виконання роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Індивідуальні завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Покроковий алгоритм та розв'язок еталонного прикладу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Покроковий алгоритм та розв&#39;язок еталонного прикладу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-configmonitor_configjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Створення файлу конфігурації config/monitor_config.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-scriptsiam_managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Реалізація модуля безпеки scripts/iam_manager.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scriptscloudwatch_monitorpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Реалізація модуля моніторингу scripts/cloudwatch_monitor.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-scriptsinstance_orchestratorpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Реалізація оркестратора інстансу зі стрес-тестом scripts/instance_orchestrator.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-run_lab8py" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 5. Головний оркестратор експерименту run_lab8.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Запуск, тестування та перевірка результатів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Вимоги до змісту звіту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Контрольні запитання для захисту роботи
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Підготовка середовища та розгортання проєкту (Крок 0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Підготовка середовища та розгортання проєкту (Крок 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Перевірка інструментів та створення робочої директорії
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Налаштування конфігураційного профілю AWS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Порядок виконання роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Порядок виконання роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Індивідуальні завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Покроковий алгоритм та розв'язок еталонного прикладу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Покроковий алгоритм та розв&#39;язок еталонного прикладу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-configmonitor_configjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Створення файлу конфігурації config/monitor_config.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-scriptsiam_managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Реалізація модуля безпеки scripts/iam_manager.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scriptscloudwatch_monitorpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Реалізація модуля моніторингу scripts/cloudwatch_monitor.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-scriptsinstance_orchestratorpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Реалізація оркестратора інстансу зі стрес-тестом scripts/instance_orchestrator.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-run_lab8py" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 5. Головний оркестратор експерименту run_lab8.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Запуск, тестування та перевірка результатів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Вимоги до змісту звіту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Контрольні запитання для захисту роботи
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="no-8">Лабораторна робота № 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем</h1>
+<p><strong>Мета:</strong> Дослідження архітектурних принципів побудови систем безпеки у хмарних середовищах на основі парадигми нульової довіри (Zero-Trust) та принципу найменших привілеїв (Principle of Least Privilege), опанування методів програмного проєктування гранулярних політик доступу AWS IAM у форматі JSON, розробка та призначення профілів інстансів (EC2 Instance Profiles) для безпечної взаємодії віртуальних машин із хмарними сервісами без використання статичних ключів доступу, налаштування комплексного моніторингу системних метрик засобами Amazon CloudWatch, конфігурування тригерів тривоги (CloudWatch Alarms) на базі порогових значень та проведення експериментального навантажувального тестування інстансу для автоматичної фіксації аномального завантаження процесора та генерації сповіщень через Amazon SNS.</p>
+<p><strong>Стек технологій та інструменти:</strong></p>
+<ul>
+<li>
+<p><strong>Мова програмування та середовище розробки:</strong> Python 3.10+ (CPython), віртуальне оточення <code>venv</code>.</p>
+</li>
+<li>
+<p><strong>Хмарна платформа та сервіси:</strong> Amazon Web Services (AWS IAM, AWS EC2, AWS CloudWatch, AWS SNS, AWS CloudTrail), SDK-бібліотека <code>boto3</code> (v1.34+), <code>botocore</code> (v1.34+), утиліта форматування <code>tabulate</code> (v0.9+).</p>
+</li>
+<li>
+<p><strong>Інструменти тестування та діагностики:</strong> AWS CLI v2, утиліти навантажувального стрес-тестування Linux (<code>stress-ng</code>, <code>htop</code>, <code>sysstat</code>), інтегроване середовище розробки Visual Studio Code / PyCharm.</p>
+</li>
+</ul>
+<hr />
+<h2 id="1">1 Теоретичні відомості</h2>
+<p>У кіберфізичних системах та критичній інформаційній інфраструктурі безпека та спостережуваність є нерозривними складовими надійного функціонування. Згідно з моделлю нульової довіри (<strong>Zero-Trust Architecture</strong>), жоден внутрішній або зовнішній компонент системи не вважається апріорі довіреним. Збереження статичних паролів або довготривалих ключів доступу API (<code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code>) безпосередньо у конфігураційних файлах або коді віртуальних машин є неприпустимим вразливим патерном, оскільки компрометація одного сервера надає зловмиснику неконтрольований доступ до всієї хмари.</p>
+<p>Безпечна програмна взаємодія між обчислювальними інстансами IaaS та хмарними сервісами реалізується за допомогою механізму <strong>ролей інстансів (IAM Roles for Amazon EC2)</strong> та <strong>профілів інстансів (Instance Profiles)</strong>. </p>
+<p>Профіль інстансу виступає логічним контейнером, який пов'язує роль IAM із віртуальною машиною під час її запуску. Віртуальна машина отримує доступ до короткоживучих криптографічних токенів безпеки через локальний захищений сервіс метаданих інстансу <strong>IMDSv2 (Instance Metadata Service Version 2)</strong> за спеціальною адресою <code>http://169.254.169.254/latest/meta-data/iam/security-credentials/</code>. Токени генеруються службою <strong>AWS STS (Security Token Service)</strong>, мають обмежений термін дії (зазвичай 6 годин) та оновлюються автоматично без втручання користувача.</p>
+<p><pre class="mermaid"><code>flowchart TD
+    subgraph ComputeBoundary ["Обчислювальний вузол КФС (EC2 Instance)"]
+        App[Прикладний процес моніторингу КФС]
+        IMDS[Сервіс метаданих IMDSv2: 169.254.169.254]
+        App --&gt;|1. Запит токена сесії X-aws-ec2-metadata-token| IMDS
+        IMDS --&gt;|2. Повернення тимчасових креденшалів STS| App
+    end
+
+    subgraph IAM_ControlPlane ["Рівень автентифікації та авторизації IAM"]
+        Role[IAM Role: CPS-Monitoring-Role]
+        Policy[IAM Policy: Декларація найменших привілеїв PoLP]
+        Role --- Policy
+    end
+
+    subgraph ObservabilityLayer ["Рівень спостережуваності та оповіщення"]
+        CW_Metrics[Amazon CloudWatch Metrics&lt;br/&gt;Метрика: CPUUtilization]
+        CW_Alarm{CloudWatch Alarm&lt;br/&gt;Поріг: CPU &gt;= 80%&lt;br/&gt;Період: 60 с}
+        SNS_Topic[Amazon SNS Topic&lt;br/&gt;Аварійне сповіщення інженерів]
+    end
+
+    IMDS &lt;==&gt;|3. Делегування прав через Instance Profile| Role
+    App ===&gt;|4. Відправка метрик PutMetricData| CW_Metrics
+    CW_Metrics ===&gt;|5. Оцінка ковзного середнього| CW_Alarm
+    CW_Alarm ===&gt;|6. Стан ALARM: Тригер сповіщення| SNS_Topic</code></pre>
+<em>Рисунок 1.1 — Архітектурна схема безпечної автентифікації інстансу через IMDSv2 та замкненого контуру моніторингу CloudWatch</em></p>
+<p>Політика безпеки IAM описується декларативним JSON-документом, який строго втілює <strong>принцип найменших привілеїв (PoLP)</strong>. Структура політики містить інструкцію дозволу <code>Effect: "Allow"</code>, точний перелік дозволених дій у полі <code>Action</code> (наприклад, дозвіл лише на запис метрик <code>cloudwatch:PutMetricData</code> та читання конфігурацій з одного конкретного бакета <code>s3:GetObject</code>), обмеження цільових ресурсів через їхній глобальний ARN у полі <code>Resource</code>, а також умовні оператори <code>Condition</code> (наприклад, обов'язковість шифрованого протоколу <code>aws:SecureTransport: true</code>).</p>
+<p>Паралельно з контролем доступу в хмарі функціонує підсистема <strong>спостережуваності (Observability)</strong> на базі сервісу <strong>Amazon CloudWatch</strong>. </p>
+<p>CloudWatch збирає системні та прикладні <strong>метрики (Metrics)</strong> — числові часові ряди, структуровані за трьома параметрами:</p>
+<ol>
+<li>
+<p><strong>Простір імен (Namespace).</strong> Логічний контейнер метрик (наприклад, стандартний простір <code>AWS/EC2</code> або користувацький <code>CPS/SensorTelemetry</code>).</p>
+</li>
+<li>
+<p><strong>Назва метрики (MetricName).</strong> Фізичний або системний показник (наприклад, <code>CPUUtilization</code>, <code>DiskReadOps</code>, <code>NetworkIn</code>).</p>
+</li>
+<li>
+<p><strong>Виміри (Dimensions).</strong> Пари «ключ-значення», що конкретизують джерело вимірювання (наприклад, <code>InstanceId = i-0a8b9c7d6e5f41234</code>).</p>
+</li>
+</ol>
+<p>Для автоматичної детекції нештатних станів налаштовуються <strong>тригери тривоги (CloudWatch Alarms)</strong>. Алгоритм функціонування тригера базується на статистичній агрегації значень метрики за фіксовані інтервали часу (<strong>Period</strong>, <span class="arithmatex">\(T_{\text{period}}\)</span>). </p>
+<p>Двигун тривоги аналізує ковзне середнє значення <span class="arithmatex">\(\overline{X}_W(t)\)</span> за вікно оцінки <span class="arithmatex">\(W\)</span>, яке складається з <span class="arithmatex">\(M\)</span> послідовних інтервалів вимірювання (<strong>Evaluation Periods</strong>):</p>
+<div class="arithmatex">\[\overline{X}_W(t) = \frac{1}{M} \sum_{i=0}^{M-1} x(t - i \cdot T_{\text{period}})\]</div>
+<p>де <span class="arithmatex">\(x(t)\)</span> — значення метрики, зафіксоване в інтервалі <span class="arithmatex">\(t\)</span>, <span class="arithmatex">\(M\)</span> — кількість інтервалів оцінки (<span class="arithmatex">\(M \ge 1\)</span>), <span class="arithmatex">\(T_{\text{period}}\)</span> — тривалість одного інтервалу квантування (наприклад, 60 секунд).</p>
+<p><pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; INSUFFICIENT_DATA: Ініціалізація алерту
+
+    INSUFFICIENT_DATA --&gt; OK: Отримано метрики, значення &lt; 80%
+    OK --&gt; INSUFFICIENT_DATA: Відсутність надходження даних
+
+    OK --&gt; ALARM: CPUUtilization &gt;= 80% протягом M періодів
+    ALARM --&gt; OK: CPUUtilization &lt; 80% (Нормалізація навантаження)
+    ALARM --&gt; INSUFFICIENT_DATA: Втрата зв'язку з інстансом
+
+    state "Стан тривоги (ALARM)" as AlarmState {
+        Action1: Відправка JSON повідомлення в Amazon SNS
+        Action2: Сповіщення чергового персоналу Email / SMS
+        Action3: Активація автоматичного відновлення Auto-Recovery
+    }</code></pre>
+<em>Рисунок 1.2 — Діаграма станів та умови переходів тригера тривоги Amazon CloudWatch Alarm</em></p>
+<p>Стан тригера тривоги описується дискретною функцією переходу між трьома станами: <code>OK</code> (метрика в межах норми), <code>ALARM</code> (показник перевищує поріг <span class="arithmatex">\(\Theta_{\text{threshold}}\)</span>) та <code>INSUFFICIENT_DATA</code> (недостатньо даних для прийняття рішення):</p>
+<div class="arithmatex">\[\mathcal{S}_{\text{alarm}}(t) = \begin{cases} \text{ALARM}, &amp; \text{якщо } \overline{X}_W(t) \ge \Theta_{\text{threshold}} \\ \text{OK}, &amp; \text{якщо } \overline{X}_W(t) \lt  \Theta_{\text{threshold}} \\ \text{INSUFFICIENT\_DATA}, &amp; \text{якщо кількість точок даних } \lt  M \end{cases}\]</div>
+<p>Середній час виявлення аномалії (<strong>Mean Time to Detect, MTTD</strong>) моніторинговою системою CloudWatch визначається затримкою накопичення вибірки та мережевою затримкою служби оповіщення SNS:</p>
+<div class="arithmatex">\[\text{MTTD} = M \cdot T_{\text{period}} + \tau_{\text{eval}} + \tau_{\text{sns}}\]</div>
+<p>де <span class="arithmatex">\(\tau_{\text{eval}}\)</span> — внутрішній час обчислення агрегату сервісом CloudWatch (<span class="arithmatex">\(\approx 10 \dots 30\)</span> с), <span class="arithmatex">\(\tau_{\text{sns}}\)</span> — час доставки повідомлення брокером SNS до підписників.</p>
+<p><em>Таблиця 1.1 — Порівняльна характеристика компонентів безпеки та спостережуваності AWS</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Інструмент / Служба</th>
+<th style="text-align: left;">Рівень застосування</th>
+<th style="text-align: left;">Основна функція в інфраструктурі</th>
+<th style="text-align: left;">Формат даних / Протокол</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>IAM Instance Profile</strong></td>
+<td style="text-align: left;">Обчислювальний інстанс (EC2)</td>
+<td style="text-align: left;">Автоматичне постачання тимчасових токенів STS</td>
+<td style="text-align: left;">REST API / IMDSv2 Token</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IAM Policy</strong></td>
+<td style="text-align: left;">Логічні сутності (Users, Roles)</td>
+<td style="text-align: left;">Суворе декларативне визначення прав доступу</td>
+<td style="text-align: left;">JSON маніфест за стандартом AWS</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CloudWatch Metrics</strong></td>
+<td style="text-align: left;">Всі сервіси інфраструктури</td>
+<td style="text-align: left;">Фіксація числових параметрів продуктивності</td>
+<td style="text-align: left;">Часові ряди (Time-Series Metrics)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CloudWatch Alarms</strong></td>
+<td style="text-align: left;">Метрики та аналітичні вирази</td>
+<td style="text-align: left;">Автоматична генерація сигналів тривоги</td>
+<td style="text-align: left;">Булева логіка перевірки порогів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Amazon SNS</strong></td>
+<td style="text-align: left;">Шина подій та розсилання</td>
+<td style="text-align: left;">Масова доставка аварійних повідомлень</td>
+<td style="text-align: left;">JSON-повідомлення / Email / SMS / HTTPS</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-0">2 Підготовка середовища та розгортання проєкту (Крок 0)</h2>
+<p>Перед початком конфігурування ролей безпеки та систем моніторингу необхідно перевірити версії базових інструментів, створити робочу директорію, налаштувати віртуальне середовище Python та встановити бібліотеки Boto3 і Tabulate.</p>
+<h3 id="21">2.1 Перевірка інструментів та створення робочої директорії</h3>
+<p>Відкрийте термінал операційної системи та виконайте перевірку наявності інтерпретатора Python та AWS CLI:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span>--version
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pip3<span class="w"> </span>--version
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>aws<span class="w"> </span>--version
+</span></code></pre></div>
+<p>Створіть робочу ієрархію каталогів лабораторної роботи та активуйте віртуальне оточення:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/cloud_labs/lab8_iam_cloudwatch
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>~/cloud_labs/lab8_iam_cloudwatch
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</span></code></pre></div>
+<p>Сформуйте файлову структуру проєкту відповідно до такої схеми:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>lab8_iam_cloudwatch/
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── config/
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│   └── monitor_config.json        # Специфікація параметрів ролей, метрик та порогів
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├── scripts/
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│   ├── __init__.py
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│   ├── iam_manager.py             # Модуль створення ролей, політик та Instance Profile
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│   ├── cloudwatch_monitor.py      # Модуль керування топіками SNS, алертами та дашбордами
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>│   └── instance_orchestrator.py   # Модуль запуску ВМ зі стрес-тестом та збору метрик
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>├── output/
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>│   ├── security_audit_report.json # Звіт аудиту прав ролей та параметрів алерту
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>│   └── alarm_history_log.json     # Хронологія переходів станів тригера тривоги
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>├── requirements.txt               # Залежності Python
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>└── run_lab8.py                    # Головний виконуваний модуль оркестрації
+</span></code></pre></div>
+<p>Створіть файл <code>requirements.txt</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>boto3&gt;=1.34.0
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>botocore&gt;=1.34.0
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>tabulate&gt;=0.9.0
+</span></code></pre></div>
+<p>Встановіть залежності у віртуальне оточення:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span></code></pre></div>
+<h3 id="22-aws">2.2 Налаштування конфігураційного профілю AWS</h3>
+<p>Перевірте коректність облікових даних за допомогою виклику служби STS:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aws<span class="w"> </span>sts<span class="w"> </span>get-caller-identity
+</span></code></pre></div>
+<p>Встановіть робочий регіон розгортання:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>default.region<span class="w"> </span><span class="s2">"eu-central-1"</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>default.output_format<span class="w"> </span><span class="s2">"json"</span>
+</span></code></pre></div>
+<hr />
+<h2 id="3">3 Порядок виконання роботи</h2>
+<h3 id="31">3.1 Індивідуальні завдання</h3>
+<p>Здобувач вищої освіти обирає варіант індивідуального завдання відповідно до свого номера в академічному журналі групи. Необхідно розробити гранулярну IAM-політику, створити Instance Profile, запустити віртуальну машину, налаштувати тригер тривоги CloudWatch Alarm для цільової метрики згідно з порогом <span class="arithmatex">\(\Theta_{\text{threshold}}\)</span>, промоделювати навантаження та зафіксувати перехід стану відповідно до таблиці 3.1.</p>
+<p><em>Таблиця 3.1 — Індивідуальні параметри безпеки, моніторингу та порогових значень</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Варіант</th>
+<th style="text-align: left;">Назва цільового вузла КФС</th>
+<th style="text-align: left;">Контрольована метрика CloudWatch</th>
+<th style="text-align: center;">Порогове значення <span class="arithmatex">\(\Theta\)</span></th>
+<th style="text-align: center;">Період оцінки <span class="arithmatex">\(T_{\text{period}}\)</span> (с)</th>
+<th style="text-align: center;">Кількість інтервалів <span class="arithmatex">\(M\)</span></th>
+<th style="text-align: left;">Цільовий префікс дозволеного S3 бакета</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: left;"><code>cps-grid-controller</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 80{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-grid-secure-audit</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: left;"><code>cps-robot-gateway</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 75{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>cps-robot-firmware-vault</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: left;"><code>cps-scada-master</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 85{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-scada-telemetry-store</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: left;"><code>cps-pipeline-pump</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 70{,}0\%\)</span></td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-pipeline-metrics-data</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: left;"><code>cps-icu-vital-node</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 80{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-patient-vital-archive</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: left;"><code>cps-uav-ground-stn</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 85{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>cps-drone-flight-logs</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: left;"><code>cps-greenhouse-hub</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 75{,}0\%\)</span></td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-climate-sensor-repo</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: left;"><code>cps-traffic-analyzer</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 80{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-traffic-video-events</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: left;"><code>cps-cnc-controller</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 90{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-cnc-tool-calibration</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>10</strong></td>
+<td style="text-align: left;"><code>cps-seismic-station</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 70{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>cps-seismic-raw-records</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>11</strong></td>
+<td style="text-align: left;"><code>cps-boiler-monitor</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 85{,}0\%\)</span></td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-boiler-pressure-log</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>12</strong></td>
+<td style="text-align: left;"><code>cps-bms-edge-core</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 80{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-bms-telemetry-dump</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>13</strong></td>
+<td style="text-align: left;"><code>cps-conveyor-plc</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 75{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-conveyor-speed-data</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>14</strong></td>
+<td style="text-align: left;"><code>cps-water-quality</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 70{,}0\%\)</span></td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-water-purification-log</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>15</strong></td>
+<td style="text-align: left;"><code>cps-air-monitoring</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 80{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>cps-air-pollution-archive</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>16</strong></td>
+<td style="text-align: left;"><code>cps-wind-generator</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 85{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-wind-turbine-states</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>17</strong></td>
+<td style="text-align: left;"><code>cps-reactor-safety</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 75{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-reactor-emergency-log</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>18</strong></td>
+<td style="text-align: left;"><code>cps-mining-hauler</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 80{,}0\%\)</span></td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-mining-diagnostics</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>19</strong></td>
+<td style="text-align: left;"><code>cps-chiller-system</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 75{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>cps-chiller-thermal-data</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>20</strong></td>
+<td style="text-align: left;"><code>cps-agv-fleet-core</code></td>
+<td style="text-align: left;"><code>CPUUtilization</code></td>
+<td style="text-align: center;"><span class="arithmatex">\(\ge 85{,}0\%\)</span></td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>cps-agv-position-stream</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="32">3.2 Покроковий алгоритм та розв'язок еталонного прикладу</h3>
+<p>У цьому підрозділі представлено повний еталонний розв'язок задачі зі створення ролі IAM із принципом найменших привілеїв, призначення її інстансу через Instance Profile, створення топіка SNS та алерту CloudWatch на перевищення навантаження процесора <span class="arithmatex">\(\ge 80\%\)</span>, запуску синтетичного стрес-тесту на віртуальній машині та відстеження зміни стану тригера тривоги.</p>
+<h4 id="1-configmonitor_configjson">Крок 1. Створення файлу конфігурації <code>config/monitor_config.json</code></h4>
+<p>Створіть конфігураційний файл, який регламентує параметри безпеки та моніторингу:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eu-central-1"</span><span class="p">,</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">"project_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cps-reference-security"</span><span class="p">,</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">"instance_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"t3.micro"</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">"ami_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ami-0faab6bdbac9486fb"</span><span class="p">,</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nt">"target_s3_bucket"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cps-grid-secure-audit-bucket"</span><span class="p">,</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="nt">"cloudwatch_alarm"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="nt">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPUUtilization"</span><span class="p">,</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="nt">"namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS/EC2"</span><span class="p">,</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="nt">"threshold_percent"</span><span class="p">:</span><span class="w"> </span><span class="mf">80.0</span><span class="p">,</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="nt">"period_seconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="nt">"evaluation_periods"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="nt">"statistic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Average"</span><span class="p">,</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="nt">"comparison_operator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GreaterThanOrEqualToThreshold"</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="p">}</span>
+</span></code></pre></div>
+<h4 id="2-scriptsiam_managerpy">Крок 2. Реалізація модуля безпеки <code>scripts/iam_manager.py</code></h4>
+<p>Створіть модуль, який формує роль IAM, строгу політику доступу PoLP та реєструє Instance Profile:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientError</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="k">class</span><span class="w"> </span><span class="nc">IAMSecurityManager</span><span class="p">:</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="sd">"""Модуль програмного керування сутностями IAM, політиками PoLP та Instance Profiles."""</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"region"</span><span class="p">,</span> <span class="s2">"eu-central-1"</span><span class="p">)</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">iam_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">"iam"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>        <span class="n">unique_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())[:</span><span class="mi">8</span><span class="p">]</span>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">role_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'project_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">-role-</span><span class="si">{</span><span class="n">unique_id</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">profile_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'project_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">-profile-</span><span class="si">{</span><span class="n">unique_id</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">policy_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'project_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">-polp-policy-</span><span class="si">{</span><span class="n">unique_id</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setup_instance_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="w">        </span><span class="sd">"""Створення ролі IAM, прив'язка гранулярної політики та генерація Instance Profile."""</span>
+</span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення IAM Role '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">role_name</span><span class="si">}</span><span class="s2">' для EC2..."</span><span class="p">)</span>
+</span><span id="__span-8-30"><a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>
+</span><span id="__span-8-31"><a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>        <span class="c1"># Довірча політика (Trust Policy), що дозволяє сервісу EC2 брати роль</span>
+</span><span id="__span-8-32"><a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a>        <span class="n">trust_policy</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-8-33"><a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>            <span class="s2">"Version"</span><span class="p">:</span> <span class="s2">"2012-10-17"</span><span class="p">,</span>
+</span><span id="__span-8-34"><a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a>            <span class="s2">"Statement"</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-8-35"><a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a>                <span class="p">{</span>
+</span><span id="__span-8-36"><a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>                    <span class="s2">"Effect"</span><span class="p">:</span> <span class="s2">"Allow"</span><span class="p">,</span>
+</span><span id="__span-8-37"><a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>                    <span class="s2">"Principal"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Service"</span><span class="p">:</span> <span class="s2">"ec2.amazonaws.com"</span><span class="p">},</span>
+</span><span id="__span-8-38"><a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a>                    <span class="s2">"Action"</span><span class="p">:</span> <span class="s2">"sts:AssumeRole"</span>
+</span><span id="__span-8-39"><a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a>                <span class="p">}</span>
+</span><span id="__span-8-40"><a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a>            <span class="p">]</span>
+</span><span id="__span-8-41"><a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a>        <span class="p">}</span>
+</span><span id="__span-8-42"><a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a>
+</span><span id="__span-8-43"><a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-8-44"><a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a>            <span class="c1"># 1. Створення ролі</span>
+</span><span id="__span-8-45"><a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a>            <span class="n">role_resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iam_client</span><span class="o">.</span><span class="n">create_role</span><span class="p">(</span>
+</span><span id="__span-8-46"><a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a>                <span class="n">RoleName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">role_name</span><span class="p">,</span>
+</span><span id="__span-8-47"><a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a>                <span class="n">AssumeRolePolicyDocument</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">trust_policy</span><span class="p">),</span>
+</span><span id="__span-8-48"><a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a>                <span class="n">Description</span><span class="o">=</span><span class="s2">"Least privilege role for CPS Node telemetry and monitoring"</span>
+</span><span id="__span-8-49"><a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a>            <span class="p">)</span>
+</span><span id="__span-8-50"><a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a>            <span class="n">role_arn</span> <span class="o">=</span> <span class="n">role_resp</span><span class="p">[</span><span class="s2">"Role"</span><span class="p">][</span><span class="s2">"Arn"</span><span class="p">]</span>
+</span><span id="__span-8-51"><a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"RoleArn"</span><span class="p">]</span> <span class="o">=</span> <span class="n">role_arn</span>
+</span><span id="__span-8-52"><a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"RoleName"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">role_name</span>
+</span><span id="__span-8-53"><a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Роль створено. ARN: </span><span class="si">{</span><span class="n">role_arn</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-54"><a id="__codelineno-8-54" name="__codelineno-8-54" href="#__codelineno-8-54"></a>
+</span><span id="__span-8-55"><a id="__codelineno-8-55" name="__codelineno-8-55" href="#__codelineno-8-55"></a>            <span class="c1"># 2. Формування гранулярної політики за принципом найменших привілеїв (PoLP)</span>
+</span><span id="__span-8-56"><a id="__codelineno-8-56" name="__codelineno-8-56" href="#__codelineno-8-56"></a>            <span class="n">target_bucket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"target_s3_bucket"</span><span class="p">,</span> <span class="s2">"cps-secure-bucket"</span><span class="p">)</span>
+</span><span id="__span-8-57"><a id="__codelineno-8-57" name="__codelineno-8-57" href="#__codelineno-8-57"></a>            <span class="n">polp_policy</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-8-58"><a id="__codelineno-8-58" name="__codelineno-8-58" href="#__codelineno-8-58"></a>                <span class="s2">"Version"</span><span class="p">:</span> <span class="s2">"2012-10-17"</span><span class="p">,</span>
+</span><span id="__span-8-59"><a id="__codelineno-8-59" name="__codelineno-8-59" href="#__codelineno-8-59"></a>                <span class="s2">"Statement"</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-8-60"><a id="__codelineno-8-60" name="__codelineno-8-60" href="#__codelineno-8-60"></a>                    <span class="p">{</span>
+</span><span id="__span-8-61"><a id="__codelineno-8-61" name="__codelineno-8-61" href="#__codelineno-8-61"></a>                        <span class="s2">"Sid"</span><span class="p">:</span> <span class="s2">"AllowCloudWatchMetricsPut"</span><span class="p">,</span>
+</span><span id="__span-8-62"><a id="__codelineno-8-62" name="__codelineno-8-62" href="#__codelineno-8-62"></a>                        <span class="s2">"Effect"</span><span class="p">:</span> <span class="s2">"Allow"</span><span class="p">,</span>
+</span><span id="__span-8-63"><a id="__codelineno-8-63" name="__codelineno-8-63" href="#__codelineno-8-63"></a>                        <span class="s2">"Action"</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-8-64"><a id="__codelineno-8-64" name="__codelineno-8-64" href="#__codelineno-8-64"></a>                            <span class="s2">"cloudwatch:PutMetricData"</span>
+</span><span id="__span-8-65"><a id="__codelineno-8-65" name="__codelineno-8-65" href="#__codelineno-8-65"></a>                        <span class="p">],</span>
+</span><span id="__span-8-66"><a id="__codelineno-8-66" name="__codelineno-8-66" href="#__codelineno-8-66"></a>                        <span class="s2">"Resource"</span><span class="p">:</span> <span class="s2">"*"</span>
+</span><span id="__span-8-67"><a id="__codelineno-8-67" name="__codelineno-8-67" href="#__codelineno-8-67"></a>                    <span class="p">},</span>
+</span><span id="__span-8-68"><a id="__codelineno-8-68" name="__codelineno-8-68" href="#__codelineno-8-68"></a>                    <span class="p">{</span>
+</span><span id="__span-8-69"><a id="__codelineno-8-69" name="__codelineno-8-69" href="#__codelineno-8-69"></a>                        <span class="s2">"Sid"</span><span class="p">:</span> <span class="s2">"AllowTargetS3ReadOnly"</span><span class="p">,</span>
+</span><span id="__span-8-70"><a id="__codelineno-8-70" name="__codelineno-8-70" href="#__codelineno-8-70"></a>                        <span class="s2">"Effect"</span><span class="p">:</span> <span class="s2">"Allow"</span><span class="p">,</span>
+</span><span id="__span-8-71"><a id="__codelineno-8-71" name="__codelineno-8-71" href="#__codelineno-8-71"></a>                        <span class="s2">"Action"</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-8-72"><a id="__codelineno-8-72" name="__codelineno-8-72" href="#__codelineno-8-72"></a>                            <span class="s2">"s3:GetObject"</span><span class="p">,</span>
+</span><span id="__span-8-73"><a id="__codelineno-8-73" name="__codelineno-8-73" href="#__codelineno-8-73"></a>                            <span class="s2">"s3:ListBucket"</span>
+</span><span id="__span-8-74"><a id="__codelineno-8-74" name="__codelineno-8-74" href="#__codelineno-8-74"></a>                        <span class="p">],</span>
+</span><span id="__span-8-75"><a id="__codelineno-8-75" name="__codelineno-8-75" href="#__codelineno-8-75"></a>                        <span class="s2">"Resource"</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-8-76"><a id="__codelineno-8-76" name="__codelineno-8-76" href="#__codelineno-8-76"></a>                            <span class="sa">f</span><span class="s2">"arn:aws:s3:::</span><span class="si">{</span><span class="n">target_bucket</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+</span><span id="__span-8-77"><a id="__codelineno-8-77" name="__codelineno-8-77" href="#__codelineno-8-77"></a>                            <span class="sa">f</span><span class="s2">"arn:aws:s3:::</span><span class="si">{</span><span class="n">target_bucket</span><span class="si">}</span><span class="s2">/*"</span>
+</span><span id="__span-8-78"><a id="__codelineno-8-78" name="__codelineno-8-78" href="#__codelineno-8-78"></a>                        <span class="p">]</span>
+</span><span id="__span-8-79"><a id="__codelineno-8-79" name="__codelineno-8-79" href="#__codelineno-8-79"></a>                    <span class="p">}</span>
+</span><span id="__span-8-80"><a id="__codelineno-8-80" name="__codelineno-8-80" href="#__codelineno-8-80"></a>                <span class="p">]</span>
+</span><span id="__span-8-81"><a id="__codelineno-8-81" name="__codelineno-8-81" href="#__codelineno-8-81"></a>            <span class="p">}</span>
+</span><span id="__span-8-82"><a id="__codelineno-8-82" name="__codelineno-8-82" href="#__codelineno-8-82"></a>
+</span><span id="__span-8-83"><a id="__codelineno-8-83" name="__codelineno-8-83" href="#__codelineno-8-83"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Прив'язка вбудованої політики PoLP '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">policy_name</span><span class="si">}</span><span class="s2">'..."</span><span class="p">)</span>
+</span><span id="__span-8-84"><a id="__codelineno-8-84" name="__codelineno-8-84" href="#__codelineno-8-84"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">iam_client</span><span class="o">.</span><span class="n">put_role_policy</span><span class="p">(</span>
+</span><span id="__span-8-85"><a id="__codelineno-8-85" name="__codelineno-8-85" href="#__codelineno-8-85"></a>                <span class="n">RoleName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">role_name</span><span class="p">,</span>
+</span><span id="__span-8-86"><a id="__codelineno-8-86" name="__codelineno-8-86" href="#__codelineno-8-86"></a>                <span class="n">PolicyName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">policy_name</span><span class="p">,</span>
+</span><span id="__span-8-87"><a id="__codelineno-8-87" name="__codelineno-8-87" href="#__codelineno-8-87"></a>                <span class="n">PolicyDocument</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">polp_policy</span><span class="p">)</span>
+</span><span id="__span-8-88"><a id="__codelineno-8-88" name="__codelineno-8-88" href="#__codelineno-8-88"></a>            <span class="p">)</span>
+</span><span id="__span-8-89"><a id="__codelineno-8-89" name="__codelineno-8-89" href="#__codelineno-8-89"></a>
+</span><span id="__span-8-90"><a id="__codelineno-8-90" name="__codelineno-8-90" href="#__codelineno-8-90"></a>            <span class="c1"># 3. Створення Instance Profile та додавання до нього ролі</span>
+</span><span id="__span-8-91"><a id="__codelineno-8-91" name="__codelineno-8-91" href="#__codelineno-8-91"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення Instance Profile '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">profile_name</span><span class="si">}</span><span class="s2">'..."</span><span class="p">)</span>
+</span><span id="__span-8-92"><a id="__codelineno-8-92" name="__codelineno-8-92" href="#__codelineno-8-92"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">iam_client</span><span class="o">.</span><span class="n">create_instance_profile</span><span class="p">(</span><span class="n">InstanceProfileName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">profile_name</span><span class="p">)</span>
+</span><span id="__span-8-93"><a id="__codelineno-8-93" name="__codelineno-8-93" href="#__codelineno-8-93"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">iam_client</span><span class="o">.</span><span class="n">add_role_to_instance_profile</span><span class="p">(</span>
+</span><span id="__span-8-94"><a id="__codelineno-8-94" name="__codelineno-8-94" href="#__codelineno-8-94"></a>                <span class="n">InstanceProfileName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">profile_name</span><span class="p">,</span>
+</span><span id="__span-8-95"><a id="__codelineno-8-95" name="__codelineno-8-95" href="#__codelineno-8-95"></a>                <span class="n">RoleName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">role_name</span>
+</span><span id="__span-8-96"><a id="__codelineno-8-96" name="__codelineno-8-96" href="#__codelineno-8-96"></a>            <span class="p">)</span>
+</span><span id="__span-8-97"><a id="__codelineno-8-97" name="__codelineno-8-97" href="#__codelineno-8-97"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"InstanceProfileName"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profile_name</span>
+</span><span id="__span-8-98"><a id="__codelineno-8-98" name="__codelineno-8-98" href="#__codelineno-8-98"></a>
+</span><span id="__span-8-99"><a id="__codelineno-8-99" name="__codelineno-8-99" href="#__codelineno-8-99"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Instance Profile '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">profile_name</span><span class="si">}</span><span class="s2">' успішно сконфігуровано."</span><span class="p">)</span>
+</span><span id="__span-8-100"><a id="__codelineno-8-100" name="__codelineno-8-100" href="#__codelineno-8-100"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Очікування глобальної реплікації IAM у хмарі (10 секунд)..."</span><span class="p">)</span>
+</span><span id="__span-8-101"><a id="__codelineno-8-101" name="__codelineno-8-101" href="#__codelineno-8-101"></a>            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-8-102"><a id="__codelineno-8-102" name="__codelineno-8-102" href="#__codelineno-8-102"></a>
+</span><span id="__span-8-103"><a id="__codelineno-8-103" name="__codelineno-8-103" href="#__codelineno-8-103"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">profile_name</span>
+</span><span id="__span-8-104"><a id="__codelineno-8-104" name="__codelineno-8-104" href="#__codelineno-8-104"></a>
+</span><span id="__span-8-105"><a id="__codelineno-8-105" name="__codelineno-8-105" href="#__codelineno-8-105"></a>        <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-8-106"><a id="__codelineno-8-106" name="__codelineno-8-106" href="#__codelineno-8-106"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[ERROR] Помилка налаштування IAM: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-107"><a id="__codelineno-8-107" name="__codelineno-8-107" href="#__codelineno-8-107"></a>            <span class="k">raise</span> <span class="n">e</span>
+</span><span id="__span-8-108"><a id="__codelineno-8-108" name="__codelineno-8-108" href="#__codelineno-8-108"></a>
+</span><span id="__span-8-109"><a id="__codelineno-8-109" name="__codelineno-8-109" href="#__codelineno-8-109"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup_iam</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-8-110"><a id="__codelineno-8-110" name="__codelineno-8-110" href="#__codelineno-8-110"></a><span class="w">        </span><span class="sd">"""Видалення всіх створених ресурсів безпеки."""</span>
+</span><span id="__span-8-111"><a id="__codelineno-8-111" name="__codelineno-8-111" href="#__codelineno-8-111"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Очищення ресурсів IAM..."</span><span class="p">)</span>
+</span><span id="__span-8-112"><a id="__codelineno-8-112" name="__codelineno-8-112" href="#__codelineno-8-112"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-8-113"><a id="__codelineno-8-113" name="__codelineno-8-113" href="#__codelineno-8-113"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">iam_client</span><span class="o">.</span><span class="n">remove_role_from_instance_profile</span><span class="p">(</span>
+</span><span id="__span-8-114"><a id="__codelineno-8-114" name="__codelineno-8-114" href="#__codelineno-8-114"></a>                <span class="n">InstanceProfileName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">profile_name</span><span class="p">,</span>
+</span><span id="__span-8-115"><a id="__codelineno-8-115" name="__codelineno-8-115" href="#__codelineno-8-115"></a>                <span class="n">RoleName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">role_name</span>
+</span><span id="__span-8-116"><a id="__codelineno-8-116" name="__codelineno-8-116" href="#__codelineno-8-116"></a>            <span class="p">)</span>
+</span><span id="__span-8-117"><a id="__codelineno-8-117" name="__codelineno-8-117" href="#__codelineno-8-117"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">iam_client</span><span class="o">.</span><span class="n">delete_instance_profile</span><span class="p">(</span><span class="n">InstanceProfileName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">profile_name</span><span class="p">)</span>
+</span><span id="__span-8-118"><a id="__codelineno-8-118" name="__codelineno-8-118" href="#__codelineno-8-118"></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span id="__span-8-119"><a id="__codelineno-8-119" name="__codelineno-8-119" href="#__codelineno-8-119"></a>            <span class="k">pass</span>
+</span><span id="__span-8-120"><a id="__codelineno-8-120" name="__codelineno-8-120" href="#__codelineno-8-120"></a>
+</span><span id="__span-8-121"><a id="__codelineno-8-121" name="__codelineno-8-121" href="#__codelineno-8-121"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-8-122"><a id="__codelineno-8-122" name="__codelineno-8-122" href="#__codelineno-8-122"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">iam_client</span><span class="o">.</span><span class="n">delete_role_policy</span><span class="p">(</span><span class="n">RoleName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">role_name</span><span class="p">,</span> <span class="n">PolicyName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">policy_name</span><span class="p">)</span>
+</span><span id="__span-8-123"><a id="__codelineno-8-123" name="__codelineno-8-123" href="#__codelineno-8-123"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">iam_client</span><span class="o">.</span><span class="n">delete_role</span><span class="p">(</span><span class="n">RoleName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">role_name</span><span class="p">)</span>
+</span><span id="__span-8-124"><a id="__codelineno-8-124" name="__codelineno-8-124" href="#__codelineno-8-124"></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span id="__span-8-125"><a id="__codelineno-8-125" name="__codelineno-8-125" href="#__codelineno-8-125"></a>            <span class="k">pass</span>
+</span><span id="__span-8-126"><a id="__codelineno-8-126" name="__codelineno-8-126" href="#__codelineno-8-126"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[SUCCESS] Ресурси IAM успішно утилізовано."</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="3-scriptscloudwatch_monitorpy">Крок 3. Реалізація модуля моніторингу <code>scripts/cloudwatch_monitor.py</code></h4>
+<p>Створіть модуль, який конфігурує топік сповіщень SNS, тригер тривоги CloudWatch Alarm та перевіряє історію станів:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientError</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="k">class</span><span class="w"> </span><span class="nc">CloudWatchMonitoringManager</span><span class="p">:</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="sd">"""Модуль керування метриками, алертами CloudWatch та каналами сповіщення SNS."""</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"region"</span><span class="p">,</span> <span class="s2">"eu-central-1"</span><span class="p">)</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cw_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">"cloudwatch"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sns_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">"sns"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>        <span class="n">unique_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())[:</span><span class="mi">8</span><span class="p">]</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">topic_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'project_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">-alerts-</span><span class="si">{</span><span class="n">unique_id</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">alarm_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'project_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">-cpu-high-alarm-</span><span class="si">{</span><span class="n">unique_id</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">topic_arn</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setup_sns_alert_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="w">        </span><span class="sd">"""Створення топіка SNS для отримання повідомлень тривоги."""</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення SNS Topic '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">topic_name</span><span class="si">}</span><span class="s2">'..."</span><span class="p">)</span>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sns_client</span><span class="o">.</span><span class="n">create_topic</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">topic_name</span><span class="p">)</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">topic_arn</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">"TopicArn"</span><span class="p">]</span>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"SnsTopicArn"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topic_arn</span>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] SNS Topic створено. ARN: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">topic_arn</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">topic_arn</span>
+</span><span id="__span-9-36"><a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a>
+</span><span id="__span-9-37"><a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">create_cpu_utilization_alarm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-9-38"><a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a><span class="w">        </span><span class="sd">"""Створення тригера тривоги CloudWatch Alarm на завантаження процесора."""</span>
+</span><span id="__span-9-39"><a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">topic_arn</span><span class="p">:</span>
+</span><span id="__span-9-40"><a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">setup_sns_alert_channel</span><span class="p">()</span>
+</span><span id="__span-9-41"><a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a>
+</span><span id="__span-9-42"><a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a>        <span class="n">alarm_cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"cloudwatch_alarm"</span><span class="p">]</span>
+</span><span id="__span-9-43"><a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення CloudWatch Alarm '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alarm_name</span><span class="si">}</span><span class="s2">' для інстансу </span><span class="si">{</span><span class="n">instance_id</span><span class="si">}</span><span class="s2"> (Поріг: &gt;= </span><span class="si">{</span><span class="n">alarm_cfg</span><span class="p">[</span><span class="s1">'threshold_percent'</span><span class="p">]</span><span class="si">}</span><span class="s2">%)..."</span><span class="p">)</span>
+</span><span id="__span-9-44"><a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a>
+</span><span id="__span-9-45"><a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cw_client</span><span class="o">.</span><span class="n">put_metric_alarm</span><span class="p">(</span>
+</span><span id="__span-9-46"><a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a>            <span class="n">AlarmName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alarm_name</span><span class="p">,</span>
+</span><span id="__span-9-47"><a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a>            <span class="n">AlarmDescription</span><span class="o">=</span><span class="s2">"Alarm triggered when EC2 CPU utilization exceeds 80</span><span class="si">% f</span><span class="s2">or CPS safety"</span><span class="p">,</span>
+</span><span id="__span-9-48"><a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a>            <span class="n">ActionsEnabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-9-49"><a id="__codelineno-9-49" name="__codelineno-9-49" href="#__codelineno-9-49"></a>            <span class="n">AlarmActions</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">topic_arn</span><span class="p">],</span>
+</span><span id="__span-9-50"><a id="__codelineno-9-50" name="__codelineno-9-50" href="#__codelineno-9-50"></a>            <span class="n">OKActions</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">topic_arn</span><span class="p">],</span>
+</span><span id="__span-9-51"><a id="__codelineno-9-51" name="__codelineno-9-51" href="#__codelineno-9-51"></a>            <span class="n">MetricName</span><span class="o">=</span><span class="n">alarm_cfg</span><span class="p">[</span><span class="s2">"metric_name"</span><span class="p">],</span>
+</span><span id="__span-9-52"><a id="__codelineno-9-52" name="__codelineno-9-52" href="#__codelineno-9-52"></a>            <span class="n">Namespace</span><span class="o">=</span><span class="n">alarm_cfg</span><span class="p">[</span><span class="s2">"namespace"</span><span class="p">],</span>
+</span><span id="__span-9-53"><a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a>            <span class="n">Statistic</span><span class="o">=</span><span class="n">alarm_cfg</span><span class="p">[</span><span class="s2">"statistic"</span><span class="p">],</span>
+</span><span id="__span-9-54"><a id="__codelineno-9-54" name="__codelineno-9-54" href="#__codelineno-9-54"></a>            <span class="n">Dimensions</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-9-55"><a id="__codelineno-9-55" name="__codelineno-9-55" href="#__codelineno-9-55"></a>                <span class="p">{</span><span class="s2">"Name"</span><span class="p">:</span> <span class="s2">"InstanceId"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="n">instance_id</span><span class="p">}</span>
+</span><span id="__span-9-56"><a id="__codelineno-9-56" name="__codelineno-9-56" href="#__codelineno-9-56"></a>            <span class="p">],</span>
+</span><span id="__span-9-57"><a id="__codelineno-9-57" name="__codelineno-9-57" href="#__codelineno-9-57"></a>            <span class="n">Period</span><span class="o">=</span><span class="n">alarm_cfg</span><span class="p">[</span><span class="s2">"period_seconds"</span><span class="p">],</span>
+</span><span id="__span-9-58"><a id="__codelineno-9-58" name="__codelineno-9-58" href="#__codelineno-9-58"></a>            <span class="n">EvaluationPeriods</span><span class="o">=</span><span class="n">alarm_cfg</span><span class="p">[</span><span class="s2">"evaluation_periods"</span><span class="p">],</span>
+</span><span id="__span-9-59"><a id="__codelineno-9-59" name="__codelineno-9-59" href="#__codelineno-9-59"></a>            <span class="n">Threshold</span><span class="o">=</span><span class="n">alarm_cfg</span><span class="p">[</span><span class="s2">"threshold_percent"</span><span class="p">],</span>
+</span><span id="__span-9-60"><a id="__codelineno-9-60" name="__codelineno-9-60" href="#__codelineno-9-60"></a>            <span class="n">ComparisonOperator</span><span class="o">=</span><span class="n">alarm_cfg</span><span class="p">[</span><span class="s2">"comparison_operator"</span><span class="p">],</span>
+</span><span id="__span-9-61"><a id="__codelineno-9-61" name="__codelineno-9-61" href="#__codelineno-9-61"></a>            <span class="n">TreatMissingData</span><span class="o">=</span><span class="s2">"missing"</span>
+</span><span id="__span-9-62"><a id="__codelineno-9-62" name="__codelineno-9-62" href="#__codelineno-9-62"></a>        <span class="p">)</span>
+</span><span id="__span-9-63"><a id="__codelineno-9-63" name="__codelineno-9-63" href="#__codelineno-9-63"></a>
+</span><span id="__span-9-64"><a id="__codelineno-9-64" name="__codelineno-9-64" href="#__codelineno-9-64"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"AlarmName"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alarm_name</span>
+</span><span id="__span-9-65"><a id="__codelineno-9-65" name="__codelineno-9-65" href="#__codelineno-9-65"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"MonitoredInstanceId"</span><span class="p">]</span> <span class="o">=</span> <span class="n">instance_id</span>
+</span><span id="__span-9-66"><a id="__codelineno-9-66" name="__codelineno-9-66" href="#__codelineno-9-66"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] CloudWatch Alarm успішно зареєстровано."</span><span class="p">)</span>
+</span><span id="__span-9-67"><a id="__codelineno-9-67" name="__codelineno-9-67" href="#__codelineno-9-67"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">alarm_name</span>
+</span><span id="__span-9-68"><a id="__codelineno-9-68" name="__codelineno-9-68" href="#__codelineno-9-68"></a>
+</span><span id="__span-9-69"><a id="__codelineno-9-69" name="__codelineno-9-69" href="#__codelineno-9-69"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_alarm_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span id="__span-9-70"><a id="__codelineno-9-70" name="__codelineno-9-70" href="#__codelineno-9-70"></a><span class="w">        </span><span class="sd">"""Отримання поточного стану алерту (OK, ALARM, INSUFFICIENT_DATA)."""</span>
+</span><span id="__span-9-71"><a id="__codelineno-9-71" name="__codelineno-9-71" href="#__codelineno-9-71"></a>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cw_client</span><span class="o">.</span><span class="n">describe_alarms</span><span class="p">(</span><span class="n">AlarmNames</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">alarm_name</span><span class="p">])</span>
+</span><span id="__span-9-72"><a id="__codelineno-9-72" name="__codelineno-9-72" href="#__codelineno-9-72"></a>        <span class="k">if</span> <span class="n">response</span><span class="p">[</span><span class="s2">"MetricAlarms"</span><span class="p">]:</span>
+</span><span id="__span-9-73"><a id="__codelineno-9-73" name="__codelineno-9-73" href="#__codelineno-9-73"></a>            <span class="n">alarm</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">"MetricAlarms"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-9-74"><a id="__codelineno-9-74" name="__codelineno-9-74" href="#__codelineno-9-74"></a>            <span class="k">return</span> <span class="p">{</span>
+</span><span id="__span-9-75"><a id="__codelineno-9-75" name="__codelineno-9-75" href="#__codelineno-9-75"></a>                <span class="s2">"AlarmName"</span><span class="p">:</span> <span class="n">alarm</span><span class="p">[</span><span class="s2">"AlarmName"</span><span class="p">],</span>
+</span><span id="__span-9-76"><a id="__codelineno-9-76" name="__codelineno-9-76" href="#__codelineno-9-76"></a>                <span class="s2">"StateValue"</span><span class="p">:</span> <span class="n">alarm</span><span class="p">[</span><span class="s2">"StateValue"</span><span class="p">],</span>
+</span><span id="__span-9-77"><a id="__codelineno-9-77" name="__codelineno-9-77" href="#__codelineno-9-77"></a>                <span class="s2">"StateReason"</span><span class="p">:</span> <span class="n">alarm</span><span class="p">[</span><span class="s2">"StateReason"</span><span class="p">],</span>
+</span><span id="__span-9-78"><a id="__codelineno-9-78" name="__codelineno-9-78" href="#__codelineno-9-78"></a>                <span class="s2">"StateUpdatedTimestamp"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">alarm</span><span class="p">[</span><span class="s2">"StateUpdatedTimestamp"</span><span class="p">])</span>
+</span><span id="__span-9-79"><a id="__codelineno-9-79" name="__codelineno-9-79" href="#__codelineno-9-79"></a>            <span class="p">}</span>
+</span><span id="__span-9-80"><a id="__codelineno-9-80" name="__codelineno-9-80" href="#__codelineno-9-80"></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">"StateValue"</span><span class="p">:</span> <span class="s2">"UNKNOWN"</span><span class="p">}</span>
+</span><span id="__span-9-81"><a id="__codelineno-9-81" name="__codelineno-9-81" href="#__codelineno-9-81"></a>
+</span><span id="__span-9-82"><a id="__codelineno-9-82" name="__codelineno-9-82" href="#__codelineno-9-82"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_alarm_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+</span><span id="__span-9-83"><a id="__codelineno-9-83" name="__codelineno-9-83" href="#__codelineno-9-83"></a><span class="w">        </span><span class="sd">"""Вичитування хронології переходів станів тригера тривоги."""</span>
+</span><span id="__span-9-84"><a id="__codelineno-9-84" name="__codelineno-9-84" href="#__codelineno-9-84"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-9-85"><a id="__codelineno-9-85" name="__codelineno-9-85" href="#__codelineno-9-85"></a>            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cw_client</span><span class="o">.</span><span class="n">describe_alarm_history</span><span class="p">(</span>
+</span><span id="__span-9-86"><a id="__codelineno-9-86" name="__codelineno-9-86" href="#__codelineno-9-86"></a>                <span class="n">AlarmName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alarm_name</span><span class="p">,</span>
+</span><span id="__span-9-87"><a id="__codelineno-9-87" name="__codelineno-9-87" href="#__codelineno-9-87"></a>                <span class="n">HistoryItemType</span><span class="o">=</span><span class="s2">"StateUpdate"</span><span class="p">,</span>
+</span><span id="__span-9-88"><a id="__codelineno-9-88" name="__codelineno-9-88" href="#__codelineno-9-88"></a>                <span class="n">MaxRecords</span><span class="o">=</span><span class="mi">10</span>
+</span><span id="__span-9-89"><a id="__codelineno-9-89" name="__codelineno-9-89" href="#__codelineno-9-89"></a>            <span class="p">)</span>
+</span><span id="__span-9-90"><a id="__codelineno-9-90" name="__codelineno-9-90" href="#__codelineno-9-90"></a>            <span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-9-91"><a id="__codelineno-9-91" name="__codelineno-9-91" href="#__codelineno-9-91"></a>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"AlarmHistoryItems"</span><span class="p">,</span> <span class="p">[]):</span>
+</span><span id="__span-9-92"><a id="__codelineno-9-92" name="__codelineno-9-92" href="#__codelineno-9-92"></a>                <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+</span><span id="__span-9-93"><a id="__codelineno-9-93" name="__codelineno-9-93" href="#__codelineno-9-93"></a>                    <span class="s2">"Timestamp"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">"Timestamp"</span><span class="p">]),</span>
+</span><span id="__span-9-94"><a id="__codelineno-9-94" name="__codelineno-9-94" href="#__codelineno-9-94"></a>                    <span class="s2">"Summary"</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">"HistorySummary"</span><span class="p">]</span>
+</span><span id="__span-9-95"><a id="__codelineno-9-95" name="__codelineno-9-95" href="#__codelineno-9-95"></a>                <span class="p">})</span>
+</span><span id="__span-9-96"><a id="__codelineno-9-96" name="__codelineno-9-96" href="#__codelineno-9-96"></a>            <span class="k">return</span> <span class="n">history</span>
+</span><span id="__span-9-97"><a id="__codelineno-9-97" name="__codelineno-9-97" href="#__codelineno-9-97"></a>        <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-9-98"><a id="__codelineno-9-98" name="__codelineno-9-98" href="#__codelineno-9-98"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[ERROR] Помилка отримання історії алерту: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-9-99"><a id="__codelineno-9-99" name="__codelineno-9-99" href="#__codelineno-9-99"></a>            <span class="k">return</span> <span class="p">[]</span>
+</span><span id="__span-9-100"><a id="__codelineno-9-100" name="__codelineno-9-100" href="#__codelineno-9-100"></a>
+</span><span id="__span-9-101"><a id="__codelineno-9-101" name="__codelineno-9-101" href="#__codelineno-9-101"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup_monitoring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-9-102"><a id="__codelineno-9-102" name="__codelineno-9-102" href="#__codelineno-9-102"></a><span class="w">        </span><span class="sd">"""Видалення алерту та топіка SNS."""</span>
+</span><span id="__span-9-103"><a id="__codelineno-9-103" name="__codelineno-9-103" href="#__codelineno-9-103"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Очищення ресурсів моніторингу..."</span><span class="p">)</span>
+</span><span id="__span-9-104"><a id="__codelineno-9-104" name="__codelineno-9-104" href="#__codelineno-9-104"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-9-105"><a id="__codelineno-9-105" name="__codelineno-9-105" href="#__codelineno-9-105"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">cw_client</span><span class="o">.</span><span class="n">delete_alarms</span><span class="p">(</span><span class="n">AlarmNames</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">alarm_name</span><span class="p">])</span>
+</span><span id="__span-9-106"><a id="__codelineno-9-106" name="__codelineno-9-106" href="#__codelineno-9-106"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">sns_client</span><span class="o">.</span><span class="n">delete_topic</span><span class="p">(</span><span class="n">TopicArn</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">topic_arn</span><span class="p">)</span>
+</span><span id="__span-9-107"><a id="__codelineno-9-107" name="__codelineno-9-107" href="#__codelineno-9-107"></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span id="__span-9-108"><a id="__codelineno-9-108" name="__codelineno-9-108" href="#__codelineno-9-108"></a>            <span class="k">pass</span>
+</span><span id="__span-9-109"><a id="__codelineno-9-109" name="__codelineno-9-109" href="#__codelineno-9-109"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"[SUCCESS] Ресурси моніторингу успішно видалено."</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="4-scriptsinstance_orchestratorpy">Крок 4. Реалізація оркестратора інстансу зі стрес-тестом <code>scripts/instance_orchestrator.py</code></h4>
+<p>Створіть модуль, який запускає віртуальну машину з підключеним Instance Profile та User Data скриптом для автоматичної симуляції 100% завантаження CPU:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientError</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="k">class</span><span class="w"> </span><span class="nc">InstanceOrchestrator</span><span class="p">:</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="sd">"""Модуль розгортання віртуальної машини з Instance Profile та запуском стрес-тесту."""</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">instance_profile_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"region"</span><span class="p">,</span> <span class="s2">"eu-central-1"</span><span class="p">)</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">instance_profile_name</span> <span class="o">=</span> <span class="n">instance_profile_name</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">"ec2"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_resource</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">"ec2"</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">launch_monitored_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="w">        </span><span class="sd">"""Запуск інстансу з прив'язкою IAM Instance Profile та User Data скриптом стрес-тесту."""</span>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>        <span class="c1"># User Data скрипт: очікує 60 секунд після старту, а потім навантажує CPU на 100% протягом 180 секунд</span>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>        <span class="n">user_data_script</span> <span class="o">=</span> <span class="s2">"""#!/bin/bash</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="s2">apt-get update -y</span>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a><span class="s2">apt-get install -y stress-ng curl jq</span>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a><span class="s2"># Фіксація системного старту</span>
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a><span class="s2">echo "[CPS Node] Ініціалізація успішна. Перевірка доступності IMDSv2..." &gt; /var/log/cps_init.log</span>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a><span class="s2"># Запуск стрес-тесту на процесор через 30 секунд після старту системи</span>
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a><span class="s2">sleep 30</span>
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a><span class="s2">echo "[CPS Node] Запуск стрес-тестування CPU на 100% тривалістю 180 секунд..." &gt;&gt; /var/log/cps_init.log</span>
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a><span class="s2">stress-ng --cpu 2 --cpu-load 100 --timeout 180s &gt;&gt; /var/log/cps_init.log 2&gt;&amp;1 &amp;</span>
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a><span class="s2">"""</span>
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Запуск інстансу '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'project_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">-node' з Instance Profile '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_profile_name</span><span class="si">}</span><span class="s2">'..."</span><span class="p">)</span>
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">run_instances</span><span class="p">(</span>
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>            <span class="n">ImageId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"ami_id"</span><span class="p">],</span>
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>            <span class="n">InstanceType</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"instance_type"</span><span class="p">],</span>
+</span><span id="__span-10-44"><a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>            <span class="n">MinCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-10-45"><a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>            <span class="n">MaxCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-10-46"><a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>            <span class="n">IamInstanceProfile</span><span class="o">=</span><span class="p">{</span><span class="s2">"Name"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance_profile_name</span><span class="p">},</span>
+</span><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>            <span class="n">UserData</span><span class="o">=</span><span class="n">user_data_script</span><span class="p">,</span>
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>            <span class="n">TagSpecifications</span><span class="o">=</span><span class="p">[{</span>
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a>                <span class="s2">"ResourceType"</span><span class="p">:</span> <span class="s2">"instance"</span><span class="p">,</span>
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>                <span class="s2">"Tags"</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-10-51"><a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>                    <span class="p">{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'project_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">-node"</span><span class="p">},</span>
+</span><span id="__span-10-52"><a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a>                    <span class="p">{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="s2">"Project"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s2">"project_name"</span><span class="p">]}</span>
+</span><span id="__span-10-53"><a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a>                <span class="p">]</span>
+</span><span id="__span-10-54"><a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a>            <span class="p">}]</span>
+</span><span id="__span-10-55"><a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a>        <span class="p">)</span>
+</span><span id="__span-10-56"><a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a>
+</span><span id="__span-10-57"><a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">"Instances"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"InstanceId"</span><span class="p">]</span>
+</span><span id="__span-10-58"><a id="__codelineno-10-58" name="__codelineno-10-58" href="#__codelineno-10-58"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"InstanceId"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span>
+</span><span id="__span-10-59"><a id="__codelineno-10-59" name="__codelineno-10-59" href="#__codelineno-10-59"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Інстанс створено. ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-10-60"><a id="__codelineno-10-60" name="__codelineno-10-60" href="#__codelineno-10-60"></a>
+</span><span id="__span-10-61"><a id="__codelineno-10-61" name="__codelineno-10-61" href="#__codelineno-10-61"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Очікування переходу інстансу </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2"> у стан 'running'..."</span><span class="p">)</span>
+</span><span id="__span-10-62"><a id="__codelineno-10-62" name="__codelineno-10-62" href="#__codelineno-10-62"></a>        <span class="n">waiter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s2">"instance_running"</span><span class="p">)</span>
+</span><span id="__span-10-63"><a id="__codelineno-10-63" name="__codelineno-10-63" href="#__codelineno-10-63"></a>        <span class="n">waiter</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">])</span>
+</span><span id="__span-10-64"><a id="__codelineno-10-64" name="__codelineno-10-64" href="#__codelineno-10-64"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Інстанс </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2"> активний."</span><span class="p">)</span>
+</span><span id="__span-10-65"><a id="__codelineno-10-65" name="__codelineno-10-65" href="#__codelineno-10-65"></a>
+</span><span id="__span-10-66"><a id="__codelineno-10-66" name="__codelineno-10-66" href="#__codelineno-10-66"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span>
+</span><span id="__span-10-67"><a id="__codelineno-10-67" name="__codelineno-10-67" href="#__codelineno-10-67"></a>
+</span><span id="__span-10-68"><a id="__codelineno-10-68" name="__codelineno-10-68" href="#__codelineno-10-68"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">terminate_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-10-69"><a id="__codelineno-10-69" name="__codelineno-10-69" href="#__codelineno-10-69"></a><span class="w">        </span><span class="sd">"""Знищення тестової віртуальної машини."""</span>
+</span><span id="__span-10-70"><a id="__codelineno-10-70" name="__codelineno-10-70" href="#__codelineno-10-70"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">:</span>
+</span><span id="__span-10-71"><a id="__codelineno-10-71" name="__codelineno-10-71" href="#__codelineno-10-71"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Знищення інстансу </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-10-72"><a id="__codelineno-10-72" name="__codelineno-10-72" href="#__codelineno-10-72"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">terminate_instances</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">])</span>
+</span><span id="__span-10-73"><a id="__codelineno-10-73" name="__codelineno-10-73" href="#__codelineno-10-73"></a>            <span class="n">waiter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s2">"instance_terminated"</span><span class="p">)</span>
+</span><span id="__span-10-74"><a id="__codelineno-10-74" name="__codelineno-10-74" href="#__codelineno-10-74"></a>            <span class="n">waiter</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">])</span>
+</span><span id="__span-10-75"><a id="__codelineno-10-75" name="__codelineno-10-75" href="#__codelineno-10-75"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Інстанс </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2"> видалено."</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="5-run_lab8py">Крок 5. Головний оркестратор експерименту <code>run_lab8.py</code></h4>
+<p>Створіть головний файл сценарію, який виконує розгортання, підключає моніторинг, відстежує стан тривоги та формує фінальний звіт:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scripts.iam_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">IAMSecurityManager</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scripts.cloudwatch_monitor</span><span class="w"> </span><span class="kn">import</span> <span class="n">CloudWatchMonitoringManager</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scripts.instance_orchestrator</span><span class="w"> </span><span class="kn">import</span> <span class="n">InstanceOrchestrator</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"================================================================="</span><span class="p">)</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"   НАЛАШТУВАННЯ IAM БЕЗПЕКИ ТА МОНІТОРИНГУ CLOUDWATCH ALARMS    "</span><span class="p">)</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"=================================================================</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>    <span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"config"</span><span class="p">,</span> <span class="s2">"monitor_config.json"</span><span class="p">)</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>    <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">"output"</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>    <span class="n">audit_report_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">"security_audit_report.json"</span><span class="p">)</span>
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>    <span class="n">history_report_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">"alarm_history_log.json"</span><span class="p">)</span>
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>    <span class="c1"># 1. Створення IAM Role та Instance Profile</span>
+</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>    <span class="n">iam_mgr</span> <span class="o">=</span> <span class="n">IAMSecurityManager</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="n">config_path</span><span class="p">)</span>
+</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>    <span class="n">profile_name</span> <span class="o">=</span> <span class="n">iam_mgr</span><span class="o">.</span><span class="n">setup_instance_profile</span><span class="p">()</span>
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>
+</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>    <span class="c1"># 2. Розгортання інстансу з прив'язаною роллю</span>
+</span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>    <span class="n">orchestrator</span> <span class="o">=</span> <span class="n">InstanceOrchestrator</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="n">config_path</span><span class="p">,</span> <span class="n">instance_profile_name</span><span class="o">=</span><span class="n">profile_name</span><span class="p">)</span>
+</span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>    <span class="n">instance_id</span> <span class="o">=</span> <span class="n">orchestrator</span><span class="o">.</span><span class="n">launch_monitored_instance</span><span class="p">()</span>
+</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>
+</span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>    <span class="c1"># 3. Налаштування CloudWatch Alarm та SNS</span>
+</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>    <span class="n">cw_mgr</span> <span class="o">=</span> <span class="n">CloudWatchMonitoringManager</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="n">config_path</span><span class="p">)</span>
+</span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>    <span class="n">alarm_name</span> <span class="o">=</span> <span class="n">cw_mgr</span><span class="o">.</span><span class="n">create_cpu_utilization_alarm</span><span class="p">(</span><span class="n">instance_id</span><span class="o">=</span><span class="n">instance_id</span><span class="p">)</span>
+</span><span id="__span-11-32"><a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>
+</span><span id="__span-11-33"><a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>    <span class="c1"># 4. Моніторинг переходу станів алерту під час виконання стрес-тесту</span>
+</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Моніторинг переходів стану CloudWatch Alarm під час навантаження ---"</span><span class="p">)</span>
+</span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Інстанс виконує фоновий стрес-тест CPU (stress-ng 100%)..."</span><span class="p">)</span>
+</span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"[INFO] Опитування стану алерту кожні 30 секунд (загальний час спостереження ~4 хв)..."</span><span class="p">)</span>
+</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>
+</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>    <span class="n">alarm_reached</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>    <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
+</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>        <span class="n">state_data</span> <span class="o">=</span> <span class="n">cw_mgr</span><span class="o">.</span><span class="n">get_alarm_state</span><span class="p">()</span>
+</span><span id="__span-11-42"><a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>        <span class="n">current_state</span> <span class="o">=</span> <span class="n">state_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"StateValue"</span><span class="p">,</span> <span class="s2">"UNKNOWN"</span><span class="p">)</span>
+</span><span id="__span-11-43"><a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[T+</span><span class="si">{</span><span class="n">iteration</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">30</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">s] Поточний стан алерту: [</span><span class="si">{</span><span class="n">current_state</span><span class="si">}</span><span class="s2">] — Причина: </span><span class="si">{</span><span class="n">state_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'StateReason'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">)[:</span><span class="mi">65</span><span class="p">]</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-11-44"><a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>
+</span><span id="__span-11-45"><a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a>        <span class="k">if</span> <span class="n">current_state</span> <span class="o">==</span> <span class="s2">"ALARM"</span><span class="p">:</span>
+</span><span id="__span-11-46"><a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a>            <span class="n">alarm_reached</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="__span-11-47"><a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">[ALERT DETECTED] Увага! Спрацював тригер тривоги CloudWatch Alarm (CPU &gt;= 80%)!"</span><span class="p">)</span>
+</span><span id="__span-11-48"><a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a>            <span class="k">break</span>
+</span><span id="__span-11-49"><a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a>
+</span><span id="__span-11-50"><a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>    <span class="c1"># 5. Отримання хронології журналу алерту</span>
+</span><span id="__span-11-51"><a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a>    <span class="n">history</span> <span class="o">=</span> <span class="n">cw_mgr</span><span class="o">.</span><span class="n">get_alarm_history</span><span class="p">()</span>
+</span><span id="__span-11-52"><a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a>
+</span><span id="__span-11-53"><a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a>    <span class="c1"># 6. Зведення результатів у таблицю</span>
+</span><span id="__span-11-54"><a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">================================================================="</span><span class="p">)</span>
+</span><span id="__span-11-55"><a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"               ЗВЕДЕНИЙ ЗВІТ АУДИТУ БЕЗПЕКИ ТА МОНІТОРИНГУ      "</span><span class="p">)</span>
+</span><span id="__span-11-56"><a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"================================================================="</span><span class="p">)</span>
+</span><span id="__span-11-57"><a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a>
+</span><span id="__span-11-58"><a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a>    <span class="n">summary_table</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-11-59"><a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a>        <span class="p">[</span><span class="s2">"IAM Role Name"</span><span class="p">,</span> <span class="n">iam_mgr</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"RoleName"</span><span class="p">]],</span>
+</span><span id="__span-11-60"><a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a>        <span class="p">[</span><span class="s2">"IAM Instance Profile"</span><span class="p">,</span> <span class="n">profile_name</span><span class="p">],</span>
+</span><span id="__span-11-61"><a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a>        <span class="p">[</span><span class="s2">"Target S3 Security Boundary"</span><span class="p">,</span> <span class="n">iam_mgr</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"target_s3_bucket"</span><span class="p">)],</span>
+</span><span id="__span-11-62"><a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a>        <span class="p">[</span><span class="s2">"Monitored EC2 Instance ID"</span><span class="p">,</span> <span class="n">instance_id</span><span class="p">],</span>
+</span><span id="__span-11-63"><a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a>        <span class="p">[</span><span class="s2">"CloudWatch Metric Monitored"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cw_mgr</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'cloudwatch_alarm'</span><span class="p">][</span><span class="s1">'metric_name'</span><span class="p">]</span><span class="si">}</span><span class="s2"> (&gt;= </span><span class="si">{</span><span class="n">cw_mgr</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">'cloudwatch_alarm'</span><span class="p">][</span><span class="s1">'threshold_percent'</span><span class="p">]</span><span class="si">}</span><span class="s2">%)"</span><span class="p">],</span>
+</span><span id="__span-11-64"><a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a>        <span class="p">[</span><span class="s2">"Alarm Topic SNS ARN"</span><span class="p">,</span> <span class="n">cw_mgr</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"SnsTopicArn"</span><span class="p">]],</span>
+</span><span id="__span-11-65"><a id="__codelineno-11-65" name="__codelineno-11-65" href="#__codelineno-11-65"></a>        <span class="p">[</span><span class="s2">"Фіксація стану ALARM під час стрес-тесту"</span><span class="p">,</span> <span class="s2">"УСПІШНО (Детектовано)"</span> <span class="k">if</span> <span class="n">alarm_reached</span> <span class="k">else</span> <span class="s2">"В процесі накопичення"</span><span class="p">]</span>
+</span><span id="__span-11-66"><a id="__codelineno-11-66" name="__codelineno-11-66" href="#__codelineno-11-66"></a>    <span class="p">]</span>
+</span><span id="__span-11-67"><a id="__codelineno-11-67" name="__codelineno-11-67" href="#__codelineno-11-67"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">summary_table</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">"Параметр аудиту"</span><span class="p">,</span> <span class="s2">"Значення"</span><span class="p">],</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">"fancy_grid"</span><span class="p">))</span>
+</span><span id="__span-11-68"><a id="__codelineno-11-68" name="__codelineno-11-68" href="#__codelineno-11-68"></a>
+</span><span id="__span-11-69"><a id="__codelineno-11-69" name="__codelineno-11-69" href="#__codelineno-11-69"></a>    <span class="c1"># Збереження звітів</span>
+</span><span id="__span-11-70"><a id="__codelineno-11-70" name="__codelineno-11-70" href="#__codelineno-11-70"></a>    <span class="n">audit_data</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-11-71"><a id="__codelineno-11-71" name="__codelineno-11-71" href="#__codelineno-11-71"></a>        <span class="s2">"IAM_State"</span><span class="p">:</span> <span class="n">iam_mgr</span><span class="o">.</span><span class="n">state</span><span class="p">,</span>
+</span><span id="__span-11-72"><a id="__codelineno-11-72" name="__codelineno-11-72" href="#__codelineno-11-72"></a>        <span class="s2">"Monitoring_State"</span><span class="p">:</span> <span class="n">cw_mgr</span><span class="o">.</span><span class="n">state</span><span class="p">,</span>
+</span><span id="__span-11-73"><a id="__codelineno-11-73" name="__codelineno-11-73" href="#__codelineno-11-73"></a>        <span class="s2">"AlarmEvaluationResult"</span><span class="p">:</span> <span class="s2">"SUCCESS_ALARM_TRIGGERED"</span> <span class="k">if</span> <span class="n">alarm_reached</span> <span class="k">else</span> <span class="s2">"PENDING_EVALUATION"</span>
+</span><span id="__span-11-74"><a id="__codelineno-11-74" name="__codelineno-11-74" href="#__codelineno-11-74"></a>    <span class="p">}</span>
+</span><span id="__span-11-75"><a id="__codelineno-11-75" name="__codelineno-11-75" href="#__codelineno-11-75"></a>
+</span><span id="__span-11-76"><a id="__codelineno-11-76" name="__codelineno-11-76" href="#__codelineno-11-76"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">audit_report_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-11-77"><a id="__codelineno-11-77" name="__codelineno-11-77" href="#__codelineno-11-77"></a>        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">audit_data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-11-78"><a id="__codelineno-11-78" name="__codelineno-11-78" href="#__codelineno-11-78"></a>
+</span><span id="__span-11-79"><a id="__codelineno-11-79" name="__codelineno-11-79" href="#__codelineno-11-79"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">history_report_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-11-80"><a id="__codelineno-11-80" name="__codelineno-11-80" href="#__codelineno-11-80"></a>        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-11-81"><a id="__codelineno-11-81" name="__codelineno-11-81" href="#__codelineno-11-81"></a>
+</span><span id="__span-11-82"><a id="__codelineno-11-82" name="__codelineno-11-82" href="#__codelineno-11-82"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">[INFO] Звіти аудиту збережено у: </span><span class="si">{</span><span class="n">output_dir</span><span class="si">}</span><span class="s2">/"</span><span class="p">)</span>
+</span><span id="__span-11-83"><a id="__codelineno-11-83" name="__codelineno-11-83" href="#__codelineno-11-83"></a>
+</span><span id="__span-11-84"><a id="__codelineno-11-84" name="__codelineno-11-84" href="#__codelineno-11-84"></a>    <span class="c1"># 7. Утилізація хмарних ресурсів</span>
+</span><span id="__span-11-85"><a id="__codelineno-11-85" name="__codelineno-11-85" href="#__codelineno-11-85"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Завершення лабораторної роботи та очищення ресурсів ---"</span><span class="p">)</span>
+</span><span id="__span-11-86"><a id="__codelineno-11-86" name="__codelineno-11-86" href="#__codelineno-11-86"></a>    <span class="n">orchestrator</span><span class="o">.</span><span class="n">terminate_instance</span><span class="p">()</span>
+</span><span id="__span-11-87"><a id="__codelineno-11-87" name="__codelineno-11-87" href="#__codelineno-11-87"></a>    <span class="n">cw_mgr</span><span class="o">.</span><span class="n">cleanup_monitoring</span><span class="p">()</span>
+</span><span id="__span-11-88"><a id="__codelineno-11-88" name="__codelineno-11-88" href="#__codelineno-11-88"></a>    <span class="n">iam_mgr</span><span class="o">.</span><span class="n">cleanup_iam</span><span class="p">()</span>
+</span><span id="__span-11-89"><a id="__codelineno-11-89" name="__codelineno-11-89" href="#__codelineno-11-89"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"[SUCCESS] Лабораторну роботу успішно виконано."</span><span class="p">)</span>
+</span><span id="__span-11-90"><a id="__codelineno-11-90" name="__codelineno-11-90" href="#__codelineno-11-90"></a>
+</span><span id="__span-11-91"><a id="__codelineno-11-91" name="__codelineno-11-91" href="#__codelineno-11-91"></a>
+</span><span id="__span-11-92"><a id="__codelineno-11-92" name="__codelineno-11-92" href="#__codelineno-11-92"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+</span><span id="__span-11-93"><a id="__codelineno-11-93" name="__codelineno-11-93" href="#__codelineno-11-93"></a>    <span class="n">main</span><span class="p">()</span>
+</span></code></pre></div>
+<hr />
+<h3 id="33">3.3 Запуск, тестування та перевірка результатів</h3>
+<p>Виконайте запуск розробленого модуля автоматизації у терміналі:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>python3<span class="w"> </span>run_lab8.py
+</span></code></pre></div>
+<p>Консоль демонструє створення ролі IAM, ініціалізацію профілю інстансу, запуск ВМ, створення алерту та його перехід у стан <code>ALARM</code> при досягненні 100% завантаження CPU:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>=================================================================
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>   НАЛАШТУВАННЯ IAM БЕЗПЕКИ ТА МОНІТОРИНГУ CLOUDWATCH ALARMS    
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>=================================================================
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>[INFO] Створення IAM Role 'cps-reference-security-role-9a8b1c2d' для EC2...
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>[SUCCESS] Роль створено. ARN: arn:aws:iam::123456789012:role/cps-reference-security-role-9a8b1c2d
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>[INFO] Прив'язка вбудованої політики PoLP 'cps-reference-security-polp-policy-9a8b1c2d'...
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>[INFO] Створення Instance Profile 'cps-reference-security-profile-9a8b1c2d'...
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>[SUCCESS] Instance Profile 'cps-reference-security-profile-9a8b1c2d' успішно сконфігуровано.
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>[INFO] Очікування глобальної реплікації IAM у хмарі (10 секунд)...
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>[INFO] Запуск інстансу 'cps-reference-security-node' з Instance Profile 'cps-reference-security-profile-9a8b1c2d'...
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>[SUCCESS] Інстанс створено. ID: i-0f9e8d7c6b5a41234
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>[INFO] Очікування переходу інстансу i-0f9e8d7c6b5a41234 у стан 'running'...
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>[SUCCESS] Інстанс i-0f9e8d7c6b5a41234 активний.
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>[INFO] Створення SNS Topic 'cps-reference-security-alerts-9a8b1c2d'...
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>[SUCCESS] SNS Topic створено. ARN: arn:aws:sns:eu-central-1:123456789012:cps-reference-security-alerts-9a8b1c2d
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>[INFO] Створення CloudWatch Alarm 'cps-reference-security-cpu-high-alarm-9a8b1c2d' для інстансу i-0f9e8d7c6b5a41234 (Поріг: &gt;= 80.0%)...
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>[SUCCESS] CloudWatch Alarm успішно зареєстровано.
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>--- Моніторинг переходів стану CloudWatch Alarm під час навантаження ---
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>[INFO] Інстанс виконує фоновий стрес-тест CPU (stress-ng 100%)...
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>[INFO] Опитування стану алерту кожні 30 секунд (загальний час спостереження ~4 хв)...
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>[T+030s] Поточний стан алерту: [INSUFFICIENT_DATA] — Причина: Unchecked: Initial alarm creation...
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>[T+060s] Поточний стан алерту: [OK] — Причина: Threshold Crossed: 1 out of the last 1 datapoints [1.25%] was not g...
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>[T+090s] Поточний стан алерту: [OK] — Причина: Threshold Crossed: 1 out of the last 1 datapoints [45.12%] was not ...
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>[T+120s] Поточний стан алерту: [ALARM] — Причина: Threshold Crossed: 1 out of the last 1 datapoints [99.85%] was gre...
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>[ALERT DETECTED] Увага! Спрацював тригер тривоги CloudWatch Alarm (CPU &gt;= 80%)!
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>=================================================================
+</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>               ЗВЕДЕНИЙ ЗВІТ АУДИТУ БЕЗПЕКИ ТА МОНІТОРИНГУ      
+</span><span id="__span-13-32"><a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>=================================================================
+</span><span id="__span-13-33"><a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>╒══════════════════════════════════════════╤═════════════════════════════════════════════════════════════════════╕
+</span><span id="__span-13-34"><a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>│ Параметр аудиту                          │ Значення                                                            │
+</span><span id="__span-13-35"><a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>╞══════════════════════════════════════════╪═════════════════════════════════════════════════════════════════════╡
+</span><span id="__span-13-36"><a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>│ IAM Role Name                            │ cps-reference-security-role-9a8b1c2d                                │
+</span><span id="__span-13-37"><a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>│ IAM Instance Profile                     │ cps-reference-security-profile-9a8b1c2d                             │
+</span><span id="__span-13-38"><a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a>│ Target S3 Security Boundary              │ cps-grid-secure-audit-bucket                                        │
+</span><span id="__span-13-39"><a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>│ Monitored EC2 Instance ID                │ i-0f9e8d7c6b5a41234                                                 │
+</span><span id="__span-13-40"><a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a>│ CloudWatch Metric Monitored              │ CPUUtilization (&gt;= 80.0%)                                           │
+</span><span id="__span-13-41"><a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a>│ Alarm Topic SNS ARN                      │ arn:aws:sns:eu-central-1:123456789012:cps-reference-security-alerts │
+</span><span id="__span-13-42"><a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a>│ Фіксація стану ALARM під час стрес-тесту │ УСПІШНО (Детектовано)                                               │
+</span><span id="__span-13-43"><a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a>╘══════════════════════════════════════════╧═════════════════════════════════════════════════════════════════════╛
+</span><span id="__span-13-44"><a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a>
+</span><span id="__span-13-45"><a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a>[INFO] Звіти аудиту збережено у: output/
+</span><span id="__span-13-46"><a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a>
+</span><span id="__span-13-47"><a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a>--- Завершення лабораторної роботи та очищення ресурсів ---
+</span><span id="__span-13-48"><a id="__codelineno-13-48" name="__codelineno-13-48" href="#__codelineno-13-48"></a>[INFO] Знищення інстансу i-0f9e8d7c6b5a41234...
+</span><span id="__span-13-49"><a id="__codelineno-13-49" name="__codelineno-13-49" href="#__codelineno-13-49"></a>[SUCCESS] Інстанс i-0f9e8d7c6b5a41234 видалено.
+</span><span id="__span-13-50"><a id="__codelineno-13-50" name="__codelineno-13-50" href="#__codelineno-13-50"></a>[INFO] Очищення ресурсів моніторингу...
+</span><span id="__span-13-51"><a id="__codelineno-13-51" name="__codelineno-13-51" href="#__codelineno-13-51"></a>[SUCCESS] Ресурси моніторингу успішно видалено.
+</span><span id="__span-13-52"><a id="__codelineno-13-52" name="__codelineno-13-52" href="#__codelineno-13-52"></a>[INFO] Очищення ресурсів IAM...
+</span><span id="__span-13-53"><a id="__codelineno-13-53" name="__codelineno-13-53" href="#__codelineno-13-53"></a>[SUCCESS] Ресурси IAM успішно утилізовано.
+</span><span id="__span-13-54"><a id="__codelineno-13-54" name="__codelineno-13-54" href="#__codelineno-13-54"></a>[SUCCESS] Лабораторну роботу успішно виконано.
+</span></code></pre></div>
+<hr />
+<h2 id="4">4. Вимоги до змісту звіту</h2>
+<p>Звіт з лабораторної роботи оформлюється у форматі PDF відповідно до вимог вищої школи та повинен містити такі обов'язкові структурні елементи:</p>
+<ol>
+<li>
+<p><strong>Титульна сторінка</strong> із зазначенням реквізитів ЗВО, факультету, кафедри, дисципліни, номера лабораторної роботи, теми, академічної групи, ПІБ здобувача та номера індивідуального варіанта.</p>
+</li>
+<li>
+<p><strong>Мета роботи та індивідуальне технічне завдання</strong> згідно з таблицею 3.1.</p>
+</li>
+<li>
+<p><strong>Розрахункова частина:</strong> математичний розрахунок середнього часу виявлення аномалії (<span class="arithmatex">\(\text{MTTD}\)</span>) для налаштованих параметрів інтервалу <span class="arithmatex">\(T_{\text{period}}\)</span> та кількості періодів <span class="arithmatex">\(M\)</span> за формулою теоретичного розділу.</p>
+</li>
+<li>
+<p><strong>Архітектурна схема безпеки та моніторингу</strong>, що ілюструє взаємодію IMDSv2, IAM Role, EC2 Instance, CloudWatch Metrics, CloudWatch Alarm та топіка Amazon SNS.</p>
+</li>
+<li>
+<p><strong>Повний вихідний текст програмних модулів</strong> (<code>monitor_config.json</code>, <code>iam_manager.py</code>, <code>cloudwatch_monitor.py</code>, <code>instance_orchestrator.py</code>, <code>run_lab8.py</code>) із детальними авторськими коментарями.</p>
+</li>
+<li>
+<p><strong>Скріншоти виконання програми в терміналі</strong>, що підтверджують створення профілю інстансу, запуск ВМ, фіксацію станів <code>INSUFFICIENT_DATA</code> <span class="arithmatex">\(\to\)</span> <code>OK</code> <span class="arithmatex">\(\to\)</span> <code>ALARM</code> та виведення фінальної таблиці аудиту.</p>
+</li>
+<li>
+<p><strong>Аналітичні висновки</strong>, де наведено оцінку переваг використання тимчасових креденшалів через Instance Profile над статичними ключами доступу, аналіз чутливості тригерів CloudWatch та підсумки досягнення мети роботи.</p>
+</li>
+</ol>
+<hr />
+<h2 id="5">5. Контрольні запитання для захисту роботи</h2>
+<ol>
+<li>
+<p>Розкрийте зміст принципу найменших привілеїв (Principle of Least Privilege, PoLP). Чому в інфраструктурі IAM використання символу зірочки (<code>"Resource": "*"</code>) вважається критичною вразливістю для операцій модифікації даних?</p>
+</li>
+<li>
+<p>Як функціонує сервіс метаданих інстансу IMDSv2 (адреса <code>169.254.169.254</code>), і чому він є захищенішим за попередню версію IMDSv1 проти атак класу SSRF (Server-Side Request Forgery)?</p>
+</li>
+<li>
+<p>Поясніть концептуальну різницю між IAM Role та IAM User. Чому віртуальним машинам та мікросервісам призначаються саме ролі через Instance Profiles, а не статичні ключі користувачів?</p>
+</li>
+<li>
+<p>Опишіть призначення компонентів структури IAM Policy: <code>Effect</code>, <code>Action</code>, <code>Resource</code> та <code>Condition</code>. Яке правило пріоритету діє при одночасній наявності інструкцій <code>Explicit Allow</code> та <code>Explicit Deny</code>?</p>
+</li>
+<li>
+<p>Розкрийте алгоритм функціонування тригера тривоги CloudWatch Alarm. Що означають параметри <code>Period</code>, <code>EvaluationPeriods</code> та <code>DatapointsToAlarm</code> (<span class="arithmatex">\(M\)</span> out of <span class="arithmatex">\(N\)</span>), і як вони впливають на частоту хибних спрацьовувань?</p>
+</li>
+<li>
+<p>Поясніть призначення та можливі значення трьох базових станів CloudWatch Alarm: <code>OK</code>, <code>ALARM</code> та <code>INSUFFICIENT_DATA</code>. У яких випадках алерт переходить у стан <code>INSUFFICIENT_DATA</code>?</p>
+</li>
+<li>
+<p>За якою математичною формулою розраховується середній час детекції інциденту (<span class="arithmatex">\(\text{MTTD}\)</span>), і як зменшення періоду вимірювання метрики з 5 хвилин (Standard Monitoring) до 1 хвилини (Detailed Monitoring) впливає на доступність системи за формулою зв'язку з MTTR та MTBF?</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

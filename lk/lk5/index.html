@@ -1,0 +1,2937 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../lk4/">
+      
+      
+        <link rel="next" href="../lk6/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lk1/" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lb/lb1/" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-faas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектурні засади безсерверних обчислень та системні механізми FaaS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Масштабування, економічні моделі та оркестрація розподілених робочих процесів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Архітектурне проєктування безсерверної платформи збору телеметрії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-faas_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектурні засади безсерверних обчислень та системні механізми FaaS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Архітектурні засади безсерверних обчислень та системні механізми FaaS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-serverless-computing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Еволюційний перехід від монолітних архітектур і серверної віртуалізації до мікросервісів, контейнеризації та концепції повної абстракції інфраструктури (Serverless Computing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-function-as-a-service-faas-microvm-aws-firecracker-gvisor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Системні механізми реалізації парадигми Function-as-a-Service (FaaS): апаратна та ядрова ізоляція мікросередовищ виконання на базі гіпервізорів MicroVM (AWS Firecracker) і пісочниць безпеки (gVisor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-event-driven-lifecycle-cold-start-warm-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Подієвий життєвий цикл безсерверної функції (Event-Driven Lifecycle), фази ініціалізації та математична формалізація затримок холодного (Cold Start) і теплого (Warm Start) стартів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-inputoutput-bindings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Системна класифікація джерел подій (синхронні, асинхронні, потокові пулінгові тригери) та концепція декларативних вхідних і вихідних прив'язок (Input/Output Bindings)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Керування конкурентністю, моделі масштабування та оркестрація розподілених конвеєрів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Керування конкурентністю, моделі масштабування та оркестрація розподілених конвеєрів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-reserved-unreserved-provisioned-concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Математичне моделювання паралелізму за законом Літтла та стратегії диспетчеризації пулу конкурентності (Reserved, Unreserved, Provisioned Concurrency)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-break-even-point-faas-iaaspaas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Економічна модель квантування ресурсів, розрахунок точки беззбитковості (Break-Even Point) між FaaS та виділеною інфраструктурою IaaS/PaaS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-state-machines-aws-step-functions-durable-functions-saga-scatter-gather-fan-outfan-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Оркестрація розподілених безсерверних процесів і патерни обробки транзакцій: State Machines (AWS Step Functions), Durable Functions, моделі Saga, Scatter-Gather (Fan-out/Fan-in) та експоненційний відступ із джитером
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-thundering-herd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Системні обмеження, критичні бар'єри та вразливості безсерверних архітектур: жорсткі таймаути виконання, обмеження локальних ресурсів, вичерпання пулів з'єднань із СУБД та ефект «громового стада» (Thundering Herd) при відмовах
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування та розгортання високопродуктивної безсерверної телеметрії для кіберфізичних систем
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Проєктування та розгортання високопродуктивної безсерверної телеметрії для кіберфізичних систем">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-iiot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Проєктування відмовостійкого безсерверного конвеєра обробки телеметрії промислового Інтернету речей (IIoT)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Проєктування відмовостійкого безсерверного конвеєра обробки телеметрії промислового Інтернету речей (IIoT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок інтенсивності вхідного навантаження
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Оцінка конкурентності за законом Літтла та аналіз перевантаження
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Інженерний розрахунок параметрів буферизації та пакування (Batching)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Розрахунок місячного бюджету безсерверної архітектури
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Прикладні тестові завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lk7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lb/lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мета лекції
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Очікувані результати навчання
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Детальний покроковий план лекції
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Детальний покроковий план лекції">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-faas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектурні засади безсерверних обчислень та системні механізми FaaS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Масштабування, економічні моделі та оркестрація розподілених робочих процесів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Архітектурне проєктування безсерверної платформи збору телеметрії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-faas_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Теоретико-концептуальний базис. Архітектурні засади безсерверних обчислень та системні механізми FaaS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Теоретико-концептуальний базис. Архітектурні засади безсерверних обчислень та системні механізми FaaS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-serverless-computing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Еволюційний перехід від монолітних архітектур і серверної віртуалізації до мікросервісів, контейнеризації та концепції повної абстракції інфраструктури (Serverless Computing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-function-as-a-service-faas-microvm-aws-firecracker-gvisor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Системні механізми реалізації парадигми Function-as-a-Service (FaaS): апаратна та ядрова ізоляція мікросередовищ виконання на базі гіпервізорів MicroVM (AWS Firecracker) і пісочниць безпеки (gVisor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-event-driven-lifecycle-cold-start-warm-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Подієвий життєвий цикл безсерверної функції (Event-Driven Lifecycle), фази ініціалізації та математична формалізація затримок холодного (Cold Start) і теплого (Warm Start) стартів
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-inputoutput-bindings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Системна класифікація джерел подій (синхронні, асинхронні, потокові пулінгові тригери) та концепція декларативних вхідних і вихідних прив'язок (Input/Output Bindings)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Методологія та аналіз граничних умов. Керування конкурентністю, моделі масштабування та оркестрація розподілених конвеєрів
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Методологія та аналіз граничних умов. Керування конкурентністю, моделі масштабування та оркестрація розподілених конвеєрів">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-reserved-unreserved-provisioned-concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Математичне моделювання паралелізму за законом Літтла та стратегії диспетчеризації пулу конкурентності (Reserved, Unreserved, Provisioned Concurrency)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-break-even-point-faas-iaaspaas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Економічна модель квантування ресурсів, розрахунок точки беззбитковості (Break-Even Point) між FaaS та виділеною інфраструктурою IaaS/PaaS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-state-machines-aws-step-functions-durable-functions-saga-scatter-gather-fan-outfan-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Оркестрація розподілених безсерверних процесів і патерни обробки транзакцій: State Machines (AWS Step Functions), Durable Functions, моделі Saga, Scatter-Gather (Fan-out/Fan-in) та експоненційний відступ із джитером
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-thundering-herd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Системні обмеження, критичні бар'єри та вразливості безсерверних архітектур: жорсткі таймаути виконання, обмеження локальних ресурсів, вичерпання пулів з'єднань із СУБД та ефект «громового стада» (Thundering Herd) при відмовах
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вказівки для самостійного осмислення
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Практичний індустріальний / фаховий кейс. Проєктування та розгортання високопродуктивної безсерверної телеметрії для кіберфізичних систем
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Практичний індустріальний / фаховий кейс. Проєктування та розгортання високопродуктивної безсерверної телеметрії для кіберфізичних систем">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-iiot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Комплексний фаховий кейс. Проєктування відмовостійкого безсерверного конвеєра обробки телеметрії промислового Інтернету речей (IIoT)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Комплексний фаховий кейс. Проєктування відмовостійкого безсерверного конвеєра обробки телеметрії промислового Інтернету речей (IIoT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі / ситуації
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Покроковий аналіз та розв'язок
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Покроковий аналіз та розв&#39;язок">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Розрахунок інтенсивності вхідного навантаження
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Оцінка конкурентності за законом Літтла та аналіз перевантаження
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-batching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Інженерний розрахунок параметрів буферизації та пакування (Batching)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Розрахунок місячного бюджету безсерверної архітектури
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Інтерпретація результатів та альтернативні сценарії
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Зведена довідкова система лекції
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Контрольні питання та завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Контрольні питання та завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Прикладні тестові завдання
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Прикладні тестові завдання">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для самостійної роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Завдання для самостійної роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Постановка задачі
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Завдання для виконання
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="5">Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах</h1>
+<h2 id="_1">Мета лекції</h2>
+<p>Формування у майбутніх інженерів комп'ютерних систем комплексу поглиблених теоретичних знань та прикладних інженерних компетентностей щодо проєктування, системного аналізу, розгортання та оптимізації безсерверних обчислювальних середовищ і сервісно-орієнтованих розподілених систем. Навчальний матеріал фокусується на вивченні низькорівневих аспектів віртуалізації та ізоляції обчислень (технології MicroVM та контейнерних пісочниць), математичному моделюванні динаміки конкурентності за законом Літтла, мінімізації часових затримок холодного старту, оптимізації сукупної вартості володіння хмарною інфраструктурою, а також на впровадженні відмовостійких архітектурних патернів координації мікросервісів у високонавантажених кіберфізичних та індустріальних системах.</p>
+<h2 id="_2">Очікувані результати навчання</h2>
+<ol>
+<li>
+<p><strong>Знання та розуміння.</strong> Здобувачі вищої освіти демонструють системні знання архітектурних принципів безсерверних обчислень, розрізняють технологічні механізми ізоляції середовищ виконання на рівні ядра операційної системи та гіпервізорів MicroVM, а також розуміють повний життєвий цикл подієво-керованих функцій і специфіку їх функціонування в мультитенантних дата-центрах.</p>
+</li>
+<li>
+<p><strong>Застосування.</strong> Студенти вміють розраховувати параметри розподілу пулів конкурентності, розраховувати часові затримки обробки сигналів телеметрії, проєктувати декларативні маніфести взаємодії функцій із тригерами та прив'язками, а також застосовувати аналітичні моделі для визначення точки фінансової беззбитковості між моделями FaaS та IaaS.</p>
+</li>
+<li>
+<p><strong>Аналіз.</strong> Слухачі здатні здійснювати критичний порівняльний аналіз технічних характеристик провідних хмарних платформ FaaS, досліджувати фактори накладних витрат під час холодного старту різних мовних середовищ виконання, а також діагностувати системні вузькі місця, пов'язані з дроселюванням викликів і блокуванням зовнішніх транзакційних сховищ даних.</p>
+</li>
+<li>
+<p><strong>Оцінювання та синтез.</strong> Майбутні інженери набувають здатності проєктувати комплексні відмовостійкі архітектури обробки масивів розподілених даних для кіберфізичних систем, синтезувати складні кінцеві автомати керування бізнес-процесами на основі патернів Saga, Retry з джитером та Fan-out/Fan-in, аргументовано обираючи інженерні компроміси між латентністю, масштабованістю, безпекою та вартістю системи.</p>
+</li>
+</ol>
+<hr />
+<h2 id="_3">Детальний покроковий план лекції</h2>
+<h3 id="1-faas">1. Теоретико-концептуальний базис. Архітектурні засади безсерверних обчислень та системні механізми FaaS</h3>
+<ul>
+<li>
+<p>1.1. Еволюційний перехід від монолітних архітектур і серверної віртуалізації до мікросервісів, контейнеризації та концепції повної абстракції інфраструктури (Serverless Computing)</p>
+</li>
+<li>
+<p>1.2. Системні механізми реалізації парадигми Function-as-a-Service (FaaS): апаратна та ядрова ізоляція мікросередовищ виконання на базі гіпервізорів MicroVM (AWS Firecracker) і пісочниць безпеки (gVisor)</p>
+</li>
+<li>
+<p>1.3. Подієвий життєвий цикл безсерверної функції (Event-Driven Lifecycle), фази ініціалізації та математична формалізація затримок холодного (Cold Start) і теплого (Warm Start) стартів</p>
+</li>
+<li>
+<p>1.4. Системна класифікація джерел подій (синхронні, асинхронні, потокові пулінгові тригери) та концепція декларативних вхідних і вихідних прив'язок (Input/Output Bindings)</p>
+</li>
+</ul>
+<h3 id="2">2. Методологія та аналіз граничних умов. Масштабування, економічні моделі та оркестрація розподілених робочих процесів</h3>
+<ul>
+<li>
+<p>2.1. Формалізовані моделі еластичного масштабування: закон Літтла, керування пулами конкурентності (Reserved, Provisioned, Unreserved Concurrency) та системні механізми дроселювання (Throttling)</p>
+</li>
+<li>
+<p>2.2. Математична модель квантування обчислювальних ресурсів у гігабайт-секундах (<span class="arithmatex">\(\text{GB}\cdot\text{s}\)</span>) та критерії визначення точки беззбитковості (Break-Even Point) між FaaS, PaaS і виділеною інфраструктурою IaaS</p>
+</li>
+<li>
+<p>2.3. Патерни та рушії безсерверної оркестрації: розподілені кінцеві автомати (AWS Step Functions, Azure Durable Functions), патерн компенсуючих транзакцій Saga, розгалуження Fan-out/Fan-in та алгоритми повторів із експоненційним відступом і джитером</p>
+</li>
+<li>
+<p>2.4. Системні обмеження, граничні бар'єри та критичні ризики експлуатації FaaS: часові ліміти виконання (Execution Timeouts), вичерпання пулів з'єднань із реляційними СУБД (Connection Starvation), ефект «громового стада» (Thundering Herd) та специфіка налагодження розподіленого стану</p>
+</li>
+</ul>
+<h3 id="3">3. Практичний індустріальний / фаховий кейс. Архітектурне проєктування безсерверної платформи збору телеметрії</h3>
+<p><strong>Тема наскрізної задачі.</strong> «Проєктування та розрахунок параметрів відмовостійкого безсерверного конвеєра обробки високоінтенсивної телеметрії промислових контролерів (IIoT) на базі AWS Lambda, Step Functions і NoSQL-сховища з гарантованою мінімізацією Cold Start та ізоляцією транзакційних збоїв»</p>
+<h2 id="1-faas_1">1. Теоретико-концептуальний базис. Архітектурні засади безсерверних обчислень та системні механізми FaaS</h2>
+<h3 id="11-serverless-computing">1.1. Еволюційний перехід від монолітних архітектур і серверної віртуалізації до мікросервісів, контейнеризації та концепції повної абстракції інфраструктури (Serverless Computing)</h3>
+<p>Еволюція обчислювальних систем у сфері комп'ютерної інженерії відображає невпинний рух від монолітної апаратно-залежної структури до граничних рівнів програмної абстракції. На початкових етапах розвитку корпоративних систем панував підхід розгортання монолітних програмних комплексів безпосередньо на фізичних серверах (<strong>Bare-Metal</strong>). За такої організації операційна система, системні бібліотеки, середовище виконання та монолітний бізнес-код функціонували в межах єдиного адресного простору та були жорстко прив'язані до конкретної апаратної конфігурації. Основними недоліками цієї моделі виступали вкрай низький коефіцієнт утилізації обчислювальних потужностей процесорів (який рідко перевищував десять-п'ятнадцять відсотків), тривалий цикл введення в експлуатацію нового обладнання та взаємне блокування процесів у межах спільного ядра операційної системи.</p>
+<p>Поява апаратних розширень віртуалізації (зокрема технологій Intel VT-x та AMD-V) заклала підґрунтя для переходу до парадигми апаратної віртуалізації під керуванням гіпервізорів першого та другого типів. Розгортання віртуальних машин дозволило консолідувати гетерогенні робочі навантаження на єдиному фізичному сервері, гарантуючи ізоляцію пам'яті та ресурсів на рівні гостьових операційних систем. Разом із тим, класична віртуалізація внесла суттєвий оверхед: кожна віртуальна машина потребує виділення гігабайтів оперативної пам'яті для функціонування власного ядра, підтримки віртуалізованих стеків драйверів введення-виведення та емуляції повного набору периферійного обладнання. Час завантаження такої системи вимірювався десятками секунд або хвилинами, що виключало можливість миттєвої реакції на високодинамічні сплески трафіку.</p>
+<p>Розвиток механізмів ізоляції в ядрі операційної системи Linux, таких як простори імен (<strong>Linux Namespaces</strong>) та контрольні групи (<strong>Control Groups, cgroups</strong>), уможливив появу операційної віртуалізації, втіленої в контейнерних рушіях. Контейнеризація усунула потребу в запуску окремих гостьових ядер, забезпечивши спільне використання ресурсів хостової операційної системи за збереження ізоляції процесів, мережевих стеків та монтованих файлових систем. Декомпозиція монолітів на мікросервіси, упаковані в контейнери, суттєво спростила горизонтальне масштабування, проте перенесла значний тягар експлуатаційної складності на інженерні команди: адміністрування кластерних оркестраторів, керування виділенням ресурсів вузлів, конфігурування автоскейлерів та безперервне оновлення базових образів ОС вимагали значних ресурсів.</p>
+<p>Концепція <strong>безсерверних обчислень (Serverless Computing)</strong> стала логічним завершенням процесу відчуження інженерів-розробників від керування фізичною та віртуальною інфраструктурою. Безсерверна парадигма базується на повній декларативній абстракції серверів, автоматичному масштабуванні від нуля до пікових значень і зміні моделі витрат на оплату виключно за фактично виконані кванти корисних обчислень. Порівняльний аналіз архітектурних характеристик наведених обчислювальних парадигм у контексті системної інженерії наведено у таблиці 1.1.</p>
+<p><em>Таблиця 1.1 — Порівняльний аналіз обчислювальних парадигм у розподілених системах</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Архітектурна парадигма</th>
+<th style="text-align: left;">Рівень ізоляції та абстракції</th>
+<th style="text-align: left;">Час ініціалізації середовища</th>
+<th style="text-align: left;">Оверхед за ресурсами (RAM/CPU)</th>
+<th style="text-align: left;">Приклад з реальної практики</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Фізичні сервери (Bare-Metal)</strong></td>
+<td style="text-align: left;">Апаратний рівень без віртуальних прошарків</td>
+<td style="text-align: left;">Дні або тижні (закупівля, монтаж ОС)</td>
+<td style="text-align: left;">Нульовий оверхед, але утилізація процесора складає лише 5–15%</td>
+<td style="text-align: left;">Локальні високопродуктивні кластери СКБД Oracle чи SAP HANA</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Віртуальні машини (IaaS)</strong></td>
+<td style="text-align: left;">Апаратна ізоляція гіпервізором (VT-x, KVM)</td>
+<td style="text-align: left;">Від десятків секунд до кількох хвилин</td>
+<td style="text-align: left;">Високий (виділення окремого ядра ОС, 1–4 ГБ RAM на систему)</td>
+<td style="text-align: left;">Віртуальні екземпляри AWS EC2, Proxmox VE, VMware vSphere</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Керовані контейнери (CaaS)</strong></td>
+<td style="text-align: left;">Ізоляція на рівні ядра ОС (Namespaces, Cgroups)</td>
+<td style="text-align: left;">Від сотень мілісекунд до кількох секунд</td>
+<td style="text-align: left;">Низький (спільне ядро ОС, накладні витрати контейнерного рушія)</td>
+<td style="text-align: left;">Мікросервісні комплекси під керуванням кластерів Kubernetes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Функція як послуга (FaaS)</strong></td>
+<td style="text-align: left;">Легковагові пісочниці або MicroVM на рівні процесу</td>
+<td style="text-align: left;">Від одиниць до сотень мілісекунд</td>
+<td style="text-align: left;">Мінімальний (квантування пам'яті від 128 МБ із кроком у 1 МБ)</td>
+<td style="text-align: left;">Подієва обробка в AWS Lambda, Cloudflare Workers, Azure Functions</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>flowchart TD
+    A["Фізична інфраструктура (Bare-Metal)"] --&gt; B["Апаратна віртуалізація (Гіпервізори IaaS)"]
+    B --&gt; C["Операційна віртуалізація (Контейнери CaaS)"]
+    C --&gt; D["Безсерверні мікросередовища (Serverless / FaaS)"]
+
+    subgraph S1 ["Зона відповідальності розробника"]
+        D1["Бізнес-логіка (Handler)"]
+    end
+
+    subgraph S2 ["Зона повної автоматизації хмари"]
+        D2["Runtime &amp; Бібліотеки"]
+        D3["Гостьова ОС / MicroVM"]
+        D4["Апаратні ресурси та мережа"]
+    end
+
+    D -.-&gt; S1
+    D -.-&gt; S2</code></pre>
+<hr />
+<h3 id="12-function-as-a-service-faas-microvm-aws-firecracker-gvisor">1.2. Системні механізми реалізації парадигми Function-as-a-Service (FaaS): апаратна та ядрова ізоляція мікросередовищ виконання на базі гіпервізорів MicroVM (AWS Firecracker) і пісочниць безпеки (gVisor)</h3>
+<p>Парадигма <strong>«Функція як послуга» (Function-as-a-Service, FaaS)</strong> висуває надзвичайно жорсткі вимоги до системної ізоляції обчислень. У мультитенантному хмарному середовищі код від тисяч різних користувачів повинен виконуватися на спільних фізичних серверах без загрози витоку даних чи несанкціонованого доступу до ресурсів хоста. Класичні контейнери Linux на базі спільних просторів імен виявляються вразливими до атак типу <strong>Container Escape</strong>, оскільки будь-яка невиправлена вразливість у системних викликах ядра Linux може скомпрометувати весь фізичний вузол. З іншого боку, традиційні гіпервізори на зразок QEMU/KVM містять сотні тисяч рядків коду для емуляції застарілих шин, контролерів переривань і складних пристроїв введення-виведення, що значно розширює потенційну поверхню атаки та спричиняє неприпустимо високі затримки запуску.</p>
+<p>Для вирішення цієї інженерної дилеми була розроблена технологія <strong>MicroVM</strong>, найвідомішим представником якої є відкритий гіпервізор <strong>AWS Firecracker</strong>, написаний на мові системного програмування Rust. Firecracker використовує інтерфейс ядра Linux KVM (<code>/dev/kvm</code>), проте принципово відмовляється від важкої емуляції QEMU. Гіпервізор реалізує мінімалістичну модель пристроїв, що обмежується виключно базовими інтерфейсами: мережевим адаптером <code>virtio-net</code>, блоковим сховищем <code>virtio-block</code>, послідовним портом і механізмом міжпроцесної комунікації <code>virtio-vsock</code>. Завдяки вилученню графічних адаптерів, складних шин PCI та підтримки ACPI, обсяг пам'яті, необхідний для запуску одного екземпляра Firecracker, становить менше 5 МБ, а час ініціалізації мікро-віртуальної машини скорочено до 5 мілісекунд. Це дозволяє здійснювати щільне розміщення тисяч повністю апаратно ізольованих середовищ FaaS на одному фізичному хості.</p>
+<p>Альтернативним підходом до ізоляції є технологія контейнерних пісочниць, реалізована в проєкті <strong>gVisor</strong> від компанії Google, що використовується для забезпечення функціонування Google Cloud Functions. Архітектурно gVisor складається з двох ключових компонентів: ядра користувацького простору <strong>Sentry</strong> та захищеного демона файлової системи <strong>Gofer</strong>. Sentry перехоплює всі системні виклики гостьової програми (через механізми <code>ptrace</code> або віртуалізацію KVM) та емулює понад двісті системних викликів Linux всередині власного процесу, написаного на мові Go із вбудованою безпекою пам'яті. Гостьова програма повністю ізольована від безпосереднього доступу до ядра хоста: якщо програма генерує небезпечний виклик, Sentry обробляє його всередині пісочниці, запобігаючи дестабілізації або злому хостової операційної системи.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph TraditionalVM ["Традиційна VM (QEMU/KVM)"]
+        A1["Гостьовий додаток"] --&gt; B1["Повна гостьова ОС"]
+        B1 --&gt; C1["QEMU (Емуляція PCI/IDE/BIOS)"]
+        C1 --&gt; D1["Linux KVM Kernel"]
+    end
+
+    subgraph MicroVMStructure ["MicroVM (AWS Firecracker)"]
+        A2["Функція FaaS (Handler)"] --&gt; B2["Мінімізоване ядро Linux"]
+        B2 --&gt; C2["Firecracker (Тільки VirtIO)"]
+        C2 --&gt; D2["Linux KVM Kernel"]
+    end
+
+    subgraph SandboxStructure ["Контейнерна пісочниця (gVisor)"]
+        A3["Функція FaaS (Handler)"] --&gt; B3["Sentry (Емуляція системних викликів)"]
+        B3 --&gt; C3["Gofer (Ізольований I/O)"]
+        C3 --&gt; D3["Host Linux Kernel"]
+    end</code></pre>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У 2018 році компанія Amazon повністю перевела сервіси AWS Lambda та AWS Fargate з контейнерів Docker на власні мікро-віртуальні машини Firecracker. Це дозволило одночасно досягти гарантій безпеки банківського рівня (повна апаратна ізоляція адресного простору процесора та таблиць сторінок пам'яті) і скоротити час холодного старту обчислювальних середовищ до субсекундних показників при утилізації тисяч мікроконтейнерів на фізичних серверах AWS.</p>
+</blockquote>
+<hr />
+<h3 id="13-event-driven-lifecycle-cold-start-warm-start">1.3. Подієвий життєвий цикл безсерверної функції (Event-Driven Lifecycle), фази ініціалізації та математична формалізація затримок холодного (Cold Start) і теплого (Warm Start) стартів</h3>
+<p>Життєвий цикл функції у середовищі FaaS підпорядковується суворій подієво-орієнтованій моделі керування (<strong>Event-Driven State Machine</strong>). На відміну від класичних демонів чи веб-серверів, які постійно прослуховують мережевий сокет у фоновому режимі, екземпляр безсерверної функції розгортається реактивно, виключно у відповідь на появу дискретного сигналу від зовнішнього джерела подій. Після завершення обчислювального завдання середовище або консервується для подальшого повторного використання, або повністю знищується платформою з метою вивільнення ресурсів фізичного сервера.</p>
+<p>У разі надходження виклику за відсутності готового екземпляра виникає феномен <strong>холодного старту (Cold Start)</strong>. Цей стан передбачає послідовне проходження системою чотирьох обов'язкових етапів: алокації базового ізольованого середовища (MicroVM або простору імен), доставки та монтування кодового артефакту з розподіленого сховища, завантаження середовища виконання мови програмування (інтерпретатора Python, Node.js або віртуальної машини JVM) та виконання статичного глобального коду ініціалізації. Лише після проходження цих фаз управління передається функції-обробнику (<strong>Handler</strong>). Якщо наступний виклик надходить протягом періоду збереження активного стану («теплий стан», <strong>Warm State</strong>, зазвичай 5–15 хвилин), платформа реалізує <strong>теплий старт (Warm Start)</strong>, передаючи подію безпосередньо у вже ініціалізований процес у пам'яті.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; Idle: Очікування події (Масштаб = 0)
+
+    state "Холодний старт (Cold Start Latency)" as ColdPhase {
+        AllocEnv: 1. Виділення MicroVM (KVM алокація)
+        FetchArtifact: 2. Завантаження коду / шарів з S3
+        InitRuntime: 3. Старт рантайму (JVM / V8 / CPython)
+        ExecGlobal: 4. Виконання глобального коду і пулів DB
+
+        AllocEnv --&gt; FetchArtifact
+        FetchArtifact --&gt; InitRuntime
+        InitRuntime --&gt; ExecGlobal
+    }
+
+    Idle --&gt; ColdPhase: Подія за відсутності теплого екземпляра
+
+    state "Виконання запиту (Execution Phase)" as ActivePhase {
+        InvokeHandler: Виконання Handler(event, context)
+    }
+
+    ExecGlobal --&gt; ActivePhase: Середовище готове
+    Idle --&gt; ActivePhase: Подія на теплий екземпляр (Warm Start)
+
+    state "Консервація (Warm Idle)" as PreservePhase {
+        PreserveState: Заморозка процесу в RAM (5-15 хв)
+    }
+
+    ActivePhase --&gt; PreservePhase: Успішне завершення виконання
+    PreservePhase --&gt; ActivePhase: Повторний виклик до таймауту
+    PreservePhase --&gt; [*]: Таймаут неактивності / GC вилучення</code></pre>
+<p>З точки зору комп'ютерної інженерії, результуюча затримка відгуку системи <span class="arithmatex">\(T_{\text{response}}\)</span> описується детермінованою сумою часових інтервалів низькорівневих операцій. Загальне математичне рівняння часу обробки запиту має такий вигляд:</p>
+<div class="arithmatex">\[T_{\text{response}} = T_{\text{net}} + T_{\text{init}} + T_{\text{exec}}\]</div>
+<p>Розкриваючи складову часу ініціалізації <span class="arithmatex">\(T_{\text{init}}\)</span> через характеристики системних фаз, отримуємо повну модель часових витрат:</p>
+<div class="arithmatex">\[T_{\text{init}} = \delta \cdot \left( t_{\text{alloc}} + t_{\text{fetch}}(S) + t_{\text{runtime}} + t_{\text{static}} \right)\]</div>
+<p>де <span class="arithmatex">\(\delta \in \{0, 1\}\)</span> — дискретний індикатор стану середовища, який дорівнює одиниці при холодному старті (<span class="arithmatex">\(\delta = 1\)</span>) та нулю при теплому старті (<span class="arithmatex">\(\delta = 0\)</span>), <span class="arithmatex">\(T_{\text{net}}\)</span> — подвійна кругова мережева затримка транспортування повідомлення, <span class="arithmatex">\(t_{\text{alloc}}\)</span> — час взаємодії гіпервізора з ядром хоста для конфігурування MicroVM (виділення сторінок пам'яті, налаштування віртуальних CPU), <span class="arithmatex">\(t_{\text{fetch}}(S)\)</span> — тривалість завантаження кодового архіву розміром <span class="arithmatex">\(S\)</span> байт із віддаленого об'єктного сховища через внутрішню мережу ЦОД, <span class="arithmatex">\(t_{\text{runtime}}\)</span> — системний час старту процесу віртуальної машини відповідної мови програмування, <span class="arithmatex">\(t_{\text{static}}\)</span> — час виконання команд глобальної області видимості (імпорт модулів, встановлення мережевих сокетів, парсинг конфігурацій), а <span class="arithmatex">\(T_{\text{exec}}\)</span> — безпосередній час роботи алгоритму обробки події всередині функції Handler.</p>
+<p>Тривалість завантаження артефакту <span class="arithmatex">\(t_{\text{fetch}}(S)\)</span> визначається через ємність пакета та пропускну здатність шини:</p>
+<div class="arithmatex">\[t_{\text{fetch}}(S) = \frac{S}{B_{\text{fabric}}} + \tau_{\text{io}}\]</div>
+<p>де <span class="arithmatex">\(S\)</span> позначає розмір стисненого образу або архіву функції, <span class="arithmatex">\(B_{\text{fabric}}\)</span> визначає ефективну пропускну здатність внутрішньої мережевої фабрики передачі даних дата-центру, а <span class="arithmatex">\(\tau_{\text{io}}\)</span> відображає накладні витрати на дискові операції введення-виведення при розпакуванні файлової системи rootfs.</p>
+<blockquote>
+<p><strong>ТИПОВА ПОМИЛКА:</strong> Поширена помилка системних архітекторів полягає в розміщенні важких клієнтів з'єднання з базами даних і операцій парсингу статичних конфігурацій всередині функції <code>Handler</code>. У безсерверній архітектурі такі ресурсомісткі виклики повинні виноситися в глобальний контекст (<strong>Static Initialization Scope</strong>). Код глобального контексту виконується лише один раз під час холодного старту, що дозволяє усім наступним теплим викликам повторно використовувати встановлені TCP-сокети та закешовані метадані без повторних часових затримок.</p>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У високонавантажених IoT-шлюзах моніторингу залізничного транспорту використання функцій на базі Java Virtual Machine без оптимізації призводило до затримок холодного старту на рівні 2,5–3,2 секунди через тривалу ініціалізацію класів у JVM. Переписування коду функції обробки телеметрії на мову Rust із компіляцією в нативний двійковий файл для середовища AWS Lambda Custom Runtime скоротило час холодного старту до 18 мілісекунд, забезпечивши обробку аварійних повідомлень сенсорів у гарантованих часових межах реального часу.</p>
+</blockquote>
+<hr />
+<h3 id="14-inputoutput-bindings">1.4. Системна класифікація джерел подій (синхронні, асинхронні, потокові пулінгові тригери) та концепція декларативних вхідних і вихідних прив'язок (Input/Output Bindings)</h3>
+<p>Екосистема FaaS перетворює обчислювальні процеси на підсистему реактивного реагування на події. <strong>Джерело подій (Event Source / Trigger)</strong> являє собою зовнішню сутність, яка фіксує зміну стану в інформаційному просторі та генерує структурований пакет метаданих (зазвичай у форматі JSON), що передається безсерверній функції як аргумент <code>event</code>.</p>
+<p>За механізмом передачі даних та моделлю координації розподілених потоків джерела подій класифікуються на три системні категорії:</p>
+<p>Синхронні тригери передбачають блокуючу модель <strong>Request-Response</strong>. Клієнтська сторона ініціює виклик (наприклад, надсилаючи HTTP-запит до API Gateway або Application Load Balancer) і утримує відкрите TCP-з'єднання, очікуючи завершення роботи функції та повернення результату з кодом статусу. У разі аварійного збою функції обробка помилки повністю покладається на клієнта.</p>
+<p>Асинхронні тригери реалізують модель повної декомпозиції в часі за схемою <strong>Fire-and-Forget</strong>. Джерело події (наприклад, сервіс об'єктного сховища при завантаженні нового файлу чи сервіс черг повідомлень) надсилає подію на платформу FaaS, яка негайно підтверджує отримання кодом <code>202 Accepted</code> і поміщає виклик у внутрішню чергу диспетчеризації. Платформа бере на себе відповідальність за гарантовану доставку: у разі збою коду функції виконуються повторні спроби запуску за алгоритмом експоненційного відступу, а при вичерпанні ліміту невдалих спроб повідомлення надсилається до черги недоставлених повідомлень (<strong>Dead Letter Queue, DLQ</strong>).</p>
+<p>Потокові тригери на основі опитування (<strong>Stream-based Polling Triggers</strong>) орієнтовані на обробку безперервних потоків телеметрії та розподілених журналів подій (наприклад, Apache Kafka, AWS Kinesis, Azure Event Hubs). У цьому сценарії спеціалізований внутрішній сервіс платформи FaaS — поллер — постійно опитує шарди або розділи журналу, зчитує пачки записів (<strong>Batch Processing</strong>) та передає їх на обробку функції зі збереженням суворої послідовності в межах кожного окремого шарду.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph TriggerTypes ["Класифікація джерел подій FaaS"]
+        Sync["1. Синхронні тригери&lt;br/&gt;(API Gateway, ALB)"]
+        Async["2. Асинхронні тригери&lt;br/&gt;(S3, SNS, EventBridge)"]
+        Stream["3. Потокові тригери&lt;br/&gt;(Kafka, Kinesis, DynamoDB Streams)"]
+    end
+
+    subgraph FaaSPlatform ["Середовище обробки FaaS"]
+        Router["Внутрішній диспетчер подій"]
+        InternalQueue["Буферна черга повторів"]
+        Poller["Внутрішній поллер шарду"]
+        Handler["Тіло функції (Handler)"]
+    end
+
+    Sync --&gt;|Блокуючий виклик / Очікування| Router --&gt; Handler
+    Async --&gt;|Асинхронний Push| InternalQueue --&gt; Handler
+    Stream --&gt;|Читання пачок / Polling| Poller --&gt; Handler</code></pre>
+<p>Для мінімізації шаблонного коду (<strong>Boilerplate Code</strong>) та усунення рутинних операцій з інтеграції зовнішніх сервісів у сучасних безсерверних середовищах використовується концепція <strong>декларативних прив'язок (Bindings)</strong>, найбільш повно втілена в архітектурі Azure Functions. Традиційний підхід вимагає від розробника вручну підключати важкі клієнтські бібліотеки SDK, ініціалізувати авторизаційні токени, керувати сокетами та явно викликати методи читання чи запису даних у зовнішні СУБД.</p>
+<p>Механізм прив'язок розділяє системну інтеграцію на дві фази:</p>
+<ol>
+<li>
+<p><strong>Вхідні прив'язки (Input Bindings)</strong> дозволяють платформі автоматично, згідно з декларативним маніфестом, витягти дані із зовнішнього джерела (наприклад, зчитати документ з бази даних NoSQL за ідентифікатором, переданим у подію тригера) та подати їх у готовому структурованому вигляді як додатковий аргумент функції Handler до початку її виконання.</p>
+</li>
+<li>
+<p><strong>Вихідні прив'язки (Output Bindings)</strong> перехоплюють вихідні дані, повернуті функцією після завершення розрахунків, і автоматично транслюють їх у цільовий сервіс (наприклад, зберігають новий запис у базі даних, створюють файл у блоковому сховищі або відправляють повідомлення в брокер черг) без жодного рядка спеціалізованого клієнтського коду всередині самої функції.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> Чому в мікросервісних архітектурах прямолінійна побудова ланцюжка послідовних викликів між безсерверними функціями через синхронні HTTP-тригери вважається критичним антипатерном проектування?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: Каскадне блокування ресурсів, мультиплікація затримок холодного старту та подвійна фінансова тарифікація.</strong></p>
+<ol>
+<li>
+<p><strong>Логічне та інженерне обґрунтування:</strong> Прямий синхронний виклик однієї FaaS-функції з іншої створює стан блокуючого очікування (Idle Waiting). Перша функція продовжує споживати виділені обчислювальні ресурси (оперативну пам'ять та час виконання), повністю простоюючи в очікуванні відповіді від другої функції. Це спричиняє ефект <strong>подвійної тарифікації (Double Billing)</strong>, коли клієнт одночасно оплачує час виконання обох функцій за корисну роботу, яку виконує лише одна з них. Крім того, виникає явище <strong>каскадного холодного старту</strong>: якщо обидві функції стартують із холодного стану, затримки їхньої ініціалізації сумуються, призводячи до перевищення клієнтських таймаутів.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів (чому альтернативні інтерпретації є помилковими):</strong></p>
+</li>
+<li>
+<p>Твердження про те, що синхронні виклики не підтримуються безсерверними мережами, є хибним: технічно функції можуть здійснювати довільні вихідні мережеві запити через HTTP/HTTPS.</p>
+</li>
+<li>
+<p>Твердження, що такий підхід порушує права доступу IAM, є некоректним, оскільки механізми автентифікації дозволяють підписувати міжсервісні запити за допомогою системних ролей виконання (Execution Roles).</p>
+</li>
+<li>
+<p>Правильним архітектурним рішенням для організації зв'язку між безсерверними компонентами є використання асинхронних черг (SQS/Service Bus), шин подій (EventBridge/Event Grid) або спеціалізованих рушіїв оркестрації кінцевих автоматів (Step Functions).</p>
+</li>
+</ol>
+</details>
+<hr />
+<h3 id="_4">Вказівки для самостійного осмислення</h3>
+<ol>
+<li>
+<p>Дослідіть та порівняйте архітектуру компонентів гіпервізора AWS Firecracker та контейнерної пісочниці gVisor, звернувши особливу увагу на різницю між прямим використанням апаратного модуля KVM та перехопленням системних викликів у просторі користувача за допомогою рушія Sentry.</p>
+</li>
+<li>
+<p>Проаналізуйте вихідний код власної навчальної або виробничої функції-обробника та визначте, які операції ініціалізації сторонніх SDK або клієнтів баз даних можуть бути винесені за межі тіла обробника подій у глобальний контекст для радикального скорочення часу повторних викликів.</p>
+</li>
+<li>
+<p>Розрахуйте сумарний час затримки холодного старту для системи збору телеметрії за умови, що розмір кодового архіву становить 85 мегабайтів, швидкість каналу передачі даних всередині ЦОД дорівнює 1 гігабіту на секунду, а середовище виконання базується на платформі Node.js 20 LTS.</p>
+</li>
+</ol>
+<h2 id="2_1">2. Методологія та аналіз граничних умов. Керування конкурентністю, моделі масштабування та оркестрація розподілених конвеєрів</h2>
+<h3 id="21-reserved-unreserved-provisioned-concurrency">2.1. Математичне моделювання паралелізму за законом Літтла та стратегії диспетчеризації пулу конкурентності (Reserved, Unreserved, Provisioned Concurrency)</h3>
+<p>Математичний апарат теорії масового обслуговування є фундаментом для інженерного розрахунку обчислювальних ресурсів у безсерверних середовищах. Основним інваріантом, що пов'язує інтенсивність зовнішнього навантаження із системною місткістю платформи, виступає теорема Літтла. У застосуванні до парадигми безсерверних функцій закон стверджує, що середня кількість одночасно активних екземплярів обчислювального середовища прямо пропорційна середній швидкості надходження вхідних подій та середньому часу їх обробки. </p>
+<p>Формалізація динаміки масштабування та виникнення стану насичення системи здійснюється за наступним покроковим алгоритмом:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 1 (Розрахунок базової конкурентності):} &amp; \quad C(t) = \lambda(t) \cdot \overline{T}_{\text{exec}} \\
+\text{Крок 2 (Швидкість нарощування попиту):} &amp; \quad \frac{dC}{dt} = \frac{d\lambda(t)}{dt} \cdot \overline{T}_{\text{exec}} + \lambda(t) \cdot \frac{d\overline{T}_{\text{exec}}}{dt} \\
+\text{Крок 3 (Модель доступної ємності платформи):} &amp; \quad C_{\text{avail}}(t) = \min \left( C_{\text{burst}} + R_{\text{scale}} \cdot (t - t_0), \; C_{\text{limit}} \right) \\
+\text{Крок 4 (Критерій виникнення дроселювання):} &amp; \quad \text{Drop}(t) = \max \left( 0, \; C(t) - C_{\text{avail}}(t) \right) &gt; 0
+\end{aligned}
+\]</div>
+<p>де параметр <span class="arithmatex">\(C(t)\)</span> позначає необхідну кількість одночасно функціонуючих контейнерів або мікро-віртуальних машин у момент часу <span class="arithmatex">\(t\)</span>, <span class="arithmatex">\(\lambda(t)\)</span> визначає миттєву інтенсивність вхідного потоку запитів, виражену в кількості подій за секунду, <span class="arithmatex">\(\overline{T}_{\text{exec}}\)</span> є математичним сподіванням тривалості обробки одного виклику в секундах, <span class="arithmatex">\(C_{\text{burst}}\)</span> задає апаратний ліміт миттєвого виділення ресурсів, що надається провайдером без затримок, <span class="arithmatex">\(R_{\text{scale}}\)</span> регламентує максимальну швидкість лінійного масштабування інфраструктури (наприклад, п'ятсот додаткових екземплярів щохвилини), <span class="arithmatex">\(C_{\text{limit}}\)</span> позначає жорстку стелю конкурентності для облікового запису в межах хмарного регіону, а функція <span class="arithmatex">\(\text{Drop}(t)\)</span> чисельно визначає обсяг запитів, що зазнають апаратного або програмного скидання в одиницю часу.</p>
+<p>Диспетчеризація обчислювальних ресурсів у FaaS спирається на розподіл загального пулу конкурентності облікового запису між трьома базовими стратегіями конфігурування:</p>
+<ol>
+<li>
+<p>Зарезервована конкурентність (<strong>Reserved Concurrency</strong>) виділяє строго визначену частину регіонального пулу для конкретної функції, гарантуючи ізоляцію обчислювальних потужностей від сусідніх мікросервісів та одночасно встановлюючи верхній поріг масштабування, що унеможливлює перевантаження підпорядкованих реляційних баз даних.</p>
+</li>
+<li>
+<p>Незбережена або спільна конкурентність (<strong>Unreserved Concurrency</strong>) являє собою нерозподілений залишок загального ліміту облікового запису, за використання якого всі недекларовані функції змагаються за принципом розділення спільного середовища, що несе ризик повної деградації другорядних сервісів при спалаху активності критичної функції.</p>
+</li>
+<li>
+<p>Попередньо виділена конкурентність (<strong>Provisioned Concurrency</strong>) утримує в оперативній пам'яті фізичних вузлів цільову кількість постійно прогрітих мікро-віртуальних машин із завантаженим середовищем виконання мови програмування та ініціалізованим статичним контекстом, зводячи затримку холодного старту до нуля ціною безперервної оплати фонового простою таких екземплярів.</p>
+</li>
+</ol>
+<p>Аналіз граничних умов показує, що модель Літтла втрачає адекватність у реальних системах, якщо математичне сподівання часу виконання стає функцією від поточної конкурентності, тобто <span class="arithmatex">\(\overline{T}_{\text{exec}} = f(C)\)</span>. Подібна ситуація виникає за наявності спільних точок блокування, наприклад, централізованого сховища даних або пулу вихідних з'єднань через NAT-шлюз. Коли вхідний потік <span class="arithmatex">\(\lambda(t)\)</span> різко зростає, база даних починає зазнавати затримок очікування на блокуваннях рядків, що спричиняє стрибок <span class="arithmatex">\(\overline{T}_{\text{exec}}\)</span> від ста мілісекунд до кількох секунд. Відповідно до кроку 2 математичної моделі, попит на конкурентність зростає експоненційно, миттєво спустошуючи доступний ліміт <span class="arithmatex">\(C_{\text{limit}}\)</span>. Система потрапляє в режим катастрофічного автоблокування, де всі наступні запити скидаються платформою з помилкою відмови в обслуговуванні, хоча корисна продуктивність обчислювального вузла прямує до нуля.</p>
+<hr />
+<h3 id="22-break-even-point-faas-iaaspaas">2.2. Економічна модель квантування ресурсів, розрахунок точки беззбитковості (Break-Even Point) між FaaS та виділеною інфраструктурою IaaS/PaaS</h3>
+<p>Економічна доцільність впровадження безсерверної парадигми базується на моделі повної відсутності витрат на апаратний простій у моменти нульової активності системи. На противагу серверам IaaS, які потребують безперервної оплати незалежно від коефіцієнта утилізації їхніх процесорів, тарифікація моделі FaaS є строго дискретною та обчислюється як інтеграл споживання виділеного обсягу оперативної пам'яті за тривалістю виконання кожного виклику.</p>
+<p>Для точного інженерного порівняння сукупної вартості володіння інфраструктурою розроблено аналітичний апарат, що дозволяє визначити критичну точку беззбитковості:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{Крок 1 (Цільова функція витрат FaaS):} &amp; \quad \Phi_{\text{FaaS}} = N_{\text{invoc}} \cdot P_{\text{invoc}} + P_{\text{GBs}} \cdot \sum_{i=1}^{N_{\text{invoc}}} \left( \left\lceil \frac{M_i}{\Delta M} \right\rceil \Delta M \cdot 10^{-3} \cdot \left\lceil \frac{t_i}{\Delta t} \right\rceil \Delta t \cdot 10^{-3} \right) \\
+\text{Крок 2 (Цільова функція витрат IaaS):} &amp; \quad \Phi_{\text{IaaS}} = N_{\text{VM}} \cdot \left( T_{\text{month}} \cdot P_{\text{VM\_hour}} \right) + C_{\text{OS}} + C_{\text{maintenance}} \\
+\text{Крок 3 (Рівняння точки беззбитковості):} &amp; \quad \Phi_{\text{FaaS}}(\lambda^*, \overline{t}, M) = \Phi_{\text{IaaS}}(N_{\text{VM}}) \\
+\text{Крок 4 (Аналітичний вираз критичної інтенсивності):} &amp; \quad \lambda^* = \frac{N_{\text{VM}} \cdot T_{\text{month}} \cdot P_{\text{VM\_hour}} + C_{\text{OS}} + C_{\text{maintenance}}}{T_{\text{month\_sec}} \cdot \left( P_{\text{invoc}} + P_{\text{GBs}} \cdot \frac{M}{1024} \cdot \overline{t} \right)}
+\end{aligned}
+\]</div>
+<p>де <span class="arithmatex">\(\Phi_{\text{FaaS}}\)</span> позначає місячну вартість експлуатації функцій, <span class="arithmatex">\(N_{\text{invoc}}\)</span> задає сумарну кількість викликів за розрахунковий період, <span class="arithmatex">\(P_{\text{invoc}}\)</span> визначає базовий тариф за один виклик, <span class="arithmatex">\(P_{\text{GBs}}\)</span> є вартістю споживання одного гігабайт-секунди ресурсів, <span class="arithmatex">\(M_i\)</span> відповідає обсягу оперативної пам'яті у мегабайтах, <span class="arithmatex">\(\Delta M\)</span> та <span class="arithmatex">\(\Delta t\)</span> задають кроки апаратно-програмного квантування ресурсів платформи (для сучасних FaaS-платформ <span class="arithmatex">\(\Delta M = 1\text{ МБ}\)</span>, <span class="arithmatex">\(\Delta t = 1\text{ мс}\)</span>), <span class="arithmatex">\(t_i\)</span> — тривалість роботи процесу, <span class="arithmatex">\(\Phi_{\text{IaaS}}\)</span> описує фіксовані місячні витрати на оренду еквівалентного кластера віртуальних машин, <span class="arithmatex">\(N_{\text{VM}}\)</span> позначає число інстансів, необхідних для покриття навантаження з урахуванням пікового резервування, <span class="arithmatex">\(T_{\text{month}}\)</span> дорівнює середній кількості годин у місяці (приблизно 730 годин), <span class="arithmatex">\(P_{\text{VM\_hour}}\)</span> задає щогодинну ціну оренди віртуального сервера, <span class="arithmatex">\(C_{\text{OS}}\)</span> і <span class="arithmatex">\(C_{\text{maintenance}}\)</span> відображають ліцензійні відрахування та оплату праці системних інженерів на адміністрування ОС, <span class="arithmatex">\(\lambda^*\)</span> чисельно фіксує порогову інтенсивність потоку подій, а <span class="arithmatex">\(T_{\text{month\_sec}}\)</span> дорівнює загальній кількості секунд у місяці (<span class="arithmatex">\(2{,}592 \cdot 10^6\text{ с}\)</span>).</p>
+<blockquote>
+<p><strong>ПРАКТИЧНИЙ ЯКІР:</strong> У 2023 році компанія 37signals (розробники Basecamp та Hey) здійснила публічний аудит хмарних витрат і перенесла низку високонавантажених сервісів із керованих хмарних платформ на власні фізичні сервери. Інженерний аналіз засвідчив, що при стабільному цілодобовому навантаженні на рівні десятків тисяч транзакцій за секунду вартість одиниці обчислювальної потужності у FaaS/PaaS перевищувала еквівалентні витрати на володіння власним апаратним обладнанням у 3,8–4,5 раза через закладену провайдерами маржу на динамічне резервування інфраструктури.</p>
+</blockquote>
+<p>Граничні умови економічної моделі чітко розмежовують сфери застосування технологій:</p>
+<ol>
+<li>
+<p>Якщо розподілена система характеризується високим коефіцієнтом нерівномірності навантаження (відношення пікового трафіку до середнього перевищує значення 5:1, або присутні тривалі нічні періоди повного простою), значення <span class="arithmatex">\(\lambda(t)\)</span> протягом тривалого часу перебуває значно нижче критичного порогу <span class="arithmatex">\(\lambda^*\)</span>, що робить FaaS безальтернативно вигіднішим варіантом.</p>
+</li>
+<li>
+<p>Якщо ж система переходить у режим стабільної, монотонної утилізації з постійно високою інтенсивністю викликів (наприклад, цілодобове потокове кодування відеосигналу або пакетна обробка сейсмічних даних), питома ціна гігабайт-секунди у безсерверному середовищі стає критично невигідною, і сумарні витрати <span class="arithmatex">\(\Phi_{\text{FaaS}}\)</span> починають стрімко зростати, багаторазово перевершуючи фіксовану вартість оренди пулу серверів IaaS.</p>
+</li>
+</ol>
+<hr />
+<h3 id="23-state-machines-aws-step-functions-durable-functions-saga-scatter-gather-fan-outfan-in">2.3. Оркестрація розподілених безсерверних процесів і патерни обробки транзакцій: State Machines (AWS Step Functions), Durable Functions, моделі Saga, Scatter-Gather (Fan-out/Fan-in) та експоненційний відступ із джитером</h3>
+<p>Ізольовані безсерверні функції за своєю фундаментальною природою позбавлені стану між окремими викликами (<strong>Stateless Execution</strong>). Побудова комплексних багатоетапних конвеєрів для кіберфізичних систем вимагає надійного збереження проміжних результатів обчислень, синхронізації асинхронних гілок та гарантованого виконання розподілених транзакцій. Для вирішення цього протиріччя застосовуються спеціалізовані оркестратори, побудовані на базі концепції кінцевих автоматів (<strong>Deterministic State Machines</strong>).</p>
+<p>У середовищі AWS Step Functions життєвий цикл робочого процесу формалізується декларативним JSON-маніфестом на мові Amazon States Language, тоді як у платформі Azure Durable Functions аналогічна координація здійснюється за допомогою імперативного коду із застосуванням механізму фіксації подій (<strong>Event Sourcing</strong>). При виникненні тривалих операцій очікування оркестратор скидає стан потоку в транзакційне сховище та припиняє виконання процесу, усуваючи необхідність оплати за процесорний час простою. Після надходження сигналу завершення зовнішньої операції оркестратор відтворює історію виконання через механізм Replay і повертає потік у активний стан.</p>
+<p>У розподілених безсерверних середовищах класичний протокол двофазної фіксації транзакцій (<strong>Two-Phase Commit, 2PC</strong>) є непридатним через блокуючий характер координатора та високу ймовірність збоїв зв'язку між вузлами. Стандартом забезпечення атомарності розподілених операцій виступає патерн <strong>Saga</strong>. Згідно з цією моделлю, глобальна транзакція розділяється на ланцюг локальних дій <span class="arithmatex">\(T_1, T_2, \dots, T_n\)</span>. Для кожного кроку <span class="arithmatex">\(T_i\)</span>, який модифікує стан апаратного чи програмного компонента системи, обов'язково проєктується парна компенсуюча транзакція <span class="arithmatex">\(C_i\)</span>, яка семантично скасовує внесені зміни та повертає підсистему у вихідний стан. </p>
+<p>Якщо під час виконання етапу <span class="arithmatex">\(T_k\)</span> виникає непоправний збій, оркестратор перериває прямий хід виконання та послідовно запускає ланцюжок компенсацій у зворотному напрямку:</p>
+<div class="arithmatex">\[\text{Прямий конвеєр:} \quad T_1 \to T_2 \to \dots \to T_{k-1} \to T_k (\text{Fail})\]</div>
+<div class="arithmatex">\[\text{Конвеєр компенсації:} \quad C_{k-1} \to C_{k-2} \to \dots \to C_1\]</div>
+<p>Взаємодія компонентів розподіленої системи під час обробки аварійного сигналу телеметрії з переходом до компенсуючих транзакцій проілюстрована на діаграмі послідовності.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant Sensor as IoT-Контролер КФС
+    participant Orchestrator as Оркестратор (Step Functions)
+    participant Worker as FaaS-Обробник (Task A)
+    participant Actuator as Фізичний Привід (Task B)
+    participant Alert as Сервіс Аварій (Compensation)
+
+    Sensor-&gt;&gt;Orchestrator: Подія критичного перевищення тиску
+    activate Orchestrator
+    Orchestrator-&gt;&gt;Worker: Старт кроку T1 (Валідація параметрів)
+    activate Worker
+    Worker--&gt;&gt;Orchestrator: Успішно: Дані підтверджено
+    deactivate Worker
+
+    Orchestrator-&gt;&gt;Actuator: Старт кроку T2 (Закриття магістралі)
+    activate Actuator
+    Note over Actuator: Апаратне заклинювання штока клапана
+    Actuator--&gt;&gt;Orchestrator: Помилка: ActuatorTimeout / HardwareError
+    deactivate Actuator
+
+    Note over Orchestrator: Активація відкату Saga (Rollback Flow)
+    Orchestrator-&gt;&gt;Alert: Старт кроку C1 (Аварійне скидання тиску через байпас)
+    activate Alert
+    Alert--&gt;&gt;Orchestrator: Підтвердження відкриття резервного байпаса
+    deactivate Alert
+
+    Orchestrator--&gt;&gt;Sensor: Статус: Аварійний стан локалізовано через компенсацію
+    deactivate Orchestrator</code></pre>
+<blockquote>
+<p><strong>ВАЖЛИВО:</strong> Кожна компенсуюча транзакція <span class="arithmatex">\(C_i\)</span> у патерні Saga зобов'язана мати властивості абсолютної ідемпотентності та комутативності. Оскільки хмарні мережеві канали гарантують лише доставку за принципом «щонайменше один раз» (<strong>At-Least-Once Delivery</strong>), компенсуюча функція може бути викликана оркестратором багаторазово під час виправлення збоїв, і повторне її виконання не повинно змінювати фінальний безпечний стан керованого об'єкта.</p>
+</blockquote>
+<p>Для забезпечення стійкості до транзитних мережевих помилок алгоритм повторів оркестратора повинен реалізовувати стратегію експоненційного відступу з додаванням випадкового шуму (<strong>Exponential Backoff with Full Jitter</strong>). Час затримки перед здійсненням <span class="arithmatex">\(n\)</span>-ї спроби розраховується за формулою:</p>
+<div class="arithmatex">\[t_{\text{wait}}(n) = \text{random} \left( 0, \; \min \left( T_{\text{max}}, \; T_{\text{base}} \cdot 2^{n-1} \right) \right)\]</div>
+<p>де <span class="arithmatex">\(T_{\text{base}}\)</span> позначає базовий інтервал очікування (наприклад, 1 секунда), <span class="arithmatex">\(T_{\text{max}}\)</span> встановлює жорстку верхню межу паузи між викликами, <span class="arithmatex">\(n\)</span> відображає порядковий номер поточної ітерації повтору, а функція <span class="arithmatex">\(\text{random}(0, X)\)</span> генерує випадкове число з рівномірним розподілом від нуля до <span class="arithmatex">\(X\)</span>, що запобігає одночасній синхронній атаці сотень відновлених функцій на цільовий сервіс.</p>
+<hr />
+<h3 id="24-thundering-herd">2.4. Системні обмеження, критичні бар'єри та вразливості безсерверних архітектур: жорсткі таймаути виконання, обмеження локальних ресурсів, вичерпання пулів з'єднань із СУБД та ефект «громового стада» (Thundering Herd) при відмовах</h3>
+<p>Попри значні переваги еластичності, безсерверна архітектура накладає низку фундаментальних апаратно-програмних обмежень, нехтування якими в інженерній практиці призводить до повної відмови системи.</p>
+<p>Найбільш критичним бар'єром для завдань комп'ютерної інженерії є жорсткий ліміт на тривалість виконання окремої транзакції (<strong>Hard Execution Timeout</strong>). Для більшості публічних хмарних платформ цей показник становить рівно 900 секунд (15 хвилин). Процеси, що вимагають тривалого монолітного рахунку (наприклад, навчання важких моделей штучного інтелекту, безперервне цифрове моделювання фізичних полів або довготривалі сесії взаємодії за бінарними промисловими протоколами), принципово не можуть виконуватися всередині окремої FaaS-функції. Спроба штучного обходу цього обмеження через перезапуск функцій у ланцюжку породжує складні проблеми передачі внутрішнього стану процесора та пам'яті, супроводжуючись накопиченням накладних витрат на ініціалізацію.</p>
+<p>Другим системним бар'єром виступає феномен <strong>вичерпання пулу з'єднань (Connection Starvation)</strong> при взаємодії з класичними реляційними базами даних (PostgreSQL, MySQL, Oracle). Традиційні сервери застосунків утримують стабільний пул із кількох десятків постійних TCP-з'єднань, розподіляючи їх між внутрішніми потоками. У парадигмі FaaS кожен обчислювальний мікроконтейнер є повністю ізольованим процесом. При надходженні стрибка навантаження в 3000 запитів за секунду платформа запускає 3000 незалежних екземплярів функції, кожен з яких намагається встановити власне виділене TCP-з'єднання з базою даних. Реляційна СУБД миттєво вичерпує ліміт доступних файлових дескрипторів і пам'яті на обслуговування процесів бекенда, після чого переходить у стан відмови в обслуговуванні для всіх компонентів інфраструктури. Вирішення цієї проблеми вимагає обов'язкового розгортання проміжних безсерверних мультиплексорів з'єднань (таких як AWS RDS Proxy або зовнішні екземпляри PgBouncer).</p>
+<p>Третім критичним ризиком є ефект <strong>«громового стада» (Thundering Herd)</strong> у поєднанні зі штормом повторних спроб (<strong>Retry Storm</strong>). Якщо зовнішній сервіс або база даних стає тимчасово недоступною, тисячі паралельно функціонуючих екземплярів безсерверних функцій фіксують помилку та одночасно ініціюють автоматичні повторні виклики. Цей лавиноподібний сумарний потік запитів генерує штучну розподілену атаку на відмову в обслуговуванні (DDoS), остаточно блокуючи спроби цільової підсистеми відновити свою штатну працездатність.</p>
+<p>Комплексне зіставлення архітектурних стратегій координації обчислень у безсерверних середовищах із урахуванням їхніх граничних бар'єрів систематизовано в таблиці 2.1.</p>
+<p><em>Таблиця 2.1 — Порівняльна матриця стратегій координації та масштабування FaaS-систем</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Модель організації обчислень</th>
+<th style="text-align: left;">Механізм керування станом</th>
+<th style="text-align: left;">Складність впровадження</th>
+<th style="text-align: left;">Критичні ризики / Обмеження</th>
+<th style="text-align: left;">Приклад з реальної практики</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Прямі синхронні HTTP-виклики</strong></td>
+<td style="text-align: left;">Відсутній (повна втрата контексту між кроками)</td>
+<td style="text-align: left;">Низька (базові клієнтські HTTP-запити)</td>
+<td style="text-align: left;">Каскадні відмови, подвійна тарифікація часу блокування, жорсткий зв'язок компонентів</td>
+<td style="text-align: left;">Прості вебхуки сповіщень у сервісах Slack або GitHub</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Асинхронна хореографія через черги</strong></td>
+<td style="text-align: left;">Розподілений стан у брокерах (SQS, EventBridge)</td>
+<td style="text-align: left;">Середня (потребує налаштування DLQ та ідемпотентності)</td>
+<td style="text-align: left;">Відсутність централізованого аудиту, висока ймовірність неузгодженості даних</td>
+<td style="text-align: left;">Подієва реєстрація транзакцій у платіжних шлюзах Stripe</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Централізована оркестрація (Step Functions)</strong></td>
+<td style="text-align: left;">Декларативні кінцеві автомати (ASL JSON)</td>
+<td style="text-align: left;">Висока (формалізація графів переходів та помилок)</td>
+<td style="text-align: left;">Граничні ліміти на розмір контексту події (до 256 КБ), накладні витрати переходів</td>
+<td style="text-align: left;">Оркестрація ланцюгів контролю якості на заводах Tesla</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Durable Functions (Event Sourcing)</strong></td>
+<td style="text-align: left;">Автоматичне збереження історії та Replay в коді</td>
+<td style="text-align: left;">Дуже висока (вимоги детермінізму до коду оркестратора)</td>
+<td style="text-align: left;">Ризик розбіжностей історії при модифікації коду в процесі виконання</td>
+<td style="text-align: left;">Банківський кліринг транзакцій у фінансових системах</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>КОНТРОЛЬНЕ ПИТАННЯ:</strong> У системі моніторингу промислового підприємства 10 000 IoT-сенсорів кожні 10 секунд надсилають пакети телеметрії. У випадку аварійної ситуації на виробництві виникає сплеск: усі датчики одночасно переходять на частоту надсилання 10 пакетів за секунду. Обробку виконує безсерверна функція FaaS, час виконання якої в штатному режимі становить 50 мс, а дані зберігаються в реляційній базі даних PostgreSQL, яка здатна підтримувати максимум 200 одночасних підключень. Які граничні бар'єри спрацюють у системі, і як інженерно трансформувати архітектуру для гарантування надійності?</p>
+</blockquote>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: Виникнення шторму конкурентності (5000 екземплярів), вичерпання пулу з'єднань PostgreSQL та масове дроселювання викликів платформи.</strong></p>
+<ol>
+<li>
+<p><strong>Поетапний аналітичний розрахунок:</strong></p>
+</li>
+<li>
+<p><strong>Штатний режим:</strong> Інтенсивність надходження подій становить <span class="arithmatex">\(\lambda_1 = \frac{10000}{10} = 1000\text{ req/s}\)</span>. Відповідно до закону Літтла, середня конкурентність дорівнює:
+     $<span class="arithmatex">\(C_1 = 1000 \cdot 0{,}05 = 50\text{ активних екземплярів}\)</span>$
+     Оскільки <span class="arithmatex">\(50 &lt; 200\)</span>, база даних функціонує в межах доступного ліміту підключень.</p>
+</li>
+<li>
+<p><strong>Аварійний піковий режим:</strong> Інтенсивність стрибкоподібно зростає до <span class="arithmatex">\(\lambda_2 = 10000 \cdot 10 = 100000\text{ req/s}\)</span>. Необхідна конкурентність сягає:
+     $<span class="arithmatex">\(C_2 = 100000 \cdot 0{,}05 = 5000\text{ активних екземплярів}\)</span>$</p>
+</li>
+<li>
+<p><strong>Аналіз відмови:</strong> Значення 5000 екземплярів у 5 разів перевищує стандартний ліміт регіональної конкурентності облікового запису (1000 викликів у AWS Lambda), що призводить до негайного масового дроселювання (HTTP 429). Одночасно 1000 функцій, які зуміли стартувати, ініціюють 1000 паралельних підключень до PostgreSQL, миттєво переповнюючи пул з'єднань СУБД (ліміт 200), що спричиняє крах бази даних.</p>
+</li>
+<li>
+<p><strong>Інженерна трансформація архітектури:</strong></p>
+</li>
+<li>
+<p>Встановлення перед FaaS буферизуючого шару розподіленого журналу подій (AWS Kinesis, Kafka або черги SQS FIFO), що повністю знімає ударне навантаження на функцію та переводить обробку в потоковий режим пачками (<strong>Batch Processing</strong>).</p>
+</li>
+<li>
+<p>Впровадження пулера з'єднань або проксі-сервісу (AWS RDS Proxy), що забезпечує мультиплексування тисяч сесій функцій у фіксовані 150 постійних з'єднань із базою даних.</p>
+</li>
+<li>
+<p>Встановлення ліміту Reserved Concurrency для функції на рівні 150 екземплярів, що гарантує захист реляційного сховища навіть за відсутності проксі-сервісу.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h3 id="_5">Вказівки для самостійного осмислення</h3>
+<ol>
+<li>
+<p>Складіть математичне рівняння для розрахунку місячних фінансових витрат безсерверного конвеєра збору даних, який обробляє сто мільйонів транзакцій за місяць, за умови використання архітектури ARM Graviton2 з обсягом пам'яті 512 мегабайтів та середньою тривалістю виконання функції 120 мілісекунд.</p>
+</li>
+<li>
+<p>Спроєктуйте алгоритм компенсуючих дій для патерну Saga у сценарії керування автоматизованим промисловим складом, де послідовно виконуються операції резервування товару в базі даних, формування транспортного завдання для робота-маніпулятора та оновлення статусу в ERP-системі.</p>
+</li>
+<li>
+<p>Проаналізуйте наслідки виникнення збою в роботі сервісу автентифікації під час паралельного виконання п'яти тисяч FaaS-функцій і запропонуйте механізм запобігання каскадному шторму повторних запитів за допомогою алгоритму Circuit Breaker.</p>
+</li>
+</ol>
+<h2 id="3_1">3. Практичний індустріальний / фаховий кейс. Проєктування та розгортання високопродуктивної безсерверної телеметрії для кіберфізичних систем</h2>
+<h3 id="31-iiot">3.1. Комплексний фаховий кейс. Проєктування відмовостійкого безсерверного конвеєра обробки телеметрії промислового Інтернету речей (IIoT)</h3>
+<h4 id="_6">Постановка задачі / ситуації</h4>
+<p>Сучасне високотехнологічне машинобудівне підприємство здійснює модернізацію системи збору та оперативної аналітики телеметрії від роботизованих виробничих ліній. Комплекс містить велику кількість сенсорів вібрації, температури та тиску, підключених до промислових контролерів. У штатному режимі контролери транслюють телеметричні пакети з помірною дискретністю, проте в разі виявлення локальної виробничої аномалії всі сенсори відповідної технологічної секції миттєво переходять у режим високочастотної фіксації параметрів аварії, формуючи критичний спалах навантаження. </p>
+<p>Інженерна команда повинна спроєктувати хмарний конвеєр обробки даних на платформі AWS, який гарантує дотримання суворих вимог угоди про рівень послуг щодо затримки реакції, виключає втрату даних при пікових сплесках та оптимізує щомісячні експлуатаційні витрати інфраструктури.</p>
+<p><em>Таблиця 3.1 — Вхідні інженерні параметри та граничні обмеження системи</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Параметр системи</th>
+<th style="text-align: left;">Символьне позначення</th>
+<th style="text-align: left;">Числове значення</th>
+<th style="text-align: left;">Інженерне обґрунтування / Обмеження</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Загальна кількість IoT-контролерів</td>
+<td style="text-align: left;"><span class="arithmatex">\(N_{\text{dev}}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(5\,000\)</span> одиниць</td>
+<td style="text-align: left;">Фізичний парк промислових контролерів на заводі</td>
+</tr>
+<tr>
+<td style="text-align: left;">Розмір одного телеметричного пакета</td>
+<td style="text-align: left;"><span class="arithmatex">\(S_{\text{payload}}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(2\)</span> КБ (<span class="arithmatex">\(2048\)</span> байт)</td>
+<td style="text-align: left;">Структурований бінарний пакет показників у форматі JSON</td>
+</tr>
+<tr>
+<td style="text-align: left;">Частота надсилання у штатному режимі</td>
+<td style="text-align: left;"><span class="arithmatex">\(f_{\text{norm}}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(0{,}2\)</span> Гц (1 раз на <span class="arithmatex">\(5\)</span> с)</td>
+<td style="text-align: left;">Плановий моніторинг робочого стану обладнання</td>
+</tr>
+<tr>
+<td style="text-align: left;">Частота надсилання в аварійному режимі</td>
+<td style="text-align: left;"><span class="arithmatex">\(f_{\text{burst}}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(10\)</span> Гц (<span class="arithmatex">\(10\)</span> разів на <span class="arithmatex">\(1\)</span> с)</td>
+<td style="text-align: left;">Режим високої дискретизації при відхиленні показників</td>
+</tr>
+<tr>
+<td style="text-align: left;">Частка сенсорів в аварійному режимі</td>
+<td style="text-align: left;"><span class="arithmatex">\(\alpha\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(10\%\)</span> (<span class="arithmatex">\(500\)</span> вузлів)</td>
+<td style="text-align: left;">Граничний розмір ізольованого виробничого цеху</td>
+</tr>
+<tr>
+<td style="text-align: left;">Гранично допустимий час обробки (SLA)</td>
+<td style="text-align: left;"><span class="arithmatex">\(T_{\text{SLA}}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(200\)</span> мс</td>
+<td style="text-align: left;">Критичний час для прийняття рішення про зупинку приводу</td>
+</tr>
+<tr>
+<td style="text-align: left;">Регіональний ліміт конкурентності Lambda</td>
+<td style="text-align: left;"><span class="arithmatex">\(C_{\text{limit}}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(1\,000\)</span> інстансів</td>
+<td style="text-align: left;">Базова квота хмарного облікового запису за замовчуванням</td>
+</tr>
+<tr>
+<td style="text-align: left;">Тариф за <span class="arithmatex">\(1\text{ GB}\cdot\text{s}\)</span> (ARM Graviton2)</td>
+<td style="text-align: left;"><span class="arithmatex">\(P_{\text{GBs}}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\$0{,}0000133334\)</span></td>
+<td style="text-align: left;">Енергоефективна архітектура AWS Lambda arm64</td>
+</tr>
+<tr>
+<td style="text-align: left;">Тариф за 1 мільйон викликів</td>
+<td style="text-align: left;"><span class="arithmatex">\(P_{\text{invoc}}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\$0{,}20\)</span></td>
+<td style="text-align: left;">Вартість транзакцій обробника подій</td>
+</tr>
+</tbody>
+</table>
+<p>Для забезпечення надійної буферизації та запобігання втраті даних під час спалахів трафіку обрано комбіновану архітектуру: брокер промислових повідомлень транслює потік у розподілений журнал подій, звідки обчислювальний шар безсерверних функцій вичитує записи пачками та за потреби ініціює кінцевий автомат аварійної зупинки обладнання.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph EdgeLayer ["Периферійний рівень (Фабричні цехи)"]
+        Sensors["5000 Промислових контролерів IIoT"]
+    end
+
+    subgraph IngestionLayer ["Рівень прийому та буферизації"]
+        IoTCore["AWS IoT Core (MQTT Broker)"]
+        Kinesis["Amazon Kinesis Data Streams (Журнал подій)"]
+    end
+
+    subgraph ProcessingLayer ["Безсерверний обчислювальний шар"]
+        IngestLambda["FaaS-Обробник (ARM64 Rust Lambda)"]
+        DLQ["Dead Letter Queue (Amazon SQS)"]
+    end
+
+    subgraph OrchestrationAndStorage ["Рівень стану та оркестрації"]
+        DynamoDB[("Гаряче сховище телеметрії (DynamoDB)")]
+        StepFunc["AWS Step Functions (Express Workflow)"]
+        Actuator["Виконавчий привід аварійної зупинки"]
+    end
+
+    Sensors ==&gt;|TLS MQTT mTLS| IoTCore
+    IoTCore --&gt;|IoT Rule Engine| Kinesis
+    Kinesis ==&gt;|Подієвий пулінг пачками| IngestLambda
+    IngestLambda -.-&gt;|Незворотний збій валідації| DLQ
+    IngestLambda --&gt;|Batch Write| DynamoDB
+    IngestLambda --&gt;|Тривога: перевищення порогу| StepFunc
+    StepFunc ==&gt;|Патерн Saga: зворотний зв'язок| Actuator</code></pre>
+<h4 id="_7">Покроковий аналіз та розв'язок</h4>
+<h5 id="1">Крок 1. Розрахунок інтенсивності вхідного навантаження</h5>
+<p>На першому етапі необхідно визначити сумарний вхідний потік запитів за секунду для штатного та пікового аварійного режимів роботи підприємства.</p>
+<p>Інтенсивність потоку подій у штатному режимі експлуатації <span class="arithmatex">\(\lambda_{\text{norm}}\)</span> визначається співвідношенням:</p>
+<div class="arithmatex">\[\lambda_{\text{norm}} = N_{\text{dev}} \cdot f_{\text{norm}} = 5000 \cdot 0{,}2 = 1000\text{ req/s}\]</div>
+<p>У разі виникнення локальної аварії в одному з цехів <span class="arithmatex">\(10\%\)</span> контролерів починають надсилати дані з піковою частотою <span class="arithmatex">\(f_{\text{burst}}\)</span>, тоді як решта парку функціонує у попередньому режимі. Сумарна пікова інтенсивність <span class="arithmatex">\(\lambda_{\text{peak}}\)</span> розраховується за формулою:</p>
+<div class="arithmatex">\[\lambda_{\text{peak}} = \left( N_{\text{dev}} \cdot (1 - \alpha) \cdot f_{\text{norm}} \right) + \left( N_{\text{dev}} \cdot \alpha \cdot f_{\text{burst}} \right)\]</div>
+<p>Підставляючи вихідні параметри, отримуємо значення пікового навантаження:</p>
+<div class="arithmatex">\[\lambda_{\text{peak}} = (5000 \cdot 0{,}9 \cdot 0{,}2) + (5000 \cdot 0{,}1 \cdot 10) = 900 + 5000 = 5900\text{ req/s}\]</div>
+<p>Сумарна смуга пропускання мережевого інтерфейсу під час пікового навантаження становить:</p>
+<div class="arithmatex">\[B_{\text{peak}} = \lambda_{\text{peak}} \cdot S_{\text{payload}} = 5900 \cdot 2\text{ КБ} = 11\,800\text{ КБ/с} \approx 11{,}52\text{ МБ/с}\]</div>
+<h5 id="2_2">Крок 2. Оцінка конкурентності за законом Літтла та аналіз перевантаження</h5>
+<p>Для визначення необхідного розміру пулу обчислювальних екземплярів функції застосовується закон Літтла за умови прямого виклику функції на кожен окремий телеметричний пакет. Припустимо, що середня тривалість виконання функції обробника, написаного на мові Python, складає <span class="arithmatex">\(\overline{T}_{\text{exec}} = 80\text{ мс} = 0{,}08\text{ с}\)</span>.</p>
+<p>Необхідна конкурентність у піковому режимі <span class="arithmatex">\(C_{\text{peak}}\)</span> дорівнює:</p>
+<div class="arithmatex">\[C_{\text{peak}} = \lambda_{\text{peak}} \cdot \overline{T}_{\text{exec}} = 5900 \cdot 0{,}08 = 472\text{ активних екземпляри}\]</div>
+<p>Хоча значення <span class="arithmatex">\(472\)</span> формально не перевищує регіональну квоту акаунта <span class="arithmatex">\(C_{\text{limit}} = 1000\)</span>, у разі раптового холодного старту через стрибок навантаження час виконання зростає до <span class="arithmatex">\(\overline{T}_{\text{cold}} = 250\text{ мс} = 0{,}25\text{ с}\)</span>. Розрахунок показує виникнення миттєвого перевантаження:</p>
+<div class="arithmatex">\[C_{\text{cold\_spike}} = 5900 \cdot 0{,}25 = 1475\text{ екземплярів} &gt; C_{\text{limit}}\]</div>
+<p>Значення <span class="arithmatex">\(1475\)</span> перевищує доступну межу в <span class="arithmatex">\(1000\)</span> екземплярів, що призведе до негайного відкидання близько <span class="arithmatex">\(32\%\)</span> пакетів телеметрії з помилкою HTTP 429. Це доводить неприпустимість прямої синхронної обробки високоінтенсивного IoT-трафіку без проміжного буфера.</p>
+<h5 id="3-batching">Крок 3. Інженерний розрахунок параметрів буферизації та пакування (Batching)</h5>
+<p>Для згладжування сплесків та оптимізації конкурентності перед обчислювальним шаром встановлюється розподілений потік Amazon Kinesis Data Streams. Один шард Kinesis гарантує запис до <span class="arithmatex">\(1\text{ МБ/с}\)</span> або <span class="arithmatex">\(1000\text{ записів/с}\)</span> і зчитування до <span class="arithmatex">\(2\text{ МБ/с}\)</span>.</p>
+<p>Мінімальна кількість шардів <span class="arithmatex">\(N_{\text{shards}}\)</span>, необхідна для гарантованого прийому пікового потоку, розраховується як максимум між обмеженням за смугою пропускання та обмеженням за кількістю повідомлень:</p>
+<div class="arithmatex">\[N_{\text{shards}} = \left\lceil \max \left( \frac{B_{\text{peak}}}{1\text{ МБ/с}}, \; \frac{\lambda_{\text{peak}}}{1000\text{ req/s}} \right) \right\rceil = \left\lceil \max \left( \frac{11{,}52}{1}, \; \frac{5900}{1000} \right) \right\rceil = \lceil 11{,}52 \rceil = 12\text{ шардів}\]</div>
+<p>При використанні Kinesis функція AWS Lambda підключається через механізм Event Source Mapping. Поллер зчитує записи пачками з розміром пачки <span class="arithmatex">\(B_{\text{size}} = 100\)</span> повідомлень або вікном накопичення <span class="arithmatex">\(t_{\text{batch}} = 1\text{ с}\)</span>. За такої схеми кількість паралельних функцій Lambda жорстко обмежується кількістю активних шардів:</p>
+<div class="arithmatex">\[C_{\text{kinesis}} = N_{\text{shards}} = 12\text{ одночасних функцій}\]</div>
+<p>Використання компільованої мови Rust у середовищі ARM64 дозволяє обробляти пачку зі 100 записів за <span class="arithmatex">\(\overline{T}_{\text{batch\_exec}} = 15\text{ мс}\)</span>. Це гарантує повну утилізацію смуги пропускання без ризику затримки читання шарду (IteratorAge = 0).</p>
+<h5 id="4">Крок 4. Розрахунок місячного бюджету безсерверної архітектури</h5>
+<p>Розрахуємо сукупні місячні витрати розробленого рішення за умови, що піковий режим триває сумарно 10 годин на місяць, а решту часу (720 годин) система працює в штатному режимі. Обсяг пам'яті для функції сконфігуровано на рівні <span class="arithmatex">\(M = 256\text{ МБ} = 0{,}25\text{ ГБ}\)</span>.</p>
+<p>Сумарна кількість викликів функції за штатний період <span class="arithmatex">\(N_{\text{norm}}\)</span> та за період аварійних сплесків <span class="arithmatex">\(N_{\text{burst}}\)</span> розраховується діленням сумарного потоку повідомлень на розмір пачки <span class="arithmatex">\(B_{\text{size}} = 100\)</span>:</p>
+<div class="arithmatex">\[N_{\text{norm}} = \frac{1000\text{ req/s} \cdot 720 \cdot 3600\text{ с}}{100} = \frac{2{,}592 \cdot 10^9}{100} = 25\,920\,000\text{ викликів}\]</div>
+<div class="arithmatex">\[N_{\text{burst}} = \frac{5900\text{ req/s} \cdot 10 \cdot 3600\text{ с}}{100} = \frac{2{,}124 \cdot 10^8}{100} = 2\,124\,000\text{ викликів}\]</div>
+<p>Загальна кількість запусків функції становить:</p>
+<div class="arithmatex">\[N_{\text{total}} = 25\,920\,000 + 2\,124\,000 = 28\,044\,000\text{ викликів}\]</div>
+<p>Фінансові витрати на оплату обчислювальних гігабайт-секунд <span class="arithmatex">\(\Phi_{\text{compute}}\)</span> за тривалості обробки пачки <span class="arithmatex">\(\overline{T}_{\text{batch\_exec}} = 15\text{ мс} = 0{,}015\text{ с}\)</span> становлять:</p>
+<div class="arithmatex">\[\Phi_{\text{compute}} = N_{\text{total}} \cdot \left( \frac{256}{1024}\text{ ГБ} \right) \cdot 0{,}015\text{ с} \cdot \$0{,}0000133334 = 28\,044\,000 \cdot 0{,}25 \cdot 0{,}015 \cdot 0{,}0000133334 \approx \$1{,}40\]</div>
+<p>Вартість самих запитів <span class="arithmatex">\(\Phi_{\text{requests}}\)</span> дорівнює:</p>
+<div class="arithmatex">\[\Phi_{\text{requests}} = \frac{28\,044\,000}{1\,000\,000} \cdot \$0{,}20 = \$5{,}61\]</div>
+<p>Сумарні щомісячні витрати на безсерверний обчислювальний шар становлять лише <span class="arithmatex">\(\$7{,}01\)</span>, що демонструє колосальну економічну ефективність архітектури завдяки механізму групування записів у пачки.</p>
+<h4 id="_8">Інтерпретація результатів та альтернативні сценарії</h4>
+<p>Отримані результати підтверджують, що правильне поєднання буферизації через Kinesis із безсерверними функціями повністю усуває загрозу вичерпання лімітів конкурентності та зводить ризик холодного старту до нуля для активних шардів. </p>
+<p>У разі зміни вихідних технічних вимог інженерне рішення зазнає таких модифікацій:</p>
+<ol>
+<li>
+<p>Якщо допустима затримка обробки буде знижена з 200 мілісекунд до жорстких 5 мілісекунд реального часу, використання публічного хмарного конвеєра FaaS стане неможливим через стохастичні коливання затримок у мережі Інтернет. У такому сценарії первинна фільтрація та керування аварійними клапанами повинні бути перенесені на локальні периферійні контролери (Edge Computing) на базі промислових комп'ютерів із операційною системою реального часу.</p>
+</li>
+<li>
+<p>Якщо характер навантаження зміниться зі спалахоподібного на стабільний цілодобовий потік інтенсивністю 100 000 запитів за секунду, витрати на шарди Kinesis та запити FaaS перевищать вартість підтримки власного виділеного кластера Kubernetes на базі спотових віртуальних машин IaaS, що вимагатиме зворотної міграції на контейнерну інфраструктуру.</p>
+</li>
+</ol>
+<hr />
+<h3 id="32">3.2. Зведена довідкова система лекції</h3>
+<p>Нижче наведено фундаментальну систематизацію концепцій, технологій та інженерних рішень безсерверної архітектури.</p>
+<p><em>Таблиця 3.2 — Зведена система архітектурних понять, формалізацій та граничних умов</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термін / Концепція</th>
+<th style="text-align: left;">Формалізація / Сутність</th>
+<th style="text-align: left;">Реальний кейс застосування</th>
+<th style="text-align: left;">Основне обмеження / Ризик</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Безсерверні обчислення (Serverless)</strong></td>
+<td style="text-align: left;">Повна операційна абстракція заліза, скейлінг до нуля та оплата за корисні кванти часу</td>
+<td style="text-align: left;">Веб-портали реєстрації подій із нульовою нічною активністю</td>
+<td style="text-align: left;">Відсутність прямого доступу до ядра ОС та низькорівневих мережевих сокетів</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Функція як послуга (FaaS)</strong></td>
+<td style="text-align: left;">Атомарна одиниця виконання бізнес-логіки <span class="arithmatex">\(\text{Handler}(e, c)\)</span> у відповідь на подію</td>
+<td style="text-align: left;">Генерація зменшених копій зображень під час завантаження у хмару</td>
+<td style="text-align: left;">Обмеження на максимальний час роботи (жорсткий таймаут 900 секунд)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Холодний старт (Cold Start)</strong></td>
+<td style="text-align: left;">Сумарна затримка <span class="arithmatex">\(T_{\text{cold}} = t_{\text{alloc}} + t_{\text{fetch}} + t_{\text{runtime}} + t_{\text{static}}\)</span></td>
+<td style="text-align: left;">Перший запуск рідкісної адмін-функції після годин простою</td>
+<td style="text-align: left;">Неприпустимий для систем високої доступності та низьколатентних API</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MicroVM (Firecracker)</strong></td>
+<td style="text-align: left;">Легковаговий KVM-гіпервізор на Rust із мінімалістичною моделлю пристроїв VirtIO</td>
+<td style="text-align: left;">Мультитенантна ізоляція мільйонів користувачів в AWS Lambda</td>
+<td style="text-align: left;">Відсутність підтримки довільних шин PCI, емуляції відео та складного обладнання</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Пісочниця gVisor</strong></td>
+<td style="text-align: left;">Перехоплення та емуляція системних викликів ядром користувацького простору Sentry</td>
+<td style="text-align: left;">Безпечне виконання недовіреного коду в Google Cloud Functions</td>
+<td style="text-align: left;">Зниження швидкодії на системних викликах введення-виведення через подвійне перемикання контексту</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Закон Літтла у FaaS</strong></td>
+<td style="text-align: left;">Формалізація попиту на паралелізм: <span class="arithmatex">\(C = \lambda \cdot \overline{T}_{\text{exec}}\)</span></td>
+<td style="text-align: left;">Розрахунок розміру пулу функцій під час рекламних кампаній</td>
+<td style="text-align: left;">Втрачає лінійність при виникненні затримок у підпорядкованих базах даних</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Дроселювання (Throttling)</strong></td>
+<td style="text-align: left;">Примусове скидання запитів платформою при перевищенні квоти конкурентності</td>
+<td style="text-align: left;">Захист бекенд-сервісів від падіння при лавиноподібному напливі клієнтів</td>
+<td style="text-align: left;">Втрата телеметрії або транзакцій у разі відсутності буферних черг</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Патерн Saga</strong></td>
+<td style="text-align: left;">Ланцюг локальних дій <span class="arithmatex">\(T_i\)</span> із парними компенсуючими кроками <span class="arithmatex">\(C_i\)</span></td>
+<td style="text-align: left;">Розподілена фінансова проводка між балансами клієнтів</td>
+<td style="text-align: left;">Необхідність гарантувати строгу ідемпотентність усіх кроків компенсації</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Експоненційний відступ із джитером</strong></td>
+<td style="text-align: left;">Алгоритм пауз: <span class="arithmatex">\(t = \text{random}(0, \min(T_{\text{max}}, T_{\text{base}} \cdot 2^{n-1}))\)</span></td>
+<td style="text-align: left;">Запобігання перевантаженню відновленого API під час повторних спроб</td>
+<td style="text-align: left;">Збільшення загальної тривалості транзакції для невдалих операцій</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Вичерпання пулу з'єднань</strong></td>
+<td style="text-align: left;">Лавиноподібне захоплення сокетів СУБД ізольованими інстансами FaaS</td>
+<td style="text-align: left;">Підключення тисячі паралельних Lambda-функцій до одного сервера PostgreSQL</td>
+<td style="text-align: left;">Падіння реляційної СУБД через перевищення ліміту процесів операційної системи</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="33">3.3. Контрольні питання та завдання</h3>
+<h4 id="_9">Прикладні тестові завдання</h4>
+<h5 id="1_1">Завдання 1</h5>
+<p>Інженерна команда розгорнула сервіс обробки фінансових платежів на базі AWS Lambda та реляційної бази даних PostgreSQL. Під час пікового навантаження інтенсивність транзакцій зросла з <span class="arithmatex">\(50\text{ req/s}\)</span> до <span class="arithmatex">\(800\text{ req/s}\)</span>. Час виконання одного виклику зріс із <span class="arithmatex">\(100\)</span> мс до <span class="arithmatex">\(1200\)</span> мс через блокування рядків у базі даних. Пул дозволених з'єднань СУБД обмежено значенням 200. Який стан зафіксує система моніторингу за умови відсутності налаштованого пулера з'єднань та використання спільних лімітів конкурентності?</p>
+<ul>
+<li>
+<p>A) Система штатно масштабується до <span class="arithmatex">\(800\)</span> екземплярів без помилок</p>
+</li>
+<li>
+<p>B) База даних переповнить пул з'єднань, а функція перевищить ліміти пам'яті</p>
+</li>
+<li>
+<p>C) Виникне колапс підключень до бази даних, функція Lambda вичерпає конкурентність до 960 одиниць, і виклики почнуть дроселюватися</p>
+</li>
+<li>
+<p>D) Платформа Lambda автоматично зменшить розмір оперативної пам'яті кожного інстансу для запобігання перевантаженню</p>
+</li>
+</ul>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: C.</strong></p>
+<ol>
+<li>
+<p><strong>Логічне та аналітичне обґрунтування:</strong> Згідно із законом Літтла, необхідна конкурентність у момент деградації швидкодії становить <span class="arithmatex">\(C = \lambda \cdot T_{\text{exec}} = 800\text{ req/s} \cdot 1{,}2\text{ с} = 960\)</span> одночасно активних інстансів. Оскільки кожна функція підключається до бази напряму, 960 екземплярів спробують одночасно відкрити 960 TCP-з'єднань, що майже у 5 разів перевищує граничний ліміт PostgreSQL (200 підключень). База даних відхилить запити, а пул конкурентності акаунта буде майже повністю вичерпано, що спричинить стан дроселювання (HTTP 429) для решти функцій компанії в цьому регіоні.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A є помилковим, оскільки базу даних буде паралізовано лавиною з'єднань задовго до обслуговування навантаження.</p>
+</li>
+<li>
+<p>Варіант B некоректний, оскільки дефіцит з'єднань викликає помилку мережевого тайм-ауту сокета, а не аварійне вичерпання виділеної оперативної пам'яті інстансу.</p>
+</li>
+<li>
+<p>Варіант D абсурдний, оскільки обсяг пам'яті безсерверної функції є статичним параметром конфігурації і не змінюється платформою під час виконання.</p>
+</li>
+</ol>
+</details>
+<h5 id="2_3">Завдання 2</h5>
+<p>Яка архітектурна зміна дозволить мінімізувати вплив холодного старту на затримку публічного REST API, побудованого на базі AWS Lambda та Java 21, без внесення суттєвих змін до алгоритмічної бізнес-логіки бекенда?</p>
+<ul>
+<li>
+<p>A) Перенесення коду ініціалізації клієнта бази даних всередину методу handleRequest</p>
+</li>
+<li>
+<p>B) Активація режиму Provisioned Concurrency для цільової функції обробника</p>
+</li>
+<li>
+<p>C) Збільшення сконфігурованого таймауту функції з 15 секунд до 15 хвилин</p>
+</li>
+<li>
+<p>D) Перехід на використання синхронних тригерів через черги Amazon SQS</p>
+</li>
+</ul>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Логічне та аналітичне обґрунтування:</strong> Механізм Provisioned Concurrency повністю усуває фази виділення мікро-віртуальної машини, завантаження пакета коду, старту JVM та виконання статичної ініціалізації під час реальних викликів користувачів, підтримуючи заданий пул інстансів у постійно прогрітому стані. Для важких рантаймів на зразок Java це скорочує час першого відгуку з 1–3 секунд до декількох мілісекунд без потреби переписування архітектури програми.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A є критичним антипатерном, який навпаки суттєво сповільнить виконання кожного виклику, оскільки підключення до бази створюватиметься заново на кожен запит.</p>
+</li>
+<li>
+<p>Варіант C жодним чином не впливає на час початкової ініціалізації контейнера, а лише регулює максимальний інтервал очікування до примусового завершення процесу.</p>
+</li>
+<li>
+<p>Варіант D є некоректним, оскільки черги SQS за своєю природою реалізують асинхронну модель доставки повідомлень, а не синхронний протокол обслуговування публічних REST API.</p>
+</li>
+</ol>
+</details>
+<h5 id="3_2">Завдання 3</h5>
+<p>Під час проєктування розподіленого процесу управління роботизованим маніпулятором розробники застосували патерн Saga в AWS Step Functions. На кроці активації зварювального апарата стався апаратний збій, через що викликано компенсуючу дію відведення маніпулятора у безпечну зону. Яку ключову системну вимогу повинен задовольняти код функції компенсації з огляду на мережеву специфіку хмарного середовища?</p>
+<ul>
+<li>
+<p>A) Функція компенсації має виконуватися за строго блокуючим синхронним протоколом 2PC</p>
+</li>
+<li>
+<p>B) Функція зобов'язана бути повністю ідемпотентною щодо повторних викликів з однаковим ідентифікатором</p>
+</li>
+<li>
+<p>C) Функція повинна завершувати роботу виключно генерацією системного виключення для фіксації в логах</p>
+</li>
+<li>
+<p>D) Функція має використовувати виключно постійні IP-адреси для зв'язку з промисловим контролером</p>
+</li>
+</ul>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Логічне та аналітичне обґрунтування:</strong> У розподілених мережах гарантується доставка повідомлень лише за моделлю «щонайменше один раз» (At-Least-Once Delivery). У разі мережевого збою на етапі підтвердження виконання відкату оркестратор Step Functions може повторно ініціювати ту саму компенсуючу дію. Якщо функція не володіє властивістю ідемпотентності, повторна спроба повернення маніпулятора може призвести до некоректного позиціонування приводу або фізичного пошкодження обладнання.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A хибний, оскільки патерн Saga створювався саме для усунення важкого та блокуючого протоколу 2PC у розподілених системах.</p>
+</li>
+<li>
+<p>Варіант C порушує саму концепцію компенсації: успішне повернення маніпулятора у безпечну зону є коректним виконанням кроку відкату, що не повинно трактуватися як системний крах функції.</p>
+</li>
+<li>
+<p>Варіант D не є обов'язковим, оскільки в хмарних середовищах маршрутизація та ідентифікація промислових шлюзів здійснюються через протоколи TLS-сертифікатів або брокери MQTT, а не фіксовані білі IP-адреси.</p>
+</li>
+</ol>
+</details>
+<h5 id="4_1">Завдання 4</h5>
+<p>Аналітичний відділ підприємства обирає між FaaS (AWS Lambda, 1024 МБ RAM) та виділеним сервером IaaS (t4g.small, вартість $0,0168 за годину) для виконання задачі, яка запускається безперервно з інтенсивністю 50 викликів за секунду із тривалістю обробки 40 мілісекунд. Яка інфраструктурна модель буде економічно доцільнішою за умови розрахунку на стандартний місяць (730 годин)?</p>
+<ul>
+<li>
+<p>A) Модель FaaS, оскільки плата за простій повністю відсутня</p>
+</li>
+<li>
+<p>B) Модель IaaS, оскільки сумарні витрати на FaaS значно перевищать фіксовану вартість інстансу</p>
+</li>
+<li>
+<p>C) Витрати обох моделей будуть повністю ідентичними через нульові накладні витрати пам'яті</p>
+</li>
+<li>
+<p>D) Модель FaaS буде в 10 разів дешевшою завдяки квантуванню пам'яті</p>
+</li>
+</ul>
+<details class="note">
+<summary>Розгорнути аналіз / відповідь</summary>
+<p><strong>Правильний варіант: B.</strong></p>
+<ol>
+<li>
+<p><strong>Логічне та аналітичне обґрунтування:</strong> </p>
+</li>
+<li>
+<p><strong>Вартість IaaS:</strong> Фіксована оренда сервера становить <span class="arithmatex">\(\Phi_{\text{IaaS}} = 730\text{ год} \cdot \$0{,}0168 = \$12{,}26\)</span> на місяць.</p>
+</li>
+<li>
+<p><strong>Вартість FaaS:</strong> Кількість викликів за місяць дорівнює <span class="arithmatex">\(N = 50\text{ req/s} \cdot 730 \cdot 3600\text{ с} = 131\,400\,000\)</span> викликів. Плата за запити: <span class="arithmatex">\(\frac{131{,}4\text{ млн}}{1\text{ млн}} \cdot \$0{,}20 = \$26{,}28\)</span>. Плата за ресурси (<span class="arithmatex">\(1\text{ ГБ RAM}\)</span>, час <span class="arithmatex">\(0{,}04\text{ с}\)</span>, тариф Graviton <span class="arithmatex">\(\$0{,}0000133334\)</span>): <span class="arithmatex">\(131\,400\,000 \cdot 1 \cdot 0{,}04 \cdot \$0{,}0000133334 \approx \$70{,}08\)</span>. Сумарні витрати FaaS: <span class="arithmatex">\(\$26{,}28 + \$70{,}08 = \$96{,}36\)</span>.</p>
+</li>
+<li>
+<p>Витрати на FaaS (<span class="arithmatex">\(\$96{,}36\)</span>) майже у 8 разів перевищують вартість виділеного інстансу IaaS (<span class="arithmatex">\(\$12{,}26\)</span>), що робить оренду віртуальної машини значно вигіднішою для безперервного потоку завдань.</p>
+</li>
+<li>
+<p><strong>Аналіз дистракторів:</strong></p>
+</li>
+<li>
+<p>Варіант A хибний, оскільки за безперервного цілодобового навантаження простій у системі відсутній, тому перевага FaaS щодо безкоштовного простою не діє.</p>
+</li>
+<li>
+<p>Варіант C спростовується базовим математичним розрахунком цільових функцій витрат.</p>
+</li>
+<li>
+<p>Варіант D спирається на помилкове твердження, ігноруючи високу питому вартість гігабайт-секунди та велику сумарну плату за самі виклики.</p>
+</li>
+</ol>
+</details>
+<hr />
+<h4 id="_10">Завдання для самостійної роботи</h4>
+<h5 id="_11">Постановка задачі</h5>
+<p>У медичному кардіологічному центрі проєктується система моніторингу пацієнтів у реальному часі. Мережа містить 2000 портативних електрокардіографів, які передають зашифровані дані кардіограми раз на 10 секунд (розмір пакета 4 КБ). При виявленні гострої шлуночкової аритмії сенсор миттєво активує аварійний режим передачі даних із частотою 20 Гц для високоточного цифрового аналізу. Розробникам необхідно створити безсерверний конвеєр збору даних на платформі за вибором (AWS або Azure), що включає буфер потоку, FaaS-обробник та збереження медичної картки пацієнта, гарантуючи захист конфіденційності та доставку сигналу тривоги на пульт чергового лікаря не пізніше ніж за 500 мілісекунд.</p>
+<h5 id="_12">Завдання для виконання</h5>
+<ol>
+<li>
+<p>Розрахуйте параметри навантаження на систему у штатному та аварійному режимах, визначивши максимальну інтенсивність потоку подій і пікову пропускну здатність вхідного мережевого каналу хмари.</p>
+</li>
+<li>
+<p>Обґрунтуйте вибір між прямим надсиланням подій через API Gateway та буферизованим прийомом через чергу або розподілений журнал подій з погляду запобігання втраті телеметрії.</p>
+</li>
+<li>
+<p>Побудуйте схему конфігурування пулу конкурентності функції-обробника, визначивши стратегію розподілу ресурсів для гарантування обробки екстрених сигналів навіть у разі деградації супутніх сервісів.</p>
+</li>
+<li>
+<p>Складіть аналітичну оцінку щомісячних фінансових витрат на FaaS-обчислення та порівняйте отриману суму з вартістю оренди еквівалентного кластера віртуальних машин з урахуванням витрат на резервування високої доступності.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

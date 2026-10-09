@@ -1,0 +1,2296 @@
+
+<!doctype html>
+<html lang="uk" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Навчальний портал з дисципліни "Сучасні хмарні технології"">
+      
+      
+      
+      
+        <link rel="prev" href="../../lk/lk7/">
+      
+      
+        <link rel="next" href="../lb2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK - Сучасні хмарні технології</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#no-1-iaas-cloud-cli-python-sdk" class="md-skip">
+          Перейти до змісту
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Хедер">
+    <a href="../.." title="Сучасні хмарні технології" class="md-header__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Сучасні хмарні технології
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Переключити на темну тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Переключити на темну тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-label="Переключити на світлу тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Переключити на світлу тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Пошук" placeholder="Пошук" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Шукати">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистити" aria-label="Очистити" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Пошук розпочато
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Робоча програма
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../lk/lk1/" class="md-tabs__link">
+          
+  
+  
+  Лекції
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Лабораторні роботи
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Самостійна робота
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sr/quest/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Перелік тестових завдань
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навігація" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Сучасні хмарні технології" class="md-nav__button md-logo" aria-label="Сучасні хмарні технології" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Сучасні хмарні технології
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Робоча програма
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лекції
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лекції
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 1. Парадигма хмарних обчислень: генезис розподілених систем, сервісні моделі та інфраструктурне розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 2. Технології системної віртуалізації: апаратна реалізація, паравіртуалізація, механізми ядра та конвергентні системи зберігання даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 3. Програмно-конфігуровані хмарні мережі та розподілені системи збереження даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 4. Асинхронні комунікації, черги повідомлень та подійні брокери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 5. Безсерверна архітектура та мікросервіси в розподілених комп'ютерних системах
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 6. Концепція «Інфраструктура як код» та автоматизація розгортання
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lk/lk7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Тема 7. Безпека, хмарний моніторинг, відмовостійкість та аналітика даних
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Лабораторні роботи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Лабораторні роботи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Підготовка середовища та розгортання проєкту (Крок 0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Підготовка середовища та розгортання проєкту (Крок 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Перевірка та встановлення базових утиліт
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Структура каталогів проєкту
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Конфігурування облікових даних доступу
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Порядок виконання роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Порядок виконання роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Індивідуальні завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Покроковий алгоритм та розв'язок еталонного прикладу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Покроковий алгоритм та розв&#39;язок еталонного прикладу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-configsettingsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Створення конфігураційного файлу параметрів config/settings.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-scriptsuser_datash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Створення ініціалізаційного скрипту scripts/user_data.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scriptsec2_managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Реалізація керуючого модуля scripts/ec2_manager.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-mainpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Головна програма оркестрації main.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Запуск, тестування та перевірка результатів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Вимоги до змісту звіту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Контрольні запитання для захисту роботи
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 2. Проєктування та налаштування ізольованої віртуальної мережевої інфраструктури та захищеного Bastion Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 3. Реалізація масштабованого об'єктного сховища з політиками доступу, версійністю, серверним шифруванням та життєвим циклом телеметрії КФС
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 4. Інтеграція хмарних NoSQL баз даних засобами Python SDK: проєктування схем, оптимізація індексів та бенчмаркінг запитів Scan проти Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 5. Побудова асинхронної черги обробки подій та повідомлень між вузлами кіберфізичної системи на базі AWS SQS та обробка збоїв через Dead-Letter Queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 6. Розробка та розгортання безсерверних мікросервісів для потокової обробки телеметрії кіберфізичних систем із тригерами S3, SQS та сповіщеннями через SNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 7. Автоматизоване розгортання повної модульної інфраструктури хмарного застосунку кіберфізичної системи за допомогою HashiCorp Terraform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 8. Налаштування безпеки, ролей інстансів та комплексного моніторингу метрик і тригерів тривоги для кіберфізичних систем
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lb9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ЛБ 9. Проєктування високонадійної еластичної хмарної інфраструктури: Application Load Balancer, Auto Scaling Groups та аварійне відновлення
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Самостійна робота
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sr/quest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Перелік тестових завдань
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Зміст">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Зміст
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Теоретичні відомості
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Підготовка середовища та розгортання проєкту (Крок 0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Підготовка середовища та розгортання проєкту (Крок 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Перевірка та встановлення базових утиліт
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Структура каталогів проєкту
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Конфігурування облікових даних доступу
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Порядок виконання роботи
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Порядок виконання роботи">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Індивідуальні завдання
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Покроковий алгоритм та розв'язок еталонного прикладу
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Покроковий алгоритм та розв&#39;язок еталонного прикладу">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-configsettingsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 1. Створення конфігураційного файлу параметрів config/settings.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-scriptsuser_datash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 2. Створення ініціалізаційного скрипту scripts/user_data.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scriptsec2_managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 3. Реалізація керуючого модуля scripts/ec2_manager.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-mainpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Крок 4. Головна програма оркестрації main.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Запуск, тестування та перевірка результатів
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Вимоги до змісту звіту
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Контрольні запитання для захисту роботи
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="no-1-iaas-cloud-cli-python-sdk">Лабораторна робота № 1. Програмне керування та автоматизація життєвого циклу інстансів IaaS засобами Cloud CLI та Python SDK</h1>
+<p><strong>Мета:</strong> Дослідження фундаментальних архітектурних принципів обчислювальних ресурсів класу «Інфраструктура як послуга» (IaaS), здобуття практичних навичок конфігурування хмарних інтерфейсів командного рядка (Cloud CLI), опанування методів програмної автентифікації та розробка комплексних сценаріїв автоматизації повного життєвого циклу віртуальних машин (створення, параметризація, моніторинг станів, модифікація конфігурації та безпечна утилізація) мовою Python з використанням бібліотеки Boto3 в інфраструктурі Amazon Web Services.</p>
+<p><strong>Стек технологій та інструменти:</strong></p>
+<ul>
+<li>
+<p><strong>Мова програмування та середовище:</strong> Python 3.10+ (CPython), віртуальне середовище <code>venv</code>.</p>
+</li>
+<li>
+<p><strong>Платформа та бібліотеки:</strong> Хмарна платформа Amazon Web Services (AWS), бібліотеки <code>boto3</code> (v1.34+), <code>botocore</code> (v1.34+), <code>tabulate</code> (v0.9+), емулятор локальної хмари <code>LocalStack</code> (опціонально для офлайн-тестування).</p>
+</li>
+<li>
+<p><strong>Інструменти розробки:</strong> Інтерфейс командного рядка AWS CLI v2, інтегроване середовище розробки Visual Studio Code / PyCharm, система контролю версій Git, емулятор терміналу Bash / PowerShell.</p>
+</li>
+</ul>
+<hr />
+<h2 id="1">1 Теоретичні відомості</h2>
+<p>Обчислювальні ресурси моделі «Інфраструктура як послуга» (<strong>IaaS</strong>) є базовим будівельним блоком сучасних хмарних систем. В екосистемі Amazon Web Services сервіс віртуальних обчислень представлений платформою <strong>Amazon Elastic Compute Cloud (AWS EC2)</strong>. Віртуальний сервер у термінології хмарних обчислень іменується <strong>інстансом (Instance)</strong>. Інстанс функціонує як повністю ізольована віртуальна машина, що виконується під управлінням апаратного гіпервізора (KVM або Nitro Hypervisor) на фізичних серверах провайдера.</p>
+<p>Архітектура інстансу EC2 базується на трьох взаємопов'язаних компонентах:</p>
+<ol>
+<li>
+<p><strong>Базовий образ віртуальної машини (Amazon Machine Image, AMI).</strong> Шаблон, який містить попередньо встановлену та налаштовану операційну систему (Linux, Windows Server), системні бібліотеки, драйвери паралельного вводу/виводу (VirtIO / ENA) та початкову конфігурацію ініціалізації.</p>
+</li>
+<li>
+<p><strong>Тип та розмір інстансу (Instance Type).</strong> Апаратно-віртуальна специфікація, яка визначає кількість виділених віртуальних ядер процесора (<strong>vCPU</strong>), обсяг оперативної пам'яті (<strong>RAM</strong>), гарантовану смугу пропускання дискового підключення до сховища EBS (<strong>EBS Bandwidth</strong>) та продуктивність мережевого адаптера (<strong>Network Performance</strong>). Класифікація інстансів використовує стандартизовану номенклатуру, де літера позначає сімейство (наприклад, <code>t</code> — інстанси зі змінною продуктивністю, <code>c</code> — оптимізовані для обчислень, <code>m</code> — загального призначення), цифра — покоління мікроархітектури, а суфікс після крапки — розмірний коефіцієнт (наприклад, <code>t3.micro</code>, <code>c5.large</code>).</p>
+</li>
+<li>
+<p><strong>Блокові накопичувачі (Root &amp; Data Volumes).</strong> Віртуалізовані блокові пристрої <strong>Amazon Elastic Block Store (EBS)</strong>, які виконують роль системного завантажувального або додаткового диска даних.</p>
+</li>
+</ol>
+<p>Життєвий цикл інстансу EC2 підпорядковується детермінованому скінченному автомату станів. Після відправки команди створення віртуальна машина переходить у стан ініціалізації <code>pending</code>, під час якого гіпервізор виділяє фізичні ресурси на хості та монтує системний том EBS. Після успішного старту ядра ОС інстанс переходить у стан <code>running</code>. </p>
+<p>У цьому стані обчислювальний вузол споживає ресурси процесора і тарифікується за посекундною моделлю. За командою користувача інстанс може бути зупинений (<code>stopping</code> <span class="arithmatex">\(\to\)</span> <code>stopped</code>), під час чого оперативна пам'ять звільняється, а стан кореневого диска зберігається в EBS без нарахування плати за процесорний час. Повне видалення інстансу з інфраструктури переводить його у стан <code>shutting-down</code> та фінальний стан <code>terminated</code>, після чого всі асоційовані ресурси безповоротно вивільняються.</p>
+<p><pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; pending: Запит run_instances()
+    pending --&gt; running: Успішна алокація та бут ОС
+
+    running --&gt; stopping: Запит stop_instances()
+    stopping --&gt; stopped: Пам'ять звільнено, диск EBS збережено
+
+    stopped --&gt; pending: Запит start_instances()
+    stopped --&gt; shutting_down: Запит terminate_instances()
+
+    running --&gt; rebooting: Запит reboot_instances()
+    rebooting --&gt; running: М'яке перезавантаження ядра
+
+    running --&gt; shutting_down: Запит terminate_instances()
+    shutting_down --&gt; terminated: Повне знищення ресурсів
+    terminated --&gt; [*]</code></pre>
+<em>Рисунок 1.1 — Граф станів та переходи життєвого циклу інстансу AWS EC2</em></p>
+<p>Програмне керування хмарною інфраструктурою реалізується шляхом надсилання формалізованих HTTP/HTTPS-запитів до уніфікованого <strong>AWS Query API</strong>. Кожен запит обов'язково підписується за допомогою криптографічного протоколу <strong>AWS Signature Version 4 (SigV4)</strong> із використанням хеш-функції SHA-256 на основі пари ключів доступу: відкритого ідентифікатора (<code>AWS_ACCESS_KEY_ID</code>) та закритого ключа підпису (<code>AWS_SECRET_ACCESS_KEY</code>).</p>
+<p>Для мови програмування Python офіційним інструментом взаємодії є бібліотека <strong>Boto3</strong>. Архітектура Boto3 складається з трьох рівнів абстракції:</p>
+<ol>
+<li>
+<p><strong>Рівень сесії (Session).</strong> Керує станом підключення, конфігурацією регіону за замовчуванням та автентифікаційними даними користувача.</p>
+</li>
+<li>
+<p><strong>Низькорівневий клієнт (Client).</strong> Забезпечує пряме відображення 1:1 методів сервісу на виклики REST API. Методи клієнта (наприклад, <code>ec2_client.describe_instances()</code>) повертають «сирі» словники Python, що відповідають повній схемі JSON-відповіді провайдера, надаючи максимальний контроль над усіма параметрами.</p>
+</li>
+<li>
+<p><strong>Високорівневий ресурс (Resource).</strong> Об'єктно-орієнтована абстракція, яка інкапсулює стан хмарних ресурсів у сутності Python (наприклад, об'єкт класу <code>ec2.Instance</code>), дозволяючи виконувати дії безпосередньо як виклики методів об'єкта (наприклад, <code>instance.stop()</code>).</p>
+</li>
+</ol>
+<p><pre class="mermaid"><code>flowchart LR
+    subgraph PythonApp ["Прикладний скрипт автоматизації"]
+        Script[ec2_lifecycle_manager.py]
+    end
+
+    subgraph Boto3Layer ["Архітектура SDK Boto3"]
+        Session[boto3.Session] --&gt; Client[boto3.client 'ec2']
+        Session --&gt; Resource[boto3.resource 'ec2']
+        Client --&gt; Botocore[Botocore Engine: SigV4 Signer]
+        Resource --&gt; Client
+    end
+
+    subgraph AWSCloud ["Хмарна інфраструктура AWS"]
+        APIGateway[AWS EC2 HTTPS Endpoint: ec2.eu-central-1.amazonaws.com]
+        Hypervisor[Хмарний оркестратор та гіпервізори]
+    end
+
+    Script ===&gt; Session
+    Botocore ===&gt;|HTTPS POST + SigV4 Auth| APIGateway
+    APIGateway ===&gt; Hypervisor</code></pre>
+<em>Рисунок 1.2 — Архітектура стека програмної взаємодії Boto3 SDK із хмарним API сервісу EC2</em></p>
+<p>Критичним аспектом надійного скриптингу хмари є асинхронність операцій. Виклик API для запуску чи зупинки інстансу повертає відповідь негайно після реєстрації запиту в системі, проте фактичний перехід стану займає від кількох секунд до кількох хвилин. </p>
+<p>Для уникнення нестабільності застосовується механізм очікувачів (<strong>Waiters</strong>). Очікувач реалізує алгоритм активного опитування (<strong>Polling</strong>) з експоненційним або фіксованим інтервалом, блокуючи виконання скрипту до моменту переходу ресурсу у цільовий стан.</p>
+<p>Сумарний час очікування переходу стану <span class="arithmatex">\(T_{\text{wait}}\)</span> математично описується рівнянням:</p>
+<div class="arithmatex">\[T_{\text{wait}} = \sum_{i=1}^{k} \left( \Delta t_{\text{interval}} + \tau_{\text{api}}(i) \right)\]</div>
+<p>де <span class="arithmatex">\(\Delta t_{\text{interval}}\)</span> — період між послідовними опитуваннями стану (для очікувача <code>instance_running</code> становить 15 секунд), <span class="arithmatex">\(\tau_{\text{api}}(i)\)</span> — мережева затримка виконання <span class="arithmatex">\(i\)</span>-го запиту опитування, <span class="arithmatex">\(k\)</span> — кількість ітерацій опитування до досягнення цільового стану (<span class="arithmatex">\(1 \le k \le k_{\text{max}}\)</span>, де <span class="arithmatex">\(k_{\text{max}} = 40\)</span> визначає ліміт таймауту).</p>
+<p>Сукупна вартість використання інстансів <span class="arithmatex">\(C_{\text{total}}\)</span> за розрахунковий період розраховується на основі формули квантування часу роботи:</p>
+<div class="arithmatex">\[C_{\text{total}} = \sum_{j=1}^{M} \left( \max\left(60, \, t_{\text{run}, j}\right) \cdot \frac{P_{\text{compute}}}{3600} + V_{\text{EBS}, j} \cdot P_{\text{storage}} \cdot \frac{t_{\text{life}, j}}{T_{\text{month}}} \right)\]</div>
+<p>де <span class="arithmatex">\(M\)</span> — кількість запущених інстансів, <span class="arithmatex">\(t_{\text{run}, j}\)</span> — фактична тривалість перебування <span class="arithmatex">\(j\)</span>-го інстансу в стані <code>running</code> (у секундах, із мінімальним тарифікаційним квантом 60 секунд), <span class="arithmatex">\(P_{\text{compute}}\)</span> — годинний тариф обраного типу інстансу (у доларах США за годину), <span class="arithmatex">\(V_{\text{EBS}, j}\)</span> — виділений обсяг блокового сховища EBS (у гігабайтах), <span class="arithmatex">\(P_{\text{storage}}\)</span> — місячний тариф за 1 ГБ сховища, <span class="arithmatex">\(t_{\text{life}, j}\)</span> — повний час існування дискового тому від моменту виділення до знищення, <span class="arithmatex">\(T_{\text{month}}\)</span> — тривалість розрахункового місяця в секундах (<span class="arithmatex">\(2{,}592 \cdot 10^6\)</span> с).</p>
+<hr />
+<h2 id="2-0">2 Підготовка середовища та розгортання проєкту (Крок 0)</h2>
+<p>Для виконання лабораторної роботи здобувач вищої освіти повинен налаштувати локальне робоче середовище, встановити інтерпретатор мови Python, комплект утиліт AWS CLI, створити ізольоване віртуальне оточення та встановити необхідні бібліотеки.</p>
+<h3 id="21">2.1 Перевірка та встановлення базових утиліт</h3>
+<p>Відкрийте термінал операційної системи та виконайте перевірку наявності інтерпретатора Python версії 3.10 або вище та системи керування пакетами pip:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span>--version
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pip3<span class="w"> </span>--version
+</span></code></pre></div>
+<p>У разі відсутності інтерфейсу командного рядка AWS CLI v2 виконайте його завантаження та інсталяцію (для ОС Linux Ubuntu / Debian):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span><span class="s2">"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">"awscliv2.zip"</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>unzip<span class="w"> </span>awscliv2.zip
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sudo<span class="w"> </span>./aws/install
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>aws<span class="w"> </span>--version
+</span></code></pre></div>
+<h3 id="22">2.2 Структура каталогів проєкту</h3>
+<p>Створіть робочу директорію проєкту та ініціалізуйте віртуальне середовище Python:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/cloud_labs/lab1_ec2_lifecycle
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span><span class="w"> </span>~/cloud_labs/lab1_ec2_lifecycle
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</span></code></pre></div>
+<p>Сформуйте файлову структуру проєкту відповідно до наведеної схеми:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>lab1_ec2_lifecycle/
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>├── config/
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>│   └── settings.json          # Конфігураційний файл параметрів варіанта
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>├── scripts/
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>│   ├── __init__.py
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>│   ├── ec2_manager.py         # Основний модуль програмного керування Boto3
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>│   └── user_data.sh           # Shell-скрипт ініціалізації вузла (cloud-init)
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>├── output/
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>│   └── instance_manifest.json # Автоматично згенерований звіт параметрів ВМ
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>├── requirements.txt           # Специфікація залежностей проєкту
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>└── main.py                    # Головна точка входу для запуску сценарію
+</span></code></pre></div>
+<p>Створіть файл специфікації залежностей <code>requirements.txt</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>boto3&gt;=1.34.0
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>botocore&gt;=1.34.0
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>tabulate&gt;=0.9.0
+</span></code></pre></div>
+<p>Встановіть залежності у віртуальне середовище:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span></code></pre></div>
+<h3 id="23">2.3 Конфігурування облікових даних доступу</h3>
+<p>Для автентифікації запитів до AWS виконайте налаштування конфігураційного профілю за допомогою команди <code>aws configure</code>. Якщо робота виконується в навчальній пісочниці (AWS Academy / Sandbox), введіть надані викладачем тимчасові креденшали. Якщо використовується локальний емулятор <code>LocalStack</code>, введіть тестові значення:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>aws_access_key_id<span class="w"> </span><span class="s2">"AKIAIOSFODNN7EXAMPLE"</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>aws_secret_access_key<span class="w"> </span><span class="s2">"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>default.region<span class="w"> </span><span class="s2">"eu-central-1"</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set</span><span class="w"> </span>default.output_format<span class="w"> </span><span class="s2">"json"</span>
+</span></code></pre></div>
+<p>Перевірте коректність налаштування та доступність API:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>aws<span class="w"> </span>sts<span class="w"> </span>get-caller-identity
+</span></code></pre></div>
+<hr />
+<h2 id="3">3 Порядок виконання роботи</h2>
+<h3 id="31">3.1 Індивідуальні завдання</h3>
+<p>Здобувач вищої освіти обирає варіант індивідуального завдання відповідно до свого порядкового номера у журналі академічної групи. Необхідно реалізувати програмний комплекс, який створює, конфігурує, тестує та утилізує інстанс згідно з параметрами, наведеними в таблиці 3.1.</p>
+<p><em>Таблиця 3.1 — Матриця індивідуальних завдань лабораторної роботи</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Варіант</th>
+<th style="text-align: left;">Назва цільового вузла КФС</th>
+<th style="text-align: left;">Тип інстансу</th>
+<th style="text-align: left;">Базовий образ ОС (AMI)</th>
+<th style="text-align: center;">Обсяг EBS (ГБ)</th>
+<th style="text-align: left;">Специфікація ініціалізаційного сценарію User Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: left;"><code>cps-telemetry-collector</code></td>
+<td style="text-align: left;"><code>t3.nano</code></td>
+<td style="text-align: left;">Ubuntu 22.04 LTS</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: left;">Встановлення Python 3, запуск HTTP-демона телеметрії на порту 8080</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: left;"><code>cps-edge-gateway</code></td>
+<td style="text-align: left;"><code>t3.micro</code></td>
+<td style="text-align: left;">Amazon Linux 2023</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: left;">Встановлення Nginx, налаштування reverse-proxy для брокера повідомлень</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: left;"><code>cps-sensor-aggregator</code></td>
+<td style="text-align: left;"><code>t3.micro</code></td>
+<td style="text-align: left;">Debian 12</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: left;">Встановлення Mosquitto MQTT Broker, відкриття порту 1883 для сенсорів</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: left;"><code>cps-actuator-controller</code></td>
+<td style="text-align: left;"><code>t3.small</code></td>
+<td style="text-align: left;">Ubuntu 22.04 LTS</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: left;">Встановлення Docker CE, запуск контейнера емулятора сервоприводів</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: left;"><code>cps-edge-analytics</code></td>
+<td style="text-align: left;"><code>t3.small</code></td>
+<td style="text-align: left;">Amazon Linux 2023</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: left;">Встановлення Redis Server, конфігурування in-memory буфера вимірювань</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: left;"><code>cps-video-ingest</code></td>
+<td style="text-align: left;"><code>t3.medium</code></td>
+<td style="text-align: left;">Ubuntu 22.04 LTS</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: left;">Встановлення FFmpeg, запуск демона обробки потокового RTSP відео</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: left;"><code>cps-signal-filter</code></td>
+<td style="text-align: left;"><code>t3.nano</code></td>
+<td style="text-align: left;">Debian 12</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: left;">Встановлення Python 3, NumPy, запуск скрипту цифрової фільтрації сигналу</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: left;"><code>cps-modbus-bridge</code></td>
+<td style="text-align: left;"><code>t3.micro</code></td>
+<td style="text-align: left;">Amazon Linux 2023</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: left;">Встановлення середовища Node.js, запуск шлюзу Modbus TCP/IP</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: left;"><code>cps-scada-node</code></td>
+<td style="text-align: left;"><code>t3.medium</code></td>
+<td style="text-align: left;">Ubuntu 22.04 LTS</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: left;">Встановлення Prometheus Node Exporter, запуск агента збору метрик</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>10</strong></td>
+<td style="text-align: left;"><code>cps-plc-monitor</code></td>
+<td style="text-align: left;"><code>t3.micro</code></td>
+<td style="text-align: left;">Debian 12</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: left;">Встановлення SQLite, запуск демона протоколювання аварійних подій</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>11</strong></td>
+<td style="text-align: left;"><code>cps-coap-server</code></td>
+<td style="text-align: left;"><code>t3.nano</code></td>
+<td style="text-align: left;">Amazon Linux 2023</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: left;">Встановлення бібліотеки aiocoap, відкриття UDP-порту 5683 для датчиків</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>12</strong></td>
+<td style="text-align: left;"><code>cps-timeseries-node</code></td>
+<td style="text-align: left;"><code>t3.small</code></td>
+<td style="text-align: left;">Ubuntu 22.04 LTS</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: left;">Встановлення InfluxDB v2, ініціалізація бакета збереження телеметрії</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>13</strong></td>
+<td style="text-align: left;"><code>cps-security-gateway</code></td>
+<td style="text-align: left;"><code>t3.micro</code></td>
+<td style="text-align: left;">Debian 12</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: left;">Встановлення OpenVPN / WireGuard, генерація ключів шифрування каналу</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>14</strong></td>
+<td style="text-align: left;"><code>cps-data-normalizer</code></td>
+<td style="text-align: left;"><code>t3.small</code></td>
+<td style="text-align: left;">Amazon Linux 2023</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: left;">Встановлення Python 3, Pandas, конфігурування пайплайну валідації JSON</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>15</strong></td>
+<td style="text-align: left;"><code>cps-firmware-server</code></td>
+<td style="text-align: left;"><code>t3.micro</code></td>
+<td style="text-align: left;">Ubuntu 22.04 LTS</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: left;">Встановлення вебсервера Apache HTTPD, хостинг OTA-образів прошивок</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>16</strong></td>
+<td style="text-align: left;"><code>cps-lora-concentrator</code></td>
+<td style="text-align: left;"><code>t3.nano</code></td>
+<td style="text-align: left;">Debian 12</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: left;">Встановлення LoRaWAN Packet Forwarder, відкриття UDP-портів зв'язку</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>17</strong></td>
+<td style="text-align: left;"><code>cps-digital-twin-core</code></td>
+<td style="text-align: left;"><code>t3.medium</code></td>
+<td style="text-align: left;">Ubuntu 22.04 LTS</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: left;">Встановлення OpenJDK 17, запуск мікросервісу цифрового двійника КФС</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>18</strong></td>
+<td style="text-align: left;"><code>cps-can-bus-logger</code></td>
+<td style="text-align: left;"><code>t3.micro</code></td>
+<td style="text-align: left;">Amazon Linux 2023</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: left;">Встановлення утиліт can-utils, налаштування демона логування кадрів</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>19</strong></td>
+<td style="text-align: left;"><code>cps-ml-inference-edge</code></td>
+<td style="text-align: left;"><code>t3.small</code></td>
+<td style="text-align: left;">Ubuntu 22.04 LTS</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: left;">Встановлення ONNX Runtime, запуск моделі класифікації аномалій</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>20</strong></td>
+<td style="text-align: left;"><code>cps-backup-orchestrator</code></td>
+<td style="text-align: left;"><code>t3.micro</code></td>
+<td style="text-align: left;">Debian 12</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: left;">Встановлення утиліти AWS CLI на інстансі, налаштування cron-бекапів</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="32">3.2 Покроковий алгоритм та розв'язок еталонного прикладу</h3>
+<p>У даному розділі наведено повний еталонний розв'язок базового навчального варіанта зі створення обчислювального вузла <code>cps-reference-controller</code> на базі ОС Ubuntu 22.04 LTS (<code>t3.micro</code>) із автоматичною генерацією пари SSH-ключів, створенням групи безпеки, моніторингом ініціалізації через механізм Waiters та керованим життєвим циклом.</p>
+<h4 id="1-configsettingsjson">Крок 1. Створення конфігураційного файлу параметрів <code>config/settings.json</code></h4>
+<p>Створіть файл конфігурації, де централізовано зберігатимуться параметри створюваного середовища:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">"region_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eu-central-1"</span><span class="p">,</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">"instance_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cps-reference-controller"</span><span class="p">,</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">"instance_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"t3.micro"</span><span class="p">,</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">"ami_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ami-0faab6bdbac9486fb"</span><span class="p">,</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="nt">"volume_size_gb"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="nt">"key_pair_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cps-lab1-keypair"</span><span class="p">,</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="nt">"security_group_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cps-lab1-secgroup"</span><span class="p">,</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nt">"Project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CyberPhysicalSystem"</span><span class="p">,</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="nt">"Environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Laboratory"</span><span class="p">,</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="nt">"ManagedBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boto3-Automation"</span><span class="p">,</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">    </span><span class="nt">"Owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Student-Master"</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="p">}</span>
+</span></code></pre></div>
+<h4 id="2-scriptsuser_datash">Крок 2. Створення ініціалізаційного скрипту <code>scripts/user_data.sh</code></h4>
+<p>Створіть shell-скрипт, який буде переданий механізму <code>cloud-init</code> під час першого завантаження операційної системи віртуальної машини:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># Оновлення індексу пакетів та встановлення необхідних сервісів</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>apt-get<span class="w"> </span>update<span class="w"> </span>-y
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3-pip<span class="w"> </span>nginx<span class="w"> </span>htop<span class="w"> </span>curl<span class="w"> </span>jq
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># Створення директорії підсистеми телеметрії</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/cps_telemetry
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># Формування тестового демона моніторингу телеметрії</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>cat<span class="w"> </span><span class="s">&lt;&lt; 'EOF' &gt; /opt/cps_telemetry/telemetry_daemon.py</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="s">import http.server</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="s">import socketserver</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="s">import json</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="s">import datetime</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="s">import os</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="s">PORT = 8080</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="s">class TelemetryHandler(http.server.SimpleHTTPRequestHandler):</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="s">    def do_GET(self):</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="s">        self.send_response(200)</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="s">        self.send_header('Content-type', 'application/json')</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="s">        self.end_headers()</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="s">        response = {</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="s">            "node_status": "ONLINE",</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="s">            "system_time": datetime.datetime.utcnow().isoformat(),</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="s">            "telemetry_source": "CPS-Reference-Node",</span>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="s">            "metrics": {</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="s">                "cpu_load_percent": os.getloadavg()[0] * 100,</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="s">                "memory_available_kb": 1024 * 1024</span>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="s">            }</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="s">        }</span>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="s">        self.wfile.write(json.dumps(response).encode('utf-8'))</span>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>
+</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a><span class="s">with socketserver.TCPServer(("", PORT), TelemetryHandler) as httpd:</span>
+</span><span id="__span-9-36"><a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a><span class="s">    httpd.serve_forever()</span>
+</span><span id="__span-9-37"><a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a><span class="s">EOF</span>
+</span><span id="__span-9-38"><a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a>
+</span><span id="__span-9-39"><a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a><span class="c1"># Запуск демона у фоновому режимі</span>
+</span><span id="__span-9-40"><a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>nohup<span class="w"> </span>python3<span class="w"> </span>/opt/cps_telemetry/telemetry_daemon.py<span class="w"> </span>&gt;<span class="w"> </span>/var/log/cps_telemetry.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+</span></code></pre></div>
+<h4 id="3-scriptsec2_managerpy">Крок 3. Реалізація керуючого модуля <code>scripts/ec2_manager.py</code></h4>
+<p>Створіть основний модуль взаємодії з API AWS, який реалізує клас <code>EC2LifecycleManager</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientError</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="k">class</span><span class="w"> </span><span class="nc">EC2LifecycleManager</span><span class="p">:</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="sd">"""Клас програмного керування життєвим циклом інстансів IaaS у хмарі AWS."""</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">        </span><span class="sd">"""Ініціалізація менеджера та зчитування конфігураційного маніфесту."""</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_path</span><span class="p">):</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Конфігураційний файл не знайдено: </span><span class="si">{</span><span class="n">config_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"region_name"</span><span class="p">,</span> <span class="s2">"eu-central-1"</span><span class="p">)</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">region_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">"ec2"</span><span class="p">)</span>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_resource</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s2">"ec2"</span><span class="p">)</span>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">key_pair_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"key_pair_name"</span><span class="p">,</span> <span class="s2">"cps-keypair"</span><span class="p">)</span>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">security_group_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"security_group_name"</span><span class="p">,</span> <span class="s2">"cps-secgroup"</span><span class="p">)</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ensure_key_pair</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a><span class="w">        </span><span class="sd">"""Перевірка наявності або створення нової пари SSH-ключів."""</span>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">describe_key_pairs</span><span class="p">(</span><span class="n">KeyNames</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">key_pair_name</span><span class="p">])</span>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] SSH-ключ '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key_pair_name</span><span class="si">}</span><span class="s2">' знайдено в інфраструктурі."</span><span class="p">)</span>
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_pair_name</span>
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>        <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>            <span class="k">if</span> <span class="s2">"InvalidKeyPair.NotFound"</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">):</span>
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Генерація нового SSH-ключа '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key_pair_name</span><span class="si">}</span><span class="s2">'..."</span><span class="p">)</span>
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>                <span class="n">key_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">create_key_pair</span><span class="p">(</span><span class="n">KeyName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">key_pair_name</span><span class="p">)</span>
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>                <span class="n">private_key_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key_pair_name</span><span class="si">}</span><span class="s2">.pem"</span>
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">private_key_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">key_file</span><span class="p">:</span>
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>                    <span class="n">key_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">key_response</span><span class="p">[</span><span class="s2">"KeyMaterial"</span><span class="p">])</span>
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>                <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">private_key_path</span><span class="p">,</span> <span class="mo">0o400</span><span class="p">)</span>
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Приватний ключ збережено у файл: </span><span class="si">{</span><span class="n">private_key_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-10-44"><a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_pair_name</span>
+</span><span id="__span-10-45"><a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-10-46"><a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>                <span class="k">raise</span> <span class="n">error</span>
+</span><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ensure_security_group</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a><span class="w">        </span><span class="sd">"""Створення та конфігурування правил мережевого екрана (Security Group)."""</span>
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-10-51"><a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">describe_security_groups</span><span class="p">(</span>
+</span><span id="__span-10-52"><a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a>                <span class="n">GroupNames</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">security_group_name</span><span class="p">]</span>
+</span><span id="__span-10-53"><a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a>            <span class="p">)</span>
+</span><span id="__span-10-54"><a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a>            <span class="n">group_id</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">"SecurityGroups"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"GroupId"</span><span class="p">]</span>
+</span><span id="__span-10-55"><a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Security Group '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">security_group_name</span><span class="si">}</span><span class="s2">' знайдено (ID: </span><span class="si">{</span><span class="n">group_id</span><span class="si">}</span><span class="s2">)."</span><span class="p">)</span>
+</span><span id="__span-10-56"><a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a>            <span class="k">return</span> <span class="n">group_id</span>
+</span><span id="__span-10-57"><a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a>        <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+</span><span id="__span-10-58"><a id="__codelineno-10-58" name="__codelineno-10-58" href="#__codelineno-10-58"></a>            <span class="k">if</span> <span class="s2">"InvalidGroup.NotFound"</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">):</span>
+</span><span id="__span-10-59"><a id="__codelineno-10-59" name="__codelineno-10-59" href="#__codelineno-10-59"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Створення Security Group '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">security_group_name</span><span class="si">}</span><span class="s2">'..."</span><span class="p">)</span>
+</span><span id="__span-10-60"><a id="__codelineno-10-60" name="__codelineno-10-60" href="#__codelineno-10-60"></a>                <span class="n">vpc_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">describe_vpcs</span><span class="p">(</span>
+</span><span id="__span-10-61"><a id="__codelineno-10-61" name="__codelineno-10-61" href="#__codelineno-10-61"></a>                    <span class="n">Filters</span><span class="o">=</span><span class="p">[{</span><span class="s2">"Name"</span><span class="p">:</span> <span class="s2">"isDefault"</span><span class="p">,</span> <span class="s2">"Values"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"true"</span><span class="p">]}]</span>
+</span><span id="__span-10-62"><a id="__codelineno-10-62" name="__codelineno-10-62" href="#__codelineno-10-62"></a>                <span class="p">)</span>
+</span><span id="__span-10-63"><a id="__codelineno-10-63" name="__codelineno-10-63" href="#__codelineno-10-63"></a>                <span class="n">default_vpc_id</span> <span class="o">=</span> <span class="n">vpc_response</span><span class="p">[</span><span class="s2">"Vpcs"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"VpcId"</span><span class="p">]</span>
+</span><span id="__span-10-64"><a id="__codelineno-10-64" name="__codelineno-10-64" href="#__codelineno-10-64"></a>
+</span><span id="__span-10-65"><a id="__codelineno-10-65" name="__codelineno-10-65" href="#__codelineno-10-65"></a>                <span class="n">group_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">create_security_group</span><span class="p">(</span>
+</span><span id="__span-10-66"><a id="__codelineno-10-66" name="__codelineno-10-66" href="#__codelineno-10-66"></a>                    <span class="n">GroupName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">security_group_name</span><span class="p">,</span>
+</span><span id="__span-10-67"><a id="__codelineno-10-67" name="__codelineno-10-67" href="#__codelineno-10-67"></a>                    <span class="n">Description</span><span class="o">=</span><span class="s2">"Security Group for CPS Telemetry and Management"</span><span class="p">,</span>
+</span><span id="__span-10-68"><a id="__codelineno-10-68" name="__codelineno-10-68" href="#__codelineno-10-68"></a>                    <span class="n">VpcId</span><span class="o">=</span><span class="n">default_vpc_id</span>
+</span><span id="__span-10-69"><a id="__codelineno-10-69" name="__codelineno-10-69" href="#__codelineno-10-69"></a>                <span class="p">)</span>
+</span><span id="__span-10-70"><a id="__codelineno-10-70" name="__codelineno-10-70" href="#__codelineno-10-70"></a>                <span class="n">group_id</span> <span class="o">=</span> <span class="n">group_response</span><span class="p">[</span><span class="s2">"GroupId"</span><span class="p">]</span>
+</span><span id="__span-10-71"><a id="__codelineno-10-71" name="__codelineno-10-71" href="#__codelineno-10-71"></a>
+</span><span id="__span-10-72"><a id="__codelineno-10-72" name="__codelineno-10-72" href="#__codelineno-10-72"></a>                <span class="c1"># Додавання правил фільтрації трафіку Ingress</span>
+</span><span id="__span-10-73"><a id="__codelineno-10-73" name="__codelineno-10-73" href="#__codelineno-10-73"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">authorize_security_group_ingress</span><span class="p">(</span>
+</span><span id="__span-10-74"><a id="__codelineno-10-74" name="__codelineno-10-74" href="#__codelineno-10-74"></a>                    <span class="n">GroupId</span><span class="o">=</span><span class="n">group_id</span><span class="p">,</span>
+</span><span id="__span-10-75"><a id="__codelineno-10-75" name="__codelineno-10-75" href="#__codelineno-10-75"></a>                    <span class="n">IpPermissions</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-10-76"><a id="__codelineno-10-76" name="__codelineno-10-76" href="#__codelineno-10-76"></a>                        <span class="p">{</span>
+</span><span id="__span-10-77"><a id="__codelineno-10-77" name="__codelineno-10-77" href="#__codelineno-10-77"></a>                            <span class="s2">"IpProtocol"</span><span class="p">:</span> <span class="s2">"tcp"</span><span class="p">,</span>
+</span><span id="__span-10-78"><a id="__codelineno-10-78" name="__codelineno-10-78" href="#__codelineno-10-78"></a>                            <span class="s2">"FromPort"</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+</span><span id="__span-10-79"><a id="__codelineno-10-79" name="__codelineno-10-79" href="#__codelineno-10-79"></a>                            <span class="s2">"ToPort"</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+</span><span id="__span-10-80"><a id="__codelineno-10-80" name="__codelineno-10-80" href="#__codelineno-10-80"></a>                            <span class="s2">"IpRanges"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"CidrIp"</span><span class="p">:</span> <span class="s2">"0.0.0.0/0"</span><span class="p">,</span> <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"SSH Access"</span><span class="p">}]</span>
+</span><span id="__span-10-81"><a id="__codelineno-10-81" name="__codelineno-10-81" href="#__codelineno-10-81"></a>                        <span class="p">},</span>
+</span><span id="__span-10-82"><a id="__codelineno-10-82" name="__codelineno-10-82" href="#__codelineno-10-82"></a>                        <span class="p">{</span>
+</span><span id="__span-10-83"><a id="__codelineno-10-83" name="__codelineno-10-83" href="#__codelineno-10-83"></a>                            <span class="s2">"IpProtocol"</span><span class="p">:</span> <span class="s2">"tcp"</span><span class="p">,</span>
+</span><span id="__span-10-84"><a id="__codelineno-10-84" name="__codelineno-10-84" href="#__codelineno-10-84"></a>                            <span class="s2">"FromPort"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+</span><span id="__span-10-85"><a id="__codelineno-10-85" name="__codelineno-10-85" href="#__codelineno-10-85"></a>                            <span class="s2">"ToPort"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+</span><span id="__span-10-86"><a id="__codelineno-10-86" name="__codelineno-10-86" href="#__codelineno-10-86"></a>                            <span class="s2">"IpRanges"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"CidrIp"</span><span class="p">:</span> <span class="s2">"0.0.0.0/0"</span><span class="p">,</span> <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"HTTP Web"</span><span class="p">}]</span>
+</span><span id="__span-10-87"><a id="__codelineno-10-87" name="__codelineno-10-87" href="#__codelineno-10-87"></a>                        <span class="p">},</span>
+</span><span id="__span-10-88"><a id="__codelineno-10-88" name="__codelineno-10-88" href="#__codelineno-10-88"></a>                        <span class="p">{</span>
+</span><span id="__span-10-89"><a id="__codelineno-10-89" name="__codelineno-10-89" href="#__codelineno-10-89"></a>                            <span class="s2">"IpProtocol"</span><span class="p">:</span> <span class="s2">"tcp"</span><span class="p">,</span>
+</span><span id="__span-10-90"><a id="__codelineno-10-90" name="__codelineno-10-90" href="#__codelineno-10-90"></a>                            <span class="s2">"FromPort"</span><span class="p">:</span> <span class="mi">8080</span><span class="p">,</span>
+</span><span id="__span-10-91"><a id="__codelineno-10-91" name="__codelineno-10-91" href="#__codelineno-10-91"></a>                            <span class="s2">"ToPort"</span><span class="p">:</span> <span class="mi">8080</span><span class="p">,</span>
+</span><span id="__span-10-92"><a id="__codelineno-10-92" name="__codelineno-10-92" href="#__codelineno-10-92"></a>                            <span class="s2">"IpRanges"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"CidrIp"</span><span class="p">:</span> <span class="s2">"0.0.0.0/0"</span><span class="p">,</span> <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"CPS Telemetry API"</span><span class="p">}]</span>
+</span><span id="__span-10-93"><a id="__codelineno-10-93" name="__codelineno-10-93" href="#__codelineno-10-93"></a>                        <span class="p">}</span>
+</span><span id="__span-10-94"><a id="__codelineno-10-94" name="__codelineno-10-94" href="#__codelineno-10-94"></a>                    <span class="p">]</span>
+</span><span id="__span-10-95"><a id="__codelineno-10-95" name="__codelineno-10-95" href="#__codelineno-10-95"></a>                <span class="p">)</span>
+</span><span id="__span-10-96"><a id="__codelineno-10-96" name="__codelineno-10-96" href="#__codelineno-10-96"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Security Group успішно створено з відкритими портами 22, 80, 8080."</span><span class="p">)</span>
+</span><span id="__span-10-97"><a id="__codelineno-10-97" name="__codelineno-10-97" href="#__codelineno-10-97"></a>                <span class="k">return</span> <span class="n">group_id</span>
+</span><span id="__span-10-98"><a id="__codelineno-10-98" name="__codelineno-10-98" href="#__codelineno-10-98"></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-10-99"><a id="__codelineno-10-99" name="__codelineno-10-99" href="#__codelineno-10-99"></a>                <span class="k">raise</span> <span class="n">error</span>
+</span><span id="__span-10-100"><a id="__codelineno-10-100" name="__codelineno-10-100" href="#__codelineno-10-100"></a>
+</span><span id="__span-10-101"><a id="__codelineno-10-101" name="__codelineno-10-101" href="#__codelineno-10-101"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">provision_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_data_script_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span id="__span-10-102"><a id="__codelineno-10-102" name="__codelineno-10-102" href="#__codelineno-10-102"></a><span class="w">        </span><span class="sd">"""Створення та запуск віртуальної машини згідно з конфігурацією."""</span>
+</span><span id="__span-10-103"><a id="__codelineno-10-103" name="__codelineno-10-103" href="#__codelineno-10-103"></a>        <span class="n">key_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ensure_key_pair</span><span class="p">()</span>
+</span><span id="__span-10-104"><a id="__codelineno-10-104" name="__codelineno-10-104" href="#__codelineno-10-104"></a>        <span class="n">group_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ensure_security_group</span><span class="p">()</span>
+</span><span id="__span-10-105"><a id="__codelineno-10-105" name="__codelineno-10-105" href="#__codelineno-10-105"></a>
+</span><span id="__span-10-106"><a id="__codelineno-10-106" name="__codelineno-10-106" href="#__codelineno-10-106"></a>        <span class="n">user_data_content</span> <span class="o">=</span> <span class="s2">""</span>
+</span><span id="__span-10-107"><a id="__codelineno-10-107" name="__codelineno-10-107" href="#__codelineno-10-107"></a>        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">user_data_script_path</span><span class="p">):</span>
+</span><span id="__span-10-108"><a id="__codelineno-10-108" name="__codelineno-10-108" href="#__codelineno-10-108"></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">user_data_script_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">script_file</span><span class="p">:</span>
+</span><span id="__span-10-109"><a id="__codelineno-10-109" name="__codelineno-10-109" href="#__codelineno-10-109"></a>                <span class="n">user_data_content</span> <span class="o">=</span> <span class="n">script_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span id="__span-10-110"><a id="__codelineno-10-110" name="__codelineno-10-110" href="#__codelineno-10-110"></a>
+</span><span id="__span-10-111"><a id="__codelineno-10-111" name="__codelineno-10-111" href="#__codelineno-10-111"></a>        <span class="n">tag_specifications</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-10-112"><a id="__codelineno-10-112" name="__codelineno-10-112" href="#__codelineno-10-112"></a>            <span class="p">{</span>
+</span><span id="__span-10-113"><a id="__codelineno-10-113" name="__codelineno-10-113" href="#__codelineno-10-113"></a>                <span class="s2">"ResourceType"</span><span class="p">:</span> <span class="s2">"instance"</span><span class="p">,</span>
+</span><span id="__span-10-114"><a id="__codelineno-10-114" name="__codelineno-10-114" href="#__codelineno-10-114"></a>                <span class="s2">"Tags"</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-10-115"><a id="__codelineno-10-115" name="__codelineno-10-115" href="#__codelineno-10-115"></a>                    <span class="p">{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"instance_name"</span><span class="p">,</span> <span class="s2">"cps-node"</span><span class="p">)}</span>
+</span><span id="__span-10-116"><a id="__codelineno-10-116" name="__codelineno-10-116" href="#__codelineno-10-116"></a>                <span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
+</span><span id="__span-10-117"><a id="__codelineno-10-117" name="__codelineno-10-117" href="#__codelineno-10-117"></a>                    <span class="p">{</span><span class="s2">"Key"</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">:</span> <span class="n">v</span><span class="p">}</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tags"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span><span id="__span-10-118"><a id="__codelineno-10-118" name="__codelineno-10-118" href="#__codelineno-10-118"></a>                <span class="p">]</span>
+</span><span id="__span-10-119"><a id="__codelineno-10-119" name="__codelineno-10-119" href="#__codelineno-10-119"></a>            <span class="p">}</span>
+</span><span id="__span-10-120"><a id="__codelineno-10-120" name="__codelineno-10-120" href="#__codelineno-10-120"></a>        <span class="p">]</span>
+</span><span id="__span-10-121"><a id="__codelineno-10-121" name="__codelineno-10-121" href="#__codelineno-10-121"></a>
+</span><span id="__span-10-122"><a id="__codelineno-10-122" name="__codelineno-10-122" href="#__codelineno-10-122"></a>        <span class="n">block_device_mappings</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-10-123"><a id="__codelineno-10-123" name="__codelineno-10-123" href="#__codelineno-10-123"></a>            <span class="p">{</span>
+</span><span id="__span-10-124"><a id="__codelineno-10-124" name="__codelineno-10-124" href="#__codelineno-10-124"></a>                <span class="s2">"DeviceName"</span><span class="p">:</span> <span class="s2">"/dev/sda1"</span><span class="p">,</span>
+</span><span id="__span-10-125"><a id="__codelineno-10-125" name="__codelineno-10-125" href="#__codelineno-10-125"></a>                <span class="s2">"Ebs"</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-10-126"><a id="__codelineno-10-126" name="__codelineno-10-126" href="#__codelineno-10-126"></a>                    <span class="s2">"VolumeSize"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"volume_size_gb"</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+</span><span id="__span-10-127"><a id="__codelineno-10-127" name="__codelineno-10-127" href="#__codelineno-10-127"></a>                    <span class="s2">"VolumeType"</span><span class="p">:</span> <span class="s2">"gp3"</span><span class="p">,</span>
+</span><span id="__span-10-128"><a id="__codelineno-10-128" name="__codelineno-10-128" href="#__codelineno-10-128"></a>                    <span class="s2">"DeleteOnTermination"</span><span class="p">:</span> <span class="kc">True</span>
+</span><span id="__span-10-129"><a id="__codelineno-10-129" name="__codelineno-10-129" href="#__codelineno-10-129"></a>                <span class="p">}</span>
+</span><span id="__span-10-130"><a id="__codelineno-10-130" name="__codelineno-10-130" href="#__codelineno-10-130"></a>            <span class="p">}</span>
+</span><span id="__span-10-131"><a id="__codelineno-10-131" name="__codelineno-10-131" href="#__codelineno-10-131"></a>        <span class="p">]</span>
+</span><span id="__span-10-132"><a id="__codelineno-10-132" name="__codelineno-10-132" href="#__codelineno-10-132"></a>
+</span><span id="__span-10-133"><a id="__codelineno-10-133" name="__codelineno-10-133" href="#__codelineno-10-133"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Запуск процедури створення інстансу типу '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'instance_type'</span><span class="p">]</span><span class="si">}</span><span class="s2">'..."</span><span class="p">)</span>
+</span><span id="__span-10-134"><a id="__codelineno-10-134" name="__codelineno-10-134" href="#__codelineno-10-134"></a>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">run_instances</span><span class="p">(</span>
+</span><span id="__span-10-135"><a id="__codelineno-10-135" name="__codelineno-10-135" href="#__codelineno-10-135"></a>            <span class="n">ImageId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">"ami_id"</span><span class="p">],</span>
+</span><span id="__span-10-136"><a id="__codelineno-10-136" name="__codelineno-10-136" href="#__codelineno-10-136"></a>            <span class="n">InstanceType</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">"instance_type"</span><span class="p">],</span>
+</span><span id="__span-10-137"><a id="__codelineno-10-137" name="__codelineno-10-137" href="#__codelineno-10-137"></a>            <span class="n">KeyName</span><span class="o">=</span><span class="n">key_name</span><span class="p">,</span>
+</span><span id="__span-10-138"><a id="__codelineno-10-138" name="__codelineno-10-138" href="#__codelineno-10-138"></a>            <span class="n">SecurityGroupIds</span><span class="o">=</span><span class="p">[</span><span class="n">group_id</span><span class="p">],</span>
+</span><span id="__span-10-139"><a id="__codelineno-10-139" name="__codelineno-10-139" href="#__codelineno-10-139"></a>            <span class="n">MinCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-10-140"><a id="__codelineno-10-140" name="__codelineno-10-140" href="#__codelineno-10-140"></a>            <span class="n">MaxCount</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-10-141"><a id="__codelineno-10-141" name="__codelineno-10-141" href="#__codelineno-10-141"></a>            <span class="n">UserData</span><span class="o">=</span><span class="n">user_data_content</span><span class="p">,</span>
+</span><span id="__span-10-142"><a id="__codelineno-10-142" name="__codelineno-10-142" href="#__codelineno-10-142"></a>            <span class="n">BlockDeviceMappings</span><span class="o">=</span><span class="n">block_device_mappings</span><span class="p">,</span>
+</span><span id="__span-10-143"><a id="__codelineno-10-143" name="__codelineno-10-143" href="#__codelineno-10-143"></a>            <span class="n">TagSpecifications</span><span class="o">=</span><span class="n">tag_specifications</span>
+</span><span id="__span-10-144"><a id="__codelineno-10-144" name="__codelineno-10-144" href="#__codelineno-10-144"></a>        <span class="p">)</span>
+</span><span id="__span-10-145"><a id="__codelineno-10-145" name="__codelineno-10-145" href="#__codelineno-10-145"></a>
+</span><span id="__span-10-146"><a id="__codelineno-10-146" name="__codelineno-10-146" href="#__codelineno-10-146"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">"Instances"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"InstanceId"</span><span class="p">]</span>
+</span><span id="__span-10-147"><a id="__codelineno-10-147" name="__codelineno-10-147" href="#__codelineno-10-147"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Запит прийнято. Створено інстанс з ідентифікатором: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-10-148"><a id="__codelineno-10-148" name="__codelineno-10-148" href="#__codelineno-10-148"></a>        <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s2">"Instances"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-10-149"><a id="__codelineno-10-149" name="__codelineno-10-149" href="#__codelineno-10-149"></a>
+</span><span id="__span-10-150"><a id="__codelineno-10-150" name="__codelineno-10-150" href="#__codelineno-10-150"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">wait_for_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_state</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"running"</span><span class="p">,</span> <span class="n">max_attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">):</span>
+</span><span id="__span-10-151"><a id="__codelineno-10-151" name="__codelineno-10-151" href="#__codelineno-10-151"></a><span class="w">        </span><span class="sd">"""Очікування переходу інстансу в цільовий стан за допомогою механізму Waiters."""</span>
+</span><span id="__span-10-152"><a id="__codelineno-10-152" name="__codelineno-10-152" href="#__codelineno-10-152"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">:</span>
+</span><span id="__span-10-153"><a id="__codelineno-10-153" name="__codelineno-10-153" href="#__codelineno-10-153"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Ідентифікатор інстансу не визначено."</span><span class="p">)</span>
+</span><span id="__span-10-154"><a id="__codelineno-10-154" name="__codelineno-10-154" href="#__codelineno-10-154"></a>
+</span><span id="__span-10-155"><a id="__codelineno-10-155" name="__codelineno-10-155" href="#__codelineno-10-155"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Очікування переходу інстансу </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2"> у стан '</span><span class="si">{</span><span class="n">target_state</span><span class="si">}</span><span class="s2">'..."</span><span class="p">)</span>
+</span><span id="__span-10-156"><a id="__codelineno-10-156" name="__codelineno-10-156" href="#__codelineno-10-156"></a>        <span class="k">if</span> <span class="n">target_state</span> <span class="o">==</span> <span class="s2">"running"</span><span class="p">:</span>
+</span><span id="__span-10-157"><a id="__codelineno-10-157" name="__codelineno-10-157" href="#__codelineno-10-157"></a>            <span class="n">waiter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s2">"instance_running"</span><span class="p">)</span>
+</span><span id="__span-10-158"><a id="__codelineno-10-158" name="__codelineno-10-158" href="#__codelineno-10-158"></a>        <span class="k">elif</span> <span class="n">target_state</span> <span class="o">==</span> <span class="s2">"stopped"</span><span class="p">:</span>
+</span><span id="__span-10-159"><a id="__codelineno-10-159" name="__codelineno-10-159" href="#__codelineno-10-159"></a>            <span class="n">waiter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s2">"instance_stopped"</span><span class="p">)</span>
+</span><span id="__span-10-160"><a id="__codelineno-10-160" name="__codelineno-10-160" href="#__codelineno-10-160"></a>        <span class="k">elif</span> <span class="n">target_state</span> <span class="o">==</span> <span class="s2">"terminated"</span><span class="p">:</span>
+</span><span id="__span-10-161"><a id="__codelineno-10-161" name="__codelineno-10-161" href="#__codelineno-10-161"></a>            <span class="n">waiter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s2">"instance_terminated"</span><span class="p">)</span>
+</span><span id="__span-10-162"><a id="__codelineno-10-162" name="__codelineno-10-162" href="#__codelineno-10-162"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-10-163"><a id="__codelineno-10-163" name="__codelineno-10-163" href="#__codelineno-10-163"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Невідомий стан для очікувача: </span><span class="si">{</span><span class="n">target_state</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-10-164"><a id="__codelineno-10-164" name="__codelineno-10-164" href="#__codelineno-10-164"></a>
+</span><span id="__span-10-165"><a id="__codelineno-10-165" name="__codelineno-10-165" href="#__codelineno-10-165"></a>        <span class="n">waiter</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span>
+</span><span id="__span-10-166"><a id="__codelineno-10-166" name="__codelineno-10-166" href="#__codelineno-10-166"></a>            <span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">],</span>
+</span><span id="__span-10-167"><a id="__codelineno-10-167" name="__codelineno-10-167" href="#__codelineno-10-167"></a>            <span class="n">WaiterConfig</span><span class="o">=</span><span class="p">{</span><span class="s2">"Delay"</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">"MaxAttempts"</span><span class="p">:</span> <span class="n">max_attempts</span><span class="p">}</span>
+</span><span id="__span-10-168"><a id="__codelineno-10-168" name="__codelineno-10-168" href="#__codelineno-10-168"></a>        <span class="p">)</span>
+</span><span id="__span-10-169"><a id="__codelineno-10-169" name="__codelineno-10-169" href="#__codelineno-10-169"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Інстанс </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2"> успішно перейшов у стан '</span><span class="si">{</span><span class="n">target_state</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
+</span><span id="__span-10-170"><a id="__codelineno-10-170" name="__codelineno-10-170" href="#__codelineno-10-170"></a>
+</span><span id="__span-10-171"><a id="__codelineno-10-171" name="__codelineno-10-171" href="#__codelineno-10-171"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_instance_details</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span id="__span-10-172"><a id="__codelineno-10-172" name="__codelineno-10-172" href="#__codelineno-10-172"></a><span class="w">        </span><span class="sd">"""Отримання повної інформації про мережеві та системні атрибути інстансу."""</span>
+</span><span id="__span-10-173"><a id="__codelineno-10-173" name="__codelineno-10-173" href="#__codelineno-10-173"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">:</span>
+</span><span id="__span-10-174"><a id="__codelineno-10-174" name="__codelineno-10-174" href="#__codelineno-10-174"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Ідентифікатор інстансу не визначено."</span><span class="p">)</span>
+</span><span id="__span-10-175"><a id="__codelineno-10-175" name="__codelineno-10-175" href="#__codelineno-10-175"></a>
+</span><span id="__span-10-176"><a id="__codelineno-10-176" name="__codelineno-10-176" href="#__codelineno-10-176"></a>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">describe_instances</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">])</span>
+</span><span id="__span-10-177"><a id="__codelineno-10-177" name="__codelineno-10-177" href="#__codelineno-10-177"></a>        <span class="n">instance_data</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">"Reservations"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"Instances"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-10-178"><a id="__codelineno-10-178" name="__codelineno-10-178" href="#__codelineno-10-178"></a>
+</span><span id="__span-10-179"><a id="__codelineno-10-179" name="__codelineno-10-179" href="#__codelineno-10-179"></a>        <span class="n">details</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-10-180"><a id="__codelineno-10-180" name="__codelineno-10-180" href="#__codelineno-10-180"></a>            <span class="s2">"InstanceId"</span><span class="p">:</span> <span class="n">instance_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"InstanceId"</span><span class="p">),</span>
+</span><span id="__span-10-181"><a id="__codelineno-10-181" name="__codelineno-10-181" href="#__codelineno-10-181"></a>            <span class="s2">"InstanceType"</span><span class="p">:</span> <span class="n">instance_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"InstanceType"</span><span class="p">),</span>
+</span><span id="__span-10-182"><a id="__codelineno-10-182" name="__codelineno-10-182" href="#__codelineno-10-182"></a>            <span class="s2">"State"</span><span class="p">:</span> <span class="n">instance_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"State"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Name"</span><span class="p">),</span>
+</span><span id="__span-10-183"><a id="__codelineno-10-183" name="__codelineno-10-183" href="#__codelineno-10-183"></a>            <span class="s2">"PublicIpAddress"</span><span class="p">:</span> <span class="n">instance_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"PublicIpAddress"</span><span class="p">,</span> <span class="s2">"N/A"</span><span class="p">),</span>
+</span><span id="__span-10-184"><a id="__codelineno-10-184" name="__codelineno-10-184" href="#__codelineno-10-184"></a>            <span class="s2">"PrivateIpAddress"</span><span class="p">:</span> <span class="n">instance_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"PrivateIpAddress"</span><span class="p">,</span> <span class="s2">"N/A"</span><span class="p">),</span>
+</span><span id="__span-10-185"><a id="__codelineno-10-185" name="__codelineno-10-185" href="#__codelineno-10-185"></a>            <span class="s2">"AvailabilityZone"</span><span class="p">:</span> <span class="n">instance_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Placement"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"AvailabilityZone"</span><span class="p">),</span>
+</span><span id="__span-10-186"><a id="__codelineno-10-186" name="__codelineno-10-186" href="#__codelineno-10-186"></a>            <span class="s2">"LaunchTime"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">instance_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"LaunchTime"</span><span class="p">)),</span>
+</span><span id="__span-10-187"><a id="__codelineno-10-187" name="__codelineno-10-187" href="#__codelineno-10-187"></a>            <span class="s2">"Architecture"</span><span class="p">:</span> <span class="n">instance_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Architecture"</span><span class="p">),</span>
+</span><span id="__span-10-188"><a id="__codelineno-10-188" name="__codelineno-10-188" href="#__codelineno-10-188"></a>            <span class="s2">"VirtualizationType"</span><span class="p">:</span> <span class="n">instance_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"VirtualizationType"</span><span class="p">),</span>
+</span><span id="__span-10-189"><a id="__codelineno-10-189" name="__codelineno-10-189" href="#__codelineno-10-189"></a>            <span class="s2">"Tags"</span><span class="p">:</span> <span class="p">{</span><span class="n">tag</span><span class="p">[</span><span class="s2">"Key"</span><span class="p">]:</span> <span class="n">tag</span><span class="p">[</span><span class="s2">"Value"</span><span class="p">]</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">instance_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Tags"</span><span class="p">,</span> <span class="p">[])}</span>
+</span><span id="__span-10-190"><a id="__codelineno-10-190" name="__codelineno-10-190" href="#__codelineno-10-190"></a>        <span class="p">}</span>
+</span><span id="__span-10-191"><a id="__codelineno-10-191" name="__codelineno-10-191" href="#__codelineno-10-191"></a>        <span class="k">return</span> <span class="n">details</span>
+</span><span id="__span-10-192"><a id="__codelineno-10-192" name="__codelineno-10-192" href="#__codelineno-10-192"></a>
+</span><span id="__span-10-193"><a id="__codelineno-10-193" name="__codelineno-10-193" href="#__codelineno-10-193"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">stop_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-10-194"><a id="__codelineno-10-194" name="__codelineno-10-194" href="#__codelineno-10-194"></a><span class="w">        </span><span class="sd">"""Зупинка працюючого інстансу."""</span>
+</span><span id="__span-10-195"><a id="__codelineno-10-195" name="__codelineno-10-195" href="#__codelineno-10-195"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Відправка сигналу зупинки інстансу </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-10-196"><a id="__codelineno-10-196" name="__codelineno-10-196" href="#__codelineno-10-196"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">stop_instances</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">])</span>
+</span><span id="__span-10-197"><a id="__codelineno-10-197" name="__codelineno-10-197" href="#__codelineno-10-197"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">wait_for_state</span><span class="p">(</span><span class="s2">"stopped"</span><span class="p">)</span>
+</span><span id="__span-10-198"><a id="__codelineno-10-198" name="__codelineno-10-198" href="#__codelineno-10-198"></a>
+</span><span id="__span-10-199"><a id="__codelineno-10-199" name="__codelineno-10-199" href="#__codelineno-10-199"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">start_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-10-200"><a id="__codelineno-10-200" name="__codelineno-10-200" href="#__codelineno-10-200"></a><span class="w">        </span><span class="sd">"""Повторний запуск зупиненого інстансу."""</span>
+</span><span id="__span-10-201"><a id="__codelineno-10-201" name="__codelineno-10-201" href="#__codelineno-10-201"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Відправка сигналу старту інстансу </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-10-202"><a id="__codelineno-10-202" name="__codelineno-10-202" href="#__codelineno-10-202"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">start_instances</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">])</span>
+</span><span id="__span-10-203"><a id="__codelineno-10-203" name="__codelineno-10-203" href="#__codelineno-10-203"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">wait_for_state</span><span class="p">(</span><span class="s2">"running"</span><span class="p">)</span>
+</span><span id="__span-10-204"><a id="__codelineno-10-204" name="__codelineno-10-204" href="#__codelineno-10-204"></a>
+</span><span id="__span-10-205"><a id="__codelineno-10-205" name="__codelineno-10-205" href="#__codelineno-10-205"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">terminate_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-10-206"><a id="__codelineno-10-206" name="__codelineno-10-206" href="#__codelineno-10-206"></a><span class="w">        </span><span class="sd">"""Безповоротне знищення віртуальної машини."""</span>
+</span><span id="__span-10-207"><a id="__codelineno-10-207" name="__codelineno-10-207" href="#__codelineno-10-207"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[INFO] Ініціалізація процедури утилізації (Termination) </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-10-208"><a id="__codelineno-10-208" name="__codelineno-10-208" href="#__codelineno-10-208"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ec2_client</span><span class="o">.</span><span class="n">terminate_instances</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">])</span>
+</span><span id="__span-10-209"><a id="__codelineno-10-209" name="__codelineno-10-209" href="#__codelineno-10-209"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">wait_for_state</span><span class="p">(</span><span class="s2">"terminated"</span><span class="p">)</span>
+</span><span id="__span-10-210"><a id="__codelineno-10-210" name="__codelineno-10-210" href="#__codelineno-10-210"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SUCCESS] Ресурси інстансу </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2"> повністю вивільнено."</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="4-mainpy">Крок 4. Головна програма оркестрації <code>main.py</code></h4>
+<p>Створіть головний виконуваний скрипт, який об'єднує всі кроки в цілісний автоматизований сценарій:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scripts.ec2_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">EC2LifecycleManager</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"================================================================="</span><span class="p">)</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"  АВТОМАТИЗАЦІЯ ЖИТТЄВОГО ЦИКЛУ IaaS ІНСТАНСУ AWS EC2 (BOTO3)   "</span><span class="p">)</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"=================================================================</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    <span class="n">config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"config"</span><span class="p">,</span> <span class="s2">"settings.json"</span><span class="p">)</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    <span class="n">user_data_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"scripts"</span><span class="p">,</span> <span class="s2">"user_data.sh"</span><span class="p">)</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>    <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">"output"</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>    <span class="n">manifest_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">"instance_manifest.json"</span><span class="p">)</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>    <span class="c1"># Ініціалізація менеджера</span>
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>    <span class="n">manager</span> <span class="o">=</span> <span class="n">EC2LifecycleManager</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="n">config_file</span><span class="p">)</span>
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>        <span class="c1"># 1. Створення та запуск інстансу</span>
+</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>        <span class="n">manager</span><span class="o">.</span><span class="n">provision_instance</span><span class="p">(</span><span class="n">user_data_script_path</span><span class="o">=</span><span class="n">user_data_file</span><span class="p">)</span>
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>
+</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>        <span class="c1"># 2. Очікування стану RUNNING</span>
+</span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>        <span class="n">manager</span><span class="o">.</span><span class="n">wait_for_state</span><span class="p">(</span><span class="s2">"running"</span><span class="p">)</span>
+</span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>
+</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>        <span class="c1"># 3. Збирання метаданих</span>
+</span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>        <span class="n">details</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_instance_details</span><span class="p">()</span>
+</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>
+</span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>        <span class="c1"># Виведення результатів у форматі таблиці</span>
+</span><span id="__span-11-32"><a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>        <span class="n">table_data</span> <span class="o">=</span> <span class="p">[[</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">details</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">"Tags"</span><span class="p">]</span>
+</span><span id="__span-11-33"><a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="n">tabulate</span><span class="p">(</span><span class="n">table_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">"Параметр"</span><span class="p">,</span> <span class="s2">"Значення"</span><span class="p">],</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">"fancy_grid"</span><span class="p">))</span>
+</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>
+</span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Призначені теги інстансу:"</span><span class="p">)</span>
+</span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>        <span class="n">tags_table</span> <span class="o">=</span> <span class="p">[[</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">details</span><span class="p">[</span><span class="s2">"Tags"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">tags_table</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">"Ключ тегу"</span><span class="p">,</span> <span class="s2">"Значення"</span><span class="p">],</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">"grid"</span><span class="p">))</span>
+</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>
+</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>        <span class="c1"># Збереження маніфесту в JSON-файл</span>
+</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">manifest_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">details</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-11-42"><a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">[INFO] Повний маніфест інстансу збережено у: </span><span class="si">{</span><span class="n">manifest_file</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-11-43"><a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a>
+</span><span id="__span-11-44"><a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>        <span class="c1"># 4. Демонстрація зупинки та повторного запуску</span>
+</span><span id="__span-11-45"><a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Демонстрація переходу станів (Stop / Start) ---"</span><span class="p">)</span>
+</span><span id="__span-11-46"><a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a>        <span class="n">manager</span><span class="o">.</span><span class="n">stop_instance</span><span class="p">()</span>
+</span><span id="__span-11-47"><a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a>        <span class="n">manager</span><span class="o">.</span><span class="n">start_instance</span><span class="p">()</span>
+</span><span id="__span-11-48"><a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a>
+</span><span id="__span-11-49"><a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a>        <span class="c1"># 5. Очищення інфраструктури (Termination)</span>
+</span><span id="__span-11-50"><a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Завершення лабораторної роботи та утилізація ресурсів ---"</span><span class="p">)</span>
+</span><span id="__span-11-51"><a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a>        <span class="n">manager</span><span class="o">.</span><span class="n">terminate_instance</span><span class="p">()</span>
+</span><span id="__span-11-52"><a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a>
+</span><span id="__span-11-53"><a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+</span><span id="__span-11-54"><a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">[ERROR] Виникла виключна ситуація: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-11-55"><a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a>        <span class="k">if</span> <span class="n">manager</span><span class="o">.</span><span class="n">instance_id</span><span class="p">:</span>
+</span><span id="__span-11-56"><a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[CLEANUP] Спроба екстреного знищення інстансу </span><span class="si">{</span><span class="n">manager</span><span class="o">.</span><span class="n">instance_id</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+</span><span id="__span-11-57"><a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a>            <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-11-58"><a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a>                <span class="n">manager</span><span class="o">.</span><span class="n">terminate_instance</span><span class="p">()</span>
+</span><span id="__span-11-59"><a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">clean_err</span><span class="p">:</span>
+</span><span id="__span-11-60"><a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[CLEANUP ERROR] Не вдалося видалити інстанс: </span><span class="si">{</span><span class="n">clean_err</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-11-61"><a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a>
+</span><span id="__span-11-62"><a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a>
+</span><span id="__span-11-63"><a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+</span><span id="__span-11-64"><a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a>    <span class="n">main</span><span class="p">()</span>
+</span></code></pre></div>
+<hr />
+<h3 id="33">3.3 Запуск, тестування та перевірка результатів</h3>
+<p>Для виконання розробленого комплексу перейдіть у кореневу директорію проєкту в терміналі та запустіть головний модуль:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>python3<span class="w"> </span>main.py
+</span></code></pre></div>
+<p>У разі коректного виконання вхідних даних у консолі буде відображено покроковий протокол проходження всіх фаз життєвого циклу, статус очікувачів та таблицю згенерованих мережевих метаданих інстансу:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>=================================================================
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  АВТОМАТИЗАЦІЯ ЖИТТЄВОГО ЦИКЛУ IaaS ІНСТАНСУ AWS EC2 (BOTO3)   
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>=================================================================
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>[INFO] SSH-ключ 'cps-lab1-keypair' знайдено в інфраструктурі.
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>[INFO] Security Group 'cps-lab1-secgroup' знайдено (ID: sg-08e1a5f4c39b22a01).
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>[INFO] Запуск процедури створення інстансу типу 't3.micro'...
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>[SUCCESS] Запит прийнято. Створено інстанс з ідентифікатором: i-0a8b9c7d6e5f41234
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>[INFO] Очікування переходу інстансу i-0a8b9c7d6e5f41234 у стан 'running'...
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>[SUCCESS] Інстанс i-0a8b9c7d6e5f41234 успішно перейшов у стан 'running'.
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>╒════════════════════╤══════════════════════════════════════╕
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>│ Параметр           │ Значення                             │
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>╞════════════════════╪══════════════════════════════════════╡
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>│ InstanceId         │ i-0a8b9c7d6e5f41234                  │
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>│ InstanceType       │ t3.micro                             │
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>│ State              │ running                              │
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>│ PublicIpAddress    │ 3.120.145.89                         │
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>│ PrivateIpAddress   │ 172.31.24.112                        │
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>│ AvailabilityZone   │ eu-central-1a                        │
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>│ LaunchTime         │ 2026-08-29 18:30:15+00:00            │
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>│ Architecture       │ x86_64                               │
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>│ VirtualizationType │ hvm                                  │
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>╘════════════════════╧══════════════════════════════════════╛
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>Призначені теги інстансу:
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>+-------------+--------------------------+
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>| Ключ тегу   | Значення                 |
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>+-------------+--------------------------+
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>| Name        | cps-reference-controller |
+</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>| Project     | CyberPhysicalSystem      |
+</span><span id="__span-13-32"><a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>| Environment | Laboratory               |
+</span><span id="__span-13-33"><a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>| ManagedBy   | Boto3-Automation         |
+</span><span id="__span-13-34"><a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>| Owner       | Student-Master           |
+</span><span id="__span-13-35"><a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>+-------------+--------------------------+
+</span><span id="__span-13-36"><a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>
+</span><span id="__span-13-37"><a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>[INFO] Повний маніфест інстансу збережено у: output/instance_manifest.json
+</span><span id="__span-13-38"><a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a>
+</span><span id="__span-13-39"><a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>--- Демонстрація переходу станів (Stop / Start) ---
+</span><span id="__span-13-40"><a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a>[INFO] Відправка сигналу зупинки інстансу i-0a8b9c7d6e5f41234...
+</span><span id="__span-13-41"><a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a>[INFO] Очікування переходу інстансу i-0a8b9c7d6e5f41234 у стан 'stopped'...
+</span><span id="__span-13-42"><a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a>[SUCCESS] Інстанс i-0a8b9c7d6e5f41234 успішно перейшов у стан 'stopped'.
+</span><span id="__span-13-43"><a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a>[INFO] Відправка сигналу старту інстансу i-0a8b9c7d6e5f41234...
+</span><span id="__span-13-44"><a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a>[INFO] Очікування переходу інстансу i-0a8b9c7d6e5f41234 у стан 'running'...
+</span><span id="__span-13-45"><a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a>[SUCCESS] Інстанс i-0a8b9c7d6e5f41234 успішно перейшов у стан 'running'.
+</span><span id="__span-13-46"><a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a>
+</span><span id="__span-13-47"><a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a>--- Завершення лабораторної роботи та утилізація ресурсів ---
+</span><span id="__span-13-48"><a id="__codelineno-13-48" name="__codelineno-13-48" href="#__codelineno-13-48"></a>[INFO] Ініціалізація процедури утилізації (Termination) i-0a8b9c7d6e5f41234...
+</span><span id="__span-13-49"><a id="__codelineno-13-49" name="__codelineno-13-49" href="#__codelineno-13-49"></a>[INFO] Очікування переходу інстансу i-0a8b9c7d6e5f41234 у стан 'terminated'...
+</span><span id="__span-13-50"><a id="__codelineno-13-50" name="__codelineno-13-50" href="#__codelineno-13-50"></a>[SUCCESS] Інстанс i-0a8b9c7d6e5f41234 успішно перейшов у стан 'terminated'.
+</span><span id="__span-13-51"><a id="__codelineno-13-51" name="__codelineno-13-51" href="#__codelineno-13-51"></a>[SUCCESS] Ресурси інстансу i-0a8b9c7d6e5f41234 повністю вивільнено.
+</span></code></pre></div>
+<hr />
+<h2 id="4">4. Вимоги до змісту звіту</h2>
+<p>Звіт з лабораторної роботи оформлюється у форматі PDF відповідно до стандартів вищої школи та повинен містити такі обов'язкові розділи:</p>
+<ol>
+<li>
+<p><strong>Титульна сторінка</strong> із зазначенням найменування закладу вищої освіти, кафедри, назви дисципліни, теми лабораторної роботи, прізвища та ініціалів здобувача, академічної групи та номера індивідуального варіанта.</p>
+</li>
+<li>
+<p><strong>Мета роботи, технічне завдання та вихідні параметри</strong> індивідуального варіанта згідно з таблицею 3.1.</p>
+</li>
+<li>
+<p><strong>Архітектурна схема</strong> створеного обчислювального вузла з описом параметрів мережі, правил Security Group, характеристик vCPU/RAM та конфігурації тому EBS.</p>
+</li>
+<li>
+<p><strong>Повний вихідний текст розроблених файлів</strong> (<code>settings.json</code>, <code>user_data.sh</code>, <code>ec2_manager.py</code>, <code>main.py</code>) із детальними авторськими коментарями.</p>
+</li>
+<li>
+<p><strong>Скріншоти виконання програми в терміналі</strong>, що підтверджують успішне створення, зміну станів (<code>pending</code> <span class="arithmatex">\(\to\)</span> <code>running</code> <span class="arithmatex">\(\to\)</span> <code>stopped</code> <span class="arithmatex">\(\to\)</span> <code>terminated</code>) та вміст згенерованого файлу <code>instance_manifest.json</code>.</p>
+</li>
+<li>
+<p><strong>Аналітичний висновок</strong>, у якому наведено оцінку ефективності автоматизації засобами Boto3, аналіз накладних витрат на час очікування операцій та розрахунок орієнтовної вартості оренди інстансу за розрахунковою формулою.</p>
+</li>
+</ol>
+<hr />
+<h2 id="5">5. Контрольні запитання для захисту роботи</h2>
+<ol>
+<li>
+<p>У чому полягає фундаментальна відмінність між низькорівневим клієнтом (<code>boto3.client</code>) та високорівневим ресурсом (<code>boto3.resource</code>) у бібліотеці Boto3, і які переваги надає кожен підхід?</p>
+</li>
+<li>
+<p>Опишіть повний автомат станів інстансу AWS EC2. Чому перехід зі стану <code>stopping</code> у стан <code>stopped</code> зупиняє нарахування плати за обчислювальні ресурси процесора, але зберігає витрати на дисковий том EBS?</p>
+</li>
+<li>
+<p>Яким чином протокол автентифікації AWS Signature Version 4 (SigV4) гарантує цілісність, автентичність та захист від атак повторного відтворення (Replay Attacks) для кожного виклику API?</p>
+</li>
+<li>
+<p>Розкрийте принцип функціонування механізму очікувачів (Waiters) у Boto3. За якою математичною моделлю розраховується сумарний час очікування, і які параметри конфігурації визначають поведінку очікувача?</p>
+</li>
+<li>
+<p>Чим відрізняється поведінка правил фільтрації трафіку в Security Groups від мережевих списків контролю доступу (Network ACL) при забезпеченні мережевого доступу до віртуальної машини?</p>
+</li>
+<li>
+<p>Поясніть призначення та механізм виконання скриптів <code>User Data</code> під час початкового розгортання інстансу. В який саме момент життєвого циклу ОС виконується цей скрипт?</p>
+</li>
+<li>
+<p>За якою математичною формулою здійснюється розрахунок вартості оренди віртуальних машин EC2, і в яких випадках використання цінової моделі Spot Instances є економічно виправданим для кіберфізичних систем?</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Повернутись нагору
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Kyrylo Vadurin &bull; <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "header.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0456\u0439\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u0421\u043a\u043e\u043f\u0456\u044e\u0432\u0430\u0442\u0438 \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0429\u0435 1 \u0437\u0431\u0456\u0433 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.more.other": "\u0429\u0435 # \u0437\u0431\u0456\u0433\u0456\u0432 \u043d\u0430 \u0446\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456", "search.result.none": "\u0417\u0431\u0456\u0433\u0456\u0432 \u043d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0437\u0431\u0456\u0433", "search.result.other": "\u0417\u043d\u0430\u0439\u0434\u0435\u043d\u043e # \u0437\u0431\u0456\u0433\u0456\u0432", "search.result.placeholder": "\u0420\u043e\u0437\u043f\u043e\u0447\u043d\u0456\u0442\u044c \u043f\u0438\u0441\u0430\u0442\u0438 \u0434\u043b\u044f \u043f\u043e\u0448\u0443\u043a\u0443", "search.result.term.missing": "\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e \u0437\u0430\u043f\u0438\u0442\u0443", "select.version": "\u041e\u0431\u0440\u0430\u0442\u0438 \u0432\u0435\u0440\u0441\u0456\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
