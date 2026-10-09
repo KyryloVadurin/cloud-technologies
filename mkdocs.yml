@@ -1,5 +1,3 @@
-# Тут будуть site_name та site_description (див. нижче для кожної дисципліни)
-
 theme:
   name: material
   language: uk
@@ -43,7 +41,9 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
         - name: math
           class: arithmatex
-          format: !!python/name:pymdownx.arithmatex.fence_mathjax_format
+          format: !!python/object/apply:pymdownx.arithmatex.arithmatex_fenced_format
+            kwds:
+              mode: generic
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
